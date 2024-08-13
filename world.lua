@@ -79,10 +79,10 @@ end
 
 Client.OnStart = function()
 	floating_island_generator:generateIslands({
-		nbIslands = 20, -- number of islands
+		nbIslands = 30, -- number of islands
 		minSize = 4, -- min size of island
 		maxSize = 7, -- max size of island
-		safearea = 200, -- min dist of islands from 0,0,0
+		safearea = 400, -- min dist of islands from 0,0,0
 		dist = 750, -- max dist of islands
 	})
 
@@ -391,7 +391,7 @@ floating_island_generator.generateIslands = function(_, config)
 			end
 			island.Position = {
 				x + 250,
-				math.random(300) - 150,
+				150 + math.random(300) - 150,
 				z + 250,
 			}
 			local t = x + z
