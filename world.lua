@@ -144,8 +144,8 @@ if DOJO then
 	end
 
 	worldInfo = {
-		rpc_url = "http://localhost:5050",
-		torii_url = "http://localhost:8080",
+		rpc_url = "https://api.cartridge.gg/x/diamond-pit/katana",
+		torii_url = "https://api.cartridge.gg/x/diamond-pit/torii",
 		world = "0xb4079627ebab1cd3cf9fd075dda1ad2454a7a448bf659591f259efa2519b18",
 		actions = "0x3610b797baec740e2fa25ae90b4a57d92b04f48a1fdbae1ae203eaf9723c1a0",
 		playerAddress = "0xb3ff441a68610b30fd5e2abbf3a1548eb6ba6f3559f2862bf2dc757e5828ca",
