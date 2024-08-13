@@ -169,6 +169,7 @@ if DOJO then
 			local z = -(column.z_layer * 10 + k)
 			local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
 			local blockColor = blockColors[blockType + 1]
+			print(blockType + 1, blockColor)
 			if b and blockHp == 0 then
 				print("Remove")
 				b:Remove()
