@@ -160,6 +160,14 @@ if DOJO then
 			data = {
 				raw = string.sub(rawColumn.data.value, 3, #rawColumn.data.value),
 				getBlock = function(self, index)
+					print(
+						index,
+						string.sub(
+							self.raw,
+							#self.raw - (math.floor(index) * 3 + 3),
+							#self.raw - (math.floor(index) * 3 + 1)
+						)
+					)
 					return tonumber(
 						string.sub(
 							self.raw,
