@@ -163,7 +163,7 @@ if DOJO then
 					return tonumber(
 						string.sub(
 							self.raw,
-							#self.raw - (math.floor(index) * 3 + 2),
+							#self.raw - math.min(#self.raw - 1, (math.floor(index) * 3 + 2)),
 							#self.raw - (math.floor(index) * 3)
 						),
 						16
