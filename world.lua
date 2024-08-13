@@ -390,9 +390,9 @@ floating_island_generator.generateIslands = function(_, config)
 				z = math.random(-dist, dist)
 			end
 			island.Position = {
-				x + 250 * Map.Scale.X,
+				x + 250,
 				math.random(300) - 150,
-				z + 250 * Map.Scale.Z,
+				z + 250,
 			}
 			local t = x + z
 			LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
