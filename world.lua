@@ -161,7 +161,7 @@ if DOJO then
 			data = tonumber(string.sub(rawColumn.data.value, 3, #rawColumn.data.value), 16),
 		}
 
-		prin("check")
+		print("check")
 		for k = 0, 9 do
 			local blockInfo = (column.data >> (12 * k)) & 4095
 			local blockType = blockInfo >> 7
