@@ -160,14 +160,6 @@ if DOJO then
 			data = {
 				raw = string.sub(rawColumn.data.value, 3, #rawColumn.data.value),
 				getBlock = function(self, index)
-					print(
-						index,
-						string.sub(
-							self.raw,
-							#self.raw - (math.floor(index) * 3 + 2),
-							#self.raw - (math.floor(index) * 3)
-						)
-					)
 					return tonumber(
 						string.sub(
 							self.raw,
@@ -327,7 +319,6 @@ end
 local function onReady(callback)
 	Object:Load("knosvoxel.oak_tree", function(obj)
 		cachedTree = obj
-		print("TREE", cachedTree)
 		callback()
 	end)
 end
