@@ -161,7 +161,7 @@ if DOJO then
 			data = tonumber(string.sub(rawColumn.data.value, 3, #rawColumn.data.value), 16),
 		}
 
-		print("check")
+		print("x y Z layer", column.x, column.y, column.z_layer)
 		for k = 0, 9 do
 			local blockInfo = (column.data >> (12 * k)) & 4095
 			local blockType = blockInfo >> 7
@@ -169,12 +169,11 @@ if DOJO then
 			local z = -(column.z_layer * 10 + k)
 			local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
 			local blockColor = blockColors[blockType + 1]
-			print(blockType + 1, blockColor)
 			if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
 				b:Remove()
 			elseif b and b.Color ~= blockColor then
 				b:Replace(blockColor)
-			elseif blockHp > 0 and not b then
+			elseif not b and blockHp > 0 then
 				blocksModule.blockShape:AddBlock(blockColor, column.x, z, column.y)
 			end
 		end
