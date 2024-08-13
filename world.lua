@@ -71,7 +71,6 @@ end
 
 blocksModule.hitBlock = function(self, block)
 	local x, y, z = block.Coords.X, block.Coords.Y, block.Coords.Z
-	print("Hit", x, y, z)
 	if DOJO then
 		dojo.actions.hit_block(x, y, z)
 	end
@@ -161,7 +160,8 @@ if DOJO then
 			data = tonumber(string.sub(rawColumn.data.value, 3, #rawColumn.data.value), 16),
 		}
 
-		print("x y Z layer", column.x, column.y, column.z_layer)
+		print(">", column.data)
+
 		for k = 0, 9 do
 			local blockInfo = (column.data >> (12 * k)) & 4095
 			local blockType = blockInfo >> 7
