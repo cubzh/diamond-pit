@@ -5,7 +5,7 @@ Modules = {
 local DOJO = true
 
 blockColors = {
-	Color.Transparent, -- air
+	nil, -- air
 	Color.Grey, -- stone
 	Color.Black, -- coal
 	Color.Orange, -- copper
@@ -170,8 +170,7 @@ if DOJO then
 			local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
 			local blockColor = blockColors[blockType + 1]
 			print(blockType + 1, blockColor)
-			if b and blockHp == 0 then
-				print("Remove")
+			if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
 				b:Remove()
 			elseif b and b.Color ~= blockColor then
 				b:Replace(blockColor)
