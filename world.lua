@@ -157,13 +157,23 @@ if DOJO then
 			x = rawColumn.x.value,
 			y = rawColumn.y.value,
 			z_layer = rawColumn.z_layer.value,
-			data = tonumber(string.sub(rawColumn.data.value, 3, #rawColumn.data.value), 16),
+			data = {
+				raw = string.sub(rawColumn.data.value, 3, #rawColumn.data.value),
+				getBlock = function(self, index)
+					return tonumber(
+						string.sub(
+							self.raw,
+							#self.raw - (math.floor(index) * 3 + 3),
+							#self.raw - (math.floor(index) * 3 + 1)
+						),
+						16
+					)
+				end,
+			},
 		}
 
-		print(">", column.data)
-
 		for k = 0, 9 do
-			local blockInfo = (column.data >> (12 * k)) & 4095
+			local blockInfo = column.data:getBlock(k)
 			local blockType = blockInfo >> 7
 			local blockHp = blockInfo & 127
 			local z = -(column.z_layer * 10 + k)
