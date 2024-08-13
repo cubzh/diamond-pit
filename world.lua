@@ -161,6 +161,7 @@ if DOJO then
 			data = tonumber(string.sub(rawColumn.data.value, 3, #rawColumn.data.value), 16),
 		}
 
+		prin("check")
 		for k = 0, 9 do
 			local blockInfo = (column.data >> (12 * k)) & 4095
 			local blockType = blockInfo >> 7
@@ -169,6 +170,7 @@ if DOJO then
 			local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
 			local blockColor = blockColors[blockType + 1]
 			if b and blockHp == 0 then
+				print("Remove")
 				b:Remove()
 			elseif b and b.Color ~= blockColor then
 				b:Replace(blockColor)
