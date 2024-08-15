@@ -98,13 +98,12 @@ initLeaderboard = function()
 
 	local text = Text()
 	text.Text = "Leaderboard"
-	text:SetParent(World)
-	text.FontSize = 4
+	text:SetParent(quad)
+	text.FontSize = 5
 	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.Black
-	text.BackgroundColor = Color.Pink
-	text.Position = { 40, 30, 40 }
+	text.Position = { 0, 90, -1 }
 end
 
 local leaderboardEntries
