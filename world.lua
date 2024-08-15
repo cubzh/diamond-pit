@@ -94,7 +94,7 @@ initLeaderboard = function()
 	quad:SetParent(World)
 	quad.Anchor = { 0.5, 0 }
 	quad.Position = { 40, 0, 40 }
-	quad.Rotation.Y = math.pi * 0.25
+	quad.Rotation.Y = math.pi * 1.25
 
 	local text = Text()
 	text.Text = "Leaderboard"
