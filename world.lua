@@ -98,6 +98,14 @@ Client.OnStart = function()
 	blocksModule:start()
 end
 
+Client.OnChat = function(payload)
+	if DOJO then
+		if payload.message == "sell" then
+			dojo.actions.sell_all()
+		end
+	end
+end
+
 Client.Action1 = function()
 	-- if Player.IsOnGround then
 	Player.Velocity.Y = 100
@@ -153,6 +161,9 @@ if DOJO then
 
 	function getOrCreateBlocksColumn(key, entity)
 		local rawColumn = dojo:getModel(entity, "BlocksColumn")
+		if not rawColumn then
+			return
+		end
 		local column = {
 			x = rawColumn.x.value,
 			y = rawColumn.y.value,
@@ -203,6 +214,10 @@ if DOJO then
 				local entity = getOrCreateBlocksColumn(key, newEntity)
 				if entity then
 					entity:update(newEntity)
+				elseif dojo:getModel(entity, "PlayerInventory") then
+					local inventory = dojo:getModel(entity, "PlayerInventory")
+					print("Stone", ((inventory.data >> 8) & 255))
+					print("Coal", ((inventory.data >> 16) & 255))
 				end
 			end
 		end)
@@ -283,6 +298,13 @@ if DOJO then
 				string.format('["%s","%s","%s"]', number_to_hexstr(x), number_to_hexstr(z), number_to_hexstr(-y))
 			print("Calling hit_block", calldatastr)
 			dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "hit_block", calldatastr)
+		end,
+		sell_all = function()
+			if not dojo.toriiClient then
+				return
+			end
+			print("Calling sell_all")
+			dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "sell_all", "[]")
 		end,
 	}
 end
