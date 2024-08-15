@@ -103,7 +103,7 @@ initLeaderboard = function()
 	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.Black
-	text.Position = { 0, 90, -1 }
+	text.LocalPosition = { 0, 90, -1 }
 end
 
 local leaderboardEntries
