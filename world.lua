@@ -187,6 +187,12 @@ updateLeaderboard = function(entry)
 		table.insert(listCoinsCollected, elem)
 	end
 	table.sort(listCoinsCollected, function(a, b)
+		if not b.nbCoinsCollected.value then
+			return 1
+		end
+		if not a.nbCoinsCollected.value then
+			return -1
+		end
 		return b.nbCoinsCollected.value - a.nbCoinsCollected.value
 	end)
 	leaderboardTextCoins.Text = ""
