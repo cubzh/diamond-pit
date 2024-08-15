@@ -97,7 +97,7 @@ initLeaderboard = function()
 	quad.Anchor = { 0.5, 0 }
 
 	local text = Text()
-	text.Text = "Top 10 Daily - Blocks Miner"
+	text.Text = "Top 10 Daily\n- Blocks Miner -"
 	text:SetParent(quad)
 	text.FontSize = 7
 	text.Type = TextType.World
@@ -123,7 +123,7 @@ initLeaderboard = function()
 	quad2.Anchor = { 0.5, 0 }
 
 	local text = Text()
-	text.Text = "Top 10 Daily - Block Hits"
+	text.Text = "Top 10 Daily\n- Block Hits -"
 	text:SetParent(quad2)
 	text.FontSize = 7
 	text.Type = TextType.World
@@ -149,7 +149,7 @@ initLeaderboard = function()
 	quad3.Anchor = { 0.5, 0 }
 
 	local text = Text()
-	text.Text = "Top 10 Daily - Coins Earned"
+	text.Text = "Top 10 Daily\n- Coins Earned -"
 	text:SetParent(quad3)
 	text.FontSize = 7
 	text.Type = TextType.World
@@ -159,7 +159,7 @@ initLeaderboard = function()
 
 	leaderboardTextCoins = Text()
 	leaderboardTextCoins.Text = "loading..."
-	leaderboardTextCoins:SetParent(quad)
+	leaderboardTextCoins:SetParent(quad3)
 	leaderboardTextCoins.FontSize = 6
 	leaderboardTextCoins.Type = TextType.World
 	leaderboardTextCoins.IsUnlit = true
@@ -170,9 +170,9 @@ initLeaderboard = function()
 	quad.Position = { 150, 0, 150 }
 	quad2.Position = { 150, 0, 300 }
 	quad3.Position = { 150, 0, 450 }
-	quad.Rotation.Y = math.pi * 1.6
+	quad.Rotation.Y = math.pi * 1.4
 	quad2.Rotation.Y = math.pi * 1.5
-	quad3.Rotation.Y = math.pi * 1.4
+	quad3.Rotation.Y = math.pi * 1.6
 end
 
 local leaderboardEntries = {}
