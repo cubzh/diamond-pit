@@ -1,8 +1,19 @@
 Modules = {
 	--	floating_island_generator = "github.com/caillef/cubzh-library/floating_island_generator:a728587",
+	--  ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5"
 }
 
-local DOJO = true
+local maxSlots = 10
+
+idToName = {
+	"Stone",
+	"Coal",
+	"Copper",
+	"DeepStone",
+	"Iron",
+	"Gold",
+	"Diamond",
+}
 
 blockColors = {
 	nil, -- air
@@ -12,7 +23,7 @@ blockColors = {
 	Color.DarkGrey, -- deepstone
 	Color.White, -- iron
 	Color.Yellow, -- gold
-	Color.Blue, -- diamond
+	Color(112, 209, 244), -- diamond
 }
 
 generate_map = function()
@@ -71,9 +82,72 @@ end
 
 blocksModule.hitBlock = function(self, block)
 	local x, y, z = block.Coords.X, block.Coords.Y, block.Coords.Z
-	if DOJO then
-		dojo.actions.hit_block(x, y, z)
+	dojo.actions.hit_block(x, y, z)
+end
+
+leaderboardText = ""
+initLeaderboard = function()
+	local quad = Quad()
+	quad.Color = Color.White
+	quad.Width = 50
+	quad.Height = 100
+	quad:SetParent(World)
+	quad.Anchor = { 0.5, 0 }
+	quad.Position = { 40, 0, 40 }
+	quad.Rotation.Y = math.pi * 0.25
+
+	local text = Text("Leaderboard")
+	text:SetParent(quad)
+	text.FontSize = 40
+	text.Color = Color.Black
+	text.LocalPosition = { 0, 90, 1 }
+end
+
+local leaderboardEntries
+updateLeaderboard = function(entry)
+	if entry.day.value ~= math.floor(Time.Unix() / 86400) then
+		return
 	end
+end
+
+local inventoryNode
+updateInventory = function(inventory)
+	if inventory.player.value ~= dojo.burnerAccount.Address then
+		return
+	end
+	local slots = {}
+	local totalQty = 0
+	for i = 1, 7 do
+		local nbInSlot = ((inventory.data.value >> (8 * i)) & 255)
+		if nbInSlot > 0 then
+			table.insert(slots, { blockType = i, qty = nbInSlot })
+			totalQty = totalQty + nbInSlot
+		end
+	end
+
+	local ui = require("uikit")
+	if inventoryNode then
+		inventoryNode:remove()
+	end
+	local nodes = {
+		ui:createText("Inventory"),
+		ui:createText(string.format("%d/%d", totalQty, maxSlots or 10)),
+	}
+	for _, slot in ipairs(slots) do
+		table.insert(nodes, ui:createText(string.format("%s: %d", idToName[slot.blockType], slot.qty)))
+	end
+	local bgInventory = ui:createFrame(Color.White)
+	bgInventory.parentDidResize = function()
+		bgInventory.Width = 100
+		bgInventory.Height = Screen.Height / 3
+		bgInventory.pos = { Screen.Width - bgInventory.Width, Screen.Height - Screen.SafeArea.Top - bgInventory.Height }
+	end
+	bgInventory:parentDidResize()
+	inventoryNode = ui_blocks:createLineContainer({
+		dir = "vertical",
+		nodes = nodes,
+	})
+	ui_blocks:anchorNode(inventoryNode, "right", "top", 5)
 end
 
 Client.OnStart = function()
@@ -86,9 +160,8 @@ Client.OnStart = function()
 	})
 
 	initPlayer()
-	if DOJO then
-		initDojo()
-	end
+	initLeaderboard()
+	initDojo()
 
 	Fog.On = false
 	generate_map()
@@ -99,10 +172,8 @@ Client.OnStart = function()
 end
 
 Client.OnChat = function(payload)
-	if DOJO then
-		if payload.message == "sell" then
-			dojo.actions.sell_all()
-		end
+	if payload.message == "sell" then
+		dojo.actions.sell_all()
 	end
 end
 
@@ -144,170 +215,155 @@ initPlayer = function()
 	end
 end
 
-if DOJO then
-	initDojo = function()
-		worldInfo.onConnect = startGame
-		dojo:createToriiClient(worldInfo)
-	end
+initDojo = function()
+	worldInfo.onConnect = startGame
+	dojo:createToriiClient(worldInfo)
+end
 
-	worldInfo = {
-		rpc_url = "https://api.cartridge.gg/x/diamond-pit/katana",
-		torii_url = "https://api.cartridge.gg/x/diamond-pit/torii",
-		world = "0xb4079627ebab1cd3cf9fd075dda1ad2454a7a448bf659591f259efa2519b18",
-		actions = "0x3610b797baec740e2fa25ae90b4a57d92b04f48a1fdbae1ae203eaf9723c1a0",
-		playerAddress = "0x657e5f424dc6dee0c5a305361ea21e93781fea133d83efa410b771b7f92b",
-		playerSigningKey = "0xcd93de85d43988b9492bfaaff930c129fc3edbc513bb0c2b81577291848007",
+worldInfo = {
+	rpc_url = "https://api.cartridge.gg/x/diamond-pit/katana",
+	torii_url = "https://api.cartridge.gg/x/diamond-pit/torii",
+	world = "0xb4079627ebab1cd3cf9fd075dda1ad2454a7a448bf659591f259efa2519b18",
+	actions = "0x3610b797baec740e2fa25ae90b4a57d92b04f48a1fdbae1ae203eaf9723c1a0",
+	playerAddress = "0x657e5f424dc6dee0c5a305361ea21e93781fea133d83efa410b771b7f92b",
+	playerSigningKey = "0xcd93de85d43988b9492bfaaff930c129fc3edbc513bb0c2b81577291848007",
+}
+
+function getOrCreateBlocksColumn(key, entity)
+	local rawColumn = dojo:getModel(entity, "BlocksColumn")
+	if not rawColumn then
+		return
+	end
+	local column = {
+		x = rawColumn.x.value,
+		y = rawColumn.y.value,
+		z_layer = rawColumn.z_layer.value,
+		data = {
+			raw = string.sub(rawColumn.data.value, 3, #rawColumn.data.value),
+			getBlock = function(self, index)
+				return tonumber(
+					string.sub(
+						self.raw,
+						#self.raw - math.min(#self.raw - 1, (math.floor(index) * 3 + 2)),
+						#self.raw - (math.floor(index) * 3)
+					),
+					16
+				)
+			end,
+		},
 	}
 
-	function getOrCreateBlocksColumn(key, entity)
-		local rawColumn = dojo:getModel(entity, "BlocksColumn")
-		if not rawColumn then
+	for k = 0, 9 do
+		local blockInfo = column.data:getBlock(k)
+		local blockType = blockInfo >> 7
+		local blockHp = blockInfo & 127
+		local z = -(column.z_layer * 10 + k)
+		local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
+		local blockColor = blockColors[blockType + 1]
+		if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
+			b:Remove()
+		elseif b and b.Color ~= blockColor then
+			b:Replace(blockColor)
+		elseif not b and blockHp > 0 then
+			blocksModule.blockShape:AddBlock(blockColor, column.x, z, column.y)
+		end
+	end
+end
+
+function updateEntity(entities)
+	for key, newEntity in pairs(entities) do
+		if getOrCreateBlocksColumn(key, newEntity) then
+			getOrCreateBlocksColumn(key, newEntity):update(newEntity)
+		elseif dojo:getModel(newEntity, "PlayerInventory") then
+			updateInventory(dojo:getModel(newEntity, "PlayerInventory"))
+		elseif dojo:getModel(newEntity, "DailyLeaderboardEntry") then
+			updateLeaderboard(dojo:getModel(newEntity, "DailyLeaderboardEntry"))
+		end
+	end
+end
+
+function startGame(toriiClient)
+	-- sync existing entities
+	toriiClient:Entities('{ "limit": 100, "offset": 0 }', updateEntity)
+
+	-- set on entity update callback
+	-- match everything
+	-- on 1.0.0, add [] around
+	local clauseJsonStr = '{ "Keys": { "keys": [], "models": [], "pattern_matching": "VariableLen" } }'
+	toriiClient:OnEntityUpdate(clauseJsonStr, updateEntity)
+end
+
+-- dojo module
+
+dojo = {}
+
+dojo.getOrCreateBurner = function(self, config, cb)
+	self.toriiClient:CreateBurner(config.playerAddress, config.playerSigningKey, function(success, burnerAccount)
+		if not success then
+			error("Can't create burner")
 			return
 		end
-		local column = {
-			x = rawColumn.x.value,
-			y = rawColumn.y.value,
-			z_layer = rawColumn.z_layer.value,
-			data = {
-				raw = string.sub(rawColumn.data.value, 3, #rawColumn.data.value),
-				getBlock = function(self, index)
-					print(
-						string.sub(
-							self.raw,
-							#self.raw - math.min(#self.raw - 1, (math.floor(index) * 3 + 2)),
-							#self.raw - (math.floor(index) * 3)
-						)
-					)
-					return tonumber(
-						string.sub(
-							self.raw,
-							#self.raw - math.min(#self.raw - 1, (math.floor(index) * 3 + 2)),
-							#self.raw - (math.floor(index) * 3)
-						),
-						16
-					)
-				end,
-			},
-		}
-
-		for k = 0, 9 do
-			local blockInfo = column.data:getBlock(k)
-			local blockType = blockInfo >> 7
-			local blockHp = blockInfo & 127
-			local z = -(column.z_layer * 10 + k)
-			local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
-			local blockColor = blockColors[blockType + 1]
-			if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
-				b:Remove()
-			elseif b and b.Color ~= blockColor then
-				b:Replace(blockColor)
-			elseif not b and blockHp > 0 then
-				blocksModule.blockShape:AddBlock(blockColor, column.x, z, column.y)
-			end
-		end
-	end
-
-	function startGame(toriiClient)
-		-- sync existing entities
-		toriiClient:Entities('{ "limit": 100, "offset": 0 }', function(entities)
-			for key, newEntity in pairs(entities) do
-				local entity = getOrCreateBlocksColumn(key, newEntity)
-				if entity then
-					entity:update(newEntity)
-				elseif dojo:getModel(entity, "PlayerInventory") then
-					local inventory = dojo:getModel(entity, "PlayerInventory")
-					print("Stone", ((inventory.data >> 8) & 255))
-					print("Coal", ((inventory.data >> 16) & 255))
-				end
-			end
-		end)
-
-		-- set on entity update callback
-		-- match everything
-		-- on 1.0.0, add [] around
-		local clauseJsonStr = '{ "Keys": { "keys": [], "models": [], "pattern_matching": "VariableLen" } }'
-		toriiClient:OnEntityUpdate(clauseJsonStr, function(entities)
-			for key, newEntity in pairs(entities) do
-				local entity = getOrCreateBlocksColumn(key, newEntity)
-				if entity then
-					entity:update(newEntity)
-				end
-			end
-		end)
-	end
-
-	-- dojo module
-
-	dojo = {}
-
-	dojo.getOrCreateBurner = function(self, config, cb)
-		self.toriiClient:CreateBurner(config.playerAddress, config.playerSigningKey, function(success, burnerAccount)
-			if not success then
-				error("Can't create burner")
-				return
-			end
-			dojo.burnerAccount = burnerAccount
-			cb()
-		end)
-	end
-
-	dojo.createToriiClient = function(self, config)
-		dojo.config = config
-		local err
-		dojo.toriiClient = Dojo:CreateToriiClient(config.torii_url, config.rpc_url, config.world)
-		dojo.toriiClient.OnConnect = function(success)
-			if not success then
-				print("Connection failed")
-				return
-			end
-			self:getOrCreateBurner(config, function()
-				config.onConnect(dojo.toriiClient)
-			end)
-		end
-		dojo.toriiClient:Connect()
-	end
-
-	dojo.getModel = function(_, entity, modelName)
-		for key, model in pairs(entity) do
-			if key == modelName then
-				return model
-			end
-		end
-	end
-
-	function bytes_to_hex(data)
-		local hex = "0x"
-		for i = 1, data.Length do
-			hex = hex .. string.format("%02x", data[i])
-		end
-		return hex
-	end
-
-	function number_to_hexstr(number)
-		return "0x" .. string.format("%x", number)
-	end
-
-	-- generated contracts
-	dojo.actions = {
-		hit_block = function(x, y, z)
-			if not dojo.toriiClient then
-				return
-			end
-			-- z is down in Dojo, y is down on Cubzh
-			local calldatastr =
-				string.format('["%s","%s","%s"]', number_to_hexstr(x), number_to_hexstr(z), number_to_hexstr(-y))
-			print("Calling hit_block", calldatastr)
-			dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "hit_block", calldatastr)
-		end,
-		sell_all = function()
-			if not dojo.toriiClient then
-				return
-			end
-			print("Calling sell_all")
-			dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "sell_all", "[]")
-		end,
-	}
+		dojo.burnerAccount = burnerAccount
+		cb()
+	end)
 end
+
+dojo.createToriiClient = function(self, config)
+	dojo.config = config
+	local err
+	dojo.toriiClient = Dojo:CreateToriiClient(config.torii_url, config.rpc_url, config.world)
+	dojo.toriiClient.OnConnect = function(success)
+		if not success then
+			print("Connection failed")
+			return
+		end
+		self:getOrCreateBurner(config, function()
+			config.onConnect(dojo.toriiClient)
+		end)
+	end
+	dojo.toriiClient:Connect()
+end
+
+dojo.getModel = function(_, entity, modelName)
+	for key, model in pairs(entity) do
+		if key == modelName then
+			return model
+		end
+	end
+end
+
+function bytes_to_hex(data)
+	local hex = "0x"
+	for i = 1, data.Length do
+		hex = hex .. string.format("%02x", data[i])
+	end
+	return hex
+end
+
+function number_to_hexstr(number)
+	return "0x" .. string.format("%x", number)
+end
+
+-- generated contracts
+dojo.actions = {
+	hit_block = function(x, y, z)
+		if not dojo.toriiClient then
+			return
+		end
+		-- z is down in Dojo, y is down on Cubzh
+		local calldatastr =
+			string.format('["%s","%s","%s"]', number_to_hexstr(x), number_to_hexstr(z), number_to_hexstr(-y))
+		print("Calling hit_block", calldatastr)
+		dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "hit_block", calldatastr)
+	end,
+	sell_all = function()
+		if not dojo.toriiClient then
+			return
+		end
+		print("Calling sell_all")
+		dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "sell_all", "[]")
+	end,
+}
 
 -- Module to create floating island
 
@@ -440,4 +496,233 @@ floating_island_generator.generateIslands = function(_, config)
 			end)
 		end
 	end)
+end
+
+ui_blocks = {}
+
+ui_blocks.createTriptych = function(_, config)
+	local ui = require("uikit")
+
+	local node = ui:createFrame(config.color)
+
+	local dir = config.dir or "horizontal"
+
+	local left = config.left or config.top
+	local center = config.center
+	local right = config.right or config.bottom
+
+	if left then
+		left:setParent(node)
+	end
+	if center then
+		center:setParent(node)
+	end
+	if right then
+		right:setParent(node)
+	end
+
+	node.parentDidResize = function()
+		if not node.parent then
+			return
+		end
+		node.Width = node.parent.Width
+		node.Height = node.parent.Height
+
+		if center then
+			center.pos = { node.Width * 0.5 - center.Width * 0.5, node.Height * 0.5 - center.Height * 0.5 }
+		end
+
+		if dir == "horizontal" then
+			if left then
+				left.pos = { 0, node.Height * 0.5 - left.Height * 0.5 }
+			end
+			if right then
+				right.pos = { node.Width - right.Width, node.Height * 0.5 - right.Height * 0.5 }
+			end
+		end
+		if dir == "vertical" then
+			if left then
+				left.pos = { node.Width * 0.5 - left.Width * 0.5, node.Height - left.Height }
+			end
+			if right then
+				right.pos = { node.Width * 0.5 - right.Width * 0.5, 0 }
+			end
+		end
+	end
+
+	return node
+end
+
+ui_blocks.createColumns = function(_, config)
+	local ui = require("uikit")
+
+	local node = ui:createFrame()
+
+	local nodes = config.nodes
+
+	local nbColumns = #nodes
+	if not nbColumns or nbColumns < 1 then
+		error("config.nodes must have at least two nodes")
+		return
+	end
+
+	local columns = {}
+	for i = 1, nbColumns do
+		local column = ui:createFrame()
+		nodes[i]:setParent(column)
+		column:setParent(node)
+		table.insert(columns, column)
+	end
+	node.columns = columns
+
+	node.parentDidResize = function()
+		if not node.parent then
+			return
+		end
+		node.Width = node.parent.Width
+		node.Height = node.parent.Height
+		local columnWidth = math.floor(node.Width / nbColumns)
+		for k, column in ipairs(columns) do
+			column.Width = columnWidth
+			column.Height = node.Height
+			column.pos = { (k - 1) * columnWidth, 0 }
+		end
+	end
+
+	return node
+end
+
+ui_blocks.createRows = function(_, config)
+	local ui = require("uikit")
+
+	local node = ui:createFrame()
+
+	local nodes = config.nodes
+
+	local nbRows = #nodes
+	if not nbRows or nbRows < 1 then
+		error("config.nodes must have at least two nodes")
+		return
+	end
+
+	local rows = {}
+	for i = 1, nbRows do
+		local row = ui:createFrame()
+		nodes[i]:setParent(row)
+		row:setParent(node)
+		table.insert(rows, row)
+	end
+	node.rows = rows
+
+	node.parentDidResize = function()
+		if not node.parent then
+			return
+		end
+		node.Width = node.parent.Width
+		node.Height = node.parent.Height
+		local rowHeight = math.floor(node.Height / nbRows)
+		for k, row in ipairs(rows) do
+			row.Width = node.Width
+			row.Height = rowHeight
+			row.pos = { 0, node.Height - k * rowHeight }
+		end
+	end
+
+	return node
+end
+
+ui_blocks.createLineContainer = function(_, config)
+	local uiContainer = require("ui_container")
+
+	local node
+	if config.dir == "vertical" then
+		node = uiContainer:createVerticalContainer()
+	else
+		node = uiContainer:createHorizontalContainer()
+	end
+
+	for _, info in ipairs(config.nodes) do
+		if info.type == "separator" then
+			node:pushSeparator()
+		elseif info.type == "gap" then
+			node:pushGap()
+		elseif info.type == "node" then
+			node:pushElement(info.node)
+		else
+			node:pushElement(info)
+		end
+	end
+
+	return node
+end
+
+ui_blocks.setNodePos = function(_, node, horizontalAnchor, verticalAnchor, margins)
+	margins = margins or 0
+	if type(margins) ~= "table" then
+		-- left, bottom, right, top
+		margins = { margins, margins, margins, margins }
+	end
+
+	local x = 0
+	local y = 0
+
+	local parentWidth = node.parent and node.parent.Width or Screen.Width
+	local parentHeight = node.parent and node.parent.Height or (Screen.Height - Screen.SafeArea.Top)
+
+	if horizontalAnchor == "left" then
+		x = margins[3]
+	elseif horizontalAnchor == "center" then
+		x = parentWidth * 0.5 - node.Width * 0.5
+	elseif horizontalAnchor == "right" then
+		x = parentWidth - margins[1] - node.Width
+	end
+
+	if verticalAnchor == "bottom" then
+		y = margins[2]
+	elseif verticalAnchor == "center" then
+		y = parentHeight * 0.5 - node.Height * 0.5
+	elseif verticalAnchor == "top" then
+		y = parentHeight - margins[4] - node.Height
+	end
+
+	node.pos = { x, y }
+end
+
+-- Only works on node that are not resized // where parentDidResize is not set
+-- If you need to define parentDidResize, use setNodePos
+ui_blocks.anchorNode = function(_, node, horizontalAnchor, verticalAnchor, margins)
+	node.parentDidResize = function()
+		ui_blocks:setNodePos(node, horizontalAnchor, verticalAnchor, margins)
+	end
+	node:parentDidResize()
+	return node
+end
+
+ui_blocks.createBlock = function(_, config)
+	local ui = require("uikit")
+
+	local node = ui:createFrame()
+
+	local subnode
+	if config.triptych then
+		subnode = ui_blocks:createTriptych(config.triptych)
+	elseif config.columns then
+		subnode = ui_blocks:createColumns({ nodes = config.columns })
+	elseif config.rows then
+		subnode = ui_blocks:createRows({ nodes = config.rows })
+	end
+	subnode:setParent(node)
+
+	node.parentDidResize = function()
+		if config.parentDidResize then
+			config.parentDidResize(node)
+		end
+		node.Width = config.width and config.width(node) or (node.parent and node.parent.Width or Screen.Width)
+		node.Height = config.height and config.height(node)
+			or (node.parent and node.parent.Height or Screen.Height - Screen.SafeArea.Top)
+		node.pos = config.pos and config.pos(node) or { 0, 0 }
+	end
+	node:parentDidResize()
+
+	return node
 end
