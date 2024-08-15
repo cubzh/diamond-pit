@@ -96,14 +96,15 @@ initLeaderboard = function()
 	quad.Position = { 40, 0, 40 }
 	quad.Rotation.Y = math.pi * 0.25
 
-	local text = Text("Leaderboard")
+	local text = Text()
+	text.Text = "Leaderboard"
 	text:SetParent(World)
 	text.FontSize = 4
 	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.Black
 	text.BackgroundColor = Color.Pink
-	text.Position = { 30, 30, 30 }
+	text.Position = { 40, 30, 40 }
 end
 
 local leaderboardEntries
