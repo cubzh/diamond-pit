@@ -106,7 +106,7 @@ initLeaderboard = function()
 	text.LocalPosition = { 0, 90, -1 }
 
 	leaderboardText = Text()
-	leaderboardText.Text = "caillef 204\ntitouan 24"
+	leaderboardText.Text = "loading..."
 	leaderboardText:SetParent(quad)
 	leaderboardText.FontSize = 5
 	leaderboardText.Type = TextType.World
