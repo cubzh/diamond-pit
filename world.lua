@@ -97,9 +97,12 @@ initLeaderboard = function()
 	quad.Rotation.Y = math.pi * 0.25
 
 	local text = Text("Leaderboard")
-	text:SetParent(World)
+	text:SetParent(quad)
 	text.FontSize = 40
+	text.Type = TextType.World
+	text.IsUnlit = true
 	text.Color = Color.Black
+	text.BackgroundColor = Color.Pink
 	text.LocalPosition = { 30, 30, 30 }
 end
 
