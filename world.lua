@@ -186,57 +186,63 @@ updateLeaderboard = function(entry)
 	for _, elem in pairs(leaderboardEntries) do
 		table.insert(listCoinsCollected, elem)
 	end
-	table.sort(listCoinsCollected, function(a, b)
-		return b.nbCoinsCollected.value - a.nbCoinsCollected.value
-	end)
-	leaderboardTextCoins.Text = ""
-	for i = 1, 10 do
-		if not listCoinsCollected[i] then
-			return
+	if #listCoinsCollected > 0 then
+		table.sort(listCoinsCollected, function(a, b)
+			return b.nbCoinsCollected.value - a.nbCoinsCollected.value
+		end)
+		leaderboardTextCoins.Text = ""
+		for i = 1, 10 do
+			if not listCoinsCollected[i] then
+				return
+			end
+			leaderboardTextCoins.Text = leaderboardTextCoins.Text
+				.. string.sub(listCoinsCollected[i].player.value, 1, 8)
+				.. ": "
+				.. tostring(math.floor(listCoinsCollected[i].nbCoinsCollected.value))
+				.. "\n"
 		end
-		leaderboardTextCoins.Text = leaderboardTextCoins.Text
-			.. string.sub(listCoinsCollected[i].player.value, 1, 8)
-			.. ": "
-			.. tostring(math.floor(listCoinsCollected[i].nbCoinsCollected.value))
-			.. "\n"
 	end
 
 	local listBlocksHit = {}
 	for _, elem in pairs(leaderboardEntries) do
 		table.insert(listBlocksHit, elem)
 	end
-	table.sort(listBlocksHit, function(a, b)
-		return b.nbHits.value - a.nbHits.value
-	end)
-	leaderboardTextHits.Text = ""
-	for i = 1, 10 do
-		if not listBlocksHit[i] then
-			return
+	if #listBlocksHit > 0 then
+		table.sort(listBlocksHit, function(a, b)
+			return b.nbHits.value - a.nbHits.value
+		end)
+		leaderboardTextHits.Text = ""
+		for i = 1, 10 do
+			if not listBlocksHit[i] then
+				return
+			end
+			leaderboardTextHits.Text = leaderboardTextHits.Text
+				.. string.sub(listBlocksHit[i].player.value, 1, 8)
+				.. ": "
+				.. tostring(math.floor(listBlocksHit[i].nbHits.value))
+				.. "\n"
 		end
-		leaderboardTextHits.Text = leaderboardTextHits.Text
-			.. string.sub(listBlocksHit[i].player.value, 1, 8)
-			.. ": "
-			.. tostring(math.floor(listBlocksHit[i].nbHits.value))
-			.. "\n"
 	end
 
 	local listBlocksMined = {}
 	for _, elem in pairs(leaderboardEntries) do
 		table.insert(listBlocksMined, elem)
 	end
-	table.sort(listBlocksMined, function(a, b)
-		return b.nbBlocksBroken.value - a.nbBlocksBroken.value
-	end)
-	leaderboardTextBlocks.Text = ""
-	for i = 1, 10 do
-		if not listBlocksMined[i] then
-			return
+	if #listBlocksMined > 0 then
+		table.sort(listBlocksMined, function(a, b)
+			return b.nbBlocksBroken.value - a.nbBlocksBroken.value
+		end)
+		leaderboardTextBlocks.Text = ""
+		for i = 1, 10 do
+			if not listBlocksMined[i] then
+				return
+			end
+			leaderboardTextBlocks.Text = leaderboardTextBlocks.Text
+				.. string.sub(listBlocksMined[i].player.value, 1, 8)
+				.. ": "
+				.. tostring(math.floor(listBlocksMined[i].nbBlocksBroken.value))
+				.. "\n"
 		end
-		leaderboardTextBlocks.Text = leaderboardTextBlocks.Text
-			.. string.sub(listBlocksMined[i].player.value, 1, 8)
-			.. ": "
-			.. tostring(math.floor(listBlocksMined[i].nbBlocksBroken.value))
-			.. "\n"
 	end
 end
 
