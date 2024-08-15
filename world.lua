@@ -97,7 +97,7 @@ initLeaderboard = function()
 	quad.Anchor = { 0.5, 0 }
 
 	local text = Text()
-	text.Text = "Top 10 Daily\n- Blocks Miner -"
+	text.Text = "Top 10 Daily\n- Blocks Mined -"
 	text:SetParent(quad)
 	text.FontSize = 7
 	text.Type = TextType.World
