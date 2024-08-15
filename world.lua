@@ -167,12 +167,12 @@ initLeaderboard = function()
 	leaderboardTextCoins.Anchor = { 0.5, 1 }
 	leaderboardTextCoins.LocalPosition = { 0, 85, -1 }
 
-	quad.Position = { 150, 0, 150 }
-	quad2.Position = { 150, 0, 250 }
-	quad3.Position = { 150, 0, 350 }
-	quad.Rotation.Y = math.pi * 0.9
-	quad2.Rotation.Y = math.pi
-	quad3.Rotation.Y = math.pi * 1.1
+	quad.Position = { 150, 0, 250 }
+	quad2.Position = { 150, 0, 450 }
+	quad3.Position = { 150, 0, 650 }
+	quad.Rotation.Y = math.pi * 0.4
+	quad2.Rotation.Y = math.pi * 0.5
+	quad3.Rotation.Y = math.pi * 0.6
 end
 
 local leaderboardEntries = {}
