@@ -126,7 +126,7 @@ updateLeaderboard = function(entry)
 	for _, elem in pairs(leaderboardEntries) do
 		table.insert(list, elem)
 	end
-	list.sort(function(a, b)
+	table.sort(list, function(a, b)
 		return a.nbCoinsCollected - b.nbCoinsCollected
 	end)
 	leaderboardText.Text = ""
