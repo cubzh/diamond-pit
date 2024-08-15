@@ -98,7 +98,7 @@ initLeaderboard = function()
 
 	local text = Text("Leaderboard")
 	text:SetParent(World)
-	text.FontSize = 40
+	text.FontSize = 4
 	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.Black
