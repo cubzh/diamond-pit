@@ -91,7 +91,7 @@ local leaderboardTextCoins
 initLeaderboard = function()
 	local quad = Quad()
 	quad.Color = Color.White
-	quad.Width = 50
+	quad.Width = 80
 	quad.Height = 100
 	quad:SetParent(World)
 	quad.Anchor = { 0.5, 0 }
@@ -117,7 +117,7 @@ initLeaderboard = function()
 
 	local quad2 = Quad()
 	quad2.Color = Color.White
-	quad2.Width = 50
+	quad2.Width = 80
 	quad2.Height = 100
 	quad2:SetParent(World)
 	quad2.Anchor = { 0.5, 0 }
@@ -143,9 +143,9 @@ initLeaderboard = function()
 
 	local quad3 = Quad()
 	quad3.Color = Color.White
-	quad3.Width = 50
+	quad3.Width = 80
 	quad3.Height = 100
-	quad:SetParent(World)
+	quad3:SetParent(World)
 	quad3.Anchor = { 0.5, 0 }
 
 	local text = Text()
