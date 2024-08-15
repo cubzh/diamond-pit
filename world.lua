@@ -129,7 +129,17 @@ updateLeaderboard = function(entry)
 	list.sort(function(a, b)
 		return a.nbCoinsCollected - b.nbCoinsCollected
 	end)
-	leaderboardText.Text = "caillef 204\ntitouan 24"
+	leaderboardText.Text = ""
+	for i = 1, 10 do
+		if not list[i] then
+			return
+		end
+		leaderboardText.Text = leaderboardText.Text
+			.. string.sub(list[i].player.value, 1, 8)
+			.. ": "
+			.. tostring(math.floor(list[i].nbBlocksBroken))
+			.. "\n"
+	end
 end
 
 local inventoryNode
