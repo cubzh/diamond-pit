@@ -188,7 +188,7 @@ updateLeaderboard = function(entry)
 	end
 	if #listCoinsCollected > 0 then
 		table.sort(listCoinsCollected, function(a, b)
-			return b.nbCoinsCollected.value - a.nbCoinsCollected.value
+			return b.nbCoinsCollected.value >= a.nbCoinsCollected.value
 		end)
 		leaderboardTextCoins.Text = ""
 		for i = 1, 10 do
