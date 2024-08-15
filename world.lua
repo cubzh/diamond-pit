@@ -137,7 +137,7 @@ updateLeaderboard = function(entry)
 		leaderboardText.Text = leaderboardText.Text
 			.. string.sub(list[i].player.value, 1, 8)
 			.. ": "
-			.. tostring(math.floor(list[i].nbBlocksBroken))
+			.. tostring(math.floor(list[i].nbBlocksBroken.value))
 			.. "\n"
 	end
 end
