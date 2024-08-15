@@ -85,7 +85,7 @@ blocksModule.hitBlock = function(self, block)
 	dojo.actions.hit_block(x, y, z)
 end
 
-leaderboardText = ""
+local leaderboardText
 initLeaderboard = function()
 	local quad = Quad()
 	quad.Color = Color.White
@@ -99,11 +99,20 @@ initLeaderboard = function()
 	local text = Text()
 	text.Text = "Leaderboard"
 	text:SetParent(quad)
-	text.FontSize = 5
+	text.FontSize = 6
 	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.Black
 	text.LocalPosition = { 0, 90, -1 }
+
+	leaderboardText = Text()
+	text.Text = ""
+	text:SetParent(quad)
+	text.FontSize = 5
+	text.Type = TextType.World
+	text.IsUnlit = true
+	text.Color = Color.Black
+	text.LocalPosition = { 0, 80, -1 }
 end
 
 local leaderboardEntries
@@ -111,6 +120,14 @@ updateLeaderboard = function(entry)
 	if entry.day.value ~= math.floor(Time.Unix() / 86400) then
 		return
 	end
+	leaderboardEntries[entry.player.value] = entry
+
+	local list = {}
+	for _, elem in pairs(leaderboardEntries) do
+		table.insert(list, elem)
+	end
+
+	leaderboardText.Text = "caillef 204\ntitouan 24"
 end
 
 local inventoryNode
