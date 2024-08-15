@@ -112,6 +112,7 @@ initLeaderboard = function()
 	leaderboardText.Type = TextType.World
 	leaderboardText.IsUnlit = true
 	leaderboardText.Color = Color.Black
+	leaderboardText.Anchor = { 0.5, 1 }
 	leaderboardText.LocalPosition = { 0, 80, -1 }
 end
 
