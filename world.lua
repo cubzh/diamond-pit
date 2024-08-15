@@ -106,13 +106,13 @@ initLeaderboard = function()
 	text.LocalPosition = { 0, 90, -1 }
 
 	leaderboardText = Text()
-	text.Text = ""
-	text:SetParent(quad)
-	text.FontSize = 5
-	text.Type = TextType.World
-	text.IsUnlit = true
-	text.Color = Color.Black
-	text.LocalPosition = { 0, 80, -1 }
+	leaderboardText.Text = "caillef 204\ntitouan 24"
+	leaderboardText:SetParent(quad)
+	leaderboardText.FontSize = 5
+	leaderboardText.Type = TextType.World
+	leaderboardText.IsUnlit = true
+	leaderboardText.Color = Color.Black
+	leaderboardText.LocalPosition = { 0, 80, -1 }
 end
 
 local leaderboardEntries = {}
@@ -126,7 +126,9 @@ updateLeaderboard = function(entry)
 	for _, elem in pairs(leaderboardEntries) do
 		table.insert(list, elem)
 	end
-
+	list.sort(function(a, b)
+		return a.nbCoinsCollected - b.nbCoinsCollected
+	end)
 	leaderboardText.Text = "caillef 204\ntitouan 24"
 end
 
