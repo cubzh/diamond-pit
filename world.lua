@@ -115,7 +115,7 @@ initLeaderboard = function()
 	text.LocalPosition = { 0, 80, -1 }
 end
 
-local leaderboardEntries
+local leaderboardEntries = {}
 updateLeaderboard = function(entry)
 	if entry.day.value ~= math.floor(Time.Unix() / 86400) then
 		return
