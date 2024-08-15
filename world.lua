@@ -197,7 +197,7 @@ updateLeaderboard = function(entry)
 		leaderboardTextCoins.Text = leaderboardTextCoins.Text
 			.. string.sub(listCoinsCollected[i].player.value, 1, 8)
 			.. ": "
-			.. tostring(math.floor(listCoinsCollected[i].nbBlocksBroken.value))
+			.. tostring(math.floor(listCoinsCollected[i].nbCoinsCollected.value))
 			.. "\n"
 	end
 
@@ -216,7 +216,7 @@ updateLeaderboard = function(entry)
 		leaderboardTextHits.Text = leaderboardTextHits.Text
 			.. string.sub(listBlocksHit[i].player.value, 1, 8)
 			.. ": "
-			.. tostring(math.floor(listBlocksHit[i].nbBlocksBroken.value))
+			.. tostring(math.floor(listBlocksHit[i].nbHits.value))
 			.. "\n"
 	end
 
