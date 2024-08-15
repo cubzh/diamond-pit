@@ -258,7 +258,7 @@ Client.OnStart = function()
 	Fog.On = false
 	generate_map()
 	Player:SetParent(World)
-	Player.Position = Number3(150, 5, 150)
+	Player.Position = Number3(250, 5, 150)
 
 	blocksModule:start()
 end
