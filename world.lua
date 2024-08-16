@@ -221,7 +221,7 @@ updateLeaderboard = function(entry)
 	if #listBlocksHit > 0 then
 		table.sort(listBlocksHit, function(a, b)
 			print(a.nbHits.value, b.nbHits.value)
-			return a.nbHits.value - b.nbHits.value
+			return a.nbHits.value > b.nbHits.value
 		end)
 		leaderboardTextHits.Text = ""
 		for i = 1, 10 do
