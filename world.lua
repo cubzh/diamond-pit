@@ -326,8 +326,8 @@ end
 Client.OnChat = function(payload)
 	if payload.message == "sell" then
 		dojo.actions.sell_all()
-		return true -- consumed
 	end
+	return true -- consumed
 end
 
 Client.Action1 = function()
