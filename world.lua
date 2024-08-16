@@ -171,7 +171,7 @@ initSellingArea = function()
 	sellAll.Pivot = { 0.5, 0, 0.5 }
 	sellAll.Physics = PhysicsMode.Trigger
 	sellAll.OnCollisionBegin = function(_, other)
-		if other ~= PLayer then
+		if other ~= Player then
 			return
 		end
 		dojo.actions.sell_all()
@@ -189,7 +189,7 @@ initUpgradeAreas = function()
 	upgradePickaxe.Pivot = { 0.5, 0, 0.5 }
 	upgradePickaxe.Physics = PhysicsMode.Trigger
 	upgradePickaxe.OnCollisionBegin = function(_, other)
-		if other ~= PLayer then
+		if other ~= Player then
 			return
 		end
 		dojo.actions.upgrade_pickaxe()
@@ -197,13 +197,13 @@ initUpgradeAreas = function()
 	end
 
 	local upgradeBackpack = MutableShape()
-	upgradeBackpack:AddBlock(Color(0, 255, 0, 0.5), 0, 0, 0)
+	upgradeBackpack:AddBlock(Color(0, 0, 255, 0.5), 0, 0, 0)
 	upgradeBackpack:SetParent(World)
 	upgradeBackpack.Scale = { 30, 5, 30 }
 	upgradeBackpack.Pivot = { 0.5, 0, 0.5 }
 	upgradeBackpack.Physics = PhysicsMode.Trigger
 	upgradeBackpack.OnCollisionBegin = function(_, other)
-		if other ~= PLayer then
+		if other ~= Player then
 			return
 		end
 		dojo.actions.upgrade_backpack()
