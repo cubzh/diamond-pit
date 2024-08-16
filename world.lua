@@ -150,8 +150,8 @@ blocksModule.start = function(self)
 end
 
 blocksModule.hitBlock = function(self, block)
-	local x, y, z = block.Coords.X, block.Coords.Y, block.Coords.Z
-	dojo.actions.hit_block(x, y, z)
+	-- SFX hit block
+	dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
 end
 
 updatePlayerStats = function(stats)
@@ -167,26 +167,51 @@ initSellingArea = function()
 	local sellAll = MutableShape()
 	sellAll:AddBlock(Color(255, 0, 0, 0.5), 0, 0, 0)
 	sellAll:SetParent(World)
-	sellAll.Scale = 40
+	sellAll.Scale = { 30, 5, 30 }
 	sellAll.Pivot = { 0.5, 0, 0.5 }
 	sellAll.Physics = PhysicsMode.Trigger
 	sellAll.OnCollisionBegin = function(_, other)
-		print(other)
+		if other ~= PLayer then
+			return
+		end
+		dojo.actions.sell_all()
+		-- SFX gold
 	end
 
 	sellAll.Position = { 450, 0, 300 }
 end
 
 initUpgradeAreas = function()
-	-- local sellAll = MutableShape()
-	-- sellAll:AddBlock(Color(255, 0, 0, 0.5))
-	-- sellAll:SetParent(World)
-	-- sellAll.Scale = 40
-	-- sellAll.OnCollisionBegin = function(_, other)
-	-- 	print(other)
-	-- end
+	local upgradePickaxe = MutableShape()
+	upgradePickaxe:AddBlock(Color(0, 255, 0, 0.5), 0, 0, 0)
+	upgradePickaxe:SetParent(World)
+	upgradePickaxe.Scale = { 30, 5, 30 }
+	upgradePickaxe.Pivot = { 0.5, 0, 0.5 }
+	upgradePickaxe.Physics = PhysicsMode.Trigger
+	upgradePickaxe.OnCollisionBegin = function(_, other)
+		if other ~= PLayer then
+			return
+		end
+		dojo.actions.upgrade_pickaxe()
+		-- SFX unlock
+	end
 
-	-- sellAll.Position = { 450, 0, 300 }
+	local upgradeBackpack = MutableShape()
+	upgradeBackpack:AddBlock(Color(0, 255, 0, 0.5), 0, 0, 0)
+	upgradeBackpack:SetParent(World)
+	upgradeBackpack.Scale = { 30, 5, 30 }
+	upgradeBackpack.Pivot = { 0.5, 0, 0.5 }
+	upgradeBackpack.Physics = PhysicsMode.Trigger
+	upgradeBackpack.OnCollisionBegin = function(_, other)
+		if other ~= PLayer then
+			return
+		end
+		dojo.actions.upgrade_backpack()
+		-- SFX unlock
+	end
+
+	upgradePickaxe.Position = { 450, 0, 150 }
+	upgradeBackpack.Position = { 450, 0, 450 }
 end
 
 local leaderboardTextBlocks
