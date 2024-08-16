@@ -55,7 +55,7 @@ generate_map = function()
 	downWing:SetParent(map)
 	downWing:AddBlock(Color(100, 200, 100), 0, 0, 0)
 	downWing.Pivot = { 0, 1, 0 }
-	downWing.Scale = { 200, 2000, 600 }
+	downWing.Scale = { 200, 100, 600 }
 	downWing.LocalPosition = { 0, 0, 0 }
 
 	local leftStone = MutableShape()
