@@ -168,6 +168,7 @@ initSellingArea = function()
 	sellAll:AddBlock(Color(255, 0, 0, 0.5), 0, 0, 0)
 	sellAll:SetParent(World)
 	sellAll.Scale = 40
+	sellAll.Pivot = { 0.5, 0, 0.5 }
 	sellAll.Physics = PhysicsMode.Trigger
 	sellAll.OnCollisionBegin = function(_, other)
 		print(other)
