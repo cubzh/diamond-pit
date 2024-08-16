@@ -187,11 +187,12 @@ updateLeaderboard = function(entry)
 
 	local listCoinsCollected = {}
 	for _, elem in pairs(leaderboardEntries) do
-		table.insert(listCoinsCollected, elem)
+		if elem.nbCoinsCollected.value > 0 then
+			table.insert(listCoinsCollected, elem)
+		end
 	end
 	if #listCoinsCollected > 0 then
 		table.sort(listCoinsCollected, function(a, b)
-			print(a.nbCoinsCollected.value, b.nbCoinsCollected.value)
 			return a.nbCoinsCollected.value - b.nbCoinsCollected.value
 		end)
 		leaderboardTextCoins.Text = ""
@@ -213,7 +214,9 @@ updateLeaderboard = function(entry)
 
 	local listBlocksHit = {}
 	for _, elem in pairs(leaderboardEntries) do
-		table.insert(listBlocksHit, elem)
+		if elem.nbHits.value > 0 then
+			table.insert(listBlocksHit, elem)
+		end
 	end
 	if #listBlocksHit > 0 then
 		table.sort(listBlocksHit, function(a, b)
@@ -238,7 +241,9 @@ updateLeaderboard = function(entry)
 
 	local listBlocksMined = {}
 	for _, elem in pairs(leaderboardEntries) do
-		table.insert(listBlocksMined, elem)
+		if elem.nbBlocksBroken.value > 0 then
+			table.insert(listBlocksMined, elem)
+		end
 	end
 	if #listBlocksMined > 0 then
 		table.sort(listBlocksMined, function(a, b)
