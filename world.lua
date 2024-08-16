@@ -227,8 +227,8 @@ updateLeaderboard = function(entry)
 			if not listBlocksHit[i] then
 				break
 			end
-			local name = string.sub(listCoinsCollected[i].player.value, 1, 8)
-			if listCoinsCollected[i].player.value == dojo.burnerAccount.Address then
+			local name = string.sub(listBlocksHit[i].player.value, 1, 8)
+			if listBlocksHit[i].player.value == dojo.burnerAccount.Address then
 				name = "> you <"
 			end
 			leaderboardTextHits.Text = leaderboardTextHits.Text
@@ -254,8 +254,8 @@ updateLeaderboard = function(entry)
 			if not listBlocksMined[i] then
 				break
 			end
-			local name = string.sub(listCoinsCollected[i].player.value, 1, 8)
-			if listCoinsCollected[i].player.value == dojo.burnerAccount.Address then
+			local name = string.sub(listBlocksMined[i].player.value, 1, 8)
+			if listBlocksMined[i].player.value == dojo.burnerAccount.Address then
 				name = "> you <"
 			end
 			leaderboardTextBlocks.Text = leaderboardTextBlocks.Text
