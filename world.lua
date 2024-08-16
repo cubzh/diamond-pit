@@ -103,7 +103,7 @@ initLeaderboard = function()
 	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.Black
-	text.LocalPosition = { 0, 90, -1 }
+	text.LocalPosition = { 0, 86, -1 }
 
 	leaderboardTextBlocks = Text()
 	leaderboardTextBlocks.Text = "loading..."
@@ -129,7 +129,7 @@ initLeaderboard = function()
 	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.Black
-	text.LocalPosition = { 0, 90, -1 }
+	text.LocalPosition = { 0, 86, -1 }
 
 	leaderboardTextHits = Text()
 	leaderboardTextHits.Text = "loading..."
@@ -155,7 +155,7 @@ initLeaderboard = function()
 	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.Black
-	text.LocalPosition = { 0, 90, -1 }
+	text.LocalPosition = { 0, 86, -1 }
 
 	leaderboardTextCoins = Text()
 	leaderboardTextCoins.Text = "loading..."
@@ -195,8 +195,12 @@ updateLeaderboard = function(entry)
 			if not listCoinsCollected[i] then
 				break
 			end
+			local name = string.sub(listCoinsCollected[i].player.value, 1, 8)
+			if listCoinsCollected[i].player.value == dojo.burnerAccount.Address then
+				name = "> you <"
+			end
 			leaderboardTextCoins.Text = leaderboardTextCoins.Text
-				.. string.sub(listCoinsCollected[i].player.value, 1, 8)
+				.. name
 				.. ": "
 				.. tostring(math.floor(listCoinsCollected[i].nbCoinsCollected.value))
 				.. "\n"
@@ -216,8 +220,12 @@ updateLeaderboard = function(entry)
 			if not listBlocksHit[i] then
 				break
 			end
+			local name = string.sub(listCoinsCollected[i].player.value, 1, 8)
+			if listCoinsCollected[i].player.value == dojo.burnerAccount.Address then
+				name = "> you <"
+			end
 			leaderboardTextHits.Text = leaderboardTextHits.Text
-				.. string.sub(listBlocksHit[i].player.value, 1, 8)
+				.. name
 				.. ": "
 				.. tostring(math.floor(listBlocksHit[i].nbHits.value))
 				.. "\n"
@@ -237,8 +245,12 @@ updateLeaderboard = function(entry)
 			if not listBlocksMined[i] then
 				break
 			end
+			local name = string.sub(listCoinsCollected[i].player.value, 1, 8)
+			if listCoinsCollected[i].player.value == dojo.burnerAccount.Address then
+				name = "> you <"
+			end
 			leaderboardTextBlocks.Text = leaderboardTextBlocks.Text
-				.. string.sub(listBlocksMined[i].player.value, 1, 8)
+				.. name
 				.. ": "
 				.. tostring(math.floor(listBlocksMined[i].nbBlocksBroken.value))
 				.. "\n"
