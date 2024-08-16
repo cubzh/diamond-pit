@@ -188,12 +188,12 @@ updateLeaderboard = function(entry)
 	end
 	if #listCoinsCollected > 0 then
 		table.sort(listCoinsCollected, function(a, b)
-			return b.nbCoinsCollected.value >= a.nbCoinsCollected.value
+			return b.nbCoinsCollected.value - a.nbCoinsCollected.value
 		end)
 		leaderboardTextCoins.Text = ""
 		for i = 1, 10 do
 			if not listCoinsCollected[i] then
-				return
+				break
 			end
 			leaderboardTextCoins.Text = leaderboardTextCoins.Text
 				.. string.sub(listCoinsCollected[i].player.value, 1, 8)
@@ -214,7 +214,7 @@ updateLeaderboard = function(entry)
 		leaderboardTextHits.Text = ""
 		for i = 1, 10 do
 			if not listBlocksHit[i] then
-				return
+				break
 			end
 			leaderboardTextHits.Text = leaderboardTextHits.Text
 				.. string.sub(listBlocksHit[i].player.value, 1, 8)
@@ -235,7 +235,7 @@ updateLeaderboard = function(entry)
 		leaderboardTextBlocks.Text = ""
 		for i = 1, 10 do
 			if not listBlocksMined[i] then
-				return
+				break
 			end
 			leaderboardTextBlocks.Text = leaderboardTextBlocks.Text
 				.. string.sub(listBlocksMined[i].player.value, 1, 8)
@@ -310,6 +310,7 @@ end
 Client.OnChat = function(payload)
 	if payload.message == "sell" then
 		dojo.actions.sell_all()
+		return true -- consumed
 	end
 end
 
