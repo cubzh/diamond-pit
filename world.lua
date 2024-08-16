@@ -188,7 +188,7 @@ updateLeaderboard = function(entry)
 	end
 	if #listCoinsCollected > 0 then
 		table.sort(listCoinsCollected, function(a, b)
-			return b.nbCoinsCollected.value - a.nbCoinsCollected.value
+			return a.nbCoinsCollected.value - b.nbCoinsCollected.value
 		end)
 		leaderboardTextCoins.Text = ""
 		for i = 1, 10 do
@@ -209,7 +209,7 @@ updateLeaderboard = function(entry)
 	end
 	if #listBlocksHit > 0 then
 		table.sort(listBlocksHit, function(a, b)
-			return b.nbHits.value - a.nbHits.value
+			return a.nbHits.value - b.nbHits.value
 		end)
 		leaderboardTextHits.Text = ""
 		for i = 1, 10 do
@@ -230,7 +230,7 @@ updateLeaderboard = function(entry)
 	end
 	if #listBlocksMined > 0 then
 		table.sort(listBlocksMined, function(a, b)
-			return b.nbBlocksBroken.value - a.nbBlocksBroken.value
+			return a.nbBlocksBroken.value - b.nbBlocksBroken.value
 		end)
 		leaderboardTextBlocks.Text = ""
 		for i = 1, 10 do
