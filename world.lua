@@ -314,8 +314,8 @@ updateLeaderboard = function(entry)
 				.. "\n"
 		end
 
-		if not hasLocalPlayer then
-			local elem = leaderboardEntries[dojo.burnerAccount.Address]
+		local elem = leaderboardEntries[dojo.burnerAccount.Address]
+		if not hasLocalPlayer and elem then
 			leaderboardTextCoins.Text = leaderboardTextCoins.Text
 				.. "> you <"
 				.. ": "
@@ -350,8 +350,8 @@ updateLeaderboard = function(entry)
 				.. "\n"
 		end
 
-		if not hasLocalPlayer then
-			local elem = leaderboardEntries[dojo.burnerAccount.Address]
+		local elem = leaderboardEntries[dojo.burnerAccount.Address]
+		if not hasLocalPlayer and elem then
 			leaderboardTextHits.Text = leaderboardTextHits.Text
 				.. "> you <"
 				.. ": "
@@ -385,8 +385,8 @@ updateLeaderboard = function(entry)
 				.. tostring(math.floor(listBlocksMined[i].nb_blocks_broken.value))
 				.. "\n"
 		end
-		if not hasLocalPlayer then
-			local elem = leaderboardEntries[dojo.burnerAccount.Address]
+		local elem = leaderboardEntries[dojo.burnerAccount.Address]
+		if not hasLocalPlayer and elem then
 			leaderboardTextBlocks.Text = leaderboardTextBlocks.Text
 				.. "> you <"
 				.. ": "
