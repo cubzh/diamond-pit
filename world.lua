@@ -680,6 +680,20 @@ dojo.actions = {
 		print("Calling sell_all")
 		dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "sell_all", "[]")
 	end,
+	upgrade_backpack = function()
+		if not dojo.toriiClient then
+			return
+		end
+		print("Calling upgrade_backpack")
+		dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "upgrade_backpack", "[]")
+	end,
+	upgrade_pickaxe = function()
+		if not dojo.toriiClient then
+			return
+		end
+		print("Calling upgrade_pickaxe")
+		dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "upgrade_pickaxe", "[]")
+	end,
 }
 
 -- Module to create floating island
