@@ -114,7 +114,7 @@ initLeaderboard = function()
 	leaderboardTextBlocks.IsUnlit = true
 	leaderboardTextBlocks.Color = Color.Black
 	leaderboardTextBlocks.Anchor = { 0.5, 1 }
-	leaderboardTextBlocks.LocalPosition = { 0, 85, -1 }
+	leaderboardTextBlocks.LocalPosition = { 0, 75, -1 }
 
 	local quad2 = Quad()
 	quad2.Color = Color.White
@@ -141,7 +141,7 @@ initLeaderboard = function()
 	leaderboardTextHits.IsUnlit = true
 	leaderboardTextHits.Color = Color.Black
 	leaderboardTextHits.Anchor = { 0.5, 1 }
-	leaderboardTextHits.LocalPosition = { 0, 85, -1 }
+	leaderboardTextHits.LocalPosition = { 0, 75, -1 }
 
 	local quad3 = Quad()
 	quad3.Color = Color.White
@@ -168,7 +168,7 @@ initLeaderboard = function()
 	leaderboardTextCoins.IsUnlit = true
 	leaderboardTextCoins.Color = Color.Black
 	leaderboardTextCoins.Anchor = { 0.5, 1 }
-	leaderboardTextCoins.LocalPosition = { 0, 85, -1 }
+	leaderboardTextCoins.LocalPosition = { 0, 75, -1 }
 
 	quad.Position = { 150, 0, 150 }
 	quad2.Position = { 130, 0, 300 }
