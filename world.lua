@@ -165,7 +165,7 @@ end
 
 initSellingArea = function()
 	local sellAll = MutableShape()
-	sellAll:AddBlock(Color(255, 0, 0, 0.5))
+	sellAll:AddBlock(Color(255, 0, 0, 0.5), 0, 0, 0)
 	sellAll:SetParent(World)
 	sellAll.Scale = 40
 	sellAll.Physics = PhysicsMode.Trigger
