@@ -103,7 +103,8 @@ initLeaderboard = function()
 	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.Black
-	text.LocalPosition = { 0, 86, -1 }
+	text.Anchor = { 0.5, 1 }
+	text.LocalPosition = { 0, 90, -1 }
 
 	leaderboardTextBlocks = Text()
 	leaderboardTextBlocks.Text = "loading..."
@@ -129,7 +130,8 @@ initLeaderboard = function()
 	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.Black
-	text.LocalPosition = { 0, 86, -1 }
+	text.Anchor = { 0.5, 1 }
+	text.LocalPosition = { 0, 90, -1 }
 
 	leaderboardTextHits = Text()
 	leaderboardTextHits.Text = "loading..."
@@ -155,7 +157,8 @@ initLeaderboard = function()
 	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.Black
-	text.LocalPosition = { 0, 86, -1 }
+	text.Anchor = { 0.5, 1 }
+	text.LocalPosition = { 0, 90, -1 }
 
 	leaderboardTextCoins = Text()
 	leaderboardTextCoins.Text = "loading..."
