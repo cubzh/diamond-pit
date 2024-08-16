@@ -3,7 +3,48 @@ Modules = {
 	--  ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5"
 }
 
-local maxSlots = 10
+local maxSlots = 5
+local pickaxeStrength = 1
+
+local PICKAXE_STRENGTHS = {
+	[0] = 1,
+	[1] = 2,
+	[2] = 3,
+	[3] = 4,
+	[4] = 8,
+	[5] = 12,
+	[6] = 20,
+}
+
+local PICKAXE_UPGRADE_PRICES = {
+	[0] = 0,
+	[1] = 10,
+	[2] = 25,
+	[3] = 50,
+	[4] = 100,
+	[5] = 250,
+	[6] = 800,
+}
+
+local BACKPACK_MAX_SLOTS = {
+	[0] = 5,
+	[1] = 15,
+	[2] = 25,
+	[3] = 40,
+	[4] = 75,
+	[5] = 100,
+	[6] = 160,
+}
+
+local BACKPACK_UPGRADE_PRICES = {
+	[0] = 0,
+	[1] = 5,
+	[2] = 20,
+	[3] = 80,
+	[4] = 135,
+	[5] = 450,
+	[6] = 1000,
+}
 
 idToName = {
 	"Stone",
@@ -113,6 +154,27 @@ blocksModule.hitBlock = function(self, block)
 	dojo.actions.hit_block(x, y, z)
 end
 
+updatePlayerStats = function(stats)
+	if stats.player.value ~= dojo.burnerAccount.Account then
+		return
+	end
+
+	maxSlots = BACKPACK_MAX_SLOTS[stats.backpack_level]
+	pickaxeStrength = PICKAXE_STRENGTHS[stats.pickaxe_level]
+end
+
+initSellingArea = function()
+	local sellAll = MutableShape()
+	sellAll:AddBlock(Color(255, 0, 0, 0.5))
+	sellAll:SetParent(World)
+	sellAll.Scale = 40
+	sellAll.OnCollisionBegin = function(_, other)
+		print(other)
+	end
+
+	sellAll.Position = { 450, 0, 300 }
+end
+
 local leaderboardTextBlocks
 local leaderboardTextHits
 local leaderboardTextCoins
@@ -219,9 +281,10 @@ updateLeaderboard = function(entry)
 	end
 	if #listCoinsCollected > 0 then
 		table.sort(listCoinsCollected, function(a, b)
-			return a.nbCoinsCollected.value > b.nbCoinsCollected.value
+			return a.nb_coins_collected.value > b.nb_coins_collected.value
 		end)
 		leaderboardTextCoins.Text = ""
+		local hasLocalPlayer = false
 		for i = 1, 10 do
 			if not listCoinsCollected[i] then
 				break
@@ -229,11 +292,21 @@ updateLeaderboard = function(entry)
 			local name = string.sub(listCoinsCollected[i].player.value, 1, 8)
 			if listCoinsCollected[i].player.value == dojo.burnerAccount.Address then
 				name = "> you <"
+				hasLocalPlayer = true
 			end
 			leaderboardTextCoins.Text = leaderboardTextCoins.Text
 				.. name
 				.. ": "
-				.. tostring(math.floor(listCoinsCollected[i].nbCoinsCollected.value))
+				.. tostring(math.floor(listCoinsCollected[i].nb_coins_collected.value))
+				.. "\n"
+		end
+
+		if not hasLocalPlayer then
+			local elem = leaderboardEntries[dojo.burnerAccount.Address]
+			leaderboardTextCoins.Text = leaderboardTextCoins.Text
+				.. "> you <"
+				.. ": "
+				.. tostring(math.floor(elem.nb_coins_collected.value))
 				.. "\n"
 		end
 	end
@@ -244,9 +317,10 @@ updateLeaderboard = function(entry)
 	end
 	if #listBlocksHit > 0 then
 		table.sort(listBlocksHit, function(a, b)
-			return a.nbHits.value > b.nbHits.value
+			return a.nb_hits.value > b.nb_hits.value
 		end)
 		leaderboardTextHits.Text = ""
+		local hasLocalPlayer = false
 		for i = 1, 10 do
 			if not listBlocksHit[i] then
 				break
@@ -254,11 +328,21 @@ updateLeaderboard = function(entry)
 			local name = string.sub(listBlocksHit[i].player.value, 1, 8)
 			if listBlocksHit[i].player.value == dojo.burnerAccount.Address then
 				name = "> you <"
+				hasLocalPlayer = true
 			end
 			leaderboardTextHits.Text = leaderboardTextHits.Text
 				.. name
 				.. ": "
-				.. tostring(math.floor(listBlocksHit[i].nbHits.value))
+				.. tostring(math.floor(listBlocksHit[i].nb_hits.value))
+				.. "\n"
+		end
+
+		if not hasLocalPlayer then
+			local elem = leaderboardEntries[dojo.burnerAccount.Address]
+			leaderboardTextHits.Text = leaderboardTextHits.Text
+				.. "> you <"
+				.. ": "
+				.. tostring(math.floor(elem.nb_hits.value))
 				.. "\n"
 		end
 	end
@@ -269,9 +353,10 @@ updateLeaderboard = function(entry)
 	end
 	if #listBlocksMined > 0 then
 		table.sort(listBlocksMined, function(a, b)
-			return a.nbBlocksBroken.value > b.nbBlocksBroken.value
+			return a.nb_blocks_broken.value > b.nb_blocks_broken.value
 		end)
 		leaderboardTextBlocks.Text = ""
+		local hasLocalPlayer = false
 		for i = 1, 10 do
 			if not listBlocksMined[i] then
 				break
@@ -279,11 +364,20 @@ updateLeaderboard = function(entry)
 			local name = string.sub(listBlocksMined[i].player.value, 1, 8)
 			if listBlocksMined[i].player.value == dojo.burnerAccount.Address then
 				name = "> you <"
+				hasLocalPlayer = true
 			end
 			leaderboardTextBlocks.Text = leaderboardTextBlocks.Text
 				.. name
 				.. ": "
-				.. tostring(math.floor(listBlocksMined[i].nbBlocksBroken.value))
+				.. tostring(math.floor(listBlocksMined[i].nb_blocks_broken.value))
+				.. "\n"
+		end
+		if not hasLocalPlayer then
+			local elem = leaderboardEntries[dojo.burnerAccount.Address]
+			leaderboardTextBlocks.Text = leaderboardTextBlocks.Text
+				.. "> you <"
+				.. ": "
+				.. tostring(math.floor(elem.nb_blocks_broken.value))
 				.. "\n"
 		end
 	end
@@ -310,7 +404,7 @@ updateInventory = function(inventory)
 	end
 	local nodes = {
 		ui:createText("Inventory"),
-		ui:createText(string.format("%d/%d", totalQty, maxSlots or 10)),
+		ui:createText(string.format("%d/%d", totalQty, maxSlots or 5)),
 	}
 	for _, slot in ipairs(slots) do
 		table.insert(nodes, ui:createText(string.format("%s: %d", idToName[slot.blockType], slot.qty)))
@@ -458,6 +552,8 @@ function updateEntity(entities)
 			updateInventory(dojo:getModel(newEntity, "PlayerInventory"))
 		elseif dojo:getModel(newEntity, "DailyLeaderboardEntry") then
 			updateLeaderboard(dojo:getModel(newEntity, "DailyLeaderboardEntry"))
+		elseif dojo:getModel(newEntity, "PlayerStats") then
+			updatePlayerStats(dojo:getModel(newEntity, "PlayerStats"))
 		end
 	end
 end
@@ -906,3 +1002,74 @@ ui_blocks.createBlock = function(_, config)
 
 	return node
 end
+
+local REACH_DIST = 30
+
+interactionModule = {}
+
+local interactionText = nil
+local interactableObject = nil
+
+interactionModule.addInteraction = function(_, obj, text, callback)
+	obj.onInteract = callback
+	obj.interactText = text
+end
+
+local function getAvailableInteraction()
+	local impact = Camera:CastRay(nil, Player)
+	local object = impact.Object
+	if object.root then -- all multishape should be spawned with a "root" value
+		object = object.root
+	end
+	if object.onInteract and impact.Distance <= REACH_DIST then
+		return object
+	end
+end
+
+local function setInteractableObject(obj)
+	if interactableObject then
+		interactionText:remove()
+	end
+	interactableObject = obj
+
+	if not obj then
+		return
+	end
+	local ui = require("uikit")
+	interactionText = ui:createFrame(Color(0, 0, 0, 0.5))
+	local interactionTextStr = ui:createText("F - " .. obj.interactText, Color.White)
+	interactionTextStr:setParent(interactionText)
+	interactionText.parentDidResize = function()
+		interactionText.Width = interactionTextStr.Width + 12
+		interactionText.Height = interactionTextStr.Height + 12
+		interactionText.pos = {
+			Screen.Width * 0.5 - interactionText.Width * 0.5,
+			Screen.Height * 0.5 - interactionText.Height * 0.5 - 50,
+		}
+		interactionTextStr.pos = { 6, 6 }
+	end
+	interactionText:parentDidResize()
+end
+
+local function handleInteractions()
+	local obj = getAvailableInteraction()
+	if not obj then
+		setInteractableObject(nil)
+		return
+	end
+	-- do nothing if same object
+	if obj == interactableObject then
+		return
+	end
+	setInteractableObject(obj)
+end
+
+LocalEvent:Listen(LocalEvent.Name.Tick, function()
+	handleInteractions()
+end)
+
+LocalEvent:Listen(LocalEvent.Name.KeyboardInput, function(char, _, _, down)
+	if char == "f" and down and interactableObject then
+		interactableObject.onInteract()
+	end
+end)
