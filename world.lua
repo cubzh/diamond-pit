@@ -55,36 +55,36 @@ generate_map = function()
 	downWing:SetParent(map)
 	downWing:AddBlock(Color(100, 200, 100), 0, 0, 0)
 	downWing.Pivot = { 0, 1, 0 }
-	downWing.Scale = { 200, 100, 600 }
+	downWing.Scale = { 200, 2000, 600 }
 	downWing.LocalPosition = { 0, 0, 0 }
 
 	local leftStone = MutableShape()
 	leftStone:SetParent(map)
 	leftStone:AddBlock(Color.DarkGrey, 0, 0, 0)
 	leftStone.Pivot = { 0, 1, 0 }
-	leftStone.Scale = { 500, 100, 200 }
-	leftStone.LocalPosition = { 0, 0, 0 }
+	leftStone.Scale = { 500, 2000, 200 }
+	leftStone.LocalPosition = { 0, 100, 0 }
 
 	local rightStone = MutableShape()
 	rightStone:SetParent(map)
 	rightStone:AddBlock(Color.DarkGrey, 0, 0, 0)
 	rightStone.Pivot = { 0, 1, 0 }
-	rightStone.Scale = { 500, 100, 200 }
-	rightStone.LocalPosition = { 0, 0, 400 }
+	rightStone.Scale = { 500, 2000, 200 }
+	rightStone.LocalPosition = { 0, 100, 400 }
 
 	local upStone = MutableShape()
 	upStone:SetParent(map)
 	upStone:AddBlock(Color.DarkGrey, 0, 0, 0)
 	upStone.Pivot = { 0, 1, 0 }
-	upStone.Scale = { 200, 100, 600 }
-	upStone.LocalPosition = { 400, 0, 0 }
+	upStone.Scale = { 200, 2000, 600 }
+	upStone.LocalPosition = { 400, 100, 0 }
 
 	local downStone = MutableShape()
 	downStone:SetParent(map)
 	downStone:AddBlock(Color.DarkGrey, 0, 0, 0)
 	downStone.Pivot = { 0, 1, 0 }
-	downStone.Scale = { 200, 100, 600 }
-	downStone.LocalPosition = { 0, 0, 0 }
+	downStone.Scale = { 200, 2000, 600 }
+	downStone.LocalPosition = { 0, 100, 0 }
 end
 
 blocksModule = {}
