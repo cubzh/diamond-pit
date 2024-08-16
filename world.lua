@@ -520,7 +520,7 @@ worldInfo = {
 
 function getOrCreateBlocksColumn(key, entity)
 	local rawColumn = dojo:getModel(entity, "BlocksColumn")
-	if not rawColumn then
+	if not rawColumn or not blocksModule.blockShape.GetBlock then
 		return
 	end
 	local column = {
