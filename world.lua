@@ -197,7 +197,7 @@ initUpgradeAreas = function()
 	end
 
 	local upgradeBackpack = MutableShape()
-	upgradeBackpack:AddBlock(Color(0, 0, 255, 0.5), 0, 0, 0)
+	upgradeBackpack:AddBlock(Color(0, 255, 255, 0.5), 0, 0, 0)
 	upgradeBackpack:SetParent(World)
 	upgradeBackpack.Scale = { 30, 5, 30 }
 	upgradeBackpack.Pivot = { 0.5, 0, 0.5 }
