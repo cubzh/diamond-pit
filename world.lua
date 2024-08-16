@@ -175,6 +175,18 @@ initSellingArea = function()
 	sellAll.Position = { 450, 0, 300 }
 end
 
+initUpgradeAreas = function()
+	-- local sellAll = MutableShape()
+	-- sellAll:AddBlock(Color(255, 0, 0, 0.5))
+	-- sellAll:SetParent(World)
+	-- sellAll.Scale = 40
+	-- sellAll.OnCollisionBegin = function(_, other)
+	-- 	print(other)
+	-- end
+
+	-- sellAll.Position = { 450, 0, 300 }
+end
+
 local leaderboardTextBlocks
 local leaderboardTextHits
 local leaderboardTextCoins
@@ -435,6 +447,8 @@ Client.OnStart = function()
 	initPlayer()
 	initLeaderboard()
 	initDojo()
+	initSellingArea()
+	initUpgradeAreas()
 
 	Fog.On = false
 	generate_map()
