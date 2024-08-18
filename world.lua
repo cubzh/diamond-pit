@@ -586,7 +586,11 @@ function getOrCreateBlocksColumn(key, entity)
 end
 
 function updateEntity(entities)
-	print(JSON:Encode(entities))
+	if not entities then
+		print("no entities")
+		return
+	end
+	print(entities)
 	for key, newEntity in pairs(entities) do
 		if getOrCreateBlocksColumn(key, newEntity) then
 			getOrCreateBlocksColumn(key, newEntity):update(newEntity)
