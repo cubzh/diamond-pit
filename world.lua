@@ -545,7 +545,7 @@ worldInfo = {
 }
 
 function getOrCreateBlocksColumn(key, entity)
-	local rawColumn = dojo:getModel(entity, "BlocksColumn")
+	local rawColumn = dojo:getModel(entity, "dojo_starter-BlocksColumn")
 	if not rawColumn or not blocksModule.blockShape.GetBlock then
 		return
 	end
@@ -589,12 +589,12 @@ function updateEntity(entities)
 	for key, newEntity in pairs(entities) do
 		if getOrCreateBlocksColumn(key, newEntity) then
 			getOrCreateBlocksColumn(key, newEntity):update(newEntity)
-		elseif dojo:getModel(newEntity, "PlayerInventory") then
-			updateInventory(dojo:getModel(newEntity, "PlayerInventory"))
-		elseif dojo:getModel(newEntity, "DailyLeaderboardEntry") then
-			updateLeaderboard(dojo:getModel(newEntity, "DailyLeaderboardEntry"))
-		elseif dojo:getModel(newEntity, "PlayerStats") then
-			updatePlayerStats(dojo:getModel(newEntity, "PlayerStats"))
+		elseif dojo:getModel(newEntity, "dojo_starter-PlayerInventory") then
+			updateInventory(dojo:getModel(newEntity, "dojo_starter-PlayerInventory"))
+		elseif dojo:getModel(newEntity, "dojo_starter-DailyLeaderboardEntry") then
+			updateLeaderboard(dojo:getModel(newEntity, "dojo_starter-DailyLeaderboardEntry"))
+		elseif dojo:getModel(newEntity, "dojo_starter-PlayerStats") then
+			updatePlayerStats(dojo:getModel(newEntity, "dojo_starter-PlayerStats"))
 		end
 	end
 end
@@ -606,7 +606,7 @@ function startGame(toriiClient)
 	-- set on entity update callback
 	-- match everything
 	-- on 1.0.0, add [] around
-	local clauseJsonStr = '{ "Keys": { "keys": [], "models": [], "pattern_matching": "VariableLen" } }'
+	local clauseJsonStr = '[{ "Keys": { "keys": [], "models": [], "pattern_matching": "VariableLen" } }]'
 	toriiClient:OnEntityUpdate(clauseJsonStr, updateEntity)
 end
 
