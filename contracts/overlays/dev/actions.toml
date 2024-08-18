@@ -1,2 +1,2 @@
-tag = "dojo_examples-actions"
-writes = [ "ns:dojo_examples" ]
+tag = "diamond_pit-actions"
+writes = [ "ns:diamond_pit" ]

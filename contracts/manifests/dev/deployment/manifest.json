@@ -1229,10 +1229,10 @@
         ]
       }
     ],
-    "address": "0x34d4e2fcecd511a3286e6acc3e0108ff5d6b7e9290876f988a76163ade950b2",
-    "transaction_hash": "0x3c006a7d1fa97ed7ac6b167aafa75044a89375f55449951ea6ad16d34d17dba",
-    "block_number": 3,
-    "seed": "dojo_examples",
+    "address": "0x5c1d201209938c1ac8340c7caeec489060b04dff85399605e58ebc2cdc149f4",
+    "transaction_hash": "0x1230d4b7e499d09c441c85a1d8cfec87180b6b535e5356bb14d6b490e1c906c",
+    "block_number": 54,
+    "seed": "diamond_pit",
     "metadata": {
       "profile_name": "dev",
       "rpc_url": "https://api.cartridge.gg/x/diamond-pit/katana"
@@ -1250,9 +1250,9 @@
   "contracts": [
     {
       "kind": "DojoContract",
-      "address": "0x3ef05fbe904cf834c4bf94a454a9d86d553089cfe614785cb60b8c559a2dc68",
-      "class_hash": "0x528f0e7804088e0c66e6053525d7a3f3cc14e913199a8371feccd7886d7d1e1",
-      "original_class_hash": "0x528f0e7804088e0c66e6053525d7a3f3cc14e913199a8371feccd7886d7d1e1",
+      "address": "0x2c24de1c529a154eac885b0b34e8bf1b04f4ce0845b91d1a4fc9aea8c9d71ed",
+      "class_hash": "0x3e928e8022e71f83f39c6c65fd92320ce4d2718306c42ccf82058fd96d5403d",
+      "original_class_hash": "0x3e928e8022e71f83f39c6c65fd92320ce4d2718306c42ccf82058fd96d5403d",
       "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
       "abi": [
         {
@@ -1385,11 +1385,11 @@
         {
           "type": "impl",
           "name": "ActionsImpl",
-          "interface_name": "dojo_examples::systems::actions::IActions"
+          "interface_name": "diamond_pit::systems::actions::IActions"
         },
         {
           "type": "interface",
-          "name": "dojo_examples::systems::actions::IActions",
+          "name": "diamond_pit::systems::actions::IActions",
           "items": [
             {
               "type": "function",
@@ -1464,11 +1464,11 @@
         {
           "type": "impl",
           "name": "IDojoInitImpl",
-          "interface_name": "dojo_examples::systems::actions::actions::IDojoInit"
+          "interface_name": "diamond_pit::systems::actions::actions::IDojoInit"
         },
         {
           "type": "interface",
-          "name": "dojo_examples::systems::actions::actions::IDojoInit",
+          "name": "diamond_pit::systems::actions::actions::IDojoInit",
           "items": [
             {
               "type": "function",
@@ -1528,7 +1528,7 @@
         },
         {
           "type": "event",
-          "name": "dojo_examples::systems::actions::actions::Event",
+          "name": "diamond_pit::systems::actions::actions::Event",
           "kind": "enum",
           "variants": [
             {
@@ -1541,10 +1541,10 @@
       ],
       "reads": [],
       "writes": [
-        "ns:dojo_examples"
+        "ns:diamond_pit"
       ],
       "init_calldata": [],
-      "tag": "dojo_examples-actions",
+      "tag": "diamond_pit-actions",
       "systems": [
         "hit_block",
         "sell_all",
@@ -1553,7 +1553,7 @@
         "inspect_block",
         "generate_world"
       ],
-      "manifest_name": "dojo_examples-actions-40b6994c"
+      "manifest_name": "diamond_pit-actions-3fc18067"
     }
   ],
   "models": [
@@ -1581,8 +1581,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x3c3e1584204c7c104a494586730b3f447b161b2d82af79c26a523b3264089af",
-      "original_class_hash": "0x3c3e1584204c7c104a494586730b3f447b161b2d82af79c26a523b3264089af",
+      "class_hash": "0x474a925eb4e2613d71d04d491ff3643835c68e142115ea6a3f2321ecd9c350f",
+      "original_class_hash": "0x474a925eb4e2613d71d04d491ff3643835c68e142115ea6a3f2321ecd9c350f",
       "abi": [
         {
           "type": "impl",
@@ -1949,11 +1949,11 @@
         {
           "type": "impl",
           "name": "blocks_columnImpl",
-          "interface_name": "dojo_examples::models::blocks_column::Iblocks_column"
+          "interface_name": "diamond_pit::models::blocks_column::Iblocks_column"
         },
         {
           "type": "struct",
-          "name": "dojo_examples::models::blocks_column::BlocksColumn",
+          "name": "diamond_pit::models::blocks_column::BlocksColumn",
           "members": [
             {
               "name": "x",
@@ -1975,7 +1975,7 @@
         },
         {
           "type": "interface",
-          "name": "dojo_examples::models::blocks_column::Iblocks_column",
+          "name": "diamond_pit::models::blocks_column::Iblocks_column",
           "items": [
             {
               "type": "function",
@@ -1983,7 +1983,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "dojo_examples::models::blocks_column::BlocksColumn"
+                  "type": "diamond_pit::models::blocks_column::BlocksColumn"
                 }
               ],
               "outputs": [],
@@ -1993,13 +1993,13 @@
         },
         {
           "type": "event",
-          "name": "dojo_examples::models::blocks_column::blocks_column::Event",
+          "name": "diamond_pit::models::blocks_column::blocks_column::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "dojo_examples-BlocksColumn",
-      "manifest_name": "dojo_examples-BlocksColumn-7d5ae84e"
+      "tag": "diamond_pit-BlocksColumn",
+      "manifest_name": "diamond_pit-BlocksColumn-766b200b"
     },
     {
       "kind": "DojoModel",
@@ -2030,8 +2030,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x2646990b7c05280300583f2a63f6e51562e55c19551821860c189b7a437dcd2",
-      "original_class_hash": "0x2646990b7c05280300583f2a63f6e51562e55c19551821860c189b7a437dcd2",
+      "class_hash": "0x73fb899e17655effb8f5ab8e389cf2a848d4b1dc2f01345bf94b75e8485d7fd",
+      "original_class_hash": "0x73fb899e17655effb8f5ab8e389cf2a848d4b1dc2f01345bf94b75e8485d7fd",
       "abi": [
         {
           "type": "impl",
@@ -2398,11 +2398,11 @@
         {
           "type": "impl",
           "name": "daily_leaderboard_entryImpl",
-          "interface_name": "dojo_examples::models::daily_leaderboard_entry::Idaily_leaderboard_entry"
+          "interface_name": "diamond_pit::models::daily_leaderboard_entry::Idaily_leaderboard_entry"
         },
         {
           "type": "struct",
-          "name": "dojo_examples::models::daily_leaderboard_entry::DailyLeaderboardEntry",
+          "name": "diamond_pit::models::daily_leaderboard_entry::DailyLeaderboardEntry",
           "members": [
             {
               "name": "player",
@@ -2428,7 +2428,7 @@
         },
         {
           "type": "interface",
-          "name": "dojo_examples::models::daily_leaderboard_entry::Idaily_leaderboard_entry",
+          "name": "diamond_pit::models::daily_leaderboard_entry::Idaily_leaderboard_entry",
           "items": [
             {
               "type": "function",
@@ -2436,7 +2436,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "dojo_examples::models::daily_leaderboard_entry::DailyLeaderboardEntry"
+                  "type": "diamond_pit::models::daily_leaderboard_entry::DailyLeaderboardEntry"
                 }
               ],
               "outputs": [],
@@ -2446,13 +2446,13 @@
         },
         {
           "type": "event",
-          "name": "dojo_examples::models::daily_leaderboard_entry::daily_leaderboard_entry::Event",
+          "name": "diamond_pit::models::daily_leaderboard_entry::daily_leaderboard_entry::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "dojo_examples-DailyLeaderboardEntry",
-      "manifest_name": "dojo_examples-DailyLeaderboardEntry-2a419e62"
+      "tag": "diamond_pit-DailyLeaderboardEntry",
+      "manifest_name": "diamond_pit-DailyLeaderboardEntry-1d6ce5ad"
     },
     {
       "kind": "DojoModel",
@@ -2473,8 +2473,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x3a060ac88af66ca77c843f465798fb7e128a9373e4b8dcc16bae43fd4fd05ee",
-      "original_class_hash": "0x3a060ac88af66ca77c843f465798fb7e128a9373e4b8dcc16bae43fd4fd05ee",
+      "class_hash": "0x4f71913a0e7dfe072368531b1ad324abbdeac558585bd72a838d900fd35873c",
+      "original_class_hash": "0x4f71913a0e7dfe072368531b1ad324abbdeac558585bd72a838d900fd35873c",
       "abi": [
         {
           "type": "impl",
@@ -2841,11 +2841,11 @@
         {
           "type": "impl",
           "name": "player_inventoryImpl",
-          "interface_name": "dojo_examples::models::player_inventory::Iplayer_inventory"
+          "interface_name": "diamond_pit::models::player_inventory::Iplayer_inventory"
         },
         {
           "type": "struct",
-          "name": "dojo_examples::models::player_inventory::PlayerInventory",
+          "name": "diamond_pit::models::player_inventory::PlayerInventory",
           "members": [
             {
               "name": "player",
@@ -2863,7 +2863,7 @@
         },
         {
           "type": "interface",
-          "name": "dojo_examples::models::player_inventory::Iplayer_inventory",
+          "name": "diamond_pit::models::player_inventory::Iplayer_inventory",
           "items": [
             {
               "type": "function",
@@ -2871,7 +2871,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "dojo_examples::models::player_inventory::PlayerInventory"
+                  "type": "diamond_pit::models::player_inventory::PlayerInventory"
                 }
               ],
               "outputs": [],
@@ -2881,13 +2881,13 @@
         },
         {
           "type": "event",
-          "name": "dojo_examples::models::player_inventory::player_inventory::Event",
+          "name": "diamond_pit::models::player_inventory::player_inventory::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "dojo_examples-PlayerInventory",
-      "manifest_name": "dojo_examples-PlayerInventory-16f11255"
+      "tag": "diamond_pit-PlayerInventory",
+      "manifest_name": "diamond_pit-PlayerInventory-676ae3a3"
     },
     {
       "kind": "DojoModel",
@@ -2913,8 +2913,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x505866fd7cdf4ed7e22365458b2f121f8bde1af832a45ad0f5f45493c585ffb",
-      "original_class_hash": "0x505866fd7cdf4ed7e22365458b2f121f8bde1af832a45ad0f5f45493c585ffb",
+      "class_hash": "0x70c3e42817e21cd81aab9674860ce73f19bed83f82bec7f31ba7b154d4cb621",
+      "original_class_hash": "0x70c3e42817e21cd81aab9674860ce73f19bed83f82bec7f31ba7b154d4cb621",
       "abi": [
         {
           "type": "impl",
@@ -3281,11 +3281,11 @@
         {
           "type": "impl",
           "name": "player_statsImpl",
-          "interface_name": "dojo_examples::models::player_stats::Iplayer_stats"
+          "interface_name": "diamond_pit::models::player_stats::Iplayer_stats"
         },
         {
           "type": "struct",
-          "name": "dojo_examples::models::player_stats::PlayerStats",
+          "name": "diamond_pit::models::player_stats::PlayerStats",
           "members": [
             {
               "name": "player",
@@ -3307,7 +3307,7 @@
         },
         {
           "type": "interface",
-          "name": "dojo_examples::models::player_stats::Iplayer_stats",
+          "name": "diamond_pit::models::player_stats::Iplayer_stats",
           "items": [
             {
               "type": "function",
@@ -3315,7 +3315,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "dojo_examples::models::player_stats::PlayerStats"
+                  "type": "diamond_pit::models::player_stats::PlayerStats"
                 }
               ],
               "outputs": [],
@@ -3325,13 +3325,13 @@
         },
         {
           "type": "event",
-          "name": "dojo_examples::models::player_stats::player_stats::Event",
+          "name": "diamond_pit::models::player_stats::player_stats::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "dojo_examples-PlayerStats",
-      "manifest_name": "dojo_examples-PlayerStats-1212a11b"
+      "tag": "diamond_pit-PlayerStats",
+      "manifest_name": "diamond_pit-PlayerStats-20bc78b8"
     }
   ]
 }

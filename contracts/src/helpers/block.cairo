@@ -1,4 +1,4 @@
-use dojo_examples::helpers::math::fast_power_2;
+use diamond_pit::helpers::math::fast_power_2;
 
 const TWO_POW_7: u128 = 128;
 const BLOCK_HP_MASK: u16 = 127;

@@ -6,7 +6,7 @@ mod tests {
     // import test utils
     use dojo::test_utils::{spawn_test_world, deploy_contract};
     // import test utils
-    use dojo_examples::{
+    use diamond_pit::{
         systems::{actions::{actions, IActionsDispatcher, IActionsDispatcherTrait}},
     };
 }

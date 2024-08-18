@@ -2,18 +2,18 @@
 version = 1
 
 [[package]]
+name = "diamond_pit"
+version = "1.0.0-alpha.6"
+dependencies = [
+ "dojo",
+]
+
+[[package]]
 name = "dojo"
 version = "1.0.0-alpha.4"
 source = "git+https://github.com/dojoengine/dojo?tag=v1.0.0-alpha.6#ede7930735c708572af8a87f81bb76354a401b3a"
 dependencies = [
  "dojo_plugin",
-]
-
-[[package]]
-name = "dojo_examples"
-version = "1.0.0-alpha.6"
-dependencies = [
- "dojo",
 ]
 
 [[package]]

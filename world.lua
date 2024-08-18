@@ -538,8 +538,8 @@ end
 worldInfo = {
 	rpc_url = "https://api.cartridge.gg/x/diamond-pit/katana",
 	torii_url = "https://api.cartridge.gg/x/diamond-pit/torii",
-	world = "0x34d4e2fcecd511a3286e6acc3e0108ff5d6b7e9290876f988a76163ade950b2",
-	actions = "0x03ef05fbe904cf834c4bf94a454a9d86d553089cfe614785cb60b8c559a2dc68",
+	world = "0x5c1d201209938c1ac8340c7caeec489060b04dff85399605e58ebc2cdc149f4",
+	actions = "0x02c24de1c529a154eac885b0b34e8bf1b04f4ce0845b91d1a4fc9aea8c9d71ed",
 	playerAddress = "0x657e5f424dc6dee0c5a305361ea21e93781fea133d83efa410b771b7f92b",
 	playerSigningKey = "0xcd93de85d43988b9492bfaaff930c129fc3edbc513bb0c2b81577291848007",
 }

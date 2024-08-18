@@ -364,11 +364,11 @@
   {
     "type": "impl",
     "name": "player_statsImpl",
-    "interface_name": "dojo_examples::models::player_stats::Iplayer_stats"
+    "interface_name": "diamond_pit::models::player_stats::Iplayer_stats"
   },
   {
     "type": "struct",
-    "name": "dojo_examples::models::player_stats::PlayerStats",
+    "name": "diamond_pit::models::player_stats::PlayerStats",
     "members": [
       {
         "name": "player",
@@ -390,7 +390,7 @@
   },
   {
     "type": "interface",
-    "name": "dojo_examples::models::player_stats::Iplayer_stats",
+    "name": "diamond_pit::models::player_stats::Iplayer_stats",
     "items": [
       {
         "type": "function",
@@ -398,7 +398,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_examples::models::player_stats::PlayerStats"
+            "type": "diamond_pit::models::player_stats::PlayerStats"
           }
         ],
         "outputs": [],
@@ -408,7 +408,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_examples::models::player_stats::player_stats::Event",
+    "name": "diamond_pit::models::player_stats::player_stats::Event",
     "kind": "enum",
     "variants": []
   }

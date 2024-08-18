@@ -1,6 +1,6 @@
 use starknet::ContractAddress;
-use dojo_examples::helpers::block::{BlockType, BlockHelperTrait};
-use dojo_examples::helpers::math::{fast_power_2};
+use diamond_pit::helpers::block::{BlockType, BlockHelperTrait};
+use diamond_pit::helpers::math::{fast_power_2};
 
 const SLOT_MASK: u64 = 255;
 
@@ -56,7 +56,7 @@ pub impl PlayerInventoryImpl of PlayerInventoryTrait {
 #[cfg(test)]
 mod tests {
     use super::{PlayerInventory, PlayerInventoryTrait};
-    use dojo_examples::helpers::block::{BlockType};
+    use diamond_pit::helpers::block::{BlockType};
  
     #[test]
     fn test_get_stone() {

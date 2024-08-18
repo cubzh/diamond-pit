@@ -1,7 +1,7 @@
 [package]
 edition.workspace = true
 license-file.workspace = true
-name = "dojo-examples-spawn-and-move"
+name = "diamond-pit"
 repository.workspace = true
 version.workspace = true
 

@@ -129,11 +129,11 @@
   {
     "type": "impl",
     "name": "ActionsImpl",
-    "interface_name": "dojo_examples::systems::actions::IActions"
+    "interface_name": "diamond_pit::systems::actions::IActions"
   },
   {
     "type": "interface",
-    "name": "dojo_examples::systems::actions::IActions",
+    "name": "diamond_pit::systems::actions::IActions",
     "items": [
       {
         "type": "function",
@@ -208,11 +208,11 @@
   {
     "type": "impl",
     "name": "IDojoInitImpl",
-    "interface_name": "dojo_examples::systems::actions::actions::IDojoInit"
+    "interface_name": "diamond_pit::systems::actions::actions::IDojoInit"
   },
   {
     "type": "interface",
-    "name": "dojo_examples::systems::actions::actions::IDojoInit",
+    "name": "diamond_pit::systems::actions::actions::IDojoInit",
     "items": [
       {
         "type": "function",
@@ -272,7 +272,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_examples::systems::actions::actions::Event",
+    "name": "diamond_pit::systems::actions::actions::Event",
     "kind": "enum",
     "variants": [
       {

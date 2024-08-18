@@ -21,13 +21,13 @@ pub trait IActions {
 pub mod actions {
     use super::{IActions, _uniform_random};
     use starknet::{ContractAddress, get_caller_address};
-    use dojo_examples::models::{
+    use diamond_pit::models::{
         blocks_column::{BlocksColumn, BlocksColumnTrait, MAX_U128},
         player_inventory::{PlayerInventory, PlayerInventoryTrait},
         daily_leaderboard_entry::{DailyLeaderboardEntry},
         player_stats::{PlayerStats, PlayerStatsTrait},
     };
-    use dojo_examples::helpers::{
+    use diamond_pit::helpers::{
         block::{BlockHelper},
         math::{fast_power_2}
     };

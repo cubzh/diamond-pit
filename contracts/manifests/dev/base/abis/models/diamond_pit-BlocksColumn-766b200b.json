@@ -364,11 +364,11 @@
   {
     "type": "impl",
     "name": "blocks_columnImpl",
-    "interface_name": "dojo_examples::models::blocks_column::Iblocks_column"
+    "interface_name": "diamond_pit::models::blocks_column::Iblocks_column"
   },
   {
     "type": "struct",
-    "name": "dojo_examples::models::blocks_column::BlocksColumn",
+    "name": "diamond_pit::models::blocks_column::BlocksColumn",
     "members": [
       {
         "name": "x",
@@ -390,7 +390,7 @@
   },
   {
     "type": "interface",
-    "name": "dojo_examples::models::blocks_column::Iblocks_column",
+    "name": "diamond_pit::models::blocks_column::Iblocks_column",
     "items": [
       {
         "type": "function",
@@ -398,7 +398,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_examples::models::blocks_column::BlocksColumn"
+            "type": "diamond_pit::models::blocks_column::BlocksColumn"
           }
         ],
         "outputs": [],
@@ -408,7 +408,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_examples::models::blocks_column::blocks_column::Event",
+    "name": "diamond_pit::models::blocks_column::blocks_column::Event",
     "kind": "enum",
     "variants": []
   }

@@ -363,38 +363,30 @@
   },
   {
     "type": "impl",
-    "name": "daily_leaderboard_entryImpl",
-    "interface_name": "dojo_examples::models::daily_leaderboard_entry::Idaily_leaderboard_entry"
+    "name": "player_inventoryImpl",
+    "interface_name": "diamond_pit::models::player_inventory::Iplayer_inventory"
   },
   {
     "type": "struct",
-    "name": "dojo_examples::models::daily_leaderboard_entry::DailyLeaderboardEntry",
+    "name": "diamond_pit::models::player_inventory::PlayerInventory",
     "members": [
       {
         "name": "player",
         "type": "core::starknet::contract_address::ContractAddress"
       },
       {
-        "name": "day",
-        "type": "core::integer::u32"
-      },
-      {
-        "name": "nb_coins_collected",
+        "name": "data",
         "type": "core::integer::u64"
       },
       {
-        "name": "nb_blocks_broken",
-        "type": "core::integer::u16"
-      },
-      {
-        "name": "nb_hits",
-        "type": "core::integer::u16"
+        "name": "coins",
+        "type": "core::integer::u64"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "dojo_examples::models::daily_leaderboard_entry::Idaily_leaderboard_entry",
+    "name": "diamond_pit::models::player_inventory::Iplayer_inventory",
     "items": [
       {
         "type": "function",
@@ -402,7 +394,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_examples::models::daily_leaderboard_entry::DailyLeaderboardEntry"
+            "type": "diamond_pit::models::player_inventory::PlayerInventory"
           }
         ],
         "outputs": [],
@@ -412,7 +404,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_examples::models::daily_leaderboard_entry::daily_leaderboard_entry::Event",
+    "name": "diamond_pit::models::player_inventory::player_inventory::Event",
     "kind": "enum",
     "variants": []
   }

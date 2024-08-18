@@ -1,6 +1,6 @@
 use starknet::ContractAddress;
-use dojo_examples::helpers::block::{BlockHelper};
-use dojo_examples::helpers::math::fast_power_2;
+use diamond_pit::helpers::block::{BlockHelper};
+use diamond_pit::helpers::math::fast_power_2;
 
 pub const MAX_U128: u128 = 340282366920938463463374607431768211455;
 
@@ -60,7 +60,7 @@ impl BlocksColumnHelperImpl of BlocksColumnHelperTrait {
 #[cfg(test)]
 mod tests {
     use super::{BlocksColumn, BlocksColumnTrait};
-    use dojo_examples::helpers::block::BlockHelper;
+    use diamond_pit::helpers::block::BlockHelper;
 
     #[test]
     fn test_hit_block_0() {

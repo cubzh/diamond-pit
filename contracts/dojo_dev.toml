@@ -1,10 +1,10 @@
 [world]
 description = "example world"
 name = "example"
-seed = "dojo_examples"
+seed = "diamond_pit"
 
 [namespace]
-default = "dojo_examples"
+default = "diamond_pit"
 
 [env]
 #rpc_url = "http://localhost:5050/"
@@ -12,6 +12,6 @@ rpc_url = "https://api.cartridge.gg/x/diamond-pit/katana"
 # Default account for katana with seed = 0
 #account_address = "0xb3ff441a68610b30fd5e2abbf3a1548eb6ba6f3559f2862bf2dc757e5828ca"
 #private_key = "0x2bbf4f9fd0bbb2e60b0316c1fe0b76cf7a4d0198bd493ced9b8df2a3a24d68a"
-world_address = "0x34d4e2fcecd511a3286e6acc3e0108ff5d6b7e9290876f988a76163ade950b2"  # Uncomment and update this line with your world address.
+world_address = "0x5c1d201209938c1ac8340c7caeec489060b04dff85399605e58ebc2cdc149f4"  # Uncomment and update this line with your world address.
 account_address = "0x657e5f424dc6dee0c5a305361ea21e93781fea133d83efa410b771b7f92b"
 private_key = "0xcd93de85d43988b9492bfaaff930c129fc3edbc513bb0c2b81577291848007"
