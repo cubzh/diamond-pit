@@ -586,6 +586,7 @@ function getOrCreateBlocksColumn(key, entity)
 end
 
 function updateEntity(entities)
+	print(JSON:Encode(entities))
 	for key, newEntity in pairs(entities) do
 		if getOrCreateBlocksColumn(key, newEntity) then
 			getOrCreateBlocksColumn(key, newEntity):update(newEntity)
