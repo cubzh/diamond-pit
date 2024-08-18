@@ -1,0 +1,26 @@
+kind = "DojoModel"
+class_hash = "0x505866fd7cdf4ed7e22365458b2f121f8bde1af832a45ad0f5f45493c585ffb"
+original_class_hash = "0x505866fd7cdf4ed7e22365458b2f121f8bde1af832a45ad0f5f45493c585ffb"
+abi = "manifests/dev/base/abis/models/dojo_examples-PlayerStats-1212a11b.json"
+tag = "dojo_examples-PlayerStats"
+manifest_name = "dojo_examples-PlayerStats-1212a11b"
+
+[[members]]
+name = "player"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "backpack_level"
+type = "u8"
+key = false
+
+[[members]]
+name = "pickaxe_level"
+type = "u8"
+key = false
+
+[[members]]
+name = "rebirth"
+type = "u16"
+key = false
