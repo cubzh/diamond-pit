@@ -658,6 +658,7 @@ dojo.setOnEntityUpdateCallbacks = function(_, callbacks)
 		)
 		dojo.toriiClient:OnEntityUpdate(clauseJsonStr, function(entityKey, entity)
 			local model = dojo:getModel(entity, modelName)
+			print(">>>>", entityKey, entity)
 			if model then
 				callback(entityKey, model, entity)
 			end
@@ -665,19 +666,19 @@ dojo.setOnEntityUpdateCallbacks = function(_, callbacks)
 	end
 end
 
-dojo.setOnAnyEntityUpdateCallback = function(_, callback)
+dojo.setOnAnyEntityUpdateCallback = function(self, callback)
 	local clauseJsonStr = '[{ "Keys": { "keys": [], "models": [], "pattern_matching": "VariableLen" } }]'
-	dojo.toriiClient:OnEntityUpdate(clauseJsonStr, callback)
+	self.toriiClient:OnEntityUpdate(clauseJsonStr, callback)
 end
 
-dojo.syncEntities = function(_, callbacks)
-	dojo.toriiClient:Entities('{ "limit": 100, "offset": 0 }', function(entities)
+dojo.syncEntities = function(self, callbacks)
+	self.toriiClient:Entities('{ "limit": 100, "offset": 0 }', function(entities)
 		if not entities then
 			return
 		end
 		for entityKey, entity in pairs(entities) do
 			for modelName, callback in pairs(callbacks) do
-				local model = dojo:getModel(entity, modelName)
+				local model = self:getModel(entity, modelName)
 				if model then
 					callback(entityKey, model, entity)
 				end
