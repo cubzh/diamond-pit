@@ -154,7 +154,7 @@ blocksModule.hitBlock = function(self, block)
 	dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
 end
 
-updatePlayerStats = function(stats)
+updatePlayerStats = function(_, stats)
 	if stats.player.value ~= dojo.burnerAccount.Account then
 		return
 	end
@@ -315,7 +315,7 @@ initLeaderboard = function()
 end
 
 local leaderboardEntries = {}
-updateLeaderboard = function(entry)
+updateLeaderboard = function(_, entry)
 	if entry.day.value ~= math.floor(Time.Unix() / 86400) then
 		return
 	end
@@ -430,7 +430,7 @@ updateLeaderboard = function(entry)
 end
 
 local inventoryNode
-updateInventory = function(inventory)
+updateInventory = function(_, inventory)
 	if inventory.player.value ~= dojo.burnerAccount.Address then
 		return
 	end
@@ -592,40 +592,28 @@ function getOrCreateBlocksColumn(key, entity)
 	end
 end
 
-function updateEntity(key, entity)
-	if not key or not entity then
-		return
-	end
-	if getOrCreateBlocksColumn(key, entity) then
-		getOrCreateBlocksColumn(key, entity):update(entity)
-	elseif dojo:getModel(entity, "diamond_pit-PlayerInventory") then
-		updateInventory(dojo:getModel(entity, "diamond_pit-PlayerInventory"))
-	elseif dojo:getModel(entity, "diamond_pit-DailyLeaderboardEntry") then
-		updateLeaderboard(dojo:getModel(entity, "diamond_pit-DailyLeaderboardEntry"))
-	elseif dojo:getModel(entity, "diamond_pit-PlayerStats") then
-		updatePlayerStats(dojo:getModel(entity, "diamond_pit-PlayerStats"))
-	end
+function updateBlocksColumn(key, entity)
+	getOrCreateBlocksColumn(key, entity):update(entity)
 end
 
-function updateEntities(entities)
-	if not entities then
-		return
-	end
-	for key, entity in pairs(entities) do
-		updateEntity(key, entity)
-	end
-end
+local onEntityUpdateCallbacks = {
+	["diamond_pit-BlocksColumn"] = updateBlocksColumn,
+	["diamond_pit-PlayerInventory"] = updateInventory,
+	["diamond_pit-DailyLeaderboardEntry"] = updateLeaderboard,
+	["diamond_pit-PlayerStats"] = updatePlayerStats,
+}
 
 function startGame(toriiClient)
-	-- sync existing entities
-	toriiClient:Entities('{ "limit": 100, "offset": 0 }', updateEntities)
+	-- sync previous entities
+	dojo:syncEntities(onEntityUpdateCallbacks)
 
-	-- set on entity update callback
-	-- match everything
-	-- on 1.0.0, add [] around
-	local clauseJsonStr =
-		'[{ "Keys": { "keys": [], "models": ["diamond_pit-PlayerInventory"], "pattern_matching": "VariableLen" } }]'
-	toriiClient:OnEntityUpdate(clauseJsonStr, updateEntity)
+	-- add callbacks when an entity is updated
+	dojo:setOnEntityUpdateCallbacks(onEntityUpdateCallbacks)
+
+	-- listen to any update
+	dojo:setOnAnyEntityUpdateCallback(function(key, entity)
+		print("Any update", key)
+	end)
 end
 
 -- dojo module
@@ -665,6 +653,42 @@ dojo.getModel = function(_, entity, modelName)
 			return model
 		end
 	end
+end
+
+dojo.setOnEntityUpdateCallbacks = function(_, callbacks)
+	for modelName, callback in pairs(callbacks) do
+		local clauseJsonStr = string.format(
+			'[{ "Keys": { "keys": [], "models": ["%s"], "pattern_matching": "VariableLen" } }]',
+			modelName
+		)
+		toriiClient:OnEntityUpdate(clauseJsonStr, function(entityKey, entity)
+			local model = dojo:getModel(entity, modelName)
+			if model then
+				callback(entityKey, model, entity)
+			end
+		end)
+	end
+end
+
+dojo.setOnAnyEntityUpdateCallback = function(_, callback)
+	local clauseJsonStr = '[{ "Keys": { "keys": [], "models": [], "pattern_matching": "VariableLen" } }]'
+	toriiClient:OnEntityUpdate(clauseJsonStr, callback)
+end
+
+dojo.syncEntities = function(_, callbacks)
+	toriiClient:Entities('{ "limit": 100, "offset": 0 }', function(entities)
+		if not entities then
+			return
+		end
+		for entityKey, entity in pairs(entities) do
+			for modelName, callback in pairs(callbacks) do
+				local model = dojo:getModel(entity, modelName)
+				if model then
+					callback(entityKey, model, entity)
+				end
+			end
+		end
+	end)
 end
 
 function bytes_to_hex(data)
