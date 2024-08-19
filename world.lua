@@ -589,14 +589,14 @@ function updateEntity(key, entity)
 	if not key or not entity then
 		return
 	end
-	if getOrCreateBlocksColumn(key, newEntity) then
-		getOrCreateBlocksColumn(key, newEntity):update(newEntity)
-	elseif dojo:getModel(newEntity, "diamond_pit-PlayerInventory") then
-		updateInventory(dojo:getModel(newEntity, "diamond_pit-PlayerInventory"))
-	elseif dojo:getModel(newEntity, "diamond_pit-DailyLeaderboardEntry") then
-		updateLeaderboard(dojo:getModel(newEntity, "diamond_pit-DailyLeaderboardEntry"))
-	elseif dojo:getModel(newEntity, "diamond_pit-PlayerStats") then
-		updatePlayerStats(dojo:getModel(newEntity, "diamond_pit-PlayerStats"))
+	if getOrCreateBlocksColumn(key, entity) then
+		getOrCreateBlocksColumn(key, entity):update(entity)
+	elseif dojo:getModel(entity, "diamond_pit-PlayerInventory") then
+		updateInventory(dojo:getModel(entity, "diamond_pit-PlayerInventory"))
+	elseif dojo:getModel(entity, "diamond_pit-DailyLeaderboardEntry") then
+		updateLeaderboard(dojo:getModel(entity, "diamond_pit-DailyLeaderboardEntry"))
+	elseif dojo:getModel(entity, "diamond_pit-PlayerStats") then
+		updatePlayerStats(dojo:getModel(entity, "diamond_pit-PlayerStats"))
 	end
 end
 
