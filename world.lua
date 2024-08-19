@@ -339,12 +339,7 @@ updateLeaderboard = function(_, entry)
 	end
 	if #listCoinsCollected > 0 then
 		table.sort(listCoinsCollected, function(a, b)
-			print(
-				a.nb_coins_collected.value,
-				b.nb_coins_collected.value,
-				a.nb_coins_collected.value > b.nb_coins_collected.value
-			)
-			return a.nb_coins_collected.value > b.nb_coins_collected.value
+			return tonumber(a.nb_coins_collected.value) > tonumber(b.nb_coins_collected.value)
 		end)
 		leaderboardTextCoins.Text = ""
 		local hasLocalPlayer = false
