@@ -653,7 +653,6 @@ end
 
 dojo.getModel = function(_, entity, modelName)
 	for key, model in pairs(entity) do
-		print("getModel KEY >", key)
 		if key == modelName then
 			return model
 		end
