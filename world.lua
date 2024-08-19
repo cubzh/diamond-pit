@@ -163,15 +163,22 @@ updatePlayerStats = function(_, stats)
 		return
 	end
 
-	print("Stats", BACKPACK_MAX_SLOTS[stats.backpack_level], maxSlots)
-	if BACKPACK_MAX_SLOTS[stats.backpack_level] > maxSlots then
-		maxSlots = BACKPACK_MAX_SLOTS[stats.backpack_level]
-		print("new maxSlots is", maxSlots)
+	if BACKPACK_MAX_SLOTS[stats.backpack_level.value] > maxSlots then
+		maxSlots = BACKPACK_MAX_SLOTS[stats.backpack_level.value]
+		LocalEvent:Send("Upgrade", {
+			upgradeType = "backpack",
+			level = stats.backpack_level.value,
+			maxSlots = maxSlots,
+		})
 	end
 
-	if PICKAXE_STRENGTHS[stats.pickaxe_level] > pickaxeStrength then
-		pickaxeStrength = PICKAXE_STRENGTHS[stats.pickaxe_level]
-		print("new pickaxe is", pickaxeStrength)
+	if PICKAXE_STRENGTHS[stats.pickaxe_level.value] > pickaxeStrength then
+		pickaxeStrength = PICKAXE_STRENGTHS[stats.pickaxe_level.value]
+		LocalEvent:Send("Upgrade", {
+			upgradeType = "pickaxe",
+			level = stats.pickaxe_level.value,
+			pickaxeStrength = pickaxeStrength,
+		})
 	end
 end
 
