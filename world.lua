@@ -648,7 +648,6 @@ end
 
 dojo.setOnEntityUpdateCallbacks = function(self, callbacks)
 	local clauseJsonStr = '[{ "Keys": { "keys": [], "models": [], "pattern_matching": "VariableLen" } }]'
-	print("on entity update")
 	self.toriiClient:OnEntityUpdate(clauseJsonStr, function(entityKey, entity)
 		print(entityKey, entity)
 		for modelName, callback in pairs(callbacks) do
