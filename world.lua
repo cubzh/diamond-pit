@@ -159,8 +159,7 @@ blocksModule.start = function(self)
 end
 
 updatePlayerStats = function(_, stats)
-	print("STATS", JSON:Encode(stats))
-	if stats.player.value ~= dojo.burnerAccount.Account then
+	if stats.player.value ~= dojo.burnerAccount.Address then
 		return
 	end
 
