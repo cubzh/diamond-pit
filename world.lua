@@ -3,6 +3,15 @@ Modules = {
 	ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5",
 }
 
+worldInfo = {
+	rpc_url = "https://api.cartridge.gg/x/diamond-pit/katana",
+	torii_url = "https://api.cartridge.gg/x/diamond-pit/torii",
+	world = "0x5c1d201209938c1ac8340c7caeec489060b04dff85399605e58ebc2cdc149f4",
+	actions = "0x02c24de1c529a154eac885b0b34e8bf1b04f4ce0845b91d1a4fc9aea8c9d71ed",
+	playerAddress = "0x657e5f424dc6dee0c5a305361ea21e93781fea133d83efa410b771b7f92b",
+	playerSigningKey = "0xcd93de85d43988b9492bfaaff930c129fc3edbc513bb0c2b81577291848007",
+}
+
 local maxSlots = 5
 local pickaxeStrength = 1
 
@@ -149,15 +158,12 @@ blocksModule.start = function(self)
 	end
 end
 
-blocksModule.hitBlock = function(self, block)
-	-- SFX hit block
-	dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
-end
-
 updatePlayerStats = function(_, stats)
 	if stats.player.value ~= dojo.burnerAccount.Account then
 		return
 	end
+
+	print("STATS", JSON:Encode(stats))
 
 	if BACKPACK_MAX_SLOTS[stats.backpack_level] > maxSlots then
 		maxSlots = BACKPACK_MAX_SLOTS[stats.backpack_level]
@@ -510,7 +516,8 @@ Client.Action2 = function()
 	if impact.Object and impact.Object.Name == "Blocks" then
 		impact = Player:CastRay(impact.Object)
 		if impact.Distance < 100 then
-			blocksModule:hitBlock(impact.Block)
+			local block = impact.Block
+			dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
 		end
 	end
 end
@@ -541,15 +548,6 @@ initDojo = function()
 	worldInfo.onConnect = startGame
 	dojo:createToriiClient(worldInfo)
 end
-
-worldInfo = {
-	rpc_url = "https://api.cartridge.gg/x/diamond-pit/katana",
-	torii_url = "https://api.cartridge.gg/x/diamond-pit/torii",
-	world = "0x5c1d201209938c1ac8340c7caeec489060b04dff85399605e58ebc2cdc149f4",
-	actions = "0x02c24de1c529a154eac885b0b34e8bf1b04f4ce0845b91d1a4fc9aea8c9d71ed",
-	playerAddress = "0x657e5f424dc6dee0c5a305361ea21e93781fea133d83efa410b771b7f92b",
-	playerSigningKey = "0xcd93de85d43988b9492bfaaff930c129fc3edbc513bb0c2b81577291848007",
-}
 
 function updateBlocksColumn(key, rawColumn)
 	if not blocksModule.blockShape.GetBlock then
@@ -651,8 +649,10 @@ end
 dojo.setOnEntityUpdateCallbacks = function(self, callback)
 	local clauseJsonStr = '[{ "Keys": { "keys": [], "models": [], "pattern_matching": "VariableLen" } }]'
 	self.toriiClient:OnEntityUpdate(clauseJsonStr, function(entityKey, entity)
+		print(entityKey, entity)
 		for modelName, callback in pairs(callbacks) do
 			local model = self:getModel(entity, modelName)
+			print(modelName, model)
 			if modelName == "all" or model then
 				callback(entityKey, model, entity)
 			end
