@@ -650,14 +650,15 @@ dojo.getModel = function(_, entity, modelName)
 	end
 end
 
-dojo.setOnEntityUpdateCallbacks = function(_, callbacks)
+dojo.setOnEntityUpdateCallbacks = function(self, callbacks)
 	for modelName, callback in pairs(callbacks) do
 		local clauseJsonStr = string.format(
 			'[{ "Keys": { "keys": [], "models": ["%s"], "pattern_matching": "VariableLen" } }]',
 			modelName
 		)
-		dojo.toriiClient:OnEntityUpdate(clauseJsonStr, function(entityKey, entity)
-			local model = dojo:getModel(entity, modelName)
+		print(clauseJsonStr)
+		self.toriiClient:OnEntityUpdate(clauseJsonStr, function(entityKey, entity)
+			local model = self:getModel(entity, modelName)
 			print(">>>>", entityKey, entity)
 			if model then
 				callback(entityKey, model, entity)
