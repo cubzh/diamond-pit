@@ -551,9 +551,8 @@ worldInfo = {
 	playerSigningKey = "0xcd93de85d43988b9492bfaaff930c129fc3edbc513bb0c2b81577291848007",
 }
 
-function getOrCreateBlocksColumn(key, entity)
-	local rawColumn = dojo:getModel(entity, "diamond_pit-BlocksColumn")
-	if not rawColumn or not blocksModule.blockShape.GetBlock then
+function updateBlocksColumn(key, rawColumn)
+	if not blocksModule.blockShape.GetBlock then
 		return
 	end
 	local column = {
@@ -590,11 +589,6 @@ function getOrCreateBlocksColumn(key, entity)
 			blocksModule.blockShape:AddBlock(blockColor, column.x, z, column.y)
 		end
 	end
-end
-
-function updateBlocksColumn(key, entity)
-	print(key, entity)
-	getOrCreateBlocksColumn(key, entity):update(entity)
 end
 
 local onEntityUpdateCallbacks = {
