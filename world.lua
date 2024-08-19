@@ -456,6 +456,7 @@ updateInventory = function(_, inventory)
 	end
 	local nodes = {
 		ui:createText("Inventory"),
+		ui:createText(string.format("💰 %d", inventory.coins.value)),
 		ui:createText(string.format("%d/%d", totalQty, maxSlots or 5)),
 	}
 	for _, slot in ipairs(slots) do
