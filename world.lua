@@ -593,6 +593,7 @@ function getOrCreateBlocksColumn(key, entity)
 end
 
 function updateBlocksColumn(key, entity)
+	print(key, entity)
 	getOrCreateBlocksColumn(key, entity):update(entity)
 end
 
