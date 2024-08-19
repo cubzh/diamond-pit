@@ -341,6 +341,9 @@ updateLeaderboard = function(_, entry)
 		table.sort(listCoinsCollected, function(a, b)
 			return a.nb_coins_collected.value > b.nb_coins_collected.value
 		end)
+		table.sort(listCoinsCollected, function(a, b)
+			return a.nb_coins_collected.value > b.nb_coins_collected.value
+		end)
 		leaderboardTextCoins.Text = ""
 		local hasLocalPlayer = false
 		for i = 1, 10 do
