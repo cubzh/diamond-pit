@@ -1230,8 +1230,8 @@
       }
     ],
     "address": "0x5c1d201209938c1ac8340c7caeec489060b04dff85399605e58ebc2cdc149f4",
-    "transaction_hash": "0x1230d4b7e499d09c441c85a1d8cfec87180b6b535e5356bb14d6b490e1c906c",
-    "block_number": 54,
+    "transaction_hash": "0x3b160b37d0ee0f3d51606f047e53add57b6633fc6de50f3b3cafd60153708ee",
+    "block_number": 3,
     "seed": "diamond_pit",
     "metadata": {
       "profile_name": "dev",
