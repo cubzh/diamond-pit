@@ -474,7 +474,7 @@ Client.OnStart = function()
 		nbIslands = 30, -- number of islands
 		minSize = 4, -- min size of island
 		maxSize = 7, -- max size of island
-		safearea = 400, -- min dist of islands from 0,0,0
+		safearea = 700, -- min dist of islands from 0,0,0
 		dist = 750, -- max dist of islands
 	})
 
