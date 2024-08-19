@@ -12,8 +12,8 @@ worldInfo = {
 	playerSigningKey = "0xcd93de85d43988b9492bfaaff930c129fc3edbc513bb0c2b81577291848007",
 }
 
-local maxSlots = 5
-local pickaxeStrength = 1
+maxSlots = 5
+pickaxeStrength = 1
 
 local PICKAXE_STRENGTHS = {
 	[0] = 1,
@@ -159,11 +159,10 @@ blocksModule.start = function(self)
 end
 
 updatePlayerStats = function(_, stats)
+	print("STATS", JSON:Encode(stats))
 	if stats.player.value ~= dojo.burnerAccount.Account then
 		return
 	end
-
-	print("STATS", JSON:Encode(stats))
 
 	if BACKPACK_MAX_SLOTS[stats.backpack_level] > maxSlots then
 		maxSlots = BACKPACK_MAX_SLOTS[stats.backpack_level]
