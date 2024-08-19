@@ -44,7 +44,6 @@ local BACKPACK_MAX_SLOTS = {
 	[5] = 100,
 	[6] = 160,
 }
-print("AAAAAA", BACKPACK_MAX_SLOTS[0])
 
 local BACKPACK_UPGRADE_PRICES = {
 	[0] = 0,
@@ -164,6 +163,7 @@ updatePlayerStats = function(_, stats)
 		return
 	end
 
+	print("Stats", BACKPACK_MAX_SLOTS[stats.backpack_level], maxSlots)
 	if BACKPACK_MAX_SLOTS[stats.backpack_level] > maxSlots then
 		maxSlots = BACKPACK_MAX_SLOTS[stats.backpack_level]
 		print("new maxSlots is", maxSlots)
