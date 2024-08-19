@@ -95,6 +95,7 @@ pub mod actions {
             let player = get_caller_address();
             let (mut stats, mut inventory) = get!(world, (player), (PlayerStats, PlayerInventory));
             let next_upgrade_price: u64 = stats.get_pickaxe_next_upgrade_price().into();
+            println!("{} {}", inventory.coins, next_upgrade_price);
             if inventory.coins < next_upgrade_price {
                 return; 
             }
