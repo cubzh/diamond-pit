@@ -349,7 +349,7 @@ updateLeaderboard = function(_, entry)
 			end
 			local name = string.sub(listCoinsCollected[i].player.value, 1, 8)
 			if listCoinsCollected[i].player.value == dojo.burnerAccount.Address then
-				name = "> you <"
+				name = " > you <"
 				hasLocalPlayer = true
 			end
 			leaderboardTextCoins.Text = string.format(
@@ -363,7 +363,7 @@ updateLeaderboard = function(_, entry)
 		local elem = leaderboardEntries[dojo.burnerAccount.Address]
 		if not hasLocalPlayer and elem then
 			leaderboardTextCoins.Text =
-				string.format("%s> you <: %d\n", leaderboardTextCoins.Text, elem.nb_coins_collected.value)
+				string.format("%s > you <: %d\n", leaderboardTextCoins.Text, elem.nb_coins_collected.value)
 		end
 	end
 
