@@ -362,11 +362,8 @@ updateLeaderboard = function(_, entry)
 
 		local elem = leaderboardEntries[dojo.burnerAccount.Address]
 		if not hasLocalPlayer and elem then
-			leaderboardTextCoins.Text = leaderboardTextCoins.Text
-				.. "> you <"
-				.. ": "
-				.. tostring(math.floor(elem.nb_coins_collected.value))
-				.. "\n"
+			leaderboardTextCoins.Text =
+				string.format("%s> you <: %d\n", leaderboardTextCoins.Text, elem.nb_coins_collected.value)
 		end
 	end
 
