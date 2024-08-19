@@ -597,9 +597,9 @@ function updateBlocksColumn(key, rawColumn)
 end
 
 local onEntityUpdateCallbacks = {
-	all = function(key, entity)
-		print("Any update", key)
-	end,
+	-- all = function(key, entity)
+	-- 	print("Any update", key)
+	-- end,
 	["diamond_pit-BlocksColumn"] = updateBlocksColumn,
 	["diamond_pit-PlayerInventory"] = updateInventory,
 	["diamond_pit-DailyLeaderboardEntry"] = updateLeaderboard,
