@@ -338,6 +338,7 @@ updateLeaderboard = function(_, entry)
 		table.insert(listCoinsCollected, elem)
 	end
 	if #listCoinsCollected > 0 then
+		print(type(listCoinsCollected[1].nb_coins_collected.value))
 		table.sort(listCoinsCollected, function(a, b)
 			return tonumber(a.nb_coins_collected.value) > tonumber(b.nb_coins_collected.value)
 		end)
