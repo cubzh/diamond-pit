@@ -592,6 +592,9 @@ function updateBlocksColumn(key, rawColumn)
 end
 
 local onEntityUpdateCallbacks = {
+	all = function(key, entity)
+		print("Any update", key)
+	end,
 	["diamond_pit-BlocksColumn"] = updateBlocksColumn,
 	["diamond_pit-PlayerInventory"] = updateInventory,
 	["diamond_pit-DailyLeaderboardEntry"] = updateLeaderboard,
@@ -604,11 +607,6 @@ function startGame(toriiClient)
 
 	-- add callbacks when an entity is updated
 	dojo:setOnEntityUpdateCallbacks(onEntityUpdateCallbacks)
-
-	-- listen to any update
-	dojo:setOnAnyEntityUpdateCallback(function(key, entity)
-		print("Any update", key)
-	end)
 end
 
 -- dojo module
@@ -650,26 +648,16 @@ dojo.getModel = function(_, entity, modelName)
 	end
 end
 
-dojo.setOnEntityUpdateCallbacks = function(self, callbacks)
-	for modelName, callback in pairs(callbacks) do
-		local clauseJsonStr = string.format(
-			'[{ "Keys": { "keys": [], "models": ["%s"], "pattern_matching": "VariableLen" } }]',
-			modelName
-		)
-		print(clauseJsonStr)
-		self.toriiClient:OnEntityUpdate(clauseJsonStr, function(entityKey, entity)
+dojo.setOnEntityUpdateCallbacks = function(self, callback)
+	local clauseJsonStr = '[{ "Keys": { "keys": [], "models": [], "pattern_matching": "VariableLen" } }]'
+	self.toriiClient:OnEntityUpdate(clauseJsonStr, function(entityKey, entity)
+		for modelName, callback in pairs(callbacks) do
 			local model = self:getModel(entity, modelName)
-			print(">>>>", entityKey, entity)
-			if model then
+			if modelName == "all" or model then
 				callback(entityKey, model, entity)
 			end
-		end)
-	end
-end
-
-dojo.setOnAnyEntityUpdateCallback = function(self, callback)
-	local clauseJsonStr = '[{ "Keys": { "keys": [], "models": [], "pattern_matching": "VariableLen" } }]'
-	self.toriiClient:OnEntityUpdate(clauseJsonStr, callback)
+		end
+	end)
 end
 
 dojo.syncEntities = function(self, callbacks)
