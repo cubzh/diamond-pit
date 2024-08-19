@@ -339,9 +339,11 @@ updateLeaderboard = function(_, entry)
 	end
 	if #listCoinsCollected > 0 then
 		table.sort(listCoinsCollected, function(a, b)
-			return a.nb_coins_collected.value > b.nb_coins_collected.value
-		end)
-		table.sort(listCoinsCollected, function(a, b)
+			print(
+				a.nb_coins_collected.value,
+				b.nb_coins_collected.value,
+				a.nb_coins_collected.value > b.nb_coins_collected.value
+			)
 			return a.nb_coins_collected.value > b.nb_coins_collected.value
 		end)
 		leaderboardTextCoins.Text = ""
