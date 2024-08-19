@@ -338,7 +338,6 @@ updateLeaderboard = function(_, entry)
 		table.insert(listCoinsCollected, elem)
 	end
 	if #listCoinsCollected > 0 then
-		print(type(listCoinsCollected[1].nb_coins_collected.value))
 		table.sort(listCoinsCollected, function(a, b)
 			return tonumber(a.nb_coins_collected.value) > tonumber(b.nb_coins_collected.value)
 		end)
@@ -353,11 +352,12 @@ updateLeaderboard = function(_, entry)
 				name = "> you <"
 				hasLocalPlayer = true
 			end
-			leaderboardTextCoins.Text = leaderboardTextCoins.Text
-				.. name
-				.. ": "
-				.. tostring(math.floor(listCoinsCollected[i].nb_coins_collected.value))
-				.. "\n"
+			leaderboardTextCoins.Text = string.format(
+				"%s%s: %d\n",
+				leaderboardTextCoins.Text,
+				name,
+				listCoinsCollected[i].nb_coins_collected.value
+			)
 		end
 
 		local elem = leaderboardEntries[dojo.burnerAccount.Address]
