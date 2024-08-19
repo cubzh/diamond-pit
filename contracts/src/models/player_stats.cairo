@@ -28,13 +28,12 @@ pub impl PlayerStatsImpl of PlayerStatsTrait {
 
     fn get_pickaxe_next_upgrade_price(self: PlayerStats) -> u16 {
          match self.pickaxe_level {
-            0 => 0,
-            1 => 10,
-            2 => 25,
-            3 => 50,
-            4 => 100,
-            5 => 250,
-            6 => 800,
+            0 => 10,
+            1 => 25,
+            2 => 50,
+            3 => 100,
+            4 => 250,
+            5 => 800,
             _ => 800,
         }
     }
@@ -54,13 +53,12 @@ pub impl PlayerStatsImpl of PlayerStatsTrait {
 
     fn get_backpack_next_upgrade_price(self: PlayerStats) -> u16 {
          match self.pickaxe_level {
-            0 => 0,
-            1 => 5,
-            2 => 20,
-            3 => 80,
-            4 => 135,
-            5 => 450,
-            6 => 1000,
+            0 => 5,
+            1 => 20,
+            2 => 80,
+            3 => 135,
+            4 => 450,
+            5 => 1000,
             _ => 1000,
         }
     }

@@ -623,7 +623,8 @@ function startGame(toriiClient)
 	-- set on entity update callback
 	-- match everything
 	-- on 1.0.0, add [] around
-	local clauseJsonStr = '[{ "Keys": { "keys": [], "models": [], "pattern_matching": "VariableLen" } }]'
+	local clauseJsonStr =
+		'[{ "Keys": { "keys": [], "models": ["diamond_pit-PlayerInventory"], "pattern_matching": "VariableLen" } }]'
 	toriiClient:OnEntityUpdate(clauseJsonStr, updateEntity)
 end
 

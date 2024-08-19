@@ -32,6 +32,10 @@ pub mod actions {
         math::{fast_power_2}
     };
 
+    pub mod Errors {
+        pub const NOT_ENOUGH_COINS: felt252 = 'not enough coins';
+    }
+
     #[abi(embed_v0)]
     impl ActionsImpl of IActions<ContractState> {
      
@@ -95,10 +99,7 @@ pub mod actions {
             let player = get_caller_address();
             let (mut stats, mut inventory) = get!(world, (player), (PlayerStats, PlayerInventory));
             let next_upgrade_price: u64 = stats.get_pickaxe_next_upgrade_price().into();
-            println!("{} {}", inventory.coins, next_upgrade_price);
-            if inventory.coins < next_upgrade_price {
-                return; 
-            }
+            assert(inventory.coins >= next_upgrade_price, Errors::NOT_ENOUGH_COINS);
             inventory.coins -= next_upgrade_price;
             stats.pickaxe_level += 1;
             set!(world, (inventory, stats));
@@ -108,9 +109,7 @@ pub mod actions {
             let player = get_caller_address();
             let (mut stats, mut inventory) = get!(world, (player), (PlayerStats, PlayerInventory));
             let next_upgrade_price: u64 = stats.get_backpack_next_upgrade_price().into();
-            if inventory.coins < next_upgrade_price {
-                return; 
-            }
+            assert(inventory.coins >= next_upgrade_price, Errors::NOT_ENOUGH_COINS);
             inventory.coins -= next_upgrade_price;
             stats.backpack_level += 1;
             set!(world, (inventory, stats));
