@@ -585,28 +585,33 @@ function getOrCreateBlocksColumn(key, entity)
 	end
 end
 
-function updateEntity(entities)
-	if not entities then
-		print("no entities")
+function updateEntity(key, entity)
+	if not key or not entity then
 		return
 	end
-	print(entities)
-	for key, newEntity in pairs(entities) do
-		if getOrCreateBlocksColumn(key, newEntity) then
-			getOrCreateBlocksColumn(key, newEntity):update(newEntity)
-		elseif dojo:getModel(newEntity, "diamond_pit-PlayerInventory") then
-			updateInventory(dojo:getModel(newEntity, "diamond_pit-PlayerInventory"))
-		elseif dojo:getModel(newEntity, "diamond_pit-DailyLeaderboardEntry") then
-			updateLeaderboard(dojo:getModel(newEntity, "diamond_pit-DailyLeaderboardEntry"))
-		elseif dojo:getModel(newEntity, "diamond_pit-PlayerStats") then
-			updatePlayerStats(dojo:getModel(newEntity, "diamond_pit-PlayerStats"))
-		end
+	if getOrCreateBlocksColumn(key, newEntity) then
+		getOrCreateBlocksColumn(key, newEntity):update(newEntity)
+	elseif dojo:getModel(newEntity, "diamond_pit-PlayerInventory") then
+		updateInventory(dojo:getModel(newEntity, "diamond_pit-PlayerInventory"))
+	elseif dojo:getModel(newEntity, "diamond_pit-DailyLeaderboardEntry") then
+		updateLeaderboard(dojo:getModel(newEntity, "diamond_pit-DailyLeaderboardEntry"))
+	elseif dojo:getModel(newEntity, "diamond_pit-PlayerStats") then
+		updatePlayerStats(dojo:getModel(newEntity, "diamond_pit-PlayerStats"))
+	end
+end
+
+function updateEntities(entities)
+	if not entities then
+		return
+	end
+	for key, entity in pairs(entities) do
+		updateEntity(key, entity)
 	end
 end
 
 function startGame(toriiClient)
 	-- sync existing entities
-	toriiClient:Entities('{ "limit": 100, "offset": 0 }', updateEntity)
+	toriiClient:Entities('{ "limit": 100, "offset": 0 }', updateEntities)
 
 	-- set on entity update callback
 	-- match everything
