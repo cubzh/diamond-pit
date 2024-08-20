@@ -137,7 +137,8 @@ pub mod actions {
                     if x >= 10 {
                         break;
                     }
-                    let mut data: u128 = z_layer <= 1 ? 42846909754239046452576930880831620 : 169440052209945320062463317574197770;
+                    let mut data: u128 = 42846909754239046452576930880831620 // 10 Stone
+                    if z_layer > 1 { data = 169440052209945320062463317574197770 }; // 10 Deepstone 
                     let rnd_value: u128 = (seed_rnd.into() + x.into() * 100049) % 10;
                     let shift = fast_power_2(rnd_value * 12);
                     let block = match z_layer {
