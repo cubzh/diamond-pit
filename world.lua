@@ -567,7 +567,7 @@ Client.Tick = function(dt)
 					text.Type = TextType.Screen
 					text.IsUnlit = true
 					text.Color = Color.Black
-					text.Anchor = { 0.5, 0.5 }
+					text.Anchor = { 0.5, 0.4 }
 					text.LocalPosition = impactPos
 					local dir = Player.Right * (math.random(-10, 10) / 50) + Number3(0, 0.3, 0)
 					local listener = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
@@ -582,7 +582,32 @@ Client.Tick = function(dt)
 					local text = Text()
 					text.Text = string.format("-%d", pickaxeStrength)
 					text:SetParent(textParent)
-					text.FontSize = 35
+					text.FontSize = 40
+					text.Type = TextType.Screen
+					text.IsUnlit = true
+					text.Color = Color.Black
+					text.Anchor = { 0.5, 0.6 }
+					local text = Text()
+					text.Text = string.format("-%d", pickaxeStrength)
+					text:SetParent(textParent)
+					text.FontSize = 40
+					text.Type = TextType.Screen
+					text.IsUnlit = true
+					text.Color = Color.Black
+					text.Anchor = { 0.6, 0.5 }
+					local text = Text()
+					text.Text = string.format("-%d", pickaxeStrength)
+					text:SetParent(textParent)
+					text.FontSize = 40
+					text.Type = TextType.Screen
+					text.IsUnlit = true
+					text.Color = Color.Black
+					text.Anchor = { 0.4, 0.5 }
+
+					local text = Text()
+					text.Text = string.format("-%d", pickaxeStrength)
+					text:SetParent(textParent)
+					text.FontSize = 40
 					text.Type = TextType.Screen
 					text.IsUnlit = true
 					text.Color = Color.White
