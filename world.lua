@@ -638,12 +638,7 @@ initPlayer = function()
 	})
 	Player.pickaxe = Shape(Items.caillef.pickaxe)
 	Player:EquipRightHand(Player.pickaxe)
-	print("palette size", #Player.pickaxe.Palette)
-	for i = 1, 8 do
-		print(Player.pickaxe.Palette[i].Color)
-	end
-	-- Player.pickaxe.Palette[2].Color = LEVEL_COLOR[3]
-	-- Player.pickaxe.Palette[3].Color = LEVEL_COLOR[4]
+	Player.pickaxe.Palette[8].Color = LEVEL_COLOR[3]
 	require("crosshair"):show()
 	Player.Avatar:loadEquipment({ type = "hair" })
 	Player.Avatar:loadEquipment({ type = "jacket" })
