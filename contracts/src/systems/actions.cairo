@@ -27,10 +27,7 @@ pub mod actions {
         daily_leaderboard_entry::{DailyLeaderboardEntry},
         player_stats::{PlayerStats, PlayerStatsTrait},
     };
-    use diamond_pit::helpers::{
-        block::{BlockHelper},
-        math::{fast_power_2}
-    };
+    use diamond_pit::helpers::{block::{BlockHelper}, math::{fast_power_2}};
 
     pub mod Errors {
         pub const NOT_ENOUGH_COINS: felt252 = 'not enough coins';
@@ -38,13 +35,12 @@ pub mod actions {
 
     #[abi(embed_v0)]
     impl ActionsImpl of IActions<ContractState> {
-     
         fn hit_block(ref world: IWorldDispatcher, x: u8, y: u8, z: u8) {
             let player = get_caller_address();
             let day: u64 = starknet::get_block_info().unbox().block_timestamp / 86400;
             let mut player_leaderboard_entry = get!(world, (player, day), (DailyLeaderboardEntry));
             player_leaderboard_entry.nb_hits += 1;
-            
+
             let z_layer = z / 10;
             let mut column = get!(world, (x, y, z_layer), (BlocksColumn));
             if !column.block_exists(z % 10) {
@@ -52,18 +48,20 @@ pub mod actions {
             }
 
             // Anti-cheat, can't break blocks that are not accessible
-            //if x > 0 && x < 9 && y > 0 && y < 9 {
+            // if x > 0 && x < 9 && y > 0 && y < 9 {
             //    let mut column1 = get!(world, (x + 1, y, z_layer), (BlocksColumn));
             //    let mut column2 = get!(world, (x - 1, y, z_layer), (BlocksColumn));
             //    let mut column3 = get!(world, (x, y + 1, z_layer), (BlocksColumn));
             //    let mut column4 = get!(world, (x, y - 1, z_layer), (BlocksColumn));
 
-            //    // Avoid being able to 
-            //    if z % 10 > 0 && z % 10 < 9 && column.block_exists(z % 10 + 1) && column.block_exists(z % 10 - 1) &&
-            //        column1.block_exists(z % 10) && column2.block_exists(z % 10) && column3.block_exists(z % 10) && column4.block_exists(z % 10) {
+            //    // Avoid being able to
+            //    if z % 10 > 0 && z % 10 < 9 && column.block_exists(z % 10 + 1) &&
+            //    column.block_exists(z % 10 - 1) &&
+            //        column1.block_exists(z % 10) && column2.block_exists(z % 10) &&
+            //        column3.block_exists(z % 10) && column4.block_exists(z % 10) {
             //        return;
             //    }
-            //}
+            // }
 
             let playerStats = get!(world, (player), (PlayerStats));
             let strength = playerStats.get_pickaxe_strength();
@@ -77,8 +75,7 @@ pub mod actions {
                 if slots_left >= nb_blocks {
                     inventory.add(BlockHelper::block_u8_to_type(block_type), nb_blocks);
                     set!(world, (inventory));
-                } else {
-                    // Send event backpack max capacity reach
+                } else { // Send event backpack max capacity reach
                 }
             }
             set!(world, (column, player_leaderboard_entry));
@@ -121,7 +118,7 @@ pub mod actions {
             let mut column = get!(world, (x, y, z_layer), (BlocksColumn));
             let block = column.get_block(z % 10);
             let (block_type, block_hp) = BlockHelper::get_block_info(block);
-            println!("{} (type {}, hp {})", block, block_type, block_hp);            
+            println!("{} (type {}, hp {})", block, block_type, block_hp);
         }
 
         // Tools
@@ -130,14 +127,22 @@ pub mod actions {
 
             let mut z_layer: u8 = 0;
             loop {
-                if z_layer >= 1 { break; }
+                if z_layer >= 1 {
+                    break;
+                }
                 let mut y: u8 = 0;
                 loop {
-                    if y >= 10 { break; }
-                    let seed_rnd = _uniform_random(timestamp.into() + y.into() * 5099 + z_layer.into(), 10000);
+                    if y >= 10 {
+                        break;
+                    }
+                    let seed_rnd = _uniform_random(
+                        timestamp.into() + y.into() * 5099 + z_layer.into(), 10000
+                    );
                     let mut x: u8 = 0;
                     loop {
-                        if x >= 10 { break; }
+                        if x >= 10 {
+                            break;
+                        }
                         let mut data: u128 = 42846909754239046452576930880831620;
                         let rnd_value: u128 = (seed_rnd.into() + x.into() * 100049) % 10;
                         let shift = fast_power_2(rnd_value * 12);
@@ -149,9 +154,7 @@ pub mod actions {
                 };
                 z_layer += 1;
             }
-
         }
-
     }
 }
 

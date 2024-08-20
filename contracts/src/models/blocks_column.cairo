@@ -22,23 +22,27 @@ pub struct BlocksColumn {
 #[generate_trait]
 pub impl BlocksColumnImpl of BlocksColumnTrait {
     fn hit_block(ref self: BlocksColumn, z: u8, mut strength: u16) -> (u16, bool) {
+        println!("hit block {} {}", z, strength);
         let block_raw: u16 = self.get_block(z);
         let (_, hp) = BlockHelper::get_block_info(block_raw);
         if (hp <= 0) { // If air or already broken, return 0
             return (0, false);
         }
-        if strength >= hp.into() {
+        if strength > hp.into() {
             strength = hp.into();
         }
+        println!("hit block success");
         let new_hp = hp - strength.try_into().unwrap();
         let final_hit = new_hp <= 0;
         let new_block_info: u16 = block_raw - strength.into();
+        println!("self before {}", self.data);
         self.set_block(new_block_info, z);
+        println!("self after {}", self.data);
         (new_block_info, final_hit)
     }
 
     fn block_exists(self: BlocksColumn, z: u8) -> bool {
-        let (block_type, hp) =  BlockHelper::get_block_info(self.get_block(z));
+        let (block_type, hp) = BlockHelper::get_block_info(self.get_block(z));
         block_type > 0 && hp > 0
     }
 
@@ -68,7 +72,7 @@ mod tests {
         let (block_type, block_hp) = BlockHelper::get_block_info(column.get_block(0));
         assert!(block_type == 3, "init block type failed");
         assert!(block_hp == 46, "init block failed");
-        let (block, _) = column.hit_block(0);
+        let (block, _) = column.hit_block(0, 1);
         let (block_type, block_hp) = BlockHelper::get_block_info(block);
         assert!(block_type == 3, "hit changed type");
         assert!(block_hp == 45, "hit hp failed");
@@ -77,11 +81,11 @@ mod tests {
     #[test]
     fn test_hit_block_1() {
         let mut column = BlocksColumn { x: 0, y: 0, z_layer: 0, data: 2974126 };
-        let (block, final_hit) = column.hit_block(1);
+        let (block, final_hit) = column.hit_block(1, 1);
         assert!(block == 725, "hit block failed");
         assert!(!final_hit, "hit block failed");
-        let (block, final_hit) = column.hit_block(1);
-        assert!(block == 724, "hit block failed 2");
+        let (block, final_hit) = column.hit_block(1, 2);
+        assert!(block == 723, "hit block failed 2");
         assert!(!final_hit, "hit block failed");
     }
 
@@ -92,7 +96,7 @@ mod tests {
         assert!(block_type == 5, "init block type failed");
         assert!(block_hp == 1, "init block failed");
 
-        let (block, final_hit) = column.hit_block(1);
+        let (block, final_hit) = column.hit_block(1, 1);
         assert!(final_hit, "final hit does not work");
 
         let (block_type, block_hp) = BlockHelper::get_block_info(block);

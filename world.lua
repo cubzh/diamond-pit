@@ -749,28 +749,36 @@ dojo.actions = {
 		-- z is down in Dojo, y is down on Cubzh
 		local calldatastr =
 			string.format('["%s","%s","%s"]', number_to_hexstr(x), number_to_hexstr(z), number_to_hexstr(-y))
-		print("Calling hit_block", calldatastr)
+		if VERBOSE then
+			print("Calling hit_block", calldatastr)
+		end
 		dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "hit_block", calldatastr)
 	end,
 	sell_all = function()
 		if not dojo.toriiClient then
 			return
 		end
-		print("Calling sell_all")
+		if VERBOSE then
+			print("Calling sell_all")
+		end
 		dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "sell_all", "[]")
 	end,
 	upgrade_backpack = function()
 		if not dojo.toriiClient then
 			return
 		end
-		print("Calling upgrade_backpack")
+		if VERBOSE then
+			print("Calling upgrade_backpack")
+		end
 		dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "upgrade_backpack", "[]")
 	end,
 	upgrade_pickaxe = function()
 		if not dojo.toriiClient then
 			return
 		end
-		print("Calling upgrade_pickaxe")
+		if VERBOSE then
+			print("Calling upgrade_pickaxe")
+		end
 		dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "upgrade_pickaxe", "[]")
 	end,
 }
