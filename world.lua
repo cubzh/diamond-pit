@@ -220,6 +220,7 @@ initUpgradeAreas = function()
 	upgradePickaxe.Scale = { 30, 5, 30 }
 	upgradePickaxe.Pivot = { 0.5, 0, 0.5 }
 	upgradePickaxe.Physics = PhysicsMode.Trigger
+	upgradePickaxe.Position = { 450, 0, 200 }
 	upgradePickaxe.OnCollisionBegin = function(_, other)
 		if other ~= Player then
 			return
@@ -229,7 +230,7 @@ initUpgradeAreas = function()
 	end
 	floatingPickaxe = Shape(Items.caillef.pickaxe)
 	floatingPickaxe:SetParent(World)
-	floatingPickaxe.Scale = 1
+	floatingPickaxe.Scale = 5
 	floatingPickaxe.Position = upgradePickaxe.Position + Number3(0, 20, 0)
 
 	local upgradeBackpack = MutableShape()
@@ -238,6 +239,7 @@ initUpgradeAreas = function()
 	upgradeBackpack.Scale = { 30, 5, 30 }
 	upgradeBackpack.Pivot = { 0.5, 0, 0.5 }
 	upgradeBackpack.Physics = PhysicsMode.Trigger
+	upgradeBackpack.Position = { 450, 0, 400 }
 	upgradeBackpack.OnCollisionBegin = function(_, other)
 		if other ~= Player then
 			return
@@ -245,9 +247,6 @@ initUpgradeAreas = function()
 		dojo.actions.upgrade_backpack()
 		-- SFX unlock
 	end
-
-	upgradePickaxe.Position = { 450, 0, 150 }
-	upgradeBackpack.Position = { 450, 0, 450 }
 end
 
 local leaderboardTextBlocks
