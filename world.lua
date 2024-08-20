@@ -612,6 +612,10 @@ function startGame(toriiClient)
 	dojo:setOnEntityUpdateCallbacks(onEntityUpdateCallbacks)
 
 	print("SigningKey", dojo.burnerAccount.SigningKey)
+	local store = KeyValueStore("test")
+	store:Set("key", "okok", function(success)
+		print(success)
+	end)
 end
 
 -- dojo module
