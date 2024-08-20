@@ -537,7 +537,7 @@ Client.Tick = function(dt)
 	print(t, mining, nextMineHit)
 	if mining then
 		if t >= nextMineHit then
-			nextMineHit = t + 8000
+			nextMineHit = t + 0.8
 			local impact = Player:CastRay(nil, Player)
 			if impact.Object and impact.Object.Name == "Blocks" then
 				impact = Player:CastRay(impact.Object)
