@@ -531,7 +531,7 @@ Client.Action2 = function()
 			Player:SwingRight()
 			emitter.Position = Camera.Position + Camera.Forward * impact.Distance
 			print(emitter.Position)
-			emitter:spawn(10)
+			emitter:spawn(15)
 			dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
 		end
 	end
@@ -540,7 +540,7 @@ end
 initPlayer = function()
 	emitter = require("particles"):newEmitter({
 		velocity = function()
-			local v = Number3(0, 0, math.random(40, 50))
+			local v = Number3(0, 0, math.random(20, 30))
 			v:Rotate(math.random() * math.pi * 2, math.random() * math.pi * 2, 0)
 			return v
 		end,
