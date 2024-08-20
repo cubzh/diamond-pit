@@ -638,7 +638,7 @@ initPlayer = function()
 	})
 	Player.pickaxe = Shape(Items.caillef.pickaxe)
 	Player:EquipRightHand(Player.pickaxe)
-	print(#Player.pickaxe.Palette)
+	print("palette size", #Player.pickaxe.Palette)
 	Player.pickaxe.Palette[1].Color = LEVEL_COLOR[2]
 	-- Player.pickaxe.Palette[2].Color = LEVEL_COLOR[3]
 	-- Player.pickaxe.Palette[3].Color = LEVEL_COLOR[4]
