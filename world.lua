@@ -582,7 +582,7 @@ Client.Tick = function(dt)
 					local text = Text()
 					text.Text = string.format("-%d", pickaxeStrength)
 					text:SetParent(textParent)
-					text.FontSize = 30
+					text.FontSize = 35
 					text.Type = TextType.Screen
 					text.IsUnlit = true
 					text.Color = Color.White
