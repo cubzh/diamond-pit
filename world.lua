@@ -610,6 +610,8 @@ function startGame(toriiClient)
 
 	-- add callbacks when an entity is updated
 	dojo:setOnEntityUpdateCallbacks(onEntityUpdateCallbacks)
+
+	print("SigningKey", dojo.burnerAccount.SigningKey)
 end
 
 -- dojo module
