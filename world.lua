@@ -173,6 +173,8 @@ updatePlayerStats = function(_, stats)
 
 	if BACKPACK_MAX_SLOTS[stats.backpack_level.value] > maxSlots then
 		maxSlots = BACKPACK_MAX_SLOTS[stats.backpack_level.value]
+		require("sfx")("victory_1", { Spatialized = false, Volume = 0.6 })
+
 		LocalEvent:Send("Upgrade", {
 			upgradeType = "backpack",
 			level = stats.backpack_level.value,
@@ -182,6 +184,8 @@ updatePlayerStats = function(_, stats)
 
 	if PICKAXE_STRENGTHS[stats.pickaxe_level.value] > pickaxeStrength then
 		pickaxeStrength = PICKAXE_STRENGTHS[stats.pickaxe_level.value]
+		require("sfx")("metal_clanging_1", { Spatialized = false, Volume = 0.6 })
+
 		LocalEvent:Send("Upgrade", {
 			upgradeType = "pickaxe",
 			level = stats.pickaxe_level.value,
@@ -202,7 +206,7 @@ initSellingArea = function()
 			return
 		end
 		dojo.actions.sell_all()
-		require("sfx")("coin_1"), { Spatialized = false, Volume = 0.6 })
+		require("sfx")("coin_1", { Spatialized = false, Volume = 0.6 })
 	end
 
 	sellAll.Position = { 450, 0, 300 }
