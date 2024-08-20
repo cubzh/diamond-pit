@@ -641,7 +641,7 @@ initPlayer = function()
 	Player.pickaxe.Palette[1].Color = LEVEL_COLOR[2]
 	-- Player.pickaxe.Palette[2].Color = LEVEL_COLOR[3]
 	-- Player.pickaxe.Palette[3].Color = LEVEL_COLOR[4]
-	print(LEVEL_COLOR[stats.pickaxe_level.value])
+	print(LEVEL_COLOR[1])
 	require("crosshair"):show()
 	Player.Avatar:loadEquipment({ type = "hair" })
 	Player.Avatar:loadEquipment({ type = "jacket" })
