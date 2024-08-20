@@ -190,10 +190,8 @@ updatePlayerStats = function(_, stats)
 	if PICKAXE_STRENGTHS[stats.pickaxe_level.value] > pickaxeStrength then
 		pickaxeStrength = PICKAXE_STRENGTHS[stats.pickaxe_level.value]
 		sfx("metal_clanging_1", { Spatialized = false, Volume = 0.6 })
-		Player.pickaxe.Palette[1].Color = LEVEL_COLOR[stats.pickaxe_level.value]
-		Player.pickaxe.Palette[2].Color = LEVEL_COLOR[stats.pickaxe_level.value + 1]
-		Player.pickaxe.Palette[3].Color = LEVEL_COLOR[stats.pickaxe_level.value + 2]
-		print(LEVEL_COLOR[stats.pickaxe_level.value])
+		Player.pickaxe.Palette[8].Color = LEVEL_COLOR[stats.pickaxe_level.value]
+		floatingPickaxe.Palette[8].Color = LEVEL_COLOR[stats.pickaxe_level.value + 1]
 	end
 end
 
@@ -229,6 +227,10 @@ initUpgradeAreas = function()
 		dojo.actions.upgrade_pickaxe()
 		-- SFX unlock
 	end
+	floatingPickaxe = Shape(Items.caillef.pickaxe)
+	floatingPickaxe:SetParent(World)
+	floatingPickaxe.Scale = 3
+	floatingPickaxe.Position = upgradePickaxe.Position + Nubmer3(0, 20, 0)
 
 	local upgradeBackpack = MutableShape()
 	upgradeBackpack:AddBlock(Color(0, 0, 255, 0.5), 0, 0, 0)
@@ -638,7 +640,6 @@ initPlayer = function()
 	})
 	Player.pickaxe = Shape(Items.caillef.pickaxe)
 	Player:EquipRightHand(Player.pickaxe)
-	Player.pickaxe.Palette[8].Color = LEVEL_COLOR[3]
 	require("crosshair"):show()
 	Player.Avatar:loadEquipment({ type = "hair" })
 	Player.Avatar:loadEquipment({ type = "jacket" })
