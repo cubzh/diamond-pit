@@ -52,18 +52,18 @@ pub mod actions {
             }
 
             // Anti-cheat, can't break blocks that are not accessible
-            if x > 0 && x < 9 && y > 0 && y < 9 {
-                let mut column1 = get!(world, (x + 1, y, z_layer), (BlocksColumn));
-                let mut column2 = get!(world, (x - 1, y, z_layer), (BlocksColumn));
-                let mut column3 = get!(world, (x, y + 1, z_layer), (BlocksColumn));
-                let mut column4 = get!(world, (x, y - 1, z_layer), (BlocksColumn));
+            //if x > 0 && x < 9 && y > 0 && y < 9 {
+            //    let mut column1 = get!(world, (x + 1, y, z_layer), (BlocksColumn));
+            //    let mut column2 = get!(world, (x - 1, y, z_layer), (BlocksColumn));
+            //    let mut column3 = get!(world, (x, y + 1, z_layer), (BlocksColumn));
+            //    let mut column4 = get!(world, (x, y - 1, z_layer), (BlocksColumn));
 
-                // Avoid being able to 
-                if z % 10 > 0 && z % 10 < 9 && column.block_exists(z % 10 + 1) && column.block_exists(z % 10 - 1) &&
-                    column1.block_exists(z % 10) && column2.block_exists(z % 10) && column3.block_exists(z % 10) && column4.block_exists(z % 10) {
-                    return;
-                }
-            }
+            //    // Avoid being able to 
+            //    if z % 10 > 0 && z % 10 < 9 && column.block_exists(z % 10 + 1) && column.block_exists(z % 10 - 1) &&
+            //        column1.block_exists(z % 10) && column2.block_exists(z % 10) && column3.block_exists(z % 10) && column4.block_exists(z % 10) {
+            //        return;
+            //    }
+            //}
 
             let playerStats = get!(world, (player), (PlayerStats));
             let strength = playerStats.get_pickaxe_strength();
