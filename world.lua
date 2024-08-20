@@ -636,7 +636,8 @@ initPlayer = function()
 			return Color.Black
 		end,
 	})
-	Player:EquipRightHand(Items.caillef.pickaxe)
+	Player.pickaxe = Shape(Items.caillef.pickaxe)
+	Player:EquipRightHand(Player.pickaxe)
 	require("crosshair"):show()
 	Player.Avatar:loadEquipment({ type = "hair" })
 	Player.Avatar:loadEquipment({ type = "jacket" })
