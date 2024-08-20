@@ -4,6 +4,8 @@ Config = {
 	},
 }
 
+VERBOSE = false
+
 Modules = {
 	--floating_island_generator = "github.com/caillef/cubzh-library/floating_island_generator:a728587",
 	ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5",
@@ -200,7 +202,7 @@ initSellingArea = function()
 			return
 		end
 		dojo.actions.sell_all()
-		-- SFX gold
+		require("sfx")("coin_1"), { Spatialized = false, Volume = 0.6 })
 	end
 
 	sellAll.Position = { 450, 0, 300 }
@@ -510,9 +512,6 @@ Client.OnStart = function()
 end
 
 Client.OnChat = function(payload)
-	if payload.message == "sell" then
-		dojo.actions.sell_all()
-	end
 	return true -- consumed
 end
 
@@ -534,7 +533,6 @@ local nextMineHit = 0
 local t = 0
 Client.Tick = function(dt)
 	t = t + dt
-	print(t, mining, nextMineHit)
 	if mining then
 		if t >= nextMineHit then
 			nextMineHit = t + 0.8
