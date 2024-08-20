@@ -237,7 +237,8 @@ initUpgradeAreas = function()
 	local t = 0
 	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
 		t = t + dt
-		floatingPickaxe.Position.Y = 30 + math.sin(t) * 1
+		floatingPickaxe.Position.Y = 30 + math.sin(t * 3) * 3
+		floatingPickaxe.Rotation.Y = floatingPickaxe.Rotation.Y + dt * 0.5
 	end)
 
 	local upgradeBackpack = MutableShape()
