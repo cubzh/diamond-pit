@@ -548,10 +548,24 @@ Client.Tick = function(dt)
 				if impact.Distance < 100 then
 					local block = impact.Block
 					Player:SwingRight()
-					emitter.Position = Camera.Position + Camera.Forward * impact.Distance
+					local impactPos = Camera.Position + Camera.Forward * impact.Distance
+					emitter.Position = impactPos
 					emitter:spawn(15)
 					sfx(string.format("wood_impact_%d", math.random(1, 5)), { Spatialized = false, Volume = 0.6 })
 					dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
+
+					local text = Text()
+					text.Text = string.format("-%d", pickaxeStrength)
+					text:SetParent(World)
+					text.FontSize = 20
+					text.Type = TextType.Screen
+					text.IsUnlit = true
+					text.Color = Color.White
+					text.Anchor = { 0.5, 0.5 }
+					text.LocalPosition = impactPos
+					Timer(2, function()
+						text:RemoveFromParent()
+					end)
 				end
 			end
 		end
