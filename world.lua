@@ -530,7 +530,6 @@ Client.Action2 = function()
 			local block = impact.Block
 			Player:SwingRight()
 			emitter.Position = Camera.Position + Camera.Forward * impact.Distance
-			print(emitter.Position)
 			emitter:spawn(15)
 			dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
 		end
