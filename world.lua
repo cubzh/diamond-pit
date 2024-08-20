@@ -623,9 +623,10 @@ end
 dojo = {}
 
 dojo.getOrCreateBurner = function(self, config, cb)
-	self.toriiClient:CreateBurner(
+	self.toriiClient:CreateBurnerFromSigningKey(
 		config.playerAddress,
 		config.playerSigningKey,
+		"0x297944a1261f65ba51313994efd3e2bccdc151f1066de95f3127a0234967b09",
 		function(success, burnerAccount, privateKey)
 			if not success then
 				error("Can't create burner")
