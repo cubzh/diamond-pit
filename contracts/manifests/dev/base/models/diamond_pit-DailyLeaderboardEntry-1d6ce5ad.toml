@@ -1,0 +1,31 @@
+kind = "DojoModel"
+class_hash = "0x73fb899e17655effb8f5ab8e389cf2a848d4b1dc2f01345bf94b75e8485d7fd"
+original_class_hash = "0x73fb899e17655effb8f5ab8e389cf2a848d4b1dc2f01345bf94b75e8485d7fd"
+abi = "manifests/dev/base/abis/models/diamond_pit-DailyLeaderboardEntry-1d6ce5ad.json"
+tag = "diamond_pit-DailyLeaderboardEntry"
+manifest_name = "diamond_pit-DailyLeaderboardEntry-1d6ce5ad"
+
+[[members]]
+name = "player"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "day"
+type = "u32"
+key = true
+
+[[members]]
+name = "nb_coins_collected"
+type = "u64"
+key = false
+
+[[members]]
+name = "nb_blocks_broken"
+type = "u16"
+key = false
+
+[[members]]
+name = "nb_hits"
+type = "u16"
+key = false

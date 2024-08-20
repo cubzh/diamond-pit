@@ -27,7 +27,7 @@ pub mod actions {
         daily_leaderboard_entry::{DailyLeaderboardEntry},
         player_stats::{PlayerStats, PlayerStatsTrait},
     };
-    use diamond_pit::helpers::{block::{BlockHelper}, math::{fast_power_2}};
+    use diamond_pit::helpers::{block::{BlockHelper, BlockType}, math::{fast_power_2}};
 
     pub mod Errors {
         pub const NOT_ENOUGH_COINS: felt252 = 'not enough coins';
@@ -137,17 +137,20 @@ pub mod actions {
                     if x >= 10 {
                         break;
                     }
-                    let mut data: u128 = 42846909754239046452576930880831620 // 10 Stone
-                    if z_layer > 1 { data = 169440052209945320062463317574197770 }; // 10 Deepstone 
+                    let mut data: u128 = 42846909754239046452576930880831620; // 10 Stone
+                    if z_layer > 1 {
+                        data = 169440052209945320062463317574197770
+                    }; // 10 Deepstone 
                     let rnd_value: u128 = (seed_rnd.into() + x.into() * 100049) % 10;
                     let shift = fast_power_2(rnd_value * 12);
-                    let block = match z_layer {
+                    let block: u128 = match z_layer {
                         0 => BlockHelper::new(BlockType::Coal),
                         1 => BlockHelper::new(BlockType::Copper),
                         2 => BlockHelper::new(BlockType::Iron),
                         3 => BlockHelper::new(BlockType::Gold),
                         4 => BlockHelper::new(BlockType::Diamond),
-                    };
+                        _ => BlockHelper::new(BlockType::Coal),
+                    }.into();
                     data = (data & (MAX_U128 ^ (4095 * shift))) + block * shift;
                     set!(world, (BlocksColumn { x, y, z_layer, data }));
                     x += 1;
