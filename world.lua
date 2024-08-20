@@ -232,6 +232,7 @@ initUpgradeAreas = function()
 	floatingPickaxe:SetParent(World)
 	floatingPickaxe.Scale = 5
 	floatingPickaxe.Position = upgradePickaxe.Position + Number3(0, 20, 0)
+	floatingPickaxe.Palette[8].Color = LEVEL_COLOR[1]
 
 	local upgradeBackpack = MutableShape()
 	upgradeBackpack:AddBlock(Color(0, 0, 255, 0.5), 0, 0, 0)
