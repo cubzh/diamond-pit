@@ -529,12 +529,28 @@ Client.Action2 = function()
 		if impact.Distance < 100 then
 			local block = impact.Block
 			Player:SwingRight()
+			emitter:spawn(10)
 			dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
 		end
 	end
 end
 
 initPlayer = function()
+	emitter = require("particles"):newEmitter({
+		acceleration = -Config.ConstantAcceleration,
+		velocity = function()
+			local v = Number3(0, 0, math.random(40, 50))
+			v:Rotate(math.random() * math.pi * 2, math.random() * math.pi * 2, 0)
+			return v
+		end,
+		life = 3.0,
+		scale = function()
+			return 0.7 + math.random() * 1.0
+		end,
+		color = function()
+			return Color.Black
+		end,
+	})
 	Player:EquipRightHand(Items.caillef.pickaxe)
 	require("crosshair"):show()
 	Player.Avatar:loadEquipment({ type = "hair" })
