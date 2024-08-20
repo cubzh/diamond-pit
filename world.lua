@@ -523,16 +523,35 @@ Client.Action1 = function()
 end
 
 Client.Action2 = function()
-	local impact = Player:CastRay(nil, Player)
-	if impact.Object and impact.Object.Name == "Blocks" then
-		impact = Player:CastRay(impact.Object)
-		if impact.Distance < 100 then
-			local block = impact.Block
-			Player:SwingRight()
-			emitter.Position = Camera.Position + Camera.Forward * impact.Distance
-			emitter:spawn(15)
-			require("sfx")(string.format("wood_impact_%d", math.random(1, 5)), { Spatialized = false, Volume = 0.6 })
-			dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
+	mining = true
+end
+
+Client.Action2Release = function()
+	mining = false
+end
+
+local nextMineHit = 0
+local t = 0
+Client.Tick = function(dt)
+	t = t + dt
+	if mining then
+		if t >= nextMineHit then
+			nextMineHit = t + 8000
+			local impact = Player:CastRay(nil, Player)
+			if impact.Object and impact.Object.Name == "Blocks" then
+				impact = Player:CastRay(impact.Object)
+				if impact.Distance < 100 then
+					local block = impact.Block
+					Player:SwingRight()
+					emitter.Position = Camera.Position + Camera.Forward * impact.Distance
+					emitter:spawn(15)
+					require("sfx")(
+						string.format("wood_impact_%d", math.random(1, 5)),
+						{ Spatialized = false, Volume = 0.6 }
+					)
+					dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
+				end
+			end
 		end
 	end
 end
