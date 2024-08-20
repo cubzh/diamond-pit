@@ -794,7 +794,7 @@ dojo.setOnEntityUpdateCallbacks = function(self, callbacks)
 end
 
 dojo.syncEntities = function(self, callbacks)
-	self.toriiClient:Entities('{ "limit": 100, "offset": 0 }', function(entities)
+	self.toriiClient:Entities('{ "limit": 1000, "offset": 0 }', function(entities)
 		if not entities then
 			return
 		end
