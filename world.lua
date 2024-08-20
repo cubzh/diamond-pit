@@ -230,9 +230,15 @@ initUpgradeAreas = function()
 	end
 	floatingPickaxe = Shape(Items.caillef.pickaxe)
 	floatingPickaxe:SetParent(World)
-	floatingPickaxe.Scale = 5
-	floatingPickaxe.Position = upgradePickaxe.Position + Number3(0, 20, 0)
+	floatingPickaxe.Scale = 3
+	floatingPickaxe.Position = upgradePickaxe.Position + Number3(0, 30, 0)
+	floatingPickaxe.Physics = PhysicsMode.Disabled
 	floatingPickaxe.Palette[8].Color = LEVEL_COLOR[1]
+	local t = 0
+	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
+		t = t + dt
+		floatingPickaxe.Position.Y = 30 + math.sin(t) * 1
+	end)
 
 	local upgradeBackpack = MutableShape()
 	upgradeBackpack:AddBlock(Color(0, 0, 255, 0.5), 0, 0, 0)
