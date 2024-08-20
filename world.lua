@@ -623,17 +623,32 @@ end
 dojo = {}
 
 dojo.getOrCreateBurner = function(self, config, cb)
-	self.toriiClient:CreateBurner(
-		config.playerAddress,
-		config.playerSigningKey,
-		function(success, burnerAccount, privateKey)
+	-- self.toriiClient:CreateBurner(
+	-- 	config.playerAddress,
+	-- 	config.playerSigningKey,
+	-- 	function(success, burnerAccount, privateKey)
+	-- 		if not success then
+	-- 			error("Can't create burner")
+	-- 			return
+	-- 		end
+	-- 		dojo.burnerAccount = burnerAccount
+	-- 		print(dojo.burnerAccount.Address, privateKey)
+	-- 		dojo.burnerAccountPrivateKey = privateKey
+	-- 		cb()
+	-- 	end
+	-- )
+
+	self.toriiClient:CreateAccount(
+		"0x61061baa37cf56f3cd139dd19d74e344d6522369416f7de585c9324ab58dc24",
+		"0x5594932d50a0b34d94336b1746df194343db6fa650078176dd1fb4600f1c74a",
+		function(success, burnerAccount)
 			if not success then
 				error("Can't create burner")
 				return
 			end
 			dojo.burnerAccount = burnerAccount
-			print(dojo.burnerAccount.Address, privateKey)
-			dojo.burnerAccountPrivateKey = privateKey
+			print(dojo.burnerAccount.Address, "0x5594932d50a0b34d94336b1746df194343db6fa650078176dd1fb4600f1c74a")
+			dojo.burnerAccountPrivateKey = "0x5594932d50a0b34d94336b1746df194343db6fa650078176dd1fb4600f1c74a"
 			cb()
 		end
 	)
