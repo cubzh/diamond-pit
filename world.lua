@@ -190,10 +190,10 @@ updatePlayerStats = function(_, stats)
 	if PICKAXE_STRENGTHS[stats.pickaxe_level.value] > pickaxeStrength then
 		pickaxeStrength = PICKAXE_STRENGTHS[stats.pickaxe_level.value]
 		sfx("metal_clanging_1", { Spatialized = false, Volume = 0.6 })
-		-- Player.pickaxe.Palette[1].Color = LEVEL_COLOR[stats.pickaxe_level.value]
-		-- Player.pickaxe.Palette[2].Color = LEVEL_COLOR[stats.pickaxe_level.value + 1]
-		-- Player.pickaxe.Palette[3].Color = LEVEL_COLOR[stats.pickaxe_level.value + 2]
-		-- print(LEVEL_COLOR[stats.pickaxe_level.value])
+		Player.pickaxe.Palette[1].Color = LEVEL_COLOR[stats.pickaxe_level.value]
+		Player.pickaxe.Palette[2].Color = LEVEL_COLOR[stats.pickaxe_level.value + 1]
+		Player.pickaxe.Palette[3].Color = LEVEL_COLOR[stats.pickaxe_level.value + 2]
+		print(LEVEL_COLOR[stats.pickaxe_level.value])
 	end
 end
 
