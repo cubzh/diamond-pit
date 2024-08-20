@@ -34,15 +34,15 @@ local PICKAXE_STRENGTHS = {
 	[6] = 20,
 }
 
-local LEVEL_COLOR = {
-	[0] = Color.Grey - Color(10, 10, 10),
-	[1] = Color.Orange - Color(10, 10, 10),
-	[2] = Color.White - Color(10, 10, 10),
-	[3] = Color.Gold - Color(10, 10, 10),
-	[4] = Color(112, 209, 244) - Color(10, 10, 10),
-	[5] = Color(128, 0, 128),
-	[6] = Color.Red,
-}
+-- local LEVEL_COLOR = {
+-- 	[0] = Color.Grey - Color(10, 10, 10),
+-- 	[1] = Color.Orange - Color(10, 10, 10),
+-- 	[2] = Color.White - Color(10, 10, 10),
+-- 	[3] = Color.Gold - Color(10, 10, 10),
+-- 	[4] = Color(112, 209, 244) - Color(10, 10, 10),
+-- 	[5] = Color(128, 0, 128),
+-- 	[6] = Color.Red,
+-- }
 
 local PICKAXE_UPGRADE_PRICES = {
 	[0] = 0,
