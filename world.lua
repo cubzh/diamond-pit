@@ -4,14 +4,13 @@ Config = {
 	},
 }
 
--- sfx = require("sfx")
-
-VERBOSE = false
-
 Modules = {
 	--floating_island_generator = "github.com/caillef/cubzh-library/floating_island_generator:a728587",
 	ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5",
 }
+
+local VERBOSE = false
+local sfx = require("sfx")
 
 worldInfo = {
 	rpc_url = "https://api.cartridge.gg/x/diamond-pit/katana",
@@ -175,7 +174,7 @@ updatePlayerStats = function(_, stats)
 
 	if BACKPACK_MAX_SLOTS[stats.backpack_level.value] > maxSlots then
 		maxSlots = BACKPACK_MAX_SLOTS[stats.backpack_level.value]
-		-- sfx("victory_1", { Spatialized = false, Volume = 0.6 })
+		sfx("victory_1", { Spatialized = false, Volume = 0.6 })
 
 		LocalEvent:Send("Upgrade", {
 			upgradeType = "backpack",
@@ -186,7 +185,7 @@ updatePlayerStats = function(_, stats)
 
 	if PICKAXE_STRENGTHS[stats.pickaxe_level.value] > pickaxeStrength then
 		pickaxeStrength = PICKAXE_STRENGTHS[stats.pickaxe_level.value]
-		-- sfx("metal_clanging_1", { Spatialized = false, Volume = 0.6 })
+		sfx("metal_clanging_1", { Spatialized = false, Volume = 0.6 })
 
 		LocalEvent:Send("Upgrade", {
 			upgradeType = "pickaxe",
@@ -208,7 +207,7 @@ initSellingArea = function()
 			return
 		end
 		dojo.actions.sell_all()
-		-- sfx("coin_1", { Spatialized = false, Volume = 0.6 })
+		sfx("coin_1", { Spatialized = false, Volume = 0.6 })
 	end
 
 	sellAll.Position = { 450, 0, 300 }
