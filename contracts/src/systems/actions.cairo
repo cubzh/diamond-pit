@@ -31,6 +31,7 @@ pub mod actions {
 
     pub mod Errors {
         pub const NOT_ENOUGH_COINS: felt252 = 'not enough coins';
+        pub const BLOCK_NOT_FOUND: felt252 = 'block not found';
     }
 
     #[abi(embed_v0)]
@@ -43,9 +44,7 @@ pub mod actions {
 
             let z_layer = z / 10;
             let mut column = get!(world, (x, y, z_layer), (BlocksColumn));
-            if !column.block_exists(z % 10) {
-                return;
-            }
+            assert(column.block_exists(z % 10), Errors::BLOCK_NOT_FOUND);
 
             // Anti-cheat, can't break blocks that are not accessible
             // if x > 0 && x < 9 && y > 0 && y < 9 {
