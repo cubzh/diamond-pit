@@ -528,6 +528,7 @@ Client.Action2 = function()
 		impact = Player:CastRay(impact.Object)
 		if impact.Distance < 100 then
 			local block = impact.Block
+			Player:SwingRight()
 			dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
 		end
 	end
