@@ -34,6 +34,16 @@ local PICKAXE_STRENGTHS = {
 	[6] = 20,
 }
 
+local LEVEL_COLOR = {
+	[0] = Color.Grey - Color(10, 10, 10),
+	[1] = Color.Orange - Color(10, 10, 10),
+	[2] = Color.White - Color(10, 10, 10),
+	[3] = Color.Gold - Color(10, 10, 10),
+	[4] = Color(112, 209, 244) - Color(10, 10, 10),
+	[5] = Color(128, 0, 128),
+	[6] = Color.Red,
+}
+
 local PICKAXE_UPGRADE_PRICES = {
 	[0] = 0,
 	[1] = 10,
@@ -175,23 +185,15 @@ updatePlayerStats = function(_, stats)
 	if BACKPACK_MAX_SLOTS[stats.backpack_level.value] > maxSlots then
 		maxSlots = BACKPACK_MAX_SLOTS[stats.backpack_level.value]
 		sfx("victory_1", { Spatialized = false, Volume = 0.6 })
-
-		LocalEvent:Send("Upgrade", {
-			upgradeType = "backpack",
-			level = stats.backpack_level.value,
-			maxSlots = maxSlots,
-		})
 	end
 
 	if PICKAXE_STRENGTHS[stats.pickaxe_level.value] > pickaxeStrength then
 		pickaxeStrength = PICKAXE_STRENGTHS[stats.pickaxe_level.value]
 		sfx("metal_clanging_1", { Spatialized = false, Volume = 0.6 })
-
-		LocalEvent:Send("Upgrade", {
-			upgradeType = "pickaxe",
-			level = stats.pickaxe_level.value,
-			pickaxeStrength = pickaxeStrength,
-		})
+		Player.pickaxe.Palette[1].Color = LEVEL_COLOR[stats.pickaxe_level.value]
+		Player.pickaxe.Palette[2].Color = LEVEL_COLOR[stats.pickaxe_level.value + 1]
+		Player.pickaxe.Palette[3].Color = LEVEL_COLOR[stats.pickaxe_level.value + 2]
+		print(LEVEL_COLOR[stats.pickaxe_level.value])
 	end
 end
 
