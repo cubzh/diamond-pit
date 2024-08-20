@@ -1,3 +1,9 @@
+Config = {
+	Items = {
+		"caillef.pickaxe",
+	},
+}
+
 Modules = {
 	--floating_island_generator = "github.com/caillef/cubzh-library/floating_island_generator:a728587",
 	ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5",
@@ -528,6 +534,7 @@ Client.Action2 = function()
 end
 
 initPlayer = function()
+	Player:EquipRightHand(Items.caillef.pickaxe)
 	require("crosshair"):show()
 	Player.Avatar:loadEquipment({ type = "hair" })
 	Player.Avatar:loadEquipment({ type = "jacket" })
@@ -612,10 +619,6 @@ function startGame(toriiClient)
 	dojo:setOnEntityUpdateCallbacks(onEntityUpdateCallbacks)
 
 	print("Private Key", dojo.burnerAccountPrivateKey)
-	-- local store = KeyValueStore("test")
-	-- store:Set("key", "okok", function(success)
-	-- 	print(success)
-	-- end)
 end
 
 -- dojo module
