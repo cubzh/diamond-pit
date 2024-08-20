@@ -566,7 +566,7 @@ Client.Tick = function(dt)
 					text.FontSize = 40
 					text.Type = TextType.Screen
 					text.IsUnlit = true
-					text.Color = Color.White
+					text.Color = Color.Black
 					text.Anchor = { 0.5, 0.5 }
 					text.LocalPosition = impactPos
 					local dir = Player.Right * (math.random(-10, 10) / 50) + Number3(0, 0.3, 0)
@@ -578,6 +578,15 @@ Client.Tick = function(dt)
 						text:RemoveFromParent()
 						listener:Remove()
 					end)
+					local textParent = text
+					local text = Text()
+					text.Text = string.format("-%d", pickaxeStrength)
+					text:SetParent(textParent)
+					text.FontSize = 30
+					text.Type = TextType.Screen
+					text.IsUnlit = true
+					text.Color = Color.White
+					text.Anchor = { 0.5, 0.5 }
 				end
 			end
 		end
