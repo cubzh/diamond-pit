@@ -534,10 +534,16 @@ Client.Action2Release = function()
 	mining = false
 end
 
+Client.Action3Release = function()
+	Player.Position = Number3(250, 5, 150)
+end
+
 local nextMineHit = 0
 local t = 0
 Client.Tick = function(dt)
-	print(Player.Position.Y)
+	if Player.Position.Y < -2050 then
+		Player.Position = Number3(250, 5, 150)
+	end
 	t = t + dt
 	if mining then
 		if t >= nextMineHit then
