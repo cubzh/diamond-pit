@@ -531,6 +531,7 @@ Client.Action2 = function()
 			Player:SwingRight()
 			emitter.Position = Camera.Position + Camera.Forward * impact.Distance
 			emitter:spawn(15)
+			require("sfx")(string.format("wood_impact_%d", math.random(1, 5)), { Spatialized = false, Volume = 0.6 })
 			dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
 		end
 	end

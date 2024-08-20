@@ -10,7 +10,7 @@ fn _uniform_random(seed: felt252, max: u128) -> u128 {
 pub trait IActions {
     fn hit_block(ref world: IWorldDispatcher, x: u8, y: u8, z: u8);
     fn inspect_block(ref world: IWorldDispatcher, x: u8, y: u8, z: u8);
-    fn generate_world(ref world: IWorldDispatcher);
+    fn generate_world(ref world: IWorldDispatcher, z_layer: u8);
     fn sell_all(ref world: IWorldDispatcher);
     fn upgrade_backpack(ref world: IWorldDispatcher);
     fn upgrade_pickaxe(ref world: IWorldDispatcher);
@@ -121,38 +121,31 @@ pub mod actions {
         }
 
         // Tools
-        fn generate_world(ref world: IWorldDispatcher) {
+        fn generate_world(ref world: IWorldDispatcher, z_layer: u8) {
             let timestamp: u64 = starknet::get_block_info().unbox().block_timestamp;
 
-            let mut z_layer: u8 = 0;
+            let mut y: u8 = 0;
             loop {
-                if z_layer >= 1 {
+                if y >= 10 {
                     break;
                 }
-                let mut y: u8 = 0;
+                let seed_rnd = _uniform_random(
+                    timestamp.into() + y.into() * 5099 + z_layer.into(), 10000
+                );
+                let mut x: u8 = 0;
                 loop {
-                    if y >= 10 {
+                    if x >= 10 {
                         break;
                     }
-                    let seed_rnd = _uniform_random(
-                        timestamp.into() + y.into() * 5099 + z_layer.into(), 10000
-                    );
-                    let mut x: u8 = 0;
-                    loop {
-                        if x >= 10 {
-                            break;
-                        }
-                        let mut data: u128 = 42846909754239046452576930880831620;
-                        let rnd_value: u128 = (seed_rnd.into() + x.into() * 100049) % 10;
-                        let shift = fast_power_2(rnd_value * 12);
-                        data = (data & (MAX_U128 ^ (4095 * shift))) + 0b000100001010 * shift;
-                        set!(world, (BlocksColumn { x, y, z_layer, data }));
-                        x += 1;
-                    };
-                    y += 1;
+                    let mut data: u128 = 42846909754239046452576930880831620;
+                    let rnd_value: u128 = (seed_rnd.into() + x.into() * 100049) % 10;
+                    let shift = fast_power_2(rnd_value * 12);
+                    data = (data & (MAX_U128 ^ (4095 * shift))) + 0b000100001010 * shift;
+                    set!(world, (BlocksColumn { x, y, z_layer, data }));
+                    x += 1;
                 };
-                z_layer += 1;
-            }
+                y += 1;
+            };
         }
     }
 }
