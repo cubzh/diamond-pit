@@ -545,7 +545,7 @@ Client.Tick = function(dt)
 			local impact = Player:CastRay(nil, Player)
 			if impact.Object and impact.Object.Name == "Blocks" then
 				impact = Player:CastRay(impact.Object)
-				if impact.Distance < 100 then
+				if impact.Distance < 40 then
 					local block = impact.Block
 					Player:SwingRight()
 					local impactPos = Camera.Position + Camera.Forward * impact.Distance
