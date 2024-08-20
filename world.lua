@@ -534,6 +534,7 @@ local nextMineHit = 0
 local t = 0
 Client.Tick = function(dt)
 	t = t + dt
+	print(t, mining, nextMineHit)
 	if mining then
 		if t >= nextMineHit then
 			nextMineHit = t + 8000
