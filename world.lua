@@ -4,7 +4,7 @@ Config = {
 	},
 }
 
-sfx = require("sfx")
+-- sfx = require("sfx")
 
 VERBOSE = false
 
@@ -175,7 +175,7 @@ updatePlayerStats = function(_, stats)
 
 	if BACKPACK_MAX_SLOTS[stats.backpack_level.value] > maxSlots then
 		maxSlots = BACKPACK_MAX_SLOTS[stats.backpack_level.value]
-		sfx("victory_1", { Spatialized = false, Volume = 0.6 })
+		-- sfx("victory_1", { Spatialized = false, Volume = 0.6 })
 
 		LocalEvent:Send("Upgrade", {
 			upgradeType = "backpack",
@@ -186,7 +186,7 @@ updatePlayerStats = function(_, stats)
 
 	if PICKAXE_STRENGTHS[stats.pickaxe_level.value] > pickaxeStrength then
 		pickaxeStrength = PICKAXE_STRENGTHS[stats.pickaxe_level.value]
-		sfx("metal_clanging_1", { Spatialized = false, Volume = 0.6 })
+		-- sfx("metal_clanging_1", { Spatialized = false, Volume = 0.6 })
 
 		LocalEvent:Send("Upgrade", {
 			upgradeType = "pickaxe",
@@ -208,7 +208,7 @@ initSellingArea = function()
 			return
 		end
 		dojo.actions.sell_all()
-		sfx("coin_1", { Spatialized = false, Volume = 0.6 })
+		-- sfx("coin_1", { Spatialized = false, Volume = 0.6 })
 	end
 
 	sellAll.Position = { 450, 0, 300 }
