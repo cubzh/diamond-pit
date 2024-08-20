@@ -557,14 +557,20 @@ Client.Tick = function(dt)
 					local text = Text()
 					text.Text = string.format("-%d", pickaxeStrength)
 					text:SetParent(World)
-					text.FontSize = 20
+					text.FontSize = 40
 					text.Type = TextType.Screen
 					text.IsUnlit = true
 					text.Color = Color.White
 					text.Anchor = { 0.5, 0.5 }
 					text.LocalPosition = impactPos
+					local dir = Number3(math.random(-3, 3), 4, math.random(-3, 3))
+					local listener = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
+						text.LocalPosition = text.LocalPosition + dir
+						dir.Y = dir.Y - 0.1
+					end)
 					Timer(2, function()
 						text:RemoveFromParent()
+						listener:Remove()
 					end)
 				end
 			end
