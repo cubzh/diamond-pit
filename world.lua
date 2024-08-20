@@ -566,7 +566,7 @@ Client.Tick = function(dt)
 					local dir = Player.Right * (math.random(-10, 10) / 30) + Number3(0, 0.7, 0)
 					local listener = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
 						text.LocalPosition = text.LocalPosition + dir
-						dir.Y = dir.Y - 0.1
+						dir.Y = dir.Y - 0.01
 					end)
 					Timer(2, function()
 						text:RemoveFromParent()
