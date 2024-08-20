@@ -539,12 +539,12 @@ end
 
 initPlayer = function()
 	emitter = require("particles"):newEmitter({
-		acceleration = -Config.ConstantAcceleration,
 		velocity = function()
 			local v = Number3(0, 0, math.random(40, 50))
 			v:Rotate(math.random() * math.pi * 2, math.random() * math.pi * 2, 0)
 			return v
 		end,
+		physics = true,
 		life = 3.0,
 		scale = function()
 			return 0.7 + math.random() * 1.0
