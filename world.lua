@@ -611,11 +611,11 @@ function startGame(toriiClient)
 	-- add callbacks when an entity is updated
 	dojo:setOnEntityUpdateCallbacks(onEntityUpdateCallbacks)
 
-	--print("SigningKey", dojo.burnerAccount.SigningKey)
-	local store = KeyValueStore("test")
-	store:Set("key", "okok", function(success)
-		print(success)
-	end)
+	print("Private Key", dojo.burnerAccountPrivateKey)
+	-- local store = KeyValueStore("test")
+	-- store:Set("key", "okok", function(success)
+	-- 	print(success)
+	-- end)
 end
 
 -- dojo module
@@ -623,14 +623,19 @@ end
 dojo = {}
 
 dojo.getOrCreateBurner = function(self, config, cb)
-	self.toriiClient:CreateBurner(config.playerAddress, config.playerSigningKey, function(success, burnerAccount)
-		if not success then
-			error("Can't create burner")
-			return
+	self.toriiClient:CreateBurner(
+		config.playerAddress,
+		config.playerSigningKey,
+		function(success, burnerAccount, privateKey)
+			if not success then
+				error("Can't create burner")
+				return
+			end
+			dojo.burnerAccount = burnerAccount
+			dojo.burnerAccountPrivateKey = privateKey
+			cb()
 		end
-		dojo.burnerAccount = burnerAccount
-		cb()
-	end)
+	)
 end
 
 dojo.createToriiClient = function(self, config)
