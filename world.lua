@@ -529,6 +529,8 @@ Client.Action2 = function()
 		if impact.Distance < 100 then
 			local block = impact.Block
 			Player:SwingRight()
+			emitter.Position = Camera.Position + impact.Direction * impact.Distance
+			print(emitter.Position)
 			emitter:spawn(10)
 			dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
 		end
