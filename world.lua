@@ -639,7 +639,7 @@ initPlayer = function()
 		physics = true,
 		life = 3.0,
 		scale = function()
-			return 0.7 + math.random() * 1.0
+			return 0.3 + math.random() * 0.5
 		end,
 		color = function()
 			return Color.Black
