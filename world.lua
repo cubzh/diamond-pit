@@ -536,6 +536,7 @@ end
 local nextMineHit = 0
 local t = 0
 Client.Tick = function(dt)
+	print(Player.Position.Y)
 	t = t + dt
 	if mining then
 		if t >= nextMineHit then
