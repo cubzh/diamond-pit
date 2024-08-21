@@ -699,6 +699,7 @@ Client.Tick = function(dt)
 end
 
 initUI = function()
+	local ui = require("uikit")
 	coinText = ui:createText("💰 0", Color.White, "big")
 	coinText.parentDidResize = function()
 		coinText.pos = { 5, Screen.Height - Screen.SafeArea.Top - 5 - coinText.Height }
