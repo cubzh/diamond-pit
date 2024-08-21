@@ -1,6 +1,7 @@
 Config = {
 	Items = {
 		"caillef.pickaxe",
+		"caillef.backpackmine",
 	},
 }
 
@@ -182,16 +183,23 @@ updatePlayerStats = function(_, stats)
 		return
 	end
 
-	if BACKPACK_MAX_SLOTS[stats.backpack_level.value] > maxSlots then
-		maxSlots = BACKPACK_MAX_SLOTS[stats.backpack_level.value]
+	local backpackLevel = stats.backpack_level.value
+	if BACKPACK_MAX_SLOTS[backpackLevel] > maxSlots then
+		maxSlots = BACKPACK_MAX_SLOTS[backpackLevel]
 		sfx("victory_1", { Spatialized = false, Volume = 0.6 })
+		local nextLevel = pickaxeLevel + 1
+		--floatingPickaxe.Palette[8].Color = LEVEL_COLOR[nextLevel]
+		backpackNextText.Text = string.format("%d 💰", BACKPACK_UPGRADE_PRICES[nextLevel])
 	end
 
-	if PICKAXE_STRENGTHS[stats.pickaxe_level.value] > pickaxeStrength then
-		pickaxeStrength = PICKAXE_STRENGTHS[stats.pickaxe_level.value]
+	local pickaxeLevel = stats.pickaxe_level.value
+	if PICKAXE_STRENGTHS[pickaxeLevel] > pickaxeStrength then
+		pickaxeStrength = PICKAXE_STRENGTHS[pickaxeLevel]
 		sfx("metal_clanging_1", { Spatialized = false, Volume = 0.6 })
-		Player.pickaxe.Palette[8].Color = LEVEL_COLOR[stats.pickaxe_level.value]
-		floatingPickaxe.Palette[8].Color = LEVEL_COLOR[stats.pickaxe_level.value + 1]
+		Player.pickaxe.Palette[8].Color = LEVEL_COLOR[pickaxeLevel]
+		local nextLevel = pickaxeLevel + 1
+		floatingPickaxe.Palette[8].Color = LEVEL_COLOR[nextLevel]
+		pickaxeNextText.Text = string.format("%d 💰", PICKAXE_UPGRADE_PRICES[nextLevel])
 	end
 end
 
@@ -265,6 +273,30 @@ initUpgradeAreas = function()
 		end
 		dojo.actions.upgrade_backpack()
 	end
+
+	floatingBackpack = Shape(Items.caillef.backpackmine)
+	floatingBackpack:SetParent(World)
+	floatingBackpack.Scale = 2
+	floatingBackpack.Position = upgradeBackpack.Position + Number3(0, 20, 0)
+	floatingBackpack.Physics = PhysicsMode.Disabled
+	--	floatingBackpack.Palette[8].Color = LEVEL_COLOR[1]
+	local t = 0
+	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
+		t = t + dt
+		floatingBackpack.Position.Y = 20 + math.sin(t * 3) * 3
+		floatingBackpack.Rotation.Y = floatingBackpack.Rotation.Y + dt * 0.5
+	end)
+
+	local text = Text()
+	text.Text = string.format("%d 💰", BACKPACK_UPGRADE_PRICES[1])
+	text:SetParent(floatingBackpack)
+	text.FontSize = 40
+	text.Type = TextType.Screen
+	text.IsUnlit = true
+	text.Color = Color.White
+	text.Anchor = { 0.5, 0 }
+	text.LocalPosition = { 0, 7, 0 }
+	backpackNextText = text
 end
 
 local leaderboardTextBlocks
