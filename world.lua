@@ -184,7 +184,7 @@ createNewPlayer = function(key, position)
 	local model = require("avatar"):get("caillef")
 	model:SetParent(World)
 	model.Position = position
-	player.shape = model
+	player.model = model
 	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
 		if not player.targetPosition then
 			return
