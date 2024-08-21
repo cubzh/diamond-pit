@@ -252,12 +252,15 @@ initUpgradeAreas = function()
 	local text = Text()
 	text.Text = string.format("%d 💰", PICKAXE_UPGRADE_PRICES[1])
 	text:SetParent(floatingPickaxe)
-	text.FontSize = 40
-	text.Type = TextType.Screen
+	text.FontSize = 5
+	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.White
 	text.Anchor = { 0.5, 0 }
 	text.LocalPosition = { 0, 7, 0 }
+	LocalEvent:Listen(LocalEvent.Name.Tick, function()
+		text.Forward = Player.Backward
+	end)
 	pickaxeNextText = text
 
 	local upgradeBackpack = MutableShape()
@@ -290,12 +293,15 @@ initUpgradeAreas = function()
 	local text = Text()
 	text.Text = string.format("%d 💰", BACKPACK_UPGRADE_PRICES[1])
 	text:SetParent(floatingBackpack)
-	text.FontSize = 40
-	text.Type = TextType.Screen
+	text.FontSize = 5
+	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.White
 	text.Anchor = { 0.5, 0 }
 	text.LocalPosition = { 0, 7, 0 }
+	LocalEvent:Listen(LocalEvent.Name.Tick, function()
+		text.Forward = Player.Backward
+	end)
 	backpackNextText = text
 end
 
