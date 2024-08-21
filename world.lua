@@ -228,12 +228,12 @@ initSellingArea = function()
 	local text = Text()
 	text.Text = "Sell"
 	text:SetParent(World)
-	text.FontSize = 5
+	text.FontSize = 7
 	text.Type = TextType.World
 	text.IsUnlit = true
 	text.Color = Color.White
 	text.Anchor = { 0.5, 0 }
-	text.Position = shop.Position + Number3(0, 32, 0)
+	text.Position = shop.Position + Number3(0, 29, 0)
 	LocalEvent:Listen(LocalEvent.Name.Tick, function()
 		text.Forward = Player.Forward
 	end)
