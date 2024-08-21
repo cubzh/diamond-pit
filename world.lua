@@ -283,7 +283,7 @@ initUpgradeAreas = function()
 	floatingBackpack.Position = upgradeBackpack.Position + Number3(0, 20, 0)
 	floatingBackpack.Physics = PhysicsMode.Disabled
 	for i = 1, #floatingBackpack.Palette do
-		floatingBackpack:AddBlock(floatingBackpack.Palette[i], i, 20, 0)
+		floatingBackpack:AddBlock(floatingBackpack.Palette[i].Color, i, 20, 0)
 	end
 	--	floatingBackpack.Palette[8].Color = LEVEL_COLOR[1]
 	local t = 0
