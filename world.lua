@@ -14,6 +14,8 @@ Modules = {
 local VERBOSE = false
 local sfx = require("sfx")
 
+otherPlayers = {}
+
 worldInfo = {
 	rpc_url = "https://api.cartridge.gg/x/diamond-pit/katana",
 	torii_url = "https://api.cartridge.gg/x/diamond-pit/torii",
@@ -191,12 +193,11 @@ createNewPlayer = function(key, position)
 		end
 		local dir = player.targetPosition - player.model.Position
 		dir:Normalize()
-		player.model.Position = player.model.Position + dir * 5
+		player.model.Position = player.model.Position + dir * dt * 10
 	end)
+	otherPlayers[key] = player
 	return player
 end
-
-otherPlayers = {}
 
 updatePlayerPosition = function(key, position)
 	if key == dojo.burnerAccount.Address then
@@ -204,16 +205,12 @@ updatePlayerPosition = function(key, position)
 	end
 
 	local worldPos = Number3(
-		math.floor(position.x.value + 1000000),
-		math.floor(position.y.value + 1000000),
-		math.floor(position.z.value + 1000000)
+		math.floor(position.x.value - 1000000),
+		math.floor(position.y.value - 1000000),
+		math.floor(position.z.value - 1000000)
 	)
 
-	local player = otherPlayers[key]
-	if not player then
-		player = createNewPlayer(key, worldPos)
-		otherPlayers[key] = player
-	end
+	local player = otherPlayers[key] or createNewPlayer(key, worldPos)
 	player.targetPosition = worldPos
 end
 
