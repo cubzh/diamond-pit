@@ -545,13 +545,14 @@ updateInventory = function(_, inventory)
 		end
 	end
 
+	coinText.Text = string.format("💰 %d", inventory.coins.value)
+
 	local ui = require("uikit")
 	if inventoryNode then
 		inventoryNode:remove()
 	end
 	local nodes = {
 		ui:createText("Inventory"),
-		ui:createText(string.format("💰 %d", inventory.coins.value)),
 		ui:createText(string.format("%d/%d", totalQty, maxSlots or 5)),
 	}
 	for _, slot in ipairs(slots) do
@@ -581,6 +582,7 @@ Client.OnStart = function()
 	})
 
 	initPlayer()
+	initUI()
 	initLeaderboard()
 	initDojo()
 	initSellingArea()
@@ -694,6 +696,14 @@ Client.Tick = function(dt)
 			end
 		end
 	end
+end
+
+initUI = function()
+	coinText = ui:createText("💰 0", Color.White, "big")
+	coinText.parentDidResize = function()
+		coinText.pos = { 5, Screen.Height - Screen.SafeArea.Top - 5 - coinText.Height }
+	end
+	coinText:parentDidResize()
 end
 
 initPlayer = function()
