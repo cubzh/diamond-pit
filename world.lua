@@ -231,13 +231,13 @@ initUpgradeAreas = function()
 	floatingPickaxe = Shape(Items.caillef.pickaxe)
 	floatingPickaxe:SetParent(World)
 	floatingPickaxe.Scale = 2
-	floatingPickaxe.Position = upgradePickaxe.Position + Number3(0, 30, 0)
+	floatingPickaxe.Position = upgradePickaxe.Position + Number3(0, 20, 0)
 	floatingPickaxe.Physics = PhysicsMode.Disabled
 	floatingPickaxe.Palette[8].Color = LEVEL_COLOR[1]
 	local t = 0
 	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
 		t = t + dt
-		floatingPickaxe.Position.Y = 30 + math.sin(t * 3) * 3
+		floatingPickaxe.Position.Y = 20 + math.sin(t * 3) * 3
 		floatingPickaxe.Rotation.Y = floatingPickaxe.Rotation.Y + dt * 0.5
 	end)
 
@@ -249,7 +249,7 @@ initUpgradeAreas = function()
 	text.IsUnlit = true
 	text.Color = Color.White
 	text.Anchor = { 0.5, 0 }
-	text.LocalPosition = { 0, 10, 0 }
+	text.LocalPosition = { 0, 7, 0 }
 	pickaxeNextText = text
 
 	local upgradeBackpack = MutableShape()
