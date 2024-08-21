@@ -226,11 +226,11 @@ initUpgradeAreas = function()
 			return
 		end
 		dojo.actions.upgrade_pickaxe()
-		-- SFX unlock
 	end
+
 	floatingPickaxe = Shape(Items.caillef.pickaxe)
 	floatingPickaxe:SetParent(World)
-	floatingPickaxe.Scale = 3
+	floatingPickaxe.Scale = 2
 	floatingPickaxe.Position = upgradePickaxe.Position + Number3(0, 30, 0)
 	floatingPickaxe.Physics = PhysicsMode.Disabled
 	floatingPickaxe.Palette[8].Color = LEVEL_COLOR[1]
@@ -240,6 +240,17 @@ initUpgradeAreas = function()
 		floatingPickaxe.Position.Y = 30 + math.sin(t * 3) * 3
 		floatingPickaxe.Rotation.Y = floatingPickaxe.Rotation.Y + dt * 0.5
 	end)
+
+	local text = Text()
+	text.Text = string.format("%d 💰", PICKAXE_UPGRADE_PRICES[1])
+	text:SetParent(floatingPickaxe)
+	text.FontSize = 40
+	text.Type = TextType.Screen
+	text.IsUnlit = true
+	text.Color = Color.White
+	text.Anchor = { 0.5, 0 }
+	text.LocalPosition = { 0, 50, 0 }
+	pickaxeNextText = text
 
 	local upgradeBackpack = MutableShape()
 	upgradeBackpack:AddBlock(Color(0, 0, 255, 0.5), 0, 0, 0)
@@ -253,7 +264,6 @@ initUpgradeAreas = function()
 			return
 		end
 		dojo.actions.upgrade_backpack()
-		-- SFX unlock
 	end
 end
 
