@@ -150,6 +150,38 @@
           {
             "name": "z",
             "type": "core::integer::u8"
+          },
+          {
+            "name": "playerx",
+            "type": "core::integer::u32"
+          },
+          {
+            "name": "playery",
+            "type": "core::integer::u32"
+          },
+          {
+            "name": "playerz",
+            "type": "core::integer::u32"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "sync_position",
+        "inputs": [
+          {
+            "name": "playerx",
+            "type": "core::integer::u32"
+          },
+          {
+            "name": "playery",
+            "type": "core::integer::u32"
+          },
+          {
+            "name": "playerz",
+            "type": "core::integer::u32"
           }
         ],
         "outputs": [],

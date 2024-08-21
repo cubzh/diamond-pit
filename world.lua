@@ -179,6 +179,44 @@ blocksModule.start = function(self)
 	end
 end
 
+createNewPlayer = function(key, position)
+	local player = {}
+	local model = require("avatar"):get("caillef")
+	model:SetParent(World)
+	model.Position = position
+	player.shape = model
+	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
+		if not player.targetPosition then
+			return
+		end
+		local dir = player.targetPosition - player.model.Position
+		dir:Normalize()
+		player.model.Position = player.model.Position + dir * 5
+	end)
+	return player
+end
+
+otherPlayers = {}
+
+updatePlayerPosition = function(key, position)
+	if key == dojo.burnerAccount.Address then
+		return
+	end
+
+	local worldPos = Number3(
+		math.floor(position.x.value + 1000000),
+		math.floor(position.y.value + 1000000),
+		math.floor(position.z.value + 1000000)
+	)
+
+	local player = otherPlayers[key]
+	if not player then
+		player = createNewPlayer(key, worldPos)
+		otherPlayers[key] = player
+	end
+	player.targetPosition = worldPos
+end
+
 updatePlayerStats = function(_, stats)
 	if stats.player.value ~= dojo.burnerAccount.Address then
 		return
@@ -639,7 +677,16 @@ Client.Tick = function(dt)
 					emitter.Position = impactPos
 					emitter:spawn(15)
 					sfx(string.format("wood_impact_%d", math.random(1, 5)), { Spatialized = false, Volume = 0.6 })
-					dojo.actions.hit_block(block.Coords.X, block.Coords.Y, block.Coords.Z)
+
+					local playerPos = Player.Position + Number3.ONE * 1000000
+					dojo.actions.hit_block(
+						math.floor(block.Coords.X),
+						math.floor(block.Coords.Y),
+						math.floor(block.Coords.Z),
+						math.floor(playerPos.X),
+						math.floor(playerPos.Y),
+						math.floor(playerpos.Z)
+					)
 
 					local text = Text()
 					text.Text = string.format("-%d", pickaxeStrength)
@@ -809,6 +856,7 @@ local onEntityUpdateCallbacks = {
 	["diamond_pit-PlayerInventory"] = updateInventory,
 	["diamond_pit-DailyLeaderboardEntry"] = updateLeaderboard,
 	["diamond_pit-PlayerStats"] = updatePlayerStats,
+	["diamond_pit-PlayerPosition"] = updatePlayerPosition,
 }
 
 function startGame(toriiClient)
@@ -923,13 +971,20 @@ end
 
 -- generated contracts
 dojo.actions = {
-	hit_block = function(x, y, z)
+	hit_block = function(x, y, z, px, py, pz)
 		if not dojo.toriiClient then
 			return
 		end
 		-- z is down in Dojo, y is down on Cubzh
-		local calldatastr =
-			string.format('["%s","%s","%s"]', number_to_hexstr(x), number_to_hexstr(z), number_to_hexstr(-y))
+		local calldatastr = string.format(
+			'["%s","%s","%s","%s","%s","%s"]',
+			number_to_hexstr(x),
+			number_to_hexstr(z),
+			number_to_hexstr(-y),
+			number_to_hexstr(px),
+			number_to_hexstr(py),
+			number_to_hexstr(pz)
+		)
 		if VERBOSE then
 			print("Calling hit_block", calldatastr)
 		end

@@ -8,7 +8,10 @@ fn _uniform_random(seed: felt252, max: u128) -> u128 {
 // define the interface
 #[dojo::interface]
 pub trait IActions {
-    fn hit_block(ref world: IWorldDispatcher, x: u8, y: u8, z: u8);
+    fn hit_block(
+        ref world: IWorldDispatcher, x: u8, y: u8, z: u8, playerx: u32, playery: u32, playerz: u32
+    );
+    fn sync_position(ref world: IWorldDispatcher, playerx: u32, playery: u32, playerz: u32);
     fn inspect_block(ref world: IWorldDispatcher, x: u8, y: u8, z: u8);
     fn generate_world(ref world: IWorldDispatcher, z_layer: u8);
     fn sell_all(ref world: IWorldDispatcher);
@@ -25,7 +28,7 @@ pub mod actions {
         blocks_column::{BlocksColumn, BlocksColumnTrait, MAX_U128},
         player_inventory::{PlayerInventory, PlayerInventoryTrait},
         daily_leaderboard_entry::{DailyLeaderboardEntry},
-        player_stats::{PlayerStats, PlayerStatsTrait},
+        player_stats::{PlayerStats, PlayerStatsTrait}, player_position::{PlayerPosition}
     };
     use diamond_pit::helpers::{block::{BlockHelper, BlockType}, math::{fast_power_2}};
 
@@ -36,7 +39,15 @@ pub mod actions {
 
     #[abi(embed_v0)]
     impl ActionsImpl of IActions<ContractState> {
-        fn hit_block(ref world: IWorldDispatcher, x: u8, y: u8, z: u8) {
+        fn hit_block(
+            ref world: IWorldDispatcher,
+            x: u8,
+            y: u8,
+            z: u8,
+            playerx: u32,
+            playery: u32,
+            playerz: u32
+        ) {
             let player = get_caller_address();
             let day: u64 = starknet::get_block_info().unbox().block_timestamp / 86400;
             let mut player_leaderboard_entry = get!(world, (player, day), (DailyLeaderboardEntry));
@@ -45,6 +56,12 @@ pub mod actions {
             let z_layer = z / 10;
             let mut column = get!(world, (x, y, z_layer), (BlocksColumn));
             assert(column.block_exists(z % 10), Errors::BLOCK_NOT_FOUND);
+
+            let (mut player_position, mut inventory) = get!(world, (player), (PlayerPosition, PlayerInventory));
+            player_position.x = playerx;
+            player_position.y = playery;
+            player_position.z = playerz;
+            player_position.time = starknet::get_block_info().unbox().block_timestamp;
 
             // Anti-cheat, can't break blocks that are not accessible
             // if x > 0 && x < 9 && y > 0 && y < 9 {
@@ -65,19 +82,33 @@ pub mod actions {
             let playerStats = get!(world, (player), (PlayerStats));
             let strength = playerStats.get_pickaxe_strength();
             let (new_block, final_hit) = column.hit_block(z % 10, strength);
+            let mut inventory_updated = false;
             if final_hit {
                 player_leaderboard_entry.nb_blocks_broken += 1;
-                let mut inventory = get!(world, (player), (PlayerInventory));
                 let (block_type, _) = BlockHelper::get_block_info(new_block);
                 let nb_blocks = playerStats.get_rebirth_multiplier();
                 let slots_left = inventory.slots_left(playerStats.get_backpack_max_slots());
                 if slots_left >= nb_blocks {
                     inventory.add(BlockHelper::block_u8_to_type(block_type), nb_blocks);
-                    set!(world, (inventory));
+                    inventory_updated = true;
                 } else { // Send event backpack max capacity reach
                 }
             }
-            set!(world, (column, player_leaderboard_entry));
+            if inventory_updated {
+                set!(world, (column, player_leaderboard_entry, player_position, inventory));
+            } else {
+                set!(world, (column, player_leaderboard_entry, player_position));
+            }
+        }
+
+        fn sync_position(ref world: IWorldDispatcher, playerx: u32, playery: u32, playerz: u32) {
+            let player = get_caller_address();
+            let mut player_position = get!(world, (player), (PlayerPosition));
+            player_position.x = playerx;
+            player_position.y = playery;
+            player_position.z = playerz;
+            player_position.time = starknet::get_block_info().unbox().block_timestamp;
+            set!(world, (player_position));
         }
 
         fn sell_all(ref world: IWorldDispatcher) {

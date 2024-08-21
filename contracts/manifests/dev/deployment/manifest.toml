@@ -24,8 +24,8 @@ manifest_name = "dojo-base"
 [[contracts]]
 kind = "DojoContract"
 address = "0x2c24de1c529a154eac885b0b34e8bf1b04f4ce0845b91d1a4fc9aea8c9d71ed"
-class_hash = "0x1562b50bd2fb2417cb608c8fb6d1942e80207bb751025b8dfe08266f5d3d19c"
-original_class_hash = "0x1562b50bd2fb2417cb608c8fb6d1942e80207bb751025b8dfe08266f5d3d19c"
+class_hash = "0x47a778bc6d5f2b5ac5b6846594f5d4736f3dec610ddb366973dc021948c3bfe"
+original_class_hash = "0x47a778bc6d5f2b5ac5b6846594f5d4736f3dec610ddb366973dc021948c3bfe"
 base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
 abi = "manifests/dev/deployment/abis/contracts/diamond_pit-actions-3fc18067.json"
 reads = []
@@ -34,6 +34,7 @@ init_calldata = []
 tag = "diamond_pit-actions"
 systems = [
     "hit_block",
+    "sync_position",
     "sell_all",
     "upgrade_pickaxe",
     "upgrade_backpack",
@@ -123,6 +124,39 @@ key = false
 
 [[models.members]]
 name = "coins"
+type = "u64"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x71e191e88aad0d5eb241e27c375cd532928e055a9e7787abf6bbe61c6c062d"
+original_class_hash = "0x71e191e88aad0d5eb241e27c375cd532928e055a9e7787abf6bbe61c6c062d"
+abi = "manifests/dev/deployment/abis/models/diamond_pit-PlayerPosition-69b522e7.json"
+tag = "diamond_pit-PlayerPosition"
+manifest_name = "diamond_pit-PlayerPosition-69b522e7"
+
+[[models.members]]
+name = "player"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "x"
+type = "u32"
+key = false
+
+[[models.members]]
+name = "y"
+type = "u32"
+key = false
+
+[[models.members]]
+name = "z"
+type = "u32"
+key = false
+
+[[models.members]]
+name = "time"
 type = "u64"
 key = false
 

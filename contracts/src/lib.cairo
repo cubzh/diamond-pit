@@ -12,6 +12,7 @@ pub mod models {
     pub mod player_inventory;
     pub mod daily_leaderboard_entry;
     pub mod player_stats;
+    pub mod player_position;
 }
 
 pub mod tests {
