@@ -194,6 +194,10 @@ createNewPlayer = function(key, position)
 		if not player.targetPosition then
 			return
 		end
+		if player.checkRefresh then
+			player.checkRefresh:Cancel()
+			player.checkRefresh = nil
+		end
 		local dir = player.targetPosition - player.model.Position
 		dir:Normalize()
 		player.model.Position = player.model.Position + dir * dt * 30
@@ -201,6 +205,10 @@ createNewPlayer = function(key, position)
 		player.model.Rotation.X = 0
 		player.model.Rotation.Z = 0
 		if (player.model.Position - player.targetPosition).SquaredLength <= 3 then
+			player.checkRefresh = Timer(61, function()
+				player.model:RemoveFromParent()
+				otherPlayers[key] = nil
+			end)
 			player.targetPosition = nil
 		end
 	end)
