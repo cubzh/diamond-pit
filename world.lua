@@ -194,7 +194,7 @@ createNewPlayer = function(key, position)
 		end
 		local dir = player.targetPosition - player.model.Position
 		dir:Normalize()
-		player.model.Position = player.model.Position + dir * 0.1
+		player.model.Position = player.model.Position + dir * dt
 		if (player.model.Position - player.targetPosition).SquaredLength <= 3 then
 			player.targetPosition = nil
 		end
