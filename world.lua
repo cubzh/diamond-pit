@@ -678,7 +678,7 @@ Client.Tick = function(dt)
 					emitter:spawn(15)
 					sfx(string.format("wood_impact_%d", math.random(1, 5)), { Spatialized = false, Volume = 0.6 })
 
-					local playerPos = Player.Position + Number3.ONE * 1000000
+					local playerPos = Player.Position + Number3(1, 1, 1) * 1000000
 					dojo.actions.hit_block(
 						math.floor(block.Coords.X),
 						math.floor(block.Coords.Y),
