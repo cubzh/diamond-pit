@@ -234,7 +234,7 @@ initSellingArea = function()
 	text.IsUnlit = true
 	text.Color = Color.White
 	text.Anchor = { 0.5, 0 }
-	text.Position = shop.Position + Number3(0, 29, 0)
+	text.Position = shop.Position + Number3(0, 25, 0)
 	LocalEvent:Listen(LocalEvent.Name.Tick, function()
 		text.Forward = Player.Forward
 	end)
