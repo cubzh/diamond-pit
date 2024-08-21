@@ -183,9 +183,6 @@ blocksModule.start = function(self)
 end
 
 createNewPlayer = function(key, position)
-	if position.time.value + 60 < Time.Unix() then
-		return
-	end
 	local player = {}
 	local model = require("avatar"):get("caillef")
 	model:SetParent(World)
@@ -221,6 +218,10 @@ updatePlayerPosition = function(key, position)
 		math.floor(position.y.value - 1000000),
 		math.floor(position.z.value - 1000000)
 	)
+
+	if position.time.value + 60 < Time.Unix() then
+		return
+	end
 
 	local player = otherPlayers[key] or createNewPlayer(key, worldPos)
 	if not player then
