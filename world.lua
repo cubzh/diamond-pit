@@ -201,7 +201,7 @@ createNewPlayer = function(key, position)
 end
 
 updatePlayerPosition = function(key, position)
-	if key == dojo.burnerAccount.Address then
+	if position.player.value == dojo.burnerAccount.Address then
 		return
 	end
 
