@@ -546,7 +546,7 @@ updateInventory = function(_, inventory)
 		end
 	end
 
-	coinText.Text = string.format("💰 %d", inventory.coins.value)
+	coinText.Text = string.format("%d", inventory.coins.value)
 
 	local ui = require("uikit")
 	if inventoryNode then
