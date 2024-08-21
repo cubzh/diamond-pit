@@ -702,11 +702,14 @@ end
 initUI = function()
 	local ui = require("uikit")
 
-	coinIcon = ui:createShape(Shape(Items.caillef.coin))
+	coinIcon = ui:createShape(Shape(Items.caillef.coin), { spherized = true })
+	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
+		coinIcon.pivot.Rotation.Y = coinIcon.pivot.Rotation.Y + dt
+	end)
 	coinIcon.parentDidResize = function()
 		coinIcon.pos = { 10, Screen.Height - Screen.SafeArea.Top - 30 - coinIcon.Height }
 	end
-	coinIcon.Size = 20
+	coinIcon.Size = 40
 	coinText = ui:createText("0", Color.White, "big")
 	coinText.parentDidResize = function()
 		coinText.pos = { 32, Screen.Height - Screen.SafeArea.Top - 30 - coinText.Height }
