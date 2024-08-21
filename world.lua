@@ -186,6 +186,7 @@ createNewPlayer = function(key, position)
 	local player = {}
 	local model = require("avatar"):get("caillef")
 	model:SetParent(World)
+	model.Scale = 0.5
 	model.Position = position
 	player.model = model
 	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
