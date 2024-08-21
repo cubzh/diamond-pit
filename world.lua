@@ -249,7 +249,7 @@ initUpgradeAreas = function()
 	text.IsUnlit = true
 	text.Color = Color.White
 	text.Anchor = { 0.5, 0 }
-	text.LocalPosition = { 0, 50, 0 }
+	text.LocalPosition = { 0, 10, 0 }
 	pickaxeNextText = text
 
 	local upgradeBackpack = MutableShape()
