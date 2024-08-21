@@ -223,9 +223,9 @@ end
 
 initUpgradeAreas = function()
 	local upgradePickaxe = MutableShape()
-	upgradePickaxe:AddBlock(Color(255, 255, 0, 0.5), 0, 0, 0)
+	upgradePickaxe:AddBlock(Color(127, 127, 127, 0.5), 0, 0, 0)
 	upgradePickaxe:SetParent(World)
-	upgradePickaxe.Scale = { 30, 5, 30 }
+	upgradePickaxe.Scale = { 30, 2, 30 }
 	upgradePickaxe.Pivot = { 0.5, 0, 0.5 }
 	upgradePickaxe.Physics = PhysicsMode.Trigger
 	upgradePickaxe.Position = { 450, 0, 200 }
@@ -264,9 +264,9 @@ initUpgradeAreas = function()
 	pickaxeNextText = text
 
 	local upgradeBackpack = MutableShape()
-	upgradeBackpack:AddBlock(Color(0, 0, 255, 0.5), 0, 0, 0)
+	upgradeBackpack:AddBlock(Color(127, 127, 127, 0.5), 0, 0, 0)
 	upgradeBackpack:SetParent(World)
-	upgradeBackpack.Scale = { 30, 5, 30 }
+	upgradeBackpack.Scale = { 30, 2, 30 }
 	upgradeBackpack.Pivot = { 0.5, 0, 0.5 }
 	upgradeBackpack.Physics = PhysicsMode.Trigger
 	upgradeBackpack.Position = { 450, 0, 400 }
