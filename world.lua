@@ -706,14 +706,13 @@ initUI = function()
 	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
 		coinIcon.pivot.Rotation.Y = coinIcon.pivot.Rotation.Y + dt
 	end)
-	coinIcon.parentDidResize = function()
-		coinIcon.pos = { 10, Screen.Height - Screen.SafeArea.Top - 10 - coinIcon.Height }
-	end
 	coinIcon.Size = 80
 	coinText = ui:createText("0", Color.White, "big")
-	coinText.content.FontSize = 30
+	coinText.object.FontSize = 30
 	coinText.parentDidResize = function()
-		coinText.pos = { 32, Screen.Height - Screen.SafeArea.Top - 30 - coinText.Height }
+		coinIcon.pos = { 10, Screen.Height - Screen.SafeArea.Top - 10 - coinIcon.Height }
+		coinText.pos =
+			{ coinIcon.pos.X + coinIcon.Width + 5, coinIcon.pos.Y + coinIcon.Height * 0.5 - coinText.Height * 0.5 }
 	end
 	coinText:parentDidResize()
 end
