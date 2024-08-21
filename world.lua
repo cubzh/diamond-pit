@@ -700,9 +700,15 @@ end
 
 initUI = function()
 	local ui = require("uikit")
-	coinText = ui:createText("💰 0", Color.White, "big")
+
+	coinIcon = ui:createShape(Shape(Items.caillef.coin))
+	coinIcon.parentDidResize = function()
+		coinIcon.pos = { 10, Screen.Height - Screen.SafeArea.Top - 30 - coinIcon.Height }
+	end
+	coinIcon.Size = 20
+	coinText = ui:createText("0", Color.White, "big")
 	coinText.parentDidResize = function()
-		coinText.pos = { 5, Screen.Height - Screen.SafeArea.Top - 5 - coinText.Height }
+		coinText.pos = { 32, Screen.Height - Screen.SafeArea.Top - 30 - coinText.Height }
 	end
 	coinText:parentDidResize()
 end
