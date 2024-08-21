@@ -187,7 +187,7 @@ updatePlayerStats = function(_, stats)
 	if BACKPACK_MAX_SLOTS[backpackLevel] > maxSlots then
 		maxSlots = BACKPACK_MAX_SLOTS[backpackLevel]
 		sfx("victory_1", { Spatialized = false, Volume = 0.6 })
-		local nextLevel = pickaxeLevel + 1
+		local nextLevel = backpackLevel + 1
 		floatingBackpack.Palette[1].Color = LEVEL_COLOR[nextLevel]
 		backpackNextText.Text = string.format("%d 💰", BACKPACK_UPGRADE_PRICES[nextLevel])
 	end
