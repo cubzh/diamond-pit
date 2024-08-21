@@ -277,11 +277,14 @@ initUpgradeAreas = function()
 		dojo.actions.upgrade_backpack()
 	end
 
-	floatingBackpack = Shape(Items.caillef.backpackmine)
+	floatingBackpack = MutableShape(Items.caillef.backpackmine)
 	floatingBackpack:SetParent(World)
-	floatingBackpack.Scale = 2
+	floatingBackpack.Scale = 1.5
 	floatingBackpack.Position = upgradeBackpack.Position + Number3(0, 20, 0)
 	floatingBackpack.Physics = PhysicsMode.Disabled
+	for i = 1, #floatingBackpack.Palette do
+		floatingBackpack:AddBlock(floatingBackpack.Palette[i], i, 20, 0)
+	end
 	--	floatingBackpack.Palette[8].Color = LEVEL_COLOR[1]
 	local t = 0
 	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
