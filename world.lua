@@ -238,14 +238,14 @@ initUpgradeAreas = function()
 
 	floatingPickaxe = Shape(Items.caillef.pickaxe)
 	floatingPickaxe:SetParent(World)
-	floatingPickaxe.Scale = 2
-	floatingPickaxe.Position = upgradePickaxe.Position + Number3(0, 20, 0)
+	floatingPickaxe.Scale = 1.5
+	floatingPickaxe.Position = upgradePickaxe.Position + Number3(0, 12, 0)
 	floatingPickaxe.Physics = PhysicsMode.Disabled
 	floatingPickaxe.Palette[8].Color = LEVEL_COLOR[1]
 	local t = 0
 	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
 		t = t + dt
-		floatingPickaxe.Position.Y = 20 + math.sin(t * 3) * 3
+		floatingPickaxe.Position.Y = 12 + math.sin(t * 3) * 2
 		floatingPickaxe.Rotation.Y = floatingPickaxe.Rotation.Y + dt * 0.5
 	end)
 
@@ -280,13 +280,13 @@ initUpgradeAreas = function()
 	floatingBackpack = MutableShape(Items.caillef.backpackmine)
 	floatingBackpack:SetParent(World)
 	floatingBackpack.Scale = 1.5
-	floatingBackpack.Position = upgradeBackpack.Position + Number3(0, 20, 0)
+	floatingBackpack.Position = upgradeBackpack.Position + Number3(0, 12, 0)
 	floatingBackpack.Physics = PhysicsMode.Disabled
 	floatingBackpack.Palette[1].Color = LEVEL_COLOR[1]
 	local t = 0
 	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
 		t = t + dt
-		floatingBackpack.Position.Y = 20 + math.sin(t * 3) * 3
+		floatingBackpack.Position.Y = 12 + math.sin(t * 3) * 2
 		floatingBackpack.Rotation.Y = floatingBackpack.Rotation.Y + dt * 0.5
 	end)
 
