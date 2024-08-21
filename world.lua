@@ -14,6 +14,7 @@ Modules = {
 local VERBOSE = false
 local sfx = require("sfx")
 
+tickSinceSync = 0
 otherPlayers = {}
 
 worldInfo = {
@@ -191,10 +192,12 @@ createNewPlayer = function(key, position)
 		if not player.targetPosition then
 			return
 		end
-		print(player.targetPosition, player.model.Position)
 		local dir = player.targetPosition - player.model.Position
 		dir:Normalize()
-		player.model.Position = player.model.Position + dir * dt * 10
+		player.model.Position = player.model.Position + dir * 0.1
+		if (player.model.Position - player.targetPosition).SquaredLength <= 3 then
+			player.targetPosition = nil
+		end
 	end)
 	otherPlayers[key] = player
 	return player
@@ -677,6 +680,7 @@ Client.Tick = function(dt)
 					sfx(string.format("wood_impact_%d", math.random(1, 5)), { Spatialized = false, Volume = 0.6 })
 
 					local playerPos = Player.Position + Number3(1, 1, 1) * 1000000
+					tickSinceSync = 0
 					dojo.actions.hit_block(
 						math.floor(block.Coords.X),
 						math.floor(block.Coords.Y),
@@ -864,7 +868,16 @@ function startGame(toriiClient)
 	-- add callbacks when an entity is updated
 	dojo:setOnEntityUpdateCallbacks(onEntityUpdateCallbacks)
 
-	print("Private Key", dojo.burnerAccountPrivateKey)
+	Timer(1, true, function()
+		tickSinceSync = tickSinceSync + 1
+		if tickSinceSync >= 5 then
+			local playerPos = Player.Position + Number3(1, 1, 1) * 1000000
+			dojo.actions.sync_position(
+				Number3(math.floor(playerPos.X), math.floor(playerPos.Y), math.floor(playerPos.Z))
+			)
+			tickSinceSync = 0
+		end
+	end)
 end
 
 -- dojo module
@@ -987,6 +1000,18 @@ dojo.actions = {
 			print("Calling hit_block", calldatastr)
 		end
 		dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "hit_block", calldatastr)
+	end,
+	sync_position = function(px, py, pz)
+		if not dojo.toriiClient then
+			return
+		end
+		-- z is down in Dojo, y is down on Cubzh
+		local calldatastr =
+			string.format('["%s","%s","%s"]', number_to_hexstr(px), number_to_hexstr(py), number_to_hexstr(pz))
+		if VERBOSE then
+			print("Calling sync_position", calldatastr)
+		end
+		dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "sync_position", calldatastr)
 	end,
 	sell_all = function()
 		if not dojo.toriiClient then
