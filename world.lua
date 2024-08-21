@@ -2,11 +2,11 @@ Config = {
 	Items = {
 		"caillef.pickaxe",
 		"caillef.backpackmine",
+		"caillef.shop2",
 	},
 }
 
 Modules = {
-	--floating_island_generator = "github.com/caillef/cubzh-library/floating_island_generator:a728587",
 	ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5",
 }
 
@@ -205,11 +205,12 @@ end
 
 initSellingArea = function()
 	local sellAll = MutableShape()
-	sellAll:AddBlock(Color(255, 0, 0, 0.5), 0, 0, 0)
+	sellAll:AddBlock(Color(0, 0, 0, 0.5), 0, 0, 0)
 	sellAll:SetParent(World)
 	sellAll.Scale = { 30, 5, 30 }
 	sellAll.Pivot = { 0.5, 0, 0.5 }
 	sellAll.Physics = PhysicsMode.Trigger
+	sellAll.Position = { 450, 0, 300 }
 	sellAll.OnCollisionBegin = function(_, other)
 		if other ~= Player then
 			return
@@ -218,7 +219,10 @@ initSellingArea = function()
 		sfx("coin_1", { Spatialized = false, Volume = 0.6 })
 	end
 
-	sellAll.Position = { 450, 0, 300 }
+	local shop = Shape(Items.caillef.shop2)
+	shop:SetParent(World)
+	shop.Position = sellAll.Position
+	shop.Pivot = { shop.Width * 0.5, 0, shop.Depth * 0.5 }
 end
 
 initUpgradeAreas = function()
