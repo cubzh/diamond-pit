@@ -191,6 +191,7 @@ createNewPlayer = function(key, position)
 		if not player.targetPosition then
 			return
 		end
+		print(player.targetPosition, player.model.Position)
 		local dir = player.targetPosition - player.model.Position
 		dir:Normalize()
 		player.model.Position = player.model.Position + dir * dt * 10
