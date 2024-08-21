@@ -259,7 +259,7 @@ initUpgradeAreas = function()
 	text.Anchor = { 0.5, 0 }
 	text.LocalPosition = { 0, 7, 0 }
 	LocalEvent:Listen(LocalEvent.Name.Tick, function()
-		text.Forward = Player.Backward
+		text.Forward = Player.Forward
 	end)
 	pickaxeNextText = text
 
@@ -300,7 +300,7 @@ initUpgradeAreas = function()
 	text.Anchor = { 0.5, 0 }
 	text.LocalPosition = { 0, 7, 0 }
 	LocalEvent:Listen(LocalEvent.Name.Tick, function()
-		text.Forward = Player.Backward
+		text.Forward = Player.Forward
 	end)
 	backpackNextText = text
 end
