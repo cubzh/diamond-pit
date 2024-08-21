@@ -188,7 +188,7 @@ updatePlayerStats = function(_, stats)
 		maxSlots = BACKPACK_MAX_SLOTS[backpackLevel]
 		sfx("victory_1", { Spatialized = false, Volume = 0.6 })
 		local nextLevel = pickaxeLevel + 1
-		floatingBackpack.Palette[8].Color = LEVEL_COLOR[nextLevel]
+		floatingBackpack.Palette[7].Color = LEVEL_COLOR[nextLevel]
 		backpackNextText.Text = string.format("%d 💰", BACKPACK_UPGRADE_PRICES[nextLevel])
 	end
 
@@ -282,7 +282,7 @@ initUpgradeAreas = function()
 	floatingBackpack.Scale = 1.5
 	floatingBackpack.Position = upgradeBackpack.Position + Number3(0, 20, 0)
 	floatingBackpack.Physics = PhysicsMode.Disabled
-	floatingBackpack.Palette[8].Color = LEVEL_COLOR[1]
+	floatingBackpack.Palette[7].Color = LEVEL_COLOR[1]
 	local t = 0
 	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
 		t = t + dt
