@@ -707,10 +707,11 @@ initUI = function()
 		coinIcon.pivot.Rotation.Y = coinIcon.pivot.Rotation.Y + dt
 	end)
 	coinIcon.parentDidResize = function()
-		coinIcon.pos = { 10, Screen.Height - Screen.SafeArea.Top - 30 - coinIcon.Height }
+		coinIcon.pos = { 10, Screen.Height - Screen.SafeArea.Top - 10 - coinIcon.Height }
 	end
-	coinIcon.Size = 40
+	coinIcon.Size = 80
 	coinText = ui:createText("0", Color.White, "big")
+	coinText.content.FontSize = 30
 	coinText.parentDidResize = function()
 		coinText.pos = { 32, Screen.Height - Screen.SafeArea.Top - 30 - coinText.Height }
 	end
