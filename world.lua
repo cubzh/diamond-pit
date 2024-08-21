@@ -3,6 +3,7 @@ Config = {
 		"caillef.pickaxe",
 		"caillef.backpackmine",
 		"caillef.shop2",
+		"caillef.coin",
 	},
 }
 
