@@ -183,10 +183,14 @@ blocksModule.start = function(self)
 end
 
 createNewPlayer = function(key, position)
+	if position.time.value + 60 < Time.Unix() then
+		return
+	end
 	local player = {}
 	local model = require("avatar"):get("caillef")
 	model:SetParent(World)
 	model.Scale = 0.5
+	model.Rotation.Y = math.random() * 2 * math.pi
 	model.Position = position
 	player.model = model
 	LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
@@ -219,6 +223,9 @@ updatePlayerPosition = function(key, position)
 	)
 
 	local player = otherPlayers[key] or createNewPlayer(key, worldPos)
+	if not player then
+		return
+	end
 	player.targetPosition = worldPos
 end
 
