@@ -685,7 +685,7 @@ Client.Tick = function(dt)
 						math.floor(block.Coords.Z),
 						math.floor(playerPos.X),
 						math.floor(playerPos.Y),
-						math.floor(playerpos.Z)
+						math.floor(playerPos.Z)
 					)
 
 					local text = Text()
