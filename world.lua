@@ -294,7 +294,7 @@ initSellingArea = function()
 	text.FontSize = 7
 	text.Type = TextType.World
 	text.IsUnlit = true
-	text.Color = Color.White
+	text.Color = Color.Black
 	text.Anchor = { 0.5, 0 }
 	text.Position = shop.Position + Number3(0, 25, 0)
 	LocalEvent:Listen(LocalEvent.Name.Tick, function()
@@ -336,7 +336,7 @@ initUpgradeAreas = function()
 	text.FontSize = 5
 	text.Type = TextType.World
 	text.IsUnlit = true
-	text.Color = Color.White
+	text.Color = Color.Black
 	text.Anchor = { 0.5, 0 }
 	text.LocalPosition = { 0, 7, 0 }
 	LocalEvent:Listen(LocalEvent.Name.Tick, function()
@@ -377,7 +377,7 @@ initUpgradeAreas = function()
 	text.FontSize = 5
 	text.Type = TextType.World
 	text.IsUnlit = true
-	text.Color = Color.White
+	text.Color = Color.Black
 	text.Anchor = { 0.5, 0 }
 	text.LocalPosition = { 0, 7, 0 }
 	LocalEvent:Listen(LocalEvent.Name.Tick, function()
@@ -731,39 +731,6 @@ Client.Tick = function(dt)
 						listener:Remove()
 					end)
 					local textParent = text
-					local text = Text()
-					text.Text = string.format("-%d", pickaxeStrength)
-					text:SetParent(textParent)
-					text.FontSize = 40
-					text.Type = TextType.Screen
-					text.IsUnlit = true
-					text.Color = Color.Black
-					text.Anchor = { 0.5, 0.6 }
-					local text = Text()
-					text.Text = string.format("-%d", pickaxeStrength)
-					text:SetParent(textParent)
-					text.FontSize = 40
-					text.Type = TextType.Screen
-					text.IsUnlit = true
-					text.Color = Color.Black
-					text.Anchor = { 0.6, 0.5 }
-					local text = Text()
-					text.Text = string.format("-%d", pickaxeStrength)
-					text:SetParent(textParent)
-					text.FontSize = 40
-					text.Type = TextType.Screen
-					text.IsUnlit = true
-					text.Color = Color.Black
-					text.Anchor = { 0.4, 0.5 }
-
-					local text = Text()
-					text.Text = string.format("-%d", pickaxeStrength)
-					text:SetParent(textParent)
-					text.FontSize = 40
-					text.Type = TextType.Screen
-					text.IsUnlit = true
-					text.Color = Color.White
-					text.Anchor = { 0.5, 0.5 }
 				end
 			end
 		end
