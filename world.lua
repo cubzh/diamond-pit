@@ -1166,7 +1166,7 @@ end
 local cachedIslands = {}
 local function create(radius)
 	if cachedIslands[radius] then
-		return Shape(cachedIslands, { includeChildren = true })
+		return Shape(cachedIslands[radius], { includeChildren = true })
 	end
 	local shape = MutableShape()
 	cachedIslands[radius] = shape
