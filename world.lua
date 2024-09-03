@@ -327,8 +327,7 @@ initSellingArea = function()
 			text.IsUnlit = true
 			text.Color = Color.Black
 			text.Anchor = { 0.5, 0.4 }
-			local impactPos = Camera.Position + Camera.Forward * 50
-			text.LocalPosition = impactPos
+			text.Position = Number3(450, 10, 300)
 			Timer(2, function()
 				text:RemoveFromParent()
 			end)
