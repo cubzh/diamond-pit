@@ -719,11 +719,12 @@ Client.OnStart = function()
 		alwaysVisible = true,
 		selector = false,
 		uiPos = function(node)
+			local padding = require("uitheme").current.padding
 			nbSlotsLeftText.pos = {
 				Screen.Width * 0.5 - node.Width * 0.5 - padding - nbSlotsLeftText.Width,
-				node.Height * 0.5 + require("uitheme").current.padding,
+				node.Height * 0.5 + padding,
 			}
-			return { Screen.Width * 0.5 - node.Width * 0.5, require("uitheme").current.padding }
+			return { Screen.Width * 0.5 - node.Width * 0.5, padding }
 		end,
 	})
 
