@@ -774,7 +774,7 @@ Client.Tick = function(dt)
 						local text = Text()
 						text.Text = "Inventory full, right click to leave the pit"
 						text:SetParent(World)
-						text.FontSize = 40
+						text.FontSize = 20
 						text.Type = TextType.Screen
 						text.IsUnlit = true
 						text.Color = Color.Black
