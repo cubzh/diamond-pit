@@ -44,6 +44,7 @@ end
 
 local VERBOSE = false
 local inventoryIsFull = false
+local inventoryTotalQty = 0
 local sfx = require("sfx")
 
 tickSinceSync = 0
@@ -315,6 +316,22 @@ initSellingArea = function()
 	sellAll.Position = { 450, 0, 300 }
 	sellAll.OnCollisionBegin = function(_, other)
 		if other ~= Player then
+			return
+		end
+		if inventoryTotalQty == 0 then
+			local text = Text()
+			text.Text = "Nothing to sell, mine blocks in the pit"
+			text:SetParent(World)
+			text.FontSize = 20
+			text.Type = TextType.Screen
+			text.IsUnlit = true
+			text.Color = Color.Black
+			text.Anchor = { 0.5, 0.4 }
+			local impactPos = Camera.Position + Camera.Forward * 50
+			text.LocalPosition = impactPos
+			Timer(2, function()
+				text:RemoveFromParent()
+			end)
 			return
 		end
 		dojo.actions.sell_all()
@@ -649,6 +666,7 @@ updateInventory = function(_, inventory)
 
 	coinText.Text = string.format("%d", inventory.coins.value)
 
+	inventoryTotalQty = totalQty
 	inventoryIsFull = totalQty == (maxSlots or 5)
 	nbSlotsLeftText.Text = string.format("%d/%d", totalQty, maxSlots or 5)
 
