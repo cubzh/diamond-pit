@@ -712,6 +712,9 @@ Client.OnStart = function()
 	Player:SetParent(World)
 	Player.Position = Number3(250 + math.random(-25, 25), 5, 150 + math.random(-25, 25))
 
+	local ui = require("uikit")
+	nbSlotsLeftText = ui:createText("0/5", Color.White, "big")
+
 	inventory_module:setResources(resourcesByKey, resourcesById)
 	inventory_module:create("hotbar", {
 		width = 7,
@@ -727,9 +730,6 @@ Client.OnStart = function()
 			return { Screen.Width * 0.5 - node.Width * 0.5, padding }
 		end,
 	})
-
-	local ui = require("uikit")
-	nbSlotsLeftText = ui:createText("0/5", Color.White, "big")
 
 	blocksModule:start()
 end
