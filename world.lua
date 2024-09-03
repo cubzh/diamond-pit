@@ -43,6 +43,7 @@ for _, v in ipairs(resources) do
 end
 
 local VERBOSE = false
+local inventoryIsFull = false
 local sfx = require("sfx")
 
 tickSinceSync = 0
@@ -648,6 +649,7 @@ updateInventory = function(_, inventory)
 
 	coinText.Text = string.format("%d", inventory.coins.value)
 
+	inventoryIsFull = totalQty == (maxSlots or 5)
 	nbSlotsLeftText.Text = string.format("%d/%d", totalQty, maxSlots or 5)
 
 	local ui = require("uikit")
@@ -717,15 +719,16 @@ Client.OnStart = function()
 		alwaysVisible = true,
 		selector = false,
 		uiPos = function(node)
+			nbSlotsLeftText.pos = {
+				Screen.Width * 0.5 - node.Width * 0.5 - padding - nbSlotsLeftText.Width,
+				node.Height * 0.5 + require("uitheme").current.padding,
+			}
 			return { Screen.Width * 0.5 - node.Width * 0.5, require("uitheme").current.padding }
 		end,
 	})
 
 	local ui = require("uikit")
 	nbSlotsLeftText = ui:createText("0/5", Color.White, "big")
-	nbSlotsLeftText.parentDidResize = function()
-		nbSlotsLeftText.pos = { 10, 10 }
-	end
 
 	blocksModule:start()
 end
@@ -766,6 +769,21 @@ Client.Tick = function(dt)
 			if impact.Object and impact.Object.Name == "Blocks" then
 				impact = Player:CastRay(impact.Object)
 				if impact.Distance < 40 then
+					if inventoryIsFull then
+						local text = Text()
+						text.Text = "Inventory full, right click to leave the pit"
+						text:SetParent(World)
+						text.FontSize = 40
+						text.Type = TextType.Screen
+						text.IsUnlit = true
+						text.Color = Color.Black
+						text.Anchor = { 0.5, 0.4 }
+						text.LocalPosition = impactPos
+						Timer(2, function()
+							text:RemoveFromParent()
+						end)
+						return
+					end
 					local block = impact.Block
 					Player:SwingRight()
 					local impactPos = Camera.Position + Camera.Forward * impact.Distance
@@ -802,7 +820,6 @@ Client.Tick = function(dt)
 						text:RemoveFromParent()
 						listener:Remove()
 					end)
-					local textParent = text
 				end
 			end
 		end
