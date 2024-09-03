@@ -780,9 +780,9 @@ initPlayer = function()
 	Player.Avatar:loadEquipment({ type = "boots" })
 	if Player.Animations then
 		-- remove view bobbing
-		Player.Animations.Walk.Duration = 10000
+		-- Player.Animations.Walk.Duration = 10000
 		-- remove idle animation
-		Player.Animations.Idle.Duration = 10000
+		-- Player.Animations.Idle.Duration = 10000
 	end
 	Player:SetParent(World)
 	Camera.FOV = 80
