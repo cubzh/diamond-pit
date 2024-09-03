@@ -284,7 +284,7 @@ initSellingArea = function()
 	local shop = Shape(Items.caillef.shop2)
 	shop:SetParent(World)
 	shop.Scale = 1.6
-	shop.Physics = PhysicsMode.Static
+	shop.Physics = PhysicsMode.Disabled
 	shop.Position = sellAll.Position
 	shop.Pivot = { 0, 0.5, shop.Depth * 0.5 }
 
