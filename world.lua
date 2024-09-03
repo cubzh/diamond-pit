@@ -1163,8 +1163,13 @@ local function onReady(callback)
 	end)
 end
 
+local cachedIslands = {}
 local function create(radius)
+	if cachedIslands[radius] then
+		return Shape(cachedIslands, { includeChildren = true })
+	end
 	local shape = MutableShape()
+	cachedIslands[radius] = shape
 	shape.Pivot = { 0.5, 0.5, 0.5 }
 	for z = -radius, radius do
 		for x = -radius, radius do
