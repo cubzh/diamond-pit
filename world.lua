@@ -8,7 +8,7 @@ Config = {
 }
 
 Modules = {
-	inventory = "github.com/caillef/cubzh-library/inventory:1037602",
+	inventory_module = "github.com/caillef/cubzh-library/inventory:1037602",
 	ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5",
 }
 
