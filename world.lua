@@ -8,8 +8,40 @@ Config = {
 }
 
 Modules = {
+	inventory = "github.com/caillef/cubzh-library/inventory:1037602",
 	ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5",
 }
+
+local resourcesById = {}
+local resourcesByKey = {}
+local resources = {
+	{
+		id = 1,
+		key = "stone",
+		name = "Stone",
+		type = "block",
+		block = { color = Color.Grey },
+	},
+	{
+		id = 2,
+		key = "coal",
+		name = "Coal",
+		type = "block",
+		block = { color = Color.Black },
+	},
+	{
+		id = 3,
+		key = "copper",
+		name = "Copper",
+		type = "block",
+		block = { color = Color.Orange },
+	},
+}
+
+for _, v in ipairs(resources) do
+	resourcesByKey[v.key] = v
+	resourcesById[v.id] = v
+end
 
 local VERBOSE = false
 local sfx = require("sfx")
@@ -544,7 +576,7 @@ updateLeaderboard = function(_, entry)
 			end
 			local name = string.sub(listBlocksHit[i].player.value, 1, 8)
 			if listBlocksHit[i].player.value == dojo.burnerAccount.Address then
-				name = "> you <"
+				name = " > you <"
 				hasLocalPlayer = true
 			end
 			leaderboardTextHits.Text = leaderboardTextHits.Text
@@ -557,7 +589,7 @@ updateLeaderboard = function(_, entry)
 		local elem = leaderboardEntries[dojo.burnerAccount.Address]
 		if not hasLocalPlayer and elem then
 			leaderboardTextHits.Text = leaderboardTextHits.Text
-				.. "> you <"
+				.. " > you <"
 				.. ": "
 				.. tostring(math.floor(elem.nb_hits.value))
 				.. "\n"
@@ -580,7 +612,7 @@ updateLeaderboard = function(_, entry)
 			end
 			local name = string.sub(listBlocksMined[i].player.value, 1, 8)
 			if listBlocksMined[i].player.value == dojo.burnerAccount.Address then
-				name = "> you <"
+				name = " > you <"
 				hasLocalPlayer = true
 			end
 			leaderboardTextBlocks.Text = leaderboardTextBlocks.Text
@@ -592,7 +624,7 @@ updateLeaderboard = function(_, entry)
 		local elem = leaderboardEntries[dojo.burnerAccount.Address]
 		if not hasLocalPlayer and elem then
 			leaderboardTextBlocks.Text = leaderboardTextBlocks.Text
-				.. "> you <"
+				.. " > you <"
 				.. ": "
 				.. tostring(math.floor(elem.nb_blocks_broken.value))
 				.. "\n"
@@ -618,28 +650,42 @@ updateInventory = function(_, inventory)
 	coinText.Text = string.format("%d", inventory.coins.value)
 
 	local ui = require("uikit")
-	if inventoryNode then
-		inventoryNode:remove()
-	end
-	local nodes = {
-		ui:createText("Inventory"),
-		ui:createText(string.format("%d/%d", totalQty, maxSlots or 5)),
-	}
+	LocalEvent:Send("InvClearAll", { key = "hotbar" })
 	for _, slot in ipairs(slots) do
-		table.insert(nodes, ui:createText(string.format("%s: %d", idToName[slot.blockType], slot.qty)))
+		LocalEvent:Send("InvAdd", {
+			key = "hotbar",
+			rKey = slot.blockType,
+			amount = slot.qty,
+			callback = function(success)
+				if success then
+					return
+				end
+			end,
+		})
 	end
-	local bgInventory = ui:createFrame(Color.White)
-	bgInventory.parentDidResize = function()
-		bgInventory.Width = 100
-		bgInventory.Height = Screen.Height / 3
-		bgInventory.pos = { Screen.Width - bgInventory.Width, Screen.Height - Screen.SafeArea.Top - bgInventory.Height }
-	end
-	bgInventory:parentDidResize()
-	inventoryNode = ui_blocks:createLineContainer({
-		dir = "vertical",
-		nodes = nodes,
-	})
-	ui_blocks:anchorNode(inventoryNode, "right", "top", 5)
+
+	-- if inventoryNode then
+	-- 	inventoryNode:remove()
+	-- end
+	-- local nodes = {
+	-- 	ui:createText("Inventory"),
+	-- 	ui:createText(string.format("%d/%d", totalQty, maxSlots or 5)),
+	-- }
+	-- for _, slot in ipairs(slots) do
+	-- 	table.insert(nodes, ui:createText(string.format("%s: %d", idToName[slot.blockType], slot.qty)))
+	-- end
+	-- local bgInventory = ui:createFrame(Color.White)
+	-- bgInventory.parentDidResize = function()
+	-- 	bgInventory.Width = 100
+	-- 	bgInventory.Height = Screen.Height / 3
+	-- 	bgInventory.pos = { Screen.Width - bgInventory.Width, Screen.Height - Screen.SafeArea.Top - bgInventory.Height }
+	-- end
+	-- bgInventory:parentDidResize()
+	-- inventoryNode = ui_blocks:createLineContainer({
+	-- 	dir = "vertical",
+	-- 	nodes = nodes,
+	-- })
+	-- ui_blocks:anchorNode(inventoryNode, "right", "top", 5)
 end
 
 Client.OnStart = function()
@@ -662,6 +708,17 @@ Client.OnStart = function()
 	generate_map()
 	Player:SetParent(World)
 	Player.Position = Number3(250 + math.random(-25, 25), 5, 150 + math.random(-25, 25))
+
+	inventory_module:setResources(resourcesByKey, resourcesById)
+	inventory_module:create("hotbar", {
+		width = 9,
+		height = 1,
+		alwaysVisible = true,
+		selector = false,
+		uiPos = function(node)
+			return { Screen.Width * 0.5 - node.Width * 0.5, require("uitheme").current.padding }
+		end,
+	})
 
 	blocksModule:start()
 end
