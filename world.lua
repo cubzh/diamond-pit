@@ -753,7 +753,8 @@ Client.Action2Release = function()
 end
 
 Client.Action3Release = function()
-	Player.Position = Number3(450, 5, 300)
+	Player.Position = Number3(400, 5, 300)
+	Player.Rotation = Number3(0, math.pi * 0.5, 0)
 end
 
 local nextMineHit = 0
