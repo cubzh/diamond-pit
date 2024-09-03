@@ -653,7 +653,7 @@ updateInventory = function(_, inventory)
 	for _, slot in ipairs(slots) do
 		LocalEvent:Send("InvAdd", {
 			key = "hotbar",
-			rKey = slot.blockType,
+			rKey = resourcesById[slot.blockType].key,
 			amount = slot.qty,
 			callback = function(success)
 				if success then
