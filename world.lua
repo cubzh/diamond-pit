@@ -110,6 +110,8 @@ generate_map = function()
 	leftWing.Pivot = { 0, 1, 0 }
 	leftWing.Scale = { 500, 100, 200 }
 	leftWing.LocalPosition = { 0, 0, 0 }
+	leftWing.CollisionGroups = Map.CollisionGroups
+	leftWing.CollidesWithGroups = Map.CollidesWithGroups
 
 	local rightWing = MutableShape()
 	rightWing:SetParent(map)
@@ -117,6 +119,8 @@ generate_map = function()
 	rightWing.Pivot = { 0, 1, 0 }
 	rightWing.Scale = { 500, 100, 200 }
 	rightWing.LocalPosition = { 0, 0, 400 }
+	rightWing.CollisionGroups = Map.CollisionGroups
+	rightWing.CollidesWithGroups = Map.CollidesWithGroups
 
 	local upWing = MutableShape()
 	upWing:SetParent(map)
@@ -124,6 +128,8 @@ generate_map = function()
 	upWing.Pivot = { 0, 1, 0 }
 	upWing.Scale = { 200, 100, 600 }
 	upWing.LocalPosition = { 400, 0, 0 }
+	upWing.CollisionGroups = Map.CollisionGroups
+	upWing.CollidesWithGroups = Map.CollidesWithGroups
 
 	local downWing = MutableShape()
 	downWing:SetParent(map)
@@ -131,6 +137,8 @@ generate_map = function()
 	downWing.Pivot = { 0, 1, 0 }
 	downWing.Scale = { 200, 100, 600 }
 	downWing.LocalPosition = { 0, 0, 0 }
+	downWing.CollisionGroups = Map.CollisionGroups
+	downWing.CollidesWithGroups = Map.CollidesWithGroups
 
 	local leftStone = MutableShape()
 	leftStone:SetParent(map)
