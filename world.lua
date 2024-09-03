@@ -328,7 +328,7 @@ initSellingArea = function()
 			text.Color = Color.Black
 			text.Anchor = { 0.5, 0.4 }
 			text.Position = Number3(450, 10, 300)
-			Timer(2, function()
+			Timer(5, function()
 				text:RemoveFromParent()
 			end)
 			return
@@ -799,7 +799,7 @@ Client.Tick = function(dt)
 						text.Anchor = { 0.5, 0.4 }
 						local impactPos = Camera.Position + Camera.Forward * impact.Distance
 						text.LocalPosition = impactPos
-						Timer(2, function()
+						Timer(4, function()
 							text:RemoveFromParent()
 						end)
 						return
