@@ -648,6 +648,8 @@ updateInventory = function(_, inventory)
 
 	coinText.Text = string.format("%d", inventory.coins.value)
 
+	nbSlotsLeftText.Text = string.format("%d/%d", totalQty, maxSlots or 5)
+
 	local ui = require("uikit")
 	LocalEvent:Send("InvClearAll", { key = "hotbar" })
 	for _, slot in ipairs(slots) do
@@ -710,7 +712,7 @@ Client.OnStart = function()
 
 	inventory_module:setResources(resourcesByKey, resourcesById)
 	inventory_module:create("hotbar", {
-		width = 9,
+		width = 7,
 		height = 1,
 		alwaysVisible = true,
 		selector = false,
@@ -718,6 +720,12 @@ Client.OnStart = function()
 			return { Screen.Width * 0.5 - node.Width * 0.5, require("uitheme").current.padding }
 		end,
 	})
+
+	local ui = require("uikit")
+	nbSlotsLeftText = ui:createText("0/5", Color.White, "big")
+	nbSlotsLeftText.parentDidResize = function()
+		nbSlotsLeftText.pos = { 10, 10 }
+	end
 
 	blocksModule:start()
 end
