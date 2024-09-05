@@ -741,7 +741,7 @@ Client.OnStart = function()
 		uiPos = function(node)
 			local padding = require("uitheme").current.padding
 			nbSlotsLeftText.pos = {
-				Screen.Width * 0.5 - node.Width * 0.5 - padding * 3 - nbSlotsLeftText.Width,
+				Screen.Width * 0.5 - node.Width * 0.5 - padding * 3 - nbSlotsLeftText.Width * 1.5,
 				padding + node.Height * 0.5 - nbSlotsLeftText.Height * 0.5,
 			}
 			return { Screen.Width * 0.5 - node.Width * 0.5, padding }
@@ -990,26 +990,9 @@ dojo.getOrCreateBurner = function(self, config, cb)
 				return
 			end
 			dojo.burnerAccount = burnerAccount
-			print(dojo.burnerAccount.Address, privateKey)
-			dojo.burnerAccountPrivateKey = privateKey
 			cb()
 		end
 	)
-
-	-- self.toriiClient:CreateAccount(
-	-- 	"0x61061baa37cf56f3cd139dd19d74e344d6522369416f7de585c9324ab58dc24",
-	-- 	"0x5594932d50a0b34d94336b1746df194343db6fa650078176dd1fb4600f1c74a",
-	-- 	function(success, burnerAccount)
-	-- 		if not success then
-	-- 			error("Can't create burner")
-	-- 			return
-	-- 		end
-	-- 		dojo.burnerAccount = burnerAccount
-	-- 		print(dojo.burnerAccount.Address, "0x5594932d50a0b34d94336b1746df194343db6fa650078176dd1fb4600f1c74a")
-	-- 		dojo.burnerAccountPrivateKey = "0x5594932d50a0b34d94336b1746df194343db6fa650078176dd1fb4600f1c74a"
-	-- 		cb()
-	-- 	end
-	-- )
 end
 
 dojo.createToriiClient = function(self, config)
@@ -1021,9 +1004,23 @@ dojo.createToriiClient = function(self, config)
 			print("Connection failed")
 			return
 		end
-		self:getOrCreateBurner(config, function()
-			config.onConnect(dojo.toriiClient)
-		end)
+		local burners = dojo.toriiClient:GetBurners()
+		if #burners == 0 then
+			self:getOrCreateBurner(config, function()
+				config.onConnect(dojo.toriiClient)
+			end)
+		else
+			print("Found burner!", JSON:Encode(burners[1]))
+			local lastBurner = burners[1]
+			self.toriiClient:CreateAccount(lastBurner.publicKey, lastBurner.privateKey, function(success, burnerAccount)
+				if not success then
+					error("Can't create burner")
+					return
+				end
+				dojo.burnerAccount = burnerAccount
+				cb()
+			end)
+		end
 	end
 	dojo.toriiClient:Connect()
 end
