@@ -1006,7 +1006,7 @@ dojo.createToriiClient = function(self, config)
 		end
 		local json = dojo.toriiClient:GetBurners()
 		local burners = json.burners
-		print(">>> burners", JSON:Encode(burners))
+		print(">>> burners", JSON:Encode(json))
 		if #burners == 0 then
 			self:getOrCreateBurner(config, function()
 				config.onConnect(dojo.toriiClient)
