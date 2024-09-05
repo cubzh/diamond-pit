@@ -1004,9 +1004,8 @@ dojo.createToriiClient = function(self, config)
 			print("Connection failed")
 			return
 		end
-		print("LUA>> A")
-		local burners = dojo.toriiClient:GetBurners()
-		print("LUA>> B")
+		local json = dojo.toriiClient:GetBurners()
+		local burners = json.burners
 		print(">>> burners", JSON:Encode(burners))
 		if #burners == 0 then
 			self:getOrCreateBurner(config, function()
