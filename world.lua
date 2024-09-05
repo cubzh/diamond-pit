@@ -1005,7 +1005,7 @@ dojo.createToriiClient = function(self, config)
 			return
 		end
 		local json = dojo.toriiClient:GetBurners()
-		console.log("LUA GET BURNERS", json)
+		print("LUA GET BURNERS", json)
 		local burners = json.burners
 		if not burners then
 			self:getOrCreateBurner(config, function()
