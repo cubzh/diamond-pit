@@ -780,6 +780,7 @@ Client.OnStart = function()
 end
 
 Client.OnChat = function(payload)
+    print(payload.message)
     dojo.actions.set_username(payload.message)
     return true -- consumed
 end
