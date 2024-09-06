@@ -588,10 +588,10 @@ updateLeaderboard = function(_, entry)
                 break
             end
             local name = string.sub(coinsCollected.player.value, 1, 8)
-            print(">>>>>", playersStats[coinsCollected.player.value].name)
-            if playersStats[coinsCollected.player.value] and playersStats[coinsCollected.player.value].name.value ~= "0x0" then
+            -- print(">>>>>", playersStats[coinsCollected.player.value].name)
+            -- if playersStats[coinsCollected.player.value] and playersStats[coinsCollected.player.value].name.value ~= "0x0" then
 
-            else if coinsCollected.player.value == dojo.burnerAccount.Address then
+            if coinsCollected.player.value == dojo.burnerAccount.Address then
                 name = " > you <"
                 hasLocalPlayer = true
             end
