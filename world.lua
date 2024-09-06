@@ -1015,6 +1015,7 @@ dojo.createToriiClient = function(self, config)
 			local lastBurner = burners[1]
 			print("Found burner!", lastBurner.publicKey, lastBurner.privateKey)
 			self.toriiClient:CreateAccount(lastBurner.publicKey, lastBurner.privateKey, function(success, burnerAccount)
+				print("LUA CALLBACK", success, burnerAccount)
 				if not success then
 					error("Can't create burner")
 					return
