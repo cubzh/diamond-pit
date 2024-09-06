@@ -11,6 +11,7 @@ Modules = {
     ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5",
 }
 
+local playersStats = {}
 local resourcesById = {}
 local resourcesByKey = {}
 local resources = {
@@ -309,7 +310,8 @@ updatePlayerPosition = function(key, position)
     player.targetPosition = worldPos
 end
 
-updatePlayerStats = function(_, stats)
+updatePlayerStats = function(key, stats)
+    playersStats[stats.player.value] = stats
     if stats.player.value ~= dojo.burnerAccount.Address then
         return
     end
@@ -581,11 +583,15 @@ updateLeaderboard = function(_, entry)
         leaderboardTextCoins.Text = ""
         local hasLocalPlayer = false
         for i = 1, 10 do
-            if not listCoinsCollected[i] then
+            local coinsCollected = listCoinsCollected[i]
+            if not coinsCollected then
                 break
             end
-            local name = string.sub(listCoinsCollected[i].player.value, 1, 8)
-            if listCoinsCollected[i].player.value == dojo.burnerAccount.Address then
+            local name = string.sub(coinsCollected.player.value, 1, 8)
+            print(">>>>>", playersStats[coinsCollected.player.value].name)
+            if playersStats[coinsCollected.player.value] and playersStats[coinsCollected.player.value].name.value ~= "0x0" then
+
+            else if coinsCollected.player.value == dojo.burnerAccount.Address then
                 name = " > you <"
                 hasLocalPlayer = true
             end
@@ -593,7 +599,7 @@ updateLeaderboard = function(_, entry)
                 "%s%s: %d\n",
                 leaderboardTextCoins.Text,
                 name,
-                listCoinsCollected[i].nb_coins_collected.value
+                coinsCollected.nb_coins_collected.value
             )
         end
 
