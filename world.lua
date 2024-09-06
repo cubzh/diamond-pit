@@ -1172,7 +1172,7 @@ dojo.actions = {
             print("Calling set_username")
         end
         dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "set_username",
-            string.format("[%s]", stringToHex(username)))
+            string.format("[\"%s\"]", stringToHex(username)))
     end,
     upgrade_pickaxe = function()
         if not dojo.toriiClient then
