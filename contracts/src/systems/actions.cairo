@@ -12,11 +12,11 @@ pub trait IActions {
         ref world: IWorldDispatcher, x: u8, y: u8, z: u8, playerx: u32, playery: u32, playerz: u32
     );
     fn sync_position(ref world: IWorldDispatcher, playerx: u32, playery: u32, playerz: u32);
-    fn inspect_block(ref world: IWorldDispatcher, x: u8, y: u8, z: u8);
     fn generate_world(ref world: IWorldDispatcher, z_layer: u8);
     fn sell_all(ref world: IWorldDispatcher);
     fn upgrade_backpack(ref world: IWorldDispatcher);
     fn upgrade_pickaxe(ref world: IWorldDispatcher);
+    fn set_username(ref world: IWorldDispatcher, name: felt252);
 }
 
 // dojo decorator
@@ -142,17 +142,17 @@ pub mod actions {
             set!(world, (inventory, stats));
         }
 
-        // Debug
-        fn inspect_block(ref world: IWorldDispatcher, x: u8, y: u8, z: u8) {
-            let z_layer = z / 10;
-            let mut column = get!(world, (x, y, z_layer), (BlocksColumn));
-            let block = column.get_block(z % 10);
-            let (block_type, block_hp) = BlockHelper::get_block_info(block);
-            println!("{} (type {}, hp {})", block, block_type, block_hp);
+        fn set_username(ref world: IWorldDispatcher, name: felt252) {
+            let player = get_caller_address();
+            let mut stats = get!(world, (player), (PlayerStats));
+            stats.name = name;
+            set!(world, (stats));
         }
 
         // Tools
         fn generate_world(ref world: IWorldDispatcher, z_layer: u8) {
+            assert(world.is_owner(self.selector().into(), get_caller_address()), 'not owner');
+
             let timestamp: u64 = starknet::get_block_info().unbox().block_timestamp;
 
             let mut y: u8 = 0;
@@ -171,7 +171,7 @@ pub mod actions {
                     let mut data: u128 = 42846909754239046452576930880831620; // 10 DeepStone
                     if z_layer > 1 {
                         data = 169440052209945320062463317574197770
-                    }; // 10 Deepstone 
+                    }; // 10 Deepstone
                     let rnd_value: u128 = (seed_rnd.into() + x.into() * 100049) % 10;
                     let shift = fast_power_2(rnd_value * 12);
                     let block: u128 = match z_layer {
@@ -191,4 +191,3 @@ pub mod actions {
         }
     }
 }
-

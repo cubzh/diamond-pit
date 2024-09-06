@@ -189,26 +189,6 @@
       },
       {
         "type": "function",
-        "name": "inspect_block",
-        "inputs": [
-          {
-            "name": "x",
-            "type": "core::integer::u8"
-          },
-          {
-            "name": "y",
-            "type": "core::integer::u8"
-          },
-          {
-            "name": "z",
-            "type": "core::integer::u8"
-          }
-        ],
-        "outputs": [],
-        "state_mutability": "external"
-      },
-      {
-        "type": "function",
         "name": "generate_world",
         "inputs": [
           {
@@ -237,6 +217,18 @@
         "type": "function",
         "name": "upgrade_pickaxe",
         "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "set_username",
+        "inputs": [
+          {
+            "name": "name",
+            "type": "core::felt252"
+          }
+        ],
         "outputs": [],
         "state_mutability": "external"
       }

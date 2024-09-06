@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0x70c3e42817e21cd81aab9674860ce73f19bed83f82bec7f31ba7b154d4cb621"
-original_class_hash = "0x70c3e42817e21cd81aab9674860ce73f19bed83f82bec7f31ba7b154d4cb621"
+class_hash = "0xe615c3b06e36ab577e3419fbf8c7cdab6f50d8097dfeab9aa1a9735b437836"
+original_class_hash = "0xe615c3b06e36ab577e3419fbf8c7cdab6f50d8097dfeab9aa1a9735b437836"
 abi = "manifests/dev/base/abis/models/diamond_pit-PlayerStats-20bc78b8.json"
 tag = "diamond_pit-PlayerStats"
 manifest_name = "diamond_pit-PlayerStats-20bc78b8"
@@ -9,6 +9,11 @@ manifest_name = "diamond_pit-PlayerStats-20bc78b8"
 name = "player"
 type = "ContractAddress"
 key = true
+
+[[members]]
+name = "name"
+type = "felt252"
+key = false
 
 [[members]]
 name = "backpack_level"

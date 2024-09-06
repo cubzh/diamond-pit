@@ -1251,8 +1251,8 @@
     {
       "kind": "DojoContract",
       "address": "0x2c24de1c529a154eac885b0b34e8bf1b04f4ce0845b91d1a4fc9aea8c9d71ed",
-      "class_hash": "0x47a778bc6d5f2b5ac5b6846594f5d4736f3dec610ddb366973dc021948c3bfe",
-      "original_class_hash": "0x47a778bc6d5f2b5ac5b6846594f5d4736f3dec610ddb366973dc021948c3bfe",
+      "class_hash": "0x4a3871a24d4d2b0990492b73d87a31b64758ea6ea412efd6c9b59ce102e0cb7",
+      "original_class_hash": "0x4a3871a24d4d2b0990492b73d87a31b64758ea6ea412efd6c9b59ce102e0cb7",
       "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
       "abi": [
         {
@@ -1445,26 +1445,6 @@
             },
             {
               "type": "function",
-              "name": "inspect_block",
-              "inputs": [
-                {
-                  "name": "x",
-                  "type": "core::integer::u8"
-                },
-                {
-                  "name": "y",
-                  "type": "core::integer::u8"
-                },
-                {
-                  "name": "z",
-                  "type": "core::integer::u8"
-                }
-              ],
-              "outputs": [],
-              "state_mutability": "external"
-            },
-            {
-              "type": "function",
               "name": "generate_world",
               "inputs": [
                 {
@@ -1493,6 +1473,18 @@
               "type": "function",
               "name": "upgrade_pickaxe",
               "inputs": [],
+              "outputs": [],
+              "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "set_username",
+              "inputs": [
+                {
+                  "name": "name",
+                  "type": "core::felt252"
+                }
+              ],
               "outputs": [],
               "state_mutability": "external"
             }
@@ -1588,7 +1580,7 @@
         "sell_all",
         "upgrade_pickaxe",
         "upgrade_backpack",
-        "inspect_block",
+        "set_username",
         "generate_world"
       ],
       "manifest_name": "diamond_pit-actions-3fc18067"
@@ -3389,6 +3381,11 @@
           "key": true
         },
         {
+          "name": "name",
+          "type": "felt252",
+          "key": false
+        },
+        {
           "name": "backpack_level",
           "type": "u8",
           "key": false
@@ -3404,8 +3401,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x70c3e42817e21cd81aab9674860ce73f19bed83f82bec7f31ba7b154d4cb621",
-      "original_class_hash": "0x70c3e42817e21cd81aab9674860ce73f19bed83f82bec7f31ba7b154d4cb621",
+      "class_hash": "0xe615c3b06e36ab577e3419fbf8c7cdab6f50d8097dfeab9aa1a9735b437836",
+      "original_class_hash": "0xe615c3b06e36ab577e3419fbf8c7cdab6f50d8097dfeab9aa1a9735b437836",
       "abi": [
         {
           "type": "impl",
@@ -3781,6 +3778,10 @@
             {
               "name": "player",
               "type": "core::starknet::contract_address::ContractAddress"
+            },
+            {
+              "name": "name",
+              "type": "core::felt252"
             },
             {
               "name": "backpack_level",

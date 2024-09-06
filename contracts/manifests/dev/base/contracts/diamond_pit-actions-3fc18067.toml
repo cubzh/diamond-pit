@@ -1,6 +1,6 @@
 kind = "DojoContract"
-class_hash = "0x47a778bc6d5f2b5ac5b6846594f5d4736f3dec610ddb366973dc021948c3bfe"
-original_class_hash = "0x47a778bc6d5f2b5ac5b6846594f5d4736f3dec610ddb366973dc021948c3bfe"
+class_hash = "0x4a3871a24d4d2b0990492b73d87a31b64758ea6ea412efd6c9b59ce102e0cb7"
+original_class_hash = "0x4a3871a24d4d2b0990492b73d87a31b64758ea6ea412efd6c9b59ce102e0cb7"
 base_class_hash = "0x0"
 abi = "manifests/dev/base/abis/contracts/diamond_pit-actions-3fc18067.json"
 reads = []
@@ -13,7 +13,7 @@ systems = [
     "sell_all",
     "upgrade_pickaxe",
     "upgrade_backpack",
-    "inspect_block",
+    "set_username",
     "generate_world",
 ]
 manifest_name = "diamond_pit-actions-3fc18067"

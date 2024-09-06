@@ -780,6 +780,7 @@ Client.OnStart = function()
 end
 
 Client.OnChat = function(payload)
+    dojo.actions.set_username(payload.message)
     return true -- consumed
 end
 
@@ -1097,6 +1098,16 @@ function bytes_to_hex(data)
     return hex
 end
 
+function stringToHex(input)
+    -- Ensure the input is no longer than 11 characters
+    input = string.sub(input, 1, 11)
+    local result = "0x"
+    for i = 1, #input do
+        result = result .. string.format("%02X", string.byte(input:sub(i, i)))
+    end
+    return result
+end
+
 function number_to_hexstr(number)
     return "0x" .. string.format("%x", number)
 end
@@ -1151,6 +1162,16 @@ dojo.actions = {
             print("Calling upgrade_backpack")
         end
         dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "upgrade_backpack", "[]")
+    end,
+    set_username = function(username)
+        if not dojo.toriiClient then
+            return
+        end
+        if VERBOSE then
+            print("Calling set_username")
+        end
+        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "set_username",
+            string.format("[%s]", stringToHex(username)))
     end,
     upgrade_pickaxe = function()
         if not dojo.toriiClient then

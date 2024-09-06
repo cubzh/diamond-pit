@@ -5,6 +5,7 @@ use starknet::ContractAddress;
 pub struct PlayerStats {
     #[key]
     player: ContractAddress,
+    pub name: felt252,
     pub backpack_level: u8,
     pub pickaxe_level: u8,
     pub rebirth: u16,

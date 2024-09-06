@@ -375,6 +375,10 @@
         "type": "core::starknet::contract_address::ContractAddress"
       },
       {
+        "name": "name",
+        "type": "core::felt252"
+      },
+      {
         "name": "backpack_level",
         "type": "core::integer::u8"
       },
