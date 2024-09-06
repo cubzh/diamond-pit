@@ -168,7 +168,7 @@ pub mod actions {
                     if x >= 10 {
                         break;
                     }
-                    let mut data: u128 = 42846909754239046452576930880831620; // 10 Stone
+                    let mut data: u128 = 42846909754239046452576930880831620; // 10 DeepStone
                     if z_layer > 1 {
                         data = 169440052209945320062463317574197770
                     }; // 10 Deepstone 
