@@ -1099,7 +1099,7 @@ function bytes_to_hex(data)
     return hex
 end
 
-function stringToHex(input)
+function string_to_hex(input)
     -- Ensure the input is no longer than 11 characters
     input = string.sub(input, 1, 11)
     local result = "0x"
@@ -1171,8 +1171,9 @@ dojo.actions = {
         if VERBOSE then
             print("Calling set_username")
         end
+        print("info", dojo.burnerAccount, dojo.config.actions)
         dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "set_username",
-            string.format("[\"%s\"]", stringToHex(username)))
+            string.format("[\"%s\"]", string_to_hex(username)))
     end,
     upgrade_pickaxe = function()
         if not dojo.toriiClient then
