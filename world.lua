@@ -1171,7 +1171,6 @@ dojo.actions = {
         if VERBOSE then
             print("Calling set_username")
         end
-        print("info", dojo.burnerAccount, dojo.config.actions)
         dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "set_username",
             string.format("[\"%s\"]", string_to_hex(username)))
     end,
