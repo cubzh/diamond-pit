@@ -1012,8 +1012,8 @@ dojo.createToriiClient = function(self, config)
 				config.onConnect(dojo.toriiClient)
 			end)
 		else
-			print("Found burner!", JSON:Encode(burners[1]))
 			local lastBurner = burners[1]
+			print("Found burner!", lastBurner.publicKey, lastBurner.privateKey)
 			self.toriiClient:CreateAccount(lastBurner.publicKey, lastBurner.privateKey, function(success, burnerAccount)
 				if not success then
 					error("Can't create burner")
