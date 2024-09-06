@@ -1004,25 +1004,25 @@ dojo.createToriiClient = function(self, config)
 			print("Connection failed")
 			return
 		end
-		-- local json = dojo.toriiClient:GetBurners()
-		-- print("LUA GET BURNERS", json)
-		-- local burners = json.burners
-		-- if not burners then
-		self:getOrCreateBurner(config, function()
-			config.onConnect(dojo.toriiClient)
-		end)
-		-- else
-		-- 	print("Found burner!", JSON:Encode(burners[1]))
-		-- 	local lastBurner = burners[1]
-		-- 	self.toriiClient:CreateAccount(lastBurner.publicKey, lastBurner.privateKey, function(success, burnerAccount)
-		-- 		if not success then
-		-- 			error("Can't create burner")
-		-- 			return
-		-- 		end
-		-- 		dojo.burnerAccount = burnerAccount
-		-- 		cb()
-		-- 	end)
-		-- end
+		local json = dojo.toriiClient:GetBurners()
+		print("LUA GET BURNERS", JSON:Encode(json))
+		local burners = json.burners
+		if not burners then
+			self:getOrCreateBurner(config, function()
+				config.onConnect(dojo.toriiClient)
+			end)
+		else
+			print("Found burner!", JSON:Encode(burners[1]))
+			local lastBurner = burners[1]
+			self.toriiClient:CreateAccount(lastBurner.publicKey, lastBurner.privateKey, function(success, burnerAccount)
+				if not success then
+					error("Can't create burner")
+					return
+				end
+				dojo.burnerAccount = burnerAccount
+				cb()
+			end)
+		end
 	end
 	dojo.toriiClient:Connect()
 end
