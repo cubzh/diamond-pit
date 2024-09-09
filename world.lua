@@ -266,8 +266,9 @@ blocksModule.addChips = function(block, color)
     local chips = MutableShape()
     chips:SetParent(World)
     chips.Position = block.Position
-    chips:AddBlock(Color.Green, 0, 0, 0)
-    chips.Scale = 25
+    chips:AddBlock(Color(255, 0, 0, 0.1), 0, 0, 0)
+    chips.Physics = PhysicsMode.Disabled
+    chips.Scale = 20
 
     blocksModule.chips[block.Coords.Z] = blocksModule.chips[block.Coords.Z] or {}
     blocksModule.chips[block.Coords.Z][block.Coords.Y] = blocksModule.chips[block.Coords.Z][block.Coords.Y] or {}
@@ -285,7 +286,7 @@ blocksModule.setBlockHP = function(self, block, hp, maxHP)
     end
 
     local percentage = hp / maxHP
-    chips.Scale = 25 + percentage * 3
+    chips.Scale = 20 + percentage * 3
 end
 
 blocksModule.start = function(self)
