@@ -590,9 +590,8 @@ updateLeaderboard = function(_, entry)
             local name = string.sub(coinsCollected.player.value, 1, 8)
             print(">>>>> name", name)
             if playersStats[coinsCollected.player.value] then
-                print(">>>>> real name", playersStats[coinsCollected.player.value].name.value)
+                name = hex_to_string(playersStats[coinsCollected.player.value].name.value)
             end
-            -- if playersStats[coinsCollected.player.value] and playersStats[coinsCollected.player.value].name.value ~= "0x0" then
 
             -- if coinsCollected.player.value == dojo.burnerAccount.Address then
             --     name = " > you <"
@@ -1106,6 +1105,13 @@ function bytes_to_hex(data)
         hex = hex .. string.format("%02x", data[i])
     end
     return hex
+end
+
+function hex_to_string(hex)
+    hex = hex:gsub("^0x", "") -- Remove "0x" prefix if present
+    return (hex:gsub("..", function(cc)
+        return string.char(tonumber(cc, 16))
+    end))
 end
 
 function string_to_hex(input)
