@@ -556,22 +556,22 @@ local function createLeaderboardQuad(position, rotation, title)
     local titleText = Text()
     titleText.Text = title
     titleText:SetParent(quad)
-    titleText.FontSize = 5
+    titleText.FontSize = 3.5
     titleText.Type = TextType.World
     titleText.IsUnlit = true
     titleText.Color = Color.Black
     titleText.Anchor = { 0.5, 1 }
-    titleText.LocalPosition = { 0, 60, -1 }
+    titleText.LocalPosition = { 0, 45, -1 }
 
     local contentText = Text()
     contentText.Text = "loading..."
     contentText:SetParent(quad)
-    contentText.FontSize = 4
+    contentText.FontSize = 2.5
     contentText.Type = TextType.World
     contentText.IsUnlit = true
     contentText.Color = Color.Black
     contentText.Anchor = { 0.5, 1 }
-    contentText.LocalPosition = { 0, 55, -1 }
+    contentText.LocalPosition = { 0, 40, -1 }
 
     return contentText
 end
