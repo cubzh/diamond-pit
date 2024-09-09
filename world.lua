@@ -834,6 +834,22 @@ Client.Tick = function(dt)
                         return
                     end
                     local block = impact.Block
+                    if block.Coords.Y == -50 then
+                        local text = Text()
+                        text.Text = "You reached the bottom of the pit"
+                        text:SetParent(World)
+                        text.FontSize = 20
+                        text.Type = TextType.Screen
+                        text.IsUnlit = true
+                        text.Color = Color.Black
+                        text.Anchor = { 0.5, 0.4 }
+                        local impactPos = Camera.Position + Camera.Forward * impact.Distance
+                        text.LocalPosition = impactPos
+                        Timer(4, function()
+                            text:RemoveFromParent()
+                        end)
+                        return
+                    end
                     Player:SwingRight()
                     local impactPos = Camera.Position + Camera.Forward * impact.Distance
                     emitter.Position = impactPos
