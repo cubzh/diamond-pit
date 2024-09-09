@@ -566,7 +566,7 @@ initLeaderboard = function()
 end
 
 local leaderboardEntries = {}
-local function updateLeaderboard(entries, textObject, valueField, title)
+local function updateIndividualLeaderboard(entries, textObject, valueField, title)
     local list = {}
     for _, elem in pairs(entries) do
         table.insert(list, elem)
@@ -615,9 +615,11 @@ updateLeaderboard = function(_, entry)
     end
     leaderboardEntries[entry.player.value] = entry
 
-    updateLeaderboard(leaderboardEntries, leaderboardTextCoins, "nb_coins_collected", "Top 10 Daily - Coins Collected -")
-    updateLeaderboard(leaderboardEntries, leaderboardTextHits, "nb_hits", "Top 10 Daily - Block Hits -")
-    updateLeaderboard(leaderboardEntries, leaderboardTextBlocks, "nb_blocks_broken", "Top 10 Daily - Blocks Mined -")
+    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextCoins, "nb_coins_collected",
+        "Top 10 Daily - Coins Collected -")
+    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextHits, "nb_hits", "Top 10 Daily - Block Hits -")
+    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextBlocks, "nb_blocks_broken",
+        "Top 10 Daily - Blocks Mined -")
 end
 
 local inventoryNode
