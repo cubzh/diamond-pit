@@ -316,6 +316,10 @@ updatePlayerStats = function(key, stats)
         return
     end
 
+    if textInputUsername then
+        textInputUsername.Text = stats.name.value
+    end
+
     local backpackLevel = stats.backpack_level.value
     if BACKPACK_MAX_SLOTS[backpackLevel] > maxSlots then
         maxSlots = BACKPACK_MAX_SLOTS[backpackLevel]
@@ -436,6 +440,7 @@ initMenu = function(callbackOnStart)
         dojo.actions.set_username(name)
         bg:remove()
         Pointer:Hide()
+        textInputUsername = nil
         callbackOnStart()
     end
 
