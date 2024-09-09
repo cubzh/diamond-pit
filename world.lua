@@ -272,7 +272,7 @@ blocksModule.addChips = function(block, color)
 
     blocksModule.chips[block.Coords.Z] = blocksModule.chips[block.Coords.Z] or {}
     blocksModule.chips[block.Coords.Z][block.Coords.Y] = blocksModule.chips[block.Coords.Z][block.Coords.Y] or {}
-    blocksModule.chips[block.Coords.Z][block.Coords.Y][block.Coords.Z] = chips
+    blocksModule.chips[block.Coords.Z][block.Coords.Y][block.Coords.X] = chips
 end
 
 blocksModule.setBlockHP = function(self, block, hp, maxHP)
