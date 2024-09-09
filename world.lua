@@ -404,10 +404,9 @@ initMenu = function(callbackOnStart)
         if #name > 11 then
             name = string.sub(name, 1, 11)
         end
-        dojo.actions.set_username(name)
-        bg:remove()
-        Pointer:Hide()
-        callbackOnStart()
+        if #name > 0 then
+            dojo.actions.set_username(name)
+        end
     end
     local setUsernameBlock = ui_blocks:createLineContainer({
         dir = "horizontal",
@@ -424,6 +423,7 @@ initMenu = function(callbackOnStart)
         if #name > 11 then
             name = string.sub(name, 1, 11)
         end
+        if #name < 0 then return end
         dojo.actions.set_username(name)
         bg:remove()
         Pointer:Hide()
@@ -1021,7 +1021,6 @@ dojo.getOrCreateBurner = function(self, config, cb)
                 return
             end
             dojo.burnerAccount = burnerAccount
-            textInputUsername.Text = string.sub(burnerAccount.Address, 1, 8)
             cb()
         end
     )
