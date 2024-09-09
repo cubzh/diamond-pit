@@ -285,41 +285,21 @@ blocksModule.addChips = function(block, color)
     local function randomFacePosition()
         return math.random(-4, 4), math.random(-4, 4)
     end
+    local faces = {
+        { 1, 2, 3 }, { 1, 2, 3 }, { 2, 3, 1 }, { 2, 3, 1 }, { 1, 3, 2 }, { 1, 3, 2 }
+    }
 
-    -- Front face (3 chips)
-    for i = 1, 3 do
-        local x, y = randomFacePosition()
-        chips:AddBlock(NUGGETS_COLOR[blockType], x, y, -5)
-    end
+    local positions = { -5, 5, -5, 5, 5, -5 }
 
-    -- Back face (3 chips)
-    for i = 1, 3 do
-        local x, y = randomFacePosition()
-        chips:AddBlock(NUGGETS_COLOR[blockType], x, y, 5)
-    end
-
-    -- Left face (3 chips)
-    for i = 1, 3 do
-        local y, z = randomFacePosition()
-        chips:AddBlock(NUGGETS_COLOR[blockType], -5, y, z)
-    end
-
-    -- Right face (3 chips)
-    for i = 1, 3 do
-        local y, z = randomFacePosition()
-        chips:AddBlock(NUGGETS_COLOR[blockType], 5, y, z)
-    end
-
-    -- Top face (3 chips)
-    for i = 1, 3 do
-        local x, z = randomFacePosition()
-        chips:AddBlock(NUGGETS_COLOR[blockType], x, 5, z)
-    end
-
-    -- Bottom face (3 chips)
-    for i = 1, 3 do
-        local x, z = randomFacePosition()
-        chips:AddBlock(NUGGETS_COLOR[blockType], x, -5, z)
+    for f = 1, 6 do
+        for _ = 1, 3 do
+            local a, b = randomFacePosition()
+            local x, y, z = 0, 0, 0
+            x, y, z = faces[f][1] == 1 and a or x,
+                faces[f][2] == 2 and b or y,
+                faces[f][3] == 3 and positions[f] or z
+            chips:AddBlock(NUGGETS_COLOR[blockType], x, y, z)
+        end
     end
     chips.Physics = PhysicsMode.Disabled
     chips.Pivot = Number3(0.5, 0.5, 0.5)
