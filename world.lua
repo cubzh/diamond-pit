@@ -400,10 +400,11 @@ initMenu = function(callbackOnStart)
 
     local bgBlock = ui:createFrame(Color(0, 0, 0, 0))
     bgBlock.parentDidResize = function()
-        bgBlock.Width = Screen.Width * 0.5 - 16
-        bgBlock.Height = Screen.Height * 0.2 - 16
-        bgBlock.pos = { Screen.Width * 0.5 - bgBlock.Width * 0.5, Screen.Height * 0.5 - bgBlock.Height * 0.5 }
+        bgBlock.Width = bg.Width - 16
+        bgBlock.Height = bg.Height - 16
+        bgBlock.pos = { 8, 8 }
     end
+    bgBlock:setParent(bg)
     bgBlock:parentDidResize()
 
     textInputUsername = ui:createTextInput("")
