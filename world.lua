@@ -390,13 +390,21 @@ end
 
 initMenu = function(callbackOnStart)
     local ui = require("uikit")
-    local bg = ui:createFrame(Color.Black)
+    local bg = ui:createFrame(Color(0.5, 0.5, 0.5))
     bg.parentDidResize = function()
         bg.Width = Screen.Width * 0.5
-        bg.Height = Screen.Height * 0.5
-        bg.pos = { Screen.Width * 0.25, Screen.Height * 0.25 }
+        bg.Height = Screen.Height * 0.2
+        bg.pos = { Screen.Width * 0.5 - bg.Width * 0.5, Screen.Height * 0.5 - bg.Height * 0.5 }
     end
     bg:parentDidResize()
+
+    local bgBlock = ui:createFrame(Color(0, 0, 0, 0))
+    bgBlock.parentDidResize = function()
+        bgBlock.Width = Screen.Width * 0.5 - 8
+        bgBlock.Height = Screen.Height * 0.2 - 8
+        bgBlock.pos = { Screen.Width * 0.5 - bgBlock.Width * 0.5, Screen.Height * 0.5 - bgBlock.Height * 0.5 }
+    end
+    bgBlock:parentDidResize()
 
     textInputUsername = ui:createTextInput("")
     textInputUsername.onSubmit = function()
@@ -439,7 +447,7 @@ initMenu = function(callbackOnStart)
             bottom = playBtn,
         },
     })
-    titleScreen:setParent(bg)
+    titleScreen:setParent(bgBlock)
 
     Pointer:Show()
 end
