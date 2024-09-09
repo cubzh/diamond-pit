@@ -265,7 +265,7 @@ blocksModule.addChips = function(block, color)
 
     local chips = MutableShape()
     chips:SetParent(World)
-    chips.Position = b.Position
+    chips.Position = block.Position
     chips:AddBlock(Color.Green, 0, 0, 0)
     chips.Scale = 3
 
