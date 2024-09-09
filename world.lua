@@ -412,6 +412,9 @@ initMenu = function(callbackOnStart)
     bgBlock:parentDidResize()
 
     textInputUsername = ui:createTextInput("")
+    textInputUsername.onFocus = function()
+        textInputUsername.Text = ""
+    end
     textInputUsername.onSubmit = function()
         local name = textInputUsername.Text
         if #name > 11 then
