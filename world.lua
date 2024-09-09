@@ -405,9 +405,11 @@ initMenu = function()
     loadingText:parentDidResize()
 
     local listener
+    Pointer:Show()
     listener = LocalEvent:Listen(LocalEvent.Name.PointerUp, function()
         bg:remove()
         listener:Remove()
+        Pointer:Hide()
     end)
 end
 
