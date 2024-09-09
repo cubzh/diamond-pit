@@ -588,11 +588,11 @@ end
 
 function initLeaderboard()
     leaderboardTextBlocks, leaderboardTextBlocksScore = createLeaderboardQuad({ 150, 0, 100 }, math.pi * 1.4,
-        "Top 10 Daily\n- Blocks Mined -")
+        "Daily Leaderboard\n- Blocks Mined -")
     leaderboardTextHits, leaderboardTextHitsScore = createLeaderboardQuad({ 130, 0, 150 }, math.pi * 1.5,
-        "Top 10 Daily\n- Block Hits -")
+        "Daily Leaderboard\n- Block Hits -")
     leaderboardTextCoins, leaderboardTextCoinsScore = createLeaderboardQuad({ 150, 0, 200 }, math.pi * 1.6,
-        "Top 10 Daily\n- Coins Earned -")
+        "Daily Leaderboard\n- Coins Earned -")
 end
 
 local leaderboardEntries = {}
