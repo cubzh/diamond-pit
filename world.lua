@@ -161,6 +161,16 @@ local BLOCK_COLORS = {
     Color(112, 209, 244), -- diamond
 }
 
+local NUGGETS_COLOR = {
+    nil,                  -- stone [1]
+    Color.DarkGrey,       -- coal
+    Color(195, 90, 19),   -- copper
+    nil,                  -- deepstone
+    Color(206, 206, 206), -- iron
+    Color(246, 206, 46),  -- gold
+    Color(54, 142, 244),  -- diamond
+}
+
 local BLOCKS_MAX_HP = { 4, 10, 25, 10, 40, 80, 125 }
 
 generate_map = function()
@@ -261,13 +271,25 @@ blocksModule.checkNeighborsAndAddChips = function(_, x, y, z)
 end
 
 blocksModule.addChips = function(block, color)
+    local blockType
+    for k, v in pairs(BLOCK_COLORS) do
+        if v == color then
+            blockType = k
+            break
+        end
+    end
     local chips = MutableShape()
     chips:SetParent(World)
     chips.Position = block.Position + Number3(10, 10, 10)
-    chips:AddBlock(Color(255, 0, 0, 0.1), 0, 0, 0)
+    chips:AddBlock(NUGGETS_COLOR[blockType], 0, 0, -5) -- Front face
+    chips:AddBlock(NUGGETS_COLOR[blockType], 0, 0, 5)  -- Back face
+    chips:AddBlock(NUGGETS_COLOR[blockType], -5, 0, 0) -- Left face
+    chips:AddBlock(NUGGETS_COLOR[blockType], 5, 0, 0)  -- Right face
+    chips:AddBlock(NUGGETS_COLOR[blockType], 0, 5, 0)  -- Top face
+    chips:AddBlock(NUGGETS_COLOR[blockType], 0, -5, 0) -- Bottom face
     chips.Physics = PhysicsMode.Disabled
     chips.Pivot = Number3(0.5, 0.5, 0.5)
-    chips.Scale = 20
+    chips.Scale = 2
 
     blocksModule.chips[block.Coords.Z] = blocksModule.chips[block.Coords.Z] or {}
     blocksModule.chips[block.Coords.Z][block.Coords.Y] = blocksModule.chips[block.Coords.Z][block.Coords.Y] or {}
@@ -285,7 +307,7 @@ blocksModule.setBlockHP = function(self, block, hp, maxHP)
     end
 
     local percentage = 1 - (hp / maxHP)
-    chips.Scale = 20 + percentage * 3
+    chips.Scale = 2 + percentage * 4
 end
 
 blocksModule.start = function(self)
