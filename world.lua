@@ -439,9 +439,7 @@ initMenu = function(callbackOnStart)
         if #name < 0 then return end
         dojo.actions.set_username(name)
         bg:remove()
-        Timer(3, function()
-            Pointer:Hide()
-        end)
+        Pointer:Hide()
         textInputUsername = nil
         callbackOnStart()
     end
@@ -543,98 +541,45 @@ initUpgradeAreas = function()
     end)
     backpackNextText = text
 end
+local leaderboardTextBlocks, leaderboardTextHits, leaderboardTextCoins
 
-local leaderboardTextBlocks
-local leaderboardTextHits
-local leaderboardTextCoins
-initLeaderboard = function()
+local function createLeaderboardQuad(position, rotation, title)
     local quad = Quad()
     quad.Color = Color.White
     quad.Width = 80
     quad.Height = 100
     quad:SetParent(World)
     quad.Anchor = { 0.5, 0 }
+    quad.Position = position
+    quad.Rotation.Y = rotation
 
-    local text = Text()
-    text.Text = "Top 10 Daily\n- Blocks Mined -"
-    text:SetParent(quad)
-    text.FontSize = 7
-    text.Type = TextType.World
-    text.IsUnlit = true
-    text.Color = Color.Black
-    text.Anchor = { 0.5, 1 }
-    text.LocalPosition = { 0, 95, -1 }
+    local titleText = Text()
+    titleText.Text = title
+    titleText:SetParent(quad)
+    titleText.FontSize = 7
+    titleText.Type = TextType.World
+    titleText.IsUnlit = true
+    titleText.Color = Color.Black
+    titleText.Anchor = { 0.5, 1 }
+    titleText.LocalPosition = { 0, 95, -1 }
 
-    leaderboardTextBlocks = Text()
-    leaderboardTextBlocks.Text = "loading..."
-    leaderboardTextBlocks:SetParent(quad)
-    leaderboardTextBlocks.FontSize = 6
-    leaderboardTextBlocks.Type = TextType.World
-    leaderboardTextBlocks.IsUnlit = true
-    leaderboardTextBlocks.Color = Color.Black
-    leaderboardTextBlocks.Anchor = { 0.5, 1 }
-    leaderboardTextBlocks.LocalPosition = { 0, 75, -1 }
+    local contentText = Text()
+    contentText.Text = "loading..."
+    contentText:SetParent(quad)
+    contentText.FontSize = 6
+    contentText.Type = TextType.World
+    contentText.IsUnlit = true
+    contentText.Color = Color.Black
+    contentText.Anchor = { 0.5, 1 }
+    contentText.LocalPosition = { 0, 75, -1 }
 
-    local quad2 = Quad()
-    quad2.Color = Color.White
-    quad2.Width = 80
-    quad2.Height = 100
-    quad2:SetParent(World)
-    quad2.Anchor = { 0.5, 0 }
+    return contentText
+end
 
-    local text = Text()
-    text.Text = "Top 10 Daily\n- Block Hits -"
-    text:SetParent(quad2)
-    text.FontSize = 7
-    text.Type = TextType.World
-    text.IsUnlit = true
-    text.Color = Color.Black
-    text.Anchor = { 0.5, 1 }
-    text.LocalPosition = { 0, 95, -1 }
-
-    leaderboardTextHits = Text()
-    leaderboardTextHits.Text = "loading..."
-    leaderboardTextHits:SetParent(quad2)
-    leaderboardTextHits.FontSize = 6
-    leaderboardTextHits.Type = TextType.World
-    leaderboardTextHits.IsUnlit = true
-    leaderboardTextHits.Color = Color.Black
-    leaderboardTextHits.Anchor = { 0.5, 1 }
-    leaderboardTextHits.LocalPosition = { 0, 75, -1 }
-
-    local quad3 = Quad()
-    quad3.Color = Color.White
-    quad3.Width = 80
-    quad3.Height = 100
-    quad3:SetParent(World)
-    quad3.Anchor = { 0.5, 0 }
-
-    local text = Text()
-    text.Text = "Top 10 Daily\n- Coins Earned -"
-    text:SetParent(quad3)
-    text.FontSize = 7
-    text.Type = TextType.World
-    text.IsUnlit = true
-    text.Color = Color.Black
-    text.Anchor = { 0.5, 1 }
-    text.LocalPosition = { 0, 95, -1 }
-
-    leaderboardTextCoins = Text()
-    leaderboardTextCoins.Text = "loading..."
-    leaderboardTextCoins:SetParent(quad3)
-    leaderboardTextCoins.FontSize = 6
-    leaderboardTextCoins.Type = TextType.World
-    leaderboardTextCoins.IsUnlit = true
-    leaderboardTextCoins.Color = Color.Black
-    leaderboardTextCoins.Anchor = { 0.5, 1 }
-    leaderboardTextCoins.LocalPosition = { 0, 75, -1 }
-
-    quad.Position = { 150, 0, 150 }
-    quad2.Position = { 130, 0, 300 }
-    quad3.Position = { 150, 0, 450 }
-    quad.Rotation.Y = math.pi * 1.4
-    quad2.Rotation.Y = math.pi * 1.5
-    quad3.Rotation.Y = math.pi * 1.6
+function initLeaderboard()
+    leaderboardTextBlocks = createLeaderboardQuad({ 150, 0, 150 }, math.pi * 1.4, "Top 10 Daily\n- Blocks Mined -")
+    leaderboardTextHits = createLeaderboardQuad({ 130, 0, 300 }, math.pi * 1.5, "Top 10 Daily\n- Block Hits -")
+    leaderboardTextCoins = createLeaderboardQuad({ 150, 0, 450 }, math.pi * 1.6, "Top 10 Daily\n- Coins Earned -")
 end
 
 local leaderboardEntries = {}
