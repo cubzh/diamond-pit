@@ -716,7 +716,6 @@ Client.OnStart = function()
     })
 
     blocksModule:start()
-    initPlayer()
     initLeaderboard()
     initDojo()
     initSellingArea()
@@ -725,6 +724,7 @@ Client.OnStart = function()
     initMenu(function()
         Fog.On = false
         generate_map()
+        initPlayer()
         Player:SetParent(World)
         Player.Position = Number3(250 + math.random(-25, 25), 5, 150 + math.random(-25, 25))
 
