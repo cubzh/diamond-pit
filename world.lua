@@ -398,12 +398,29 @@ initMenu = function(callbackOnStart)
     end
     bg:parentDidResize()
 
-    local loadingText = ui:createText("Loading...", Color.White, "big")
-    loadingText:setParent(bg)
-    loadingText.parentDidResize = function()
-        loadingText.pos = { Screen.Width * 0.5 - loadingText.Width * 0.5, Screen.Height * 0.5 - loadingText.Height * 0.5 }
+    textInputUsername = ui:createTextInput("")
+    textInputUsername.onSubmit = function()
+        print("input:", textInputUsername.Text)
     end
-    loadingText:parentDidResize()
+    local setUsernameBlock = ui_blocks:createLineContainer({
+        dir = "horizontal",
+        nodes = {
+            ui:createText("Username: "),
+            { type = "gap" },
+            textInputUsername,
+        }
+    })
+
+    local titleScreen = ui_blocks:createBlock({
+        triptych = {
+            dir = "vertical",
+            color = Color(0, 0, 0, 0), -- background color
+            top = ui:createText("Diamond Pit"),
+            center = ui:createText("Mine blocks, sell them, upgrade your equipment, reach the top of the leaderboard."),
+            bottom = setUsernameBlock,
+        },
+    })
+    titleScreen:setParent(bg)
 
     local listener
     Pointer:Show()
