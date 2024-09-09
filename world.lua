@@ -569,7 +569,7 @@ local function createLeaderboardQuad(position, rotation, title)
     titleText.LocalPosition = { 0, 47, -0.1 }
 
     local contentText = Text()
-    contentText.Text = "become the first entry today"
+    contentText.Text = "become the first\nentry today"
     contentText:SetParent(quad)
     contentText.FontSize = 2.5
     contentText.Type = TextType.World
