@@ -261,8 +261,6 @@ blocksModule.checkNeighborsAndAddChips = function(_, x, y, z)
 end
 
 blocksModule.addChips = function(block, color)
-    block.Color = Color.Green
-
     local chips = MutableShape()
     chips:SetParent(World)
     chips.Position = block.Position
