@@ -561,7 +561,7 @@ local function createLeaderboardQuad(position, rotation, title)
     titleText.IsUnlit = true
     titleText.Color = Color.Black
     titleText.Anchor = { 0.5, 1 }
-    titleText.LocalPosition = { 0, 47, -1 }
+    titleText.LocalPosition = { 0, 47, -0.1 }
 
     local contentText = Text()
     contentText.Text = "loading..."
@@ -571,7 +571,7 @@ local function createLeaderboardQuad(position, rotation, title)
     contentText.IsUnlit = true
     contentText.Color = Color.Black
     contentText.Anchor = { 0, 1 }
-    contentText.LocalPosition = { -13, 35, -1 }
+    contentText.LocalPosition = { -13, 35, -0.1 }
 
     local contentTextScore = Text()
     contentTextScore.Text = "loading..."
@@ -581,7 +581,7 @@ local function createLeaderboardQuad(position, rotation, title)
     contentTextScore.IsUnlit = true
     contentTextScore.Color = Color.Black
     contentTextScore.Anchor = { 1, 1 }
-    contentTextScore.LocalPosition = { 13, 35, -1 }
+    contentTextScore.LocalPosition = { 13, 35, -0.1 }
 
     return contentText, contentTextScore
 end
