@@ -230,7 +230,38 @@ generate_map = function()
     downStone.LocalPosition = { 0, -100, 0 }
 end
 
-blocksModule = {}
+blocksModule = {
+    chips = {}
+}
+
+blocksModule.checkNeighborsAndAddChips = function(_, x, y, z)
+    local directions = {
+        { 1, 0, 0 }, { -1, 0, 0 },
+        { 0, 1, 0 }, { 0, -1, 0 },
+        { 0, 0, 1 }, { 0, 0, -1 }
+    }
+
+    for _, dir in ipairs(directions) do
+        local nx, ny, nz = x + dir[1], y + dir[2], z + dir[3]
+        local neighborBlock = blocksModule.blockShape:GetBlock(nx, ny, nz)
+
+        if neighborBlock then
+            local neighborColor = neighborBlock.Color
+            if neighborColor ~= BLOCK_COLORS[1] and neighborColor ~= BLOCK_COLORS[4] then
+                for _, color in pairs(BLOCK_COLORS) do
+                    if neighborColor == color then
+                        blocksModule.addChips(neighborBlock, color)
+                    end
+                end
+            end
+        end
+    end
+end
+
+blocksModule.addChips = function(block, color)
+    block.Color = Color.Green
+end
+
 blocksModule.start = function(self)
     self.blockShape = MutableShape()
     self.blockShape.Name = "Blocks"
@@ -983,6 +1014,7 @@ function updateBlocksColumn(key, rawColumn)
         local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
         local blockColor = BLOCK_COLORS[blockType]
         if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
+            blocksModule:checkNeighborsAndAddChips(column.x, z, column.y)
             b:Remove()
         elseif b and b.Color ~= blockColor then
             b:Replace(blockColor)
