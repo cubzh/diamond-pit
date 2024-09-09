@@ -418,14 +418,25 @@ initMenu = function(callbackOnStart)
         }
     })
 
+    local playBtn = ui:createButton("Play")
+    playBtn.onRelease = function()
+        local name = textInputUsername.Text
+        if #name > 11 then
+            name = string.sub(name, 1, 11)
+        end
+        dojo.actions.set_username(name)
+        bg:remove()
+        Pointer:Hide()
+        callbackOnStart()
+    end
+
     local titleScreen = ui_blocks:createBlock({
         triptych = {
             dir = "vertical",
             color = Color(0, 0, 0, 0), -- background color
             top = ui:createText("Diamond Pit", Color.White, "big"),
-            center = ui:createText("Mine blocks, sell them,\nupgrade your equipment,\nreach the top of the leaderboard.",
-                Color.White),
-            bottom = setUsernameBlock,
+            center = setUsernameBlock,
+            bottom = playBtn,
         },
     })
     titleScreen:setParent(bg)
@@ -1010,6 +1021,7 @@ dojo.getOrCreateBurner = function(self, config, cb)
                 return
             end
             dojo.burnerAccount = burnerAccount
+            textInputUsername.Text = string.sub(burnerAccount.Address, 1, 8)
             cb()
         end
     )
