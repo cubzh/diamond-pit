@@ -246,7 +246,7 @@ blocksModule = {
     chips = {}
 }
 
-blocksModule.checkNeighborsAndAddChips = function(_, x, y, z)
+blocksModule.checkNeighborsAndAddChips = function(self, x, y, z)
     local directions = {
         { 1, 0, 0 }, { -1, 0, 0 },
         { 0, 1, 0 }, { 0, -1, 0 },
@@ -255,14 +255,14 @@ blocksModule.checkNeighborsAndAddChips = function(_, x, y, z)
 
     for _, dir in ipairs(directions) do
         local nx, ny, nz = x + dir[1], y + dir[2], z + dir[3]
-        local neighborBlock = blocksModule.blockShape:GetBlock(nx, ny, nz)
+        local neighborBlock = self.blockShape:GetBlock(nx, ny, nz)
 
         if neighborBlock then
             local neighborColor = neighborBlock.Color
             if neighborColor ~= BLOCK_COLORS[1] and neighborColor ~= BLOCK_COLORS[4] then
                 for _, color in pairs(BLOCK_COLORS) do
                     if neighborColor == color then
-                        blocksModule.addChips(neighborBlock, color)
+                        self:addChips(neighborBlock, color)
                     end
                 end
             end
@@ -270,7 +270,7 @@ blocksModule.checkNeighborsAndAddChips = function(_, x, y, z)
     end
 end
 
-blocksModule.addChips = function(block, color)
+blocksModule.addChips = function(self, block, color)
     local blockType
     for k, v in pairs(BLOCK_COLORS) do
         if v == color then
@@ -285,29 +285,49 @@ blocksModule.addChips = function(block, color)
     local function randomFacePosition()
         return math.random(-4, 4), math.random(-4, 4)
     end
-    local faces = {
-        { 1, 2, 3 }, { 1, 2, 3 }, { 2, 3, 1 }, { 2, 3, 1 }, { 1, 3, 2 }, { 1, 3, 2 }
-    }
 
-    local positions = { -5, 5, -5, 5, 5, -5 }
+    -- Front face (3 chips)
+    for i = 1, 3 do
+        local x, y = randomFacePosition()
+        chips:AddBlock(NUGGETS_COLOR[blockType], x, y, -5)
+    end
 
-    for f = 1, 6 do
-        for _ = 1, 3 do
-            local a, b = randomFacePosition()
-            local x, y, z = 0, 0, 0
-            x, y, z = faces[f][1] == 1 and a or x,
-                faces[f][2] == 2 and b or y,
-                faces[f][3] == 3 and positions[f] or z
-            chips:AddBlock(NUGGETS_COLOR[blockType], x, y, z)
-        end
+    -- Back face (3 chips)
+    for i = 1, 3 do
+        local x, y = randomFacePosition()
+        chips:AddBlock(NUGGETS_COLOR[blockType], x, y, 5)
+    end
+
+    -- Left face (3 chips)
+    for i = 1, 3 do
+        local y, z = randomFacePosition()
+        chips:AddBlock(NUGGETS_COLOR[blockType], -5, y, z)
+    end
+
+    -- Right face (3 chips)
+    for i = 1, 3 do
+        local y, z = randomFacePosition()
+        chips:AddBlock(NUGGETS_COLOR[blockType], 5, y, z)
+    end
+
+    -- Top face (3 chips)
+    for i = 1, 3 do
+        local x, z = randomFacePosition()
+        chips:AddBlock(NUGGETS_COLOR[blockType], x, 5, z)
+    end
+
+    -- Bottom face (3 chips)
+    for i = 1, 3 do
+        local x, z = randomFacePosition()
+        chips:AddBlock(NUGGETS_COLOR[blockType], x, -5, z)
     end
     chips.Physics = PhysicsMode.Disabled
     chips.Pivot = Number3(0.5, 0.5, 0.5)
     chips.Scale = 1.75
 
-    blocksModule.chips[block.Coords.Z] = blocksModule.chips[block.Coords.Z] or {}
-    blocksModule.chips[block.Coords.Z][block.Coords.Y] = blocksModule.chips[block.Coords.Z][block.Coords.Y] or {}
-    blocksModule.chips[block.Coords.Z][block.Coords.Y][block.Coords.X] = chips
+    self.chips[block.Coords.Z] = self.chips[block.Coords.Z] or {}
+    self.chips[block.Coords.Z][block.Coords.Y] = self.chips[block.Coords.Z][block.Coords.Y] or {}
+    self.chips[block.Coords.Z][block.Coords.Y][block.Coords.X] = chips
 end
 
 blocksModule.setBlockHP = function(self, block, hp, maxHP)
