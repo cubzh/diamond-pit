@@ -334,7 +334,7 @@ updatePlayerStats = function(key, stats)
     end
 
     local pickaxeLevel = stats.pickaxe_level.value
-    if PICKAXE_STRENGTHS[pickaxeLevel] > pickaxeStrength then
+    if LEVEL_COLOR[pickaxeLevel] and PICKAXE_STRENGTHS[pickaxeLevel] > pickaxeStrength then
         pickaxeStrength = PICKAXE_STRENGTHS[pickaxeLevel]
         sfx("metal_clanging_1", { Spatialized = false, Volume = 0.6 })
         Player.pickaxe.Palette[8].Color = LEVEL_COLOR[pickaxeLevel]
