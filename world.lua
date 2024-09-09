@@ -570,20 +570,33 @@ local function createLeaderboardQuad(position, rotation, title)
     contentText.Type = TextType.World
     contentText.IsUnlit = true
     contentText.Color = Color.Black
-    contentText.Anchor = { 0.5, 1 }
-    contentText.LocalPosition = { 0, 35, -1 }
+    contentText.Anchor = { 0, 1 }
+    contentText.LocalPosition = { -13, 35, -1 }
 
-    return contentText
+    local contentTextScore = Text()
+    contentTextScore.Text = "loading..."
+    contentTextScore:SetParent(quad)
+    contentTextScore.FontSize = 2.5
+    contentTextScore.Type = TextType.World
+    contentTextScore.IsUnlit = true
+    contentTextScore.Color = Color.Black
+    contentTextScore.Anchor = { 1, 1 }
+    contentTextScore.LocalPosition = { 13, 35, -1 }
+
+    return contentText, contentTextScore
 end
 
 function initLeaderboard()
-    leaderboardTextBlocks = createLeaderboardQuad({ 150, 0, 100 }, math.pi * 1.4, "Top 10 Daily\n- Blocks Mined -")
-    leaderboardTextHits = createLeaderboardQuad({ 130, 0, 150 }, math.pi * 1.5, "Top 10 Daily\n- Block Hits -")
-    leaderboardTextCoins = createLeaderboardQuad({ 150, 0, 200 }, math.pi * 1.6, "Top 10 Daily\n- Coins Earned -")
+    leaderboardTextBlocks, leaderboardTextBlocksScore = createLeaderboardQuad({ 150, 0, 100 }, math.pi * 1.4,
+        "Top 10 Daily\n- Blocks Mined -")
+    leaderboardTextHits, leaderboardTextHitsScore = createLeaderboardQuad({ 130, 0, 150 }, math.pi * 1.5,
+        "Top 10 Daily\n- Block Hits -")
+    leaderboardTextCoins, leaderboardTextCoinsScore = createLeaderboardQuad({ 150, 0, 200 }, math.pi * 1.6,
+        "Top 10 Daily\n- Coins Earned -")
 end
 
 local leaderboardEntries = {}
-local function updateIndividualLeaderboard(entries, textObject, valueField, title)
+local function updateIndividualLeaderboard(entries, textObject, textScoreObject, valueField)
     local list = {}
     for _, elem in pairs(entries) do
         table.insert(list, elem)
@@ -595,6 +608,7 @@ local function updateIndividualLeaderboard(entries, textObject, valueField, titl
     end)
 
     local text = ""
+    local textScore = ""
     local hasLocalPlayer = false
 
     for i = 1, 10 do
@@ -609,7 +623,8 @@ local function updateIndividualLeaderboard(entries, textObject, valueField, titl
                 playersStats[entry.player.value] and hex_to_string(playersStats[entry.player.value].name.value) or "you")
             hasLocalPlayer = true
         end
-        text = text .. string.format("%s: %d\n", name, entry[valueField].value)
+        text = text .. string.format("%s\n", name)
+        textScore = textScore .. string.format("%d\n", entry[valueField].value)
     end
 
     if not hasLocalPlayer then
@@ -618,11 +633,13 @@ local function updateIndividualLeaderboard(entries, textObject, valueField, titl
             local name = playersStats[localEntry.player.value]
                 and hex_to_string(playersStats[localEntry.player.value].name.value)
                 or "you"
-            text = text .. string.format("> %s: %d\n", name, localEntry[valueField].value)
+            text = text .. string.format("%s\n", name)
+            textScore = textScore .. string.format("%d\n", localEntry[valueField].value)
         end
     end
 
     textObject.Text = text
+    textScoreObject.Text = textScore
 end
 
 -- Then in your updateLeaderboard function:
@@ -632,9 +649,9 @@ updateLeaderboard = function(_, entry)
     end
     leaderboardEntries[entry.player.value] = entry
 
-    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextCoins, "nb_coins_collected")
-    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextHits, "nb_hits")
-    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextBlocks, "nb_blocks_broken")
+    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextCoins, leaderboardTextCoinsScore, "nb_coins_collected")
+    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextHits, leaderboardTextHitsScore, "nb_hits")
+    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextBlocks, leaderboardTextBlocksScore, "nb_blocks_broken")
 end
 
 local inventoryNode
