@@ -160,6 +160,7 @@ blockColors = {
     Color.White,          -- iron
     Color.Yellow,         -- gold
     Color(112, 209, 244), -- diamond
+    Color(112, 209, 244), -- diamond
 }
 
 generate_map = function()
