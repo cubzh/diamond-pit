@@ -954,9 +954,9 @@ function updateBlocksColumn(key, rawColumn)
         },
     }
 
+    print("column info", column.x, column.y, column.z_layer, column.data.raw)
     for k = 0, 9 do
         local blockInfo = column.data:getBlock(k)
-        print("block info", column.x, column.y, column.z_layer + k, column.data.raw)
         local blockType = blockInfo >> 7
         local blockHp = blockInfo & 127
         local z = -(column.z_layer * 10 + k)
