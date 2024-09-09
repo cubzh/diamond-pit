@@ -590,7 +590,7 @@ updateLeaderboard = function(_, entry)
             local name = string.sub(coinsCollected.player.value, 1, 8)
             print(">>>>> name", name)
             if playersStats[coinsCollected.player.value] then
-                print(">>>>> real name", playersStats[coinsCollected.player.value].name)
+                print(">>>>> real name", playersStats[coinsCollected.player.value].name.value)
             end
             -- if playersStats[coinsCollected.player.value] and playersStats[coinsCollected.player.value].name.value ~= "0x0" then
 
