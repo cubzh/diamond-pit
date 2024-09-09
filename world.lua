@@ -400,7 +400,14 @@ initMenu = function(callbackOnStart)
 
     textInputUsername = ui:createTextInput("")
     textInputUsername.onSubmit = function()
-        print("input:", textInputUsername.Text)
+        local name = textInputUsername.Text
+        if #name > 11 then
+            name = string.sub(name, 1, 11)
+        end
+        dojo.actions.set_username(name)
+        bg:remove()
+        Pointer:Hide()
+        callbackOnStart()
     end
     local setUsernameBlock = ui_blocks:createLineContainer({
         dir = "horizontal",
@@ -423,14 +430,7 @@ initMenu = function(callbackOnStart)
     })
     titleScreen:setParent(bg)
 
-    local listener
     Pointer:Show()
-    listener = LocalEvent:Listen(LocalEvent.Name.PointerUp, function()
-        bg:remove()
-        listener:Remove()
-        Pointer:Hide()
-        callbackOnStart()
-    end)
 end
 
 initUpgradeAreas = function()
