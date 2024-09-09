@@ -283,7 +283,7 @@ blocksModule.addChips = function(block, color)
     chips.Position = block.Position + Number3(10, 10, 10)
 
     local function randomFacePosition()
-        return math.random(-5, 5), math.random(-5, 5)
+        return math.random(-4, 4), math.random(-4, 4)
     end
 
     -- Front face (3 chips)
