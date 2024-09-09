@@ -394,7 +394,7 @@ initMenu = function(callbackOnStart)
     bg.parentDidResize = function()
         bg.Width = Screen.Width * 0.5
         bg.Height = Screen.Height * 0.5
-        bg.pos = { Screen.Width * 0.25, Screen.Height * 0.5 }
+        bg.pos = { Screen.Width * 0.25, Screen.Height * 0.25 }
     end
     bg:parentDidResize()
 
