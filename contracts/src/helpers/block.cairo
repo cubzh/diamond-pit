@@ -23,7 +23,7 @@ pub impl BlockHelper of BlockHelperTrait {
             .unwrap();
         return (block_value + Self::block_max_hp_per_type(block_type).into()).try_into().unwrap();
     }
-    
+
     fn get_block_info(block: u16) -> (u8, u8) {
         let block_type: u8 = (block / TWO_POW_7.try_into().unwrap()).try_into().unwrap();
         let block_hp: u8 = (block & BLOCK_HP_MASK).try_into().unwrap();
@@ -39,7 +39,7 @@ pub impl BlockHelper of BlockHelperTrait {
             BlockType::DeepStone => 10,
             BlockType::Iron => 40,
             BlockType::Gold => 80,
-            BlockType::Diamond => 150,
+            BlockType::Diamond => 125,
         }
     }
 
@@ -94,5 +94,6 @@ mod tests {
         assert(BlockHelper::new(BlockType::Air) == 0, 'wrong block 1');
         assert(BlockHelper::new(BlockType::Stone) == 132, 'wrong block 2');
         assert(BlockHelper::new(BlockType::Gold) == 848, 'wrong block 3');
+        assert(BlockHelper::new(BlockType::Diamond) == 1046, 'wrong block 4');
     }
 }

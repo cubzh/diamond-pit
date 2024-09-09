@@ -954,7 +954,6 @@ function updateBlocksColumn(key, rawColumn)
         },
     }
 
-    print("column info", column.x, column.y, column.z_layer, column.data.raw)
     for k = 0, 9 do
         local blockInfo = column.data:getBlock(k)
         local blockType = blockInfo >> 7
