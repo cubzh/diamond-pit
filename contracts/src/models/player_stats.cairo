@@ -55,13 +55,12 @@ pub impl PlayerStatsImpl of PlayerStatsTrait {
     fn get_backpack_next_upgrade_price(self: PlayerStats) -> u16 {
          match self.backpack_level {
             0 => 5,
-            1 => 15,
-            2 => 25,
-            3 => 75,
-            4 => 300,
-            5 => 1000,
-            6 => 3000,
-            _ => 3000
+            1 => 20,
+            2 => 80,
+            3 => 350,
+            4 => 1250,
+            5 => 4000,
+            _ => 4000,
         }
     }
 

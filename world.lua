@@ -115,10 +115,10 @@ local PICKAXE_UPGRADE_PRICES = {
     [0] = 0,
     [1] = 10,
     [2] = 25,
-    [3] = 50,
-    [4] = 100,
-    [5] = 250,
-    [6] = 800,
+    [3] = 100,
+    [4] = 300,
+    [5] = 750,
+    [6] = 2500,
 }
 
 local BACKPACK_MAX_SLOTS = {
@@ -136,9 +136,9 @@ local BACKPACK_UPGRADE_PRICES = {
     [1] = 5,
     [2] = 20,
     [3] = 80,
-    [4] = 135,
-    [5] = 450,
-    [6] = 1000,
+    [4] = 350,
+    [5] = 1250,
+    [6] = 4000,
 }
 
 idToName = {
@@ -151,15 +151,13 @@ idToName = {
     "Diamond",
 }
 
-blockColors = {
-    nil,                  -- air
-    Color.Grey,           -- stone
+local BLOCK_COLORS = {
+    Color.Grey,           -- stone [1]
     Color.Black,          -- coal
     Color.Orange,         -- copper
     Color.DarkGrey,       -- deepstone
     Color.White,          -- iron
     Color.Yellow,         -- gold
-    Color(112, 209, 244), -- diamond
     Color(112, 209, 244), -- diamond
 }
 
@@ -326,8 +324,13 @@ updatePlayerStats = function(key, stats)
         maxSlots = BACKPACK_MAX_SLOTS[backpackLevel]
         sfx("victory_1", { Spatialized = false, Volume = 0.6 })
         local nextLevel = backpackLevel + 1
-        floatingBackpack.Palette[1].Color = LEVEL_COLOR[nextLevel]
-        backpackNextText.Text = string.format("%d 💰", BACKPACK_UPGRADE_PRICES[nextLevel])
+        if LEVEL_COLOR[nextLevel] then
+            floatingBackpack.Palette[1].Color = LEVEL_COLOR[nextLevel]
+            backpackNextText.Text = string.format("%d 💰", BACKPACK_UPGRADE_PRICES[nextLevel])
+        else
+            floatingBackpack.IsHidden = true
+            backpackNextText.IsHidden = true
+        end
     end
 
     local pickaxeLevel = stats.pickaxe_level.value
@@ -336,8 +339,13 @@ updatePlayerStats = function(key, stats)
         sfx("metal_clanging_1", { Spatialized = false, Volume = 0.6 })
         Player.pickaxe.Palette[8].Color = LEVEL_COLOR[pickaxeLevel]
         local nextLevel = pickaxeLevel + 1
-        floatingPickaxe.Palette[8].Color = LEVEL_COLOR[nextLevel]
-        pickaxeNextText.Text = string.format("%d 💰", PICKAXE_UPGRADE_PRICES[nextLevel])
+        if LEVEL_COLOR[nextLevel] then
+            floatingPickaxe.Palette[8].Color = LEVEL_COLOR[nextLevel]
+            pickaxeNextText.Text = string.format("%d 💰", PICKAXE_UPGRADE_PRICES[nextLevel])
+        else
+            floatingBackpack.IsHidden = true
+            backpackNextText.IsHidden = true
+        end
     end
 end
 
@@ -948,11 +956,12 @@ function updateBlocksColumn(key, rawColumn)
 
     for k = 0, 9 do
         local blockInfo = column.data:getBlock(k)
+        print("block info", column.x, column.y, column.z_layer + k, column.data.raw)
         local blockType = blockInfo >> 7
         local blockHp = blockInfo & 127
         local z = -(column.z_layer * 10 + k)
         local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
-        local blockColor = blockColors[blockType + 1]
+        local blockColor = BLOCK_COLORS[blockType]
         if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
             b:Remove()
         elseif b and b.Color ~= blockColor then
