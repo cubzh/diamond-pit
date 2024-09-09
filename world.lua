@@ -388,6 +388,29 @@ initSellingArea = function()
     end)
 end
 
+initMenu = function()
+    local ui = require("uikit")
+    local bg = ui:createFrame(Color.Black)
+    bg.parentDidResize = function()
+        bg.Width = Screen.Width
+        bg.Height = Screen.Height
+    end
+    bg:parentDidResize()
+
+    local loadingText = ui:createText("Loading...", Color.White, "big")
+    loadingText:setParent(bg)
+    loadingText.parentDidResize = function()
+        loadingText.pos = { Screen.Width * 0.5 - loadingText.Width * 0.5, Screen.Height * 0.5 - loadingText.Height * 0.5 }
+    end
+    loadingText:parentDidResize()
+
+    local listener
+    listener = LocalEvent:Listen(LocalEvent.Name.PointerUp, function()
+        bg:remove()
+        listener:Remove()
+    end)
+end
+
 initUpgradeAreas = function()
     local upgradePickaxe = MutableShape()
     upgradePickaxe:AddBlock(Color(127, 127, 127, 0.5), 0, 0, 0)
@@ -721,6 +744,8 @@ Client.OnStart = function()
     })
 
     blocksModule:start()
+
+    initMenu()
 end
 
 Client.OnChat = function(payload)
