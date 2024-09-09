@@ -439,7 +439,9 @@ initMenu = function(callbackOnStart)
         if #name < 0 then return end
         dojo.actions.set_username(name)
         bg:remove()
-        Pointer:Hide()
+        Timer(3, function()
+            Pointer:Hide()
+        end)
         textInputUsername = nil
         callbackOnStart()
     end
