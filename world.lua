@@ -715,6 +715,7 @@ Client.OnStart = function()
         dist = 750,     -- max dist of islands
     })
 
+    blocksModule:start()
     initPlayer()
     initLeaderboard()
     initDojo()
@@ -722,7 +723,6 @@ Client.OnStart = function()
     initUpgradeAreas()
 
     initMenu(function()
-        blocksModule:start()
         Fog.On = false
         generate_map()
         Player:SetParent(World)
