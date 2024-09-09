@@ -263,9 +263,10 @@ end
 blocksModule.addChips = function(block, color)
     local chips = MutableShape()
     chips:SetParent(World)
-    chips.Position = block.Position
+    chips.Position = block.Position + Number3(10, 10, 10)
     chips:AddBlock(Color(255, 0, 0, 0.1), 0, 0, 0)
     chips.Physics = PhysicsMode.Disabled
+    chips.Pivot = Number3(0.5, 0.5, 0.5)
     chips.Scale = 20
 
     blocksModule.chips[block.Coords.Z] = blocksModule.chips[block.Coords.Z] or {}
@@ -283,7 +284,7 @@ blocksModule.setBlockHP = function(self, block, hp, maxHP)
         return
     end
 
-    local percentage = hp / maxHP
+    local percentage = 1 - (hp / maxHP)
     chips.Scale = 20 + percentage * 3
 end
 
