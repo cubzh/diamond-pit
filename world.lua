@@ -249,6 +249,11 @@ blocksModule.start = function(self)
             end
         end
     end
+    for j = 0, 9 do
+        for i = 0, 9 do
+            self.blockShape:AddBlock(Color(138, 43, 226), i, -50, j)
+        end
+    end
 end
 
 createNewPlayer = function(key, position)
