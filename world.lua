@@ -546,8 +546,8 @@ local leaderboardTextBlocks, leaderboardTextHits, leaderboardTextCoins
 local function createLeaderboardQuad(position, rotation, title)
     local quad = Quad()
     quad.Color = Color.White
-    quad.Width = 50
-    quad.Height = 75
+    quad.Width = 30
+    quad.Height = 50
     quad:SetParent(World)
     quad.Anchor = { 0.5, 0 }
     quad.Position = position
