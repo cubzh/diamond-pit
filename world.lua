@@ -161,6 +161,8 @@ local BLOCK_COLORS = {
     Color(112, 209, 244), -- diamond
 }
 
+local BLOCKS_MAX_HP = { 4, 10, 25, 10, 40, 80, 125 }
+
 generate_map = function()
     map = Object()
     map:SetParent(World)
@@ -260,6 +262,30 @@ end
 
 blocksModule.addChips = function(block, color)
     block.Color = Color.Green
+
+    local chips = MutableShape()
+    chips:SetParent(World)
+    chips.Position = b.Position
+    chips:AddBlock(Color.Green, 0, 0, 0)
+    chips.Scale = 3
+
+    blocksModule.chips[block.Coords.Z] = blocksModule.chips[block.Coords.Z] or {}
+    blocksModule.chips[block.Coords.Z][block.Coords.Y] = blocksModule.chips[block.Coords.Z][block.Coords.Y] or {}
+    blocksModule.chips[block.Coords.Z][block.Coords.Y][block.Coords.Z] = chips
+end
+
+blocksModule.setBlockHP = function(self, block, hp, maxHP)
+    if not self.chips[block.Coords.Z] or not self.chips[block.Coords.Z][block.Coords.Y] or not self.chips[block.Coords.Z][block.Coords.Y][block.Coords.X] then return end
+
+    local chips = self.chips[block.Coords.Z][block.Coords.Y][block.Coords.X]
+    if hp <= 0 then
+        chips:RemoveFromParent()
+        self.chips[block.Coords.Z][block.Coords.Y][block.Coords.X] = nil
+        return
+    end
+
+    local percentage = hp / maxHP
+    chips.Scale = 3 + percentage * 3
 end
 
 blocksModule.start = function(self)
@@ -1012,6 +1038,7 @@ function updateBlocksColumn(key, rawColumn)
         local blockHp = blockInfo & 127
         local z = -(column.z_layer * 10 + k)
         local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
+        blocksModule:setBlockHP(b, blockHp, BLOCKS_MAX_HP[blockType])
         local blockColor = BLOCK_COLORS[blockType]
         if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
             blocksModule:checkNeighborsAndAddChips(column.x, z, column.y)
