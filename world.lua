@@ -546,8 +546,8 @@ local leaderboardTextBlocks, leaderboardTextHits, leaderboardTextCoins
 local function createLeaderboardQuad(position, rotation, title)
     local quad = Quad()
     quad.Color = Color.White
-    quad.Width = 80
-    quad.Height = 100
+    quad.Width = 50
+    quad.Height = 75
     quad:SetParent(World)
     quad.Anchor = { 0.5, 0 }
     quad.Position = position
@@ -556,22 +556,22 @@ local function createLeaderboardQuad(position, rotation, title)
     local titleText = Text()
     titleText.Text = title
     titleText:SetParent(quad)
-    titleText.FontSize = 7
+    titleText.FontSize = 5
     titleText.Type = TextType.World
     titleText.IsUnlit = true
     titleText.Color = Color.Black
     titleText.Anchor = { 0.5, 1 }
-    titleText.LocalPosition = { 0, 95, -1 }
+    titleText.LocalPosition = { 0, 60, -1 }
 
     local contentText = Text()
     contentText.Text = "loading..."
     contentText:SetParent(quad)
-    contentText.FontSize = 6
+    contentText.FontSize = 4
     contentText.Type = TextType.World
     contentText.IsUnlit = true
     contentText.Color = Color.Black
     contentText.Anchor = { 0.5, 1 }
-    contentText.LocalPosition = { 0, 75, -1 }
+    contentText.LocalPosition = { 0, 55, -1 }
 
     return contentText
 end
