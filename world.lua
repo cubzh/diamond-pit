@@ -405,7 +405,7 @@ initMenu = function(callbackOnStart)
     local setUsernameBlock = ui_blocks:createLineContainer({
         dir = "horizontal",
         nodes = {
-            ui:createText("Username: "),
+            ui:createText("Username: ", Color.White),
             { type = "gap" },
             textInputUsername,
         }
@@ -415,8 +415,9 @@ initMenu = function(callbackOnStart)
         triptych = {
             dir = "vertical",
             color = Color(0, 0, 0, 0), -- background color
-            top = ui:createText("Diamond Pit"),
-            center = ui:createText("Mine blocks, sell them, upgrade your equipment, reach the top of the leaderboard."),
+            top = ui:createText("Diamond Pit", Color.White, "big"),
+            center = ui:createText("Mine blocks, sell them,\nupgrade your equipment,\nreach the top of the leaderboard.",
+                Color.White),
             bottom = setUsernameBlock,
         },
     })
