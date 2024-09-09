@@ -334,7 +334,7 @@ updatePlayerStats = function(key, stats)
     end
 
     local pickaxeLevel = stats.pickaxe_level.value
-    if LEVEL_COLOR[pickaxeLevel] and PICKAXE_STRENGTHS[pickaxeLevel] > pickaxeStrength then
+    if Player.pickaxe and PICKAXE_STRENGTHS[pickaxeLevel] > pickaxeStrength then
         pickaxeStrength = PICKAXE_STRENGTHS[pickaxeLevel]
         sfx("metal_clanging_1", { Spatialized = false, Volume = 0.6 })
         Player.pickaxe.Palette[8].Color = LEVEL_COLOR[pickaxeLevel]
@@ -762,6 +762,7 @@ Client.OnStart = function()
         end,
     })
     initUI()
+    Player.pickaxe = Shape(Items.caillef.pickaxe)
 
     initMenu(function()
         Fog.On = false
@@ -903,7 +904,6 @@ initPlayer = function()
             return Color.Black
         end,
     })
-    Player.pickaxe = Shape(Items.caillef.pickaxe)
     Player:EquipRightHand(Player.pickaxe)
     require("crosshair"):show()
     Player.Avatar:loadEquipment({ type = "hair" })
