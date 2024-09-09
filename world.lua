@@ -566,122 +566,58 @@ initLeaderboard = function()
 end
 
 local leaderboardEntries = {}
+local function updateLeaderboard(entries, textObject, valueField, title)
+    local list = {}
+    for _, elem in pairs(entries) do
+        table.insert(list, elem)
+    end
+    if #list == 0 then return end
+
+    table.sort(list, function(a, b)
+        return tonumber(a[valueField].value) > tonumber(b[valueField].value)
+    end)
+
+    local text = title .. "\n"
+    local hasLocalPlayer = false
+
+    for i = 1, 10 do
+        local entry = list[i]
+        if not entry then break end
+
+        local name = playersStats[entry.player.value]
+            and hex_to_string(playersStats[entry.player.value].name.value)
+            or string.sub(entry.player.value, 1, 8)
+
+        text = text .. string.format("%s: %d\n", name, entry[valueField].value)
+
+        if entry.player.value == dojo.burnerAccount.Address then
+            hasLocalPlayer = true
+        end
+    end
+
+    if not hasLocalPlayer then
+        local localEntry = entries[dojo.burnerAccount.Address]
+        if localEntry then
+            local name = playersStats[localEntry.player.value]
+                and hex_to_string(playersStats[localEntry.player.value].name.value)
+                or "you"
+            text = text .. string.format("> %s: %d\n", name, localEntry[valueField].value)
+        end
+    end
+
+    textObject.Text = text
+end
+
+-- Then in your updateLeaderboard function:
 updateLeaderboard = function(_, entry)
     if entry.day.value ~= math.floor(Time.Unix() / 86400) then
         return
     end
     leaderboardEntries[entry.player.value] = entry
 
-    local listCoinsCollected = {}
-    for _, elem in pairs(leaderboardEntries) do
-        table.insert(listCoinsCollected, elem)
-    end
-    if #listCoinsCollected > 0 then
-        table.sort(listCoinsCollected, function(a, b)
-            return tonumber(a.nb_coins_collected.value) > tonumber(b.nb_coins_collected.value)
-        end)
-        leaderboardTextCoins.Text = ""
-        local hasLocalPlayer = false
-        for i = 1, 10 do
-            local coinsCollected = listCoinsCollected[i]
-            if not coinsCollected then
-                break
-            end
-            local name = string.sub(coinsCollected.player.value, 1, 8)
-            print(">>>>> has realname", playersStats[coinsCollected.player.value] ~= nil)
-            if playersStats[coinsCollected.player.value] then
-                name = hex_to_string(playersStats[coinsCollected.player.value].name.value)
-            end
-
-            -- if coinsCollected.player.value == dojo.burnerAccount.Address then
-            --     name = " > you <"
-            --     hasLocalPlayer = true
-            -- end
-            leaderboardTextCoins.Text = string.format(
-                "%s%s: %d\n",
-                leaderboardTextCoins.Text,
-                name,
-                coinsCollected.nb_coins_collected.value
-            )
-        end
-
-        local elem = leaderboardEntries[dojo.burnerAccount.Address]
-        if not hasLocalPlayer and elem then
-            leaderboardTextCoins.Text =
-                string.format("%s > you <: %d\n", leaderboardTextCoins.Text, elem.nb_coins_collected.value)
-        end
-    end
-
-    local listBlocksHit = {}
-    for _, elem in pairs(leaderboardEntries) do
-        table.insert(listBlocksHit, elem)
-    end
-    if #listBlocksHit > 0 then
-        table.sort(listBlocksHit, function(a, b)
-            return a.nb_hits.value > b.nb_hits.value
-        end)
-        leaderboardTextHits.Text = ""
-        local hasLocalPlayer = false
-        for i = 1, 10 do
-            if not listBlocksHit[i] then
-                break
-            end
-            local name = string.sub(listBlocksHit[i].player.value, 1, 8)
-            if listBlocksHit[i].player.value == dojo.burnerAccount.Address then
-                name = " > you <"
-                hasLocalPlayer = true
-            end
-            leaderboardTextHits.Text = leaderboardTextHits.Text
-                .. name
-                .. ": "
-                .. tostring(math.floor(listBlocksHit[i].nb_hits.value))
-                .. "\n"
-        end
-
-        local elem = leaderboardEntries[dojo.burnerAccount.Address]
-        if not hasLocalPlayer and elem then
-            leaderboardTextHits.Text = leaderboardTextHits.Text
-                .. " > you <"
-                .. ": "
-                .. tostring(math.floor(elem.nb_hits.value))
-                .. "\n"
-        end
-    end
-
-    local listBlocksMined = {}
-    for _, elem in pairs(leaderboardEntries) do
-        table.insert(listBlocksMined, elem)
-    end
-    if #listBlocksMined > 0 then
-        table.sort(listBlocksMined, function(a, b)
-            return a.nb_blocks_broken.value > b.nb_blocks_broken.value
-        end)
-        leaderboardTextBlocks.Text = ""
-        local hasLocalPlayer = false
-        for i = 1, 10 do
-            if not listBlocksMined[i] then
-                break
-            end
-            local name = string.sub(listBlocksMined[i].player.value, 1, 8)
-            if listBlocksMined[i].player.value == dojo.burnerAccount.Address then
-                name = " > you <"
-                hasLocalPlayer = true
-            end
-            leaderboardTextBlocks.Text = leaderboardTextBlocks.Text
-                .. name
-                .. ": "
-                .. tostring(math.floor(listBlocksMined[i].nb_blocks_broken.value))
-                .. "\n"
-        end
-        local elem = leaderboardEntries[dojo.burnerAccount.Address]
-        if not hasLocalPlayer and elem then
-            leaderboardTextBlocks.Text = leaderboardTextBlocks.Text
-                .. " > you <"
-                .. ": "
-                .. tostring(math.floor(elem.nb_blocks_broken.value))
-                .. "\n"
-        end
-    end
+    updateLeaderboard(leaderboardEntries, leaderboardTextCoins, "nb_coins_collected", "Top 10 Daily - Coins Collected -")
+    updateLeaderboard(leaderboardEntries, leaderboardTextHits, "nb_hits", "Top 10 Daily - Block Hits -")
+    updateLeaderboard(leaderboardEntries, leaderboardTextBlocks, "nb_blocks_broken", "Top 10 Daily - Blocks Mined -")
 end
 
 local inventoryNode
