@@ -1231,7 +1231,7 @@
     ],
     "address": "0x5c1d201209938c1ac8340c7caeec489060b04dff85399605e58ebc2cdc149f4",
     "transaction_hash": "0x3b160b37d0ee0f3d51606f047e53add57b6633fc6de50f3b3cafd60153708ee",
-    "block_number": 3,
+    "block_number": 4,
     "seed": "diamond_pit",
     "metadata": {
       "profile_name": "dev",
@@ -1251,8 +1251,8 @@
     {
       "kind": "DojoContract",
       "address": "0x2c24de1c529a154eac885b0b34e8bf1b04f4ce0845b91d1a4fc9aea8c9d71ed",
-      "class_hash": "0x4a3871a24d4d2b0990492b73d87a31b64758ea6ea412efd6c9b59ce102e0cb7",
-      "original_class_hash": "0x4a3871a24d4d2b0990492b73d87a31b64758ea6ea412efd6c9b59ce102e0cb7",
+      "class_hash": "0x6194bec79139217d7efc1fe049970eae1dfa5a82a2c9150efd06bb0f5ab4687",
+      "original_class_hash": "0x6194bec79139217d7efc1fe049970eae1dfa5a82a2c9150efd06bb0f5ab4687",
       "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
       "abi": [
         {

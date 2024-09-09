@@ -1103,9 +1103,6 @@ function number_to_hexstr(number)
     return "0x" .. string.format("%x", number)
 end
 
-local upgrading_backpack = false
-local upgrading_pickaxe = false
-
 -- generated contracts
 dojo.actions = {
     hit_block = function(x, y, z, px, py, pz)
@@ -1152,29 +1149,19 @@ dojo.actions = {
         if not dojo.toriiClient then
             return
         end
-        if upgrading_backpack then return end
         if VERBOSE then
             print("Calling upgrade_backpack")
         end
-        upgrading_backpack = true
         dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "upgrade_backpack", "[]")
-        Timer(2, function()
-            upgrading_backpack = false
-        end)
     end,
     upgrade_pickaxe = function()
         if not dojo.toriiClient then
             return
         end
-        if upgrading_pickaxe then return end
         if VERBOSE then
             print("Calling upgrade_pickaxe")
         end
-        upgrading_pickaxe = true
         dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "upgrade_pickaxe", "[]")
-        Timer(2, function()
-            upgrading_pickaxe = false
-        end)
     end,
     set_username = function(username)
         if not dojo.toriiClient then
