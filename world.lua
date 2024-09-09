@@ -281,15 +281,49 @@ blocksModule.addChips = function(block, color)
     local chips = MutableShape()
     chips:SetParent(World)
     chips.Position = block.Position + Number3(10, 10, 10)
-    chips:AddBlock(NUGGETS_COLOR[blockType], 0, 0, -5) -- Front face
-    chips:AddBlock(NUGGETS_COLOR[blockType], 0, 0, 5)  -- Back face
-    chips:AddBlock(NUGGETS_COLOR[blockType], -5, 0, 0) -- Left face
-    chips:AddBlock(NUGGETS_COLOR[blockType], 5, 0, 0)  -- Right face
-    chips:AddBlock(NUGGETS_COLOR[blockType], 0, 5, 0)  -- Top face
-    chips:AddBlock(NUGGETS_COLOR[blockType], 0, -5, 0) -- Bottom face
+
+    local function randomFacePosition()
+        return math.random(-5, 5), math.random(-5, 5)
+    end
+
+    -- Front face (3 chips)
+    for i = 1, 3 do
+        local x, y = randomFacePosition()
+        chips:AddBlock(NUGGETS_COLOR[blockType], x, y, -5)
+    end
+
+    -- Back face (3 chips)
+    for i = 1, 3 do
+        local x, y = randomFacePosition()
+        chips:AddBlock(NUGGETS_COLOR[blockType], x, y, 5)
+    end
+
+    -- Left face (3 chips)
+    for i = 1, 3 do
+        local y, z = randomFacePosition()
+        chips:AddBlock(NUGGETS_COLOR[blockType], -5, y, z)
+    end
+
+    -- Right face (3 chips)
+    for i = 1, 3 do
+        local y, z = randomFacePosition()
+        chips:AddBlock(NUGGETS_COLOR[blockType], 5, y, z)
+    end
+
+    -- Top face (3 chips)
+    for i = 1, 3 do
+        local x, z = randomFacePosition()
+        chips:AddBlock(NUGGETS_COLOR[blockType], x, 5, z)
+    end
+
+    -- Bottom face (3 chips)
+    for i = 1, 3 do
+        local x, z = randomFacePosition()
+        chips:AddBlock(NUGGETS_COLOR[blockType], x, -5, z)
+    end
     chips.Physics = PhysicsMode.Disabled
     chips.Pivot = Number3(0.5, 0.5, 0.5)
-    chips.Scale = 2
+    chips.Scale = 1.9
 
     blocksModule.chips[block.Coords.Z] = blocksModule.chips[block.Coords.Z] or {}
     blocksModule.chips[block.Coords.Z][block.Coords.Y] = blocksModule.chips[block.Coords.Z][block.Coords.Y] or {}
@@ -307,7 +341,7 @@ blocksModule.setBlockHP = function(self, block, hp, maxHP)
     end
 
     local percentage = 1 - (hp / maxHP)
-    chips.Scale = 2 + percentage * 4
+    chips.Scale = 1.9 + percentage * 0.3
 end
 
 blocksModule.start = function(self)
