@@ -323,7 +323,7 @@ blocksModule.addChips = function(block, color)
     end
     chips.Physics = PhysicsMode.Disabled
     chips.Pivot = Number3(0.5, 0.5, 0.5)
-    chips.Scale = 1.9
+    chips.Scale = 1.75
 
     blocksModule.chips[block.Coords.Z] = blocksModule.chips[block.Coords.Z] or {}
     blocksModule.chips[block.Coords.Z][block.Coords.Y] = blocksModule.chips[block.Coords.Z][block.Coords.Y] or {}
@@ -341,7 +341,7 @@ blocksModule.setBlockHP = function(self, block, hp, maxHP)
     end
 
     local percentage = 1 - (hp / maxHP)
-    chips.Scale = 1.9 + percentage * 0.3
+    chips.Scale = 1.75 + percentage * 0.3
 end
 
 blocksModule.start = function(self)
