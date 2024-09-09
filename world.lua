@@ -440,7 +440,6 @@ initMenu = function(callbackOnStart)
         dojo.actions.set_username(name)
         bg:remove()
         Pointer:Hide()
-        Camera:SetModeFirstPerson()
         textInputUsername = nil
         callbackOnStart()
     end
