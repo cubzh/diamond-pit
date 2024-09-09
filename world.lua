@@ -588,7 +588,7 @@ updateLeaderboard = function(_, entry)
                 break
             end
             local name = string.sub(coinsCollected.player.value, 1, 8)
-            print(">>>>> name", name)
+            print(">>>>> has realname", playersStats[coinsCollected.player.value] ~= nil)
             if playersStats[coinsCollected.player.value] then
                 name = hex_to_string(playersStats[coinsCollected.player.value].name.value)
             end
