@@ -388,7 +388,7 @@ initSellingArea = function()
     end)
 end
 
-initMenu = function()
+initMenu = function(callbackOnStart)
     local ui = require("uikit")
     local bg = ui:createFrame(Color.Black)
     bg.parentDidResize = function()
@@ -410,6 +410,7 @@ initMenu = function()
         bg:remove()
         listener:Remove()
         Pointer:Hide()
+        callbackOnStart()
     end)
 end
 
@@ -715,39 +716,38 @@ Client.OnStart = function()
     })
 
     initPlayer()
-    initUI()
     initLeaderboard()
     initDojo()
     initSellingArea()
     initUpgradeAreas()
 
-    Fog.On = false
-    generate_map()
-    Player:SetParent(World)
-    Player.Position = Number3(250 + math.random(-25, 25), 5, 150 + math.random(-25, 25))
+    initMenu(function()
+        blocksModule:start()
+        Fog.On = false
+        generate_map()
+        Player:SetParent(World)
+        Player.Position = Number3(250 + math.random(-25, 25), 5, 150 + math.random(-25, 25))
 
-    local ui = require("uikit")
-    nbSlotsLeftText = ui:createText("0/5", Color.White, "big")
+        local ui = require("uikit")
+        nbSlotsLeftText = ui:createText("0/5", Color.White, "big")
 
-    inventory_module:setResources(resourcesByKey, resourcesById)
-    inventory_module:create("hotbar", {
-        width = 7,
-        height = 1,
-        alwaysVisible = true,
-        selector = false,
-        uiPos = function(node)
-            local padding = require("uitheme").current.padding
-            nbSlotsLeftText.pos = {
-                Screen.Width * 0.5 - node.Width * 0.5 - padding * 3 - nbSlotsLeftText.Width * 1.5,
-                padding + node.Height * 0.5 - nbSlotsLeftText.Height * 0.5,
-            }
-            return { Screen.Width * 0.5 - node.Width * 0.5, padding }
-        end,
-    })
-
-    blocksModule:start()
-
-    initMenu()
+        inventory_module:setResources(resourcesByKey, resourcesById)
+        inventory_module:create("hotbar", {
+            width = 7,
+            height = 1,
+            alwaysVisible = true,
+            selector = false,
+            uiPos = function(node)
+                local padding = require("uitheme").current.padding
+                nbSlotsLeftText.pos = {
+                    Screen.Width * 0.5 - node.Width * 0.5 - padding * 3 - nbSlotsLeftText.Width * 1.5,
+                    padding + node.Height * 0.5 - nbSlotsLeftText.Height * 0.5,
+                }
+                return { Screen.Width * 0.5 - node.Width * 0.5, padding }
+            end,
+        })
+        initUI()
+    end)
 end
 
 Client.OnChat = function(payload)
