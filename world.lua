@@ -577,7 +577,7 @@ local function updateIndividualLeaderboard(entries, textObject, valueField, titl
         return tonumber(a[valueField].value) > tonumber(b[valueField].value)
     end)
 
-    local text = title .. "\n"
+    local text = ""
     local hasLocalPlayer = false
 
     for i = 1, 10 do
@@ -615,11 +615,9 @@ updateLeaderboard = function(_, entry)
     end
     leaderboardEntries[entry.player.value] = entry
 
-    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextCoins, "nb_coins_collected",
-        "Top 10 Daily - Coins Collected -")
-    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextHits, "nb_hits", "Top 10 Daily - Block Hits -")
-    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextBlocks, "nb_blocks_broken",
-        "Top 10 Daily - Blocks Mined -")
+    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextCoins, "nb_coins_collected")
+    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextHits, "nb_hits")
+    updateIndividualLeaderboard(leaderboardEntries, leaderboardTextBlocks, "nb_blocks_broken")
 end
 
 local inventoryNode
