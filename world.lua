@@ -317,7 +317,7 @@ updatePlayerStats = function(key, stats)
     end
 
     if textInputUsername then
-        textInputUsername.Text = stats.name.value
+        textInputUsername.Text = hex_to_string(stats.name.value)
     end
 
     local backpackLevel = stats.backpack_level.value
@@ -1005,6 +1005,8 @@ local onEntityUpdateCallbacks = {
 }
 
 function startGame(toriiClient)
+    textInputUsername.Text = string.sub(dojo.burnerAccount.Address, 1, 8)
+
     -- sync previous entities
     dojo:syncEntities(onEntityUpdateCallbacks)
 
@@ -1025,7 +1027,7 @@ end
 
 dojo = {}
 
-dojo.getOrCreateBurner = function(self, config, cb)
+dojo.createBurner = function(self, config, cb)
     self.toriiClient:CreateBurner(
         config.playerAddress,
         config.playerSigningKey,
@@ -1052,7 +1054,7 @@ dojo.createToriiClient = function(self, config)
         local json = dojo.toriiClient:GetBurners()
         local burners = json.burners
         if not burners then
-            self:getOrCreateBurner(config, function()
+            self:createBurner(config, function()
                 config.onConnect(dojo.toriiClient)
             end)
         else
