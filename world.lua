@@ -390,7 +390,7 @@ end
 
 initMenu = function(callbackOnStart)
     local ui = require("uikit")
-    local bg = ui:createFrame(Color(0.5, 0.5, 0.5))
+    local bg = ui:createFrame(Color(0, 0, 0, 0.5))
     bg.parentDidResize = function()
         bg.Width = Screen.Width * 0.5
         bg.Height = Screen.Height * 0.2
@@ -400,8 +400,8 @@ initMenu = function(callbackOnStart)
 
     local bgBlock = ui:createFrame(Color(0, 0, 0, 0))
     bgBlock.parentDidResize = function()
-        bgBlock.Width = Screen.Width * 0.5 - 8
-        bgBlock.Height = Screen.Height * 0.2 - 8
+        bgBlock.Width = Screen.Width * 0.5 - 16
+        bgBlock.Height = Screen.Height * 0.2 - 16
         bgBlock.pos = { Screen.Width * 0.5 - bgBlock.Width * 0.5, Screen.Height * 0.5 - bgBlock.Height * 0.5 }
     end
     bgBlock:parentDidResize()
