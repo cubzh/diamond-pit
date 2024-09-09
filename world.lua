@@ -588,11 +588,11 @@ local function updateIndividualLeaderboard(entries, textObject, valueField, titl
             and hex_to_string(playersStats[entry.player.value].name.value)
             or string.sub(entry.player.value, 1, 8)
         if entry.player.value == dojo.burnerAccount.Address then
-            name = string.format("> %s", playersStats[entry.player.value] and hex_to_string(playersStats[entry.player.value].name.value or "you")
+            name = string.format("> %s",
+                playersStats[entry.player.value] and hex_to_string(playersStats[entry.player.value].name.value) or "you")
             hasLocalPlayer = true
         end
         text = text .. string.format("%s: %d\n", name, entry[valueField].value)
-
     end
 
     if not hasLocalPlayer then
