@@ -833,7 +833,7 @@ Client.OnStart = function()
     })
     initUI()
     Player.pickaxe = Shape(Items.caillef.pickaxe)
-    Map.Position = { 0, -Map.Height * 20, 0 }
+    Map.Position = { -40, -Map.Height * 20, -40 }
 
     initMenu(function()
         Fog.On = false
@@ -844,7 +844,7 @@ Client.OnStart = function()
 end
 
 Client.OnChat = function(payload)
-    print(payload.message)
+    print("Set new username:", payload.message)
     dojo.actions.set_username(payload.message)
     return true -- consumed
 end
