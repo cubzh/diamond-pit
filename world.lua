@@ -795,7 +795,7 @@ updateInventory = function(_, inventory)
 end
 
 Client.OnWorldObjectLoad = function(obj)
-    obj.Position.Y = obj.Position.Y - 20 * Map.Height
+    obj.Position = obj.Position + Number3(40, -20 * Map.Height, 40)
 end
 
 Client.OnStart = function()
