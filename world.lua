@@ -796,6 +796,10 @@ end
 
 Client.OnWorldObjectLoad = function(obj)
     obj.Position = obj.Position + Number3(40, -20 * Map.Height, 40)
+
+    if obj.Name == "pratamacam.grass_01" then
+        obj.Scale = 10
+    end
 end
 
 Client.OnStart = function()
