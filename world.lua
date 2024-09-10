@@ -802,6 +802,7 @@ Client.OnWorldObjectLoad = function(obj)
             local copy = Shape(obj, { includeChildren = true })
             copy:SetParent(World)
             copy.Position = obj.Position + Number3(math.random(-40, 40), 0, math.random(-40, 40))
+            copy.Rotation.Y = math.random() * Math.PI
         end
     end
 end
