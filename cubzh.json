@@ -7,5 +7,6 @@
 	},
 	"contributors": [
 		{ "caillef": 1.0 }
-	]
+	],
+	"map": "map.b64",
 }
