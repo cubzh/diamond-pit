@@ -271,6 +271,11 @@ blocksModule.checkNeighborsAndAddChips = function(self, x, y, z)
 end
 
 blocksModule.addChips = function(self, block, color)
+    if self.chips[block.Coords.Z] and
+        self.chips[block.Coords.Z][block.Coords.Y] and
+        self.chips[block.Coords.Z][block.Coords.Y][block.Coords.X] then
+        return
+    end
     local blockType
     for k, v in pairs(BLOCK_COLORS) do
         if v == color then
