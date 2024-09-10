@@ -833,7 +833,7 @@ Client.OnStart = function()
     })
     initUI()
     Player.pickaxe = Shape(Items.caillef.pickaxe)
-    Map.Position = { -40, -Map.Height * 20, -40 }
+    Map.Position = { 40, -Map.Height * 20, 40 }
 
     initMenu(function()
         Fog.On = false
@@ -1388,7 +1388,7 @@ floating_island_generator.generateIslands = function(_, config)
         for i = 1, nbIslands do
             local island = create(math.random(minSize, maxSize))
             island:SetParent(World)
-            island.Scale = 5
+            island.Scale = 1
             island.Physics = PhysicsMode.Disabled
             local x = math.random(-dist, dist)
             local z = math.random(-dist, dist)
