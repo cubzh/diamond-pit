@@ -804,6 +804,7 @@ Client.OnWorldObjectLoad = function(obj)
             copy.Position = obj.Position + Number3(math.random(-10, 10), 0, math.random(-10, 10))
             copy.Rotation.Y = math.random() * math.pi
             copy.Scale = math.random() * 0.4 + 0.8
+            copy.Physics = false
         end
     end
 end
