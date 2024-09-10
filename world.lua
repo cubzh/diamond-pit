@@ -11,6 +11,8 @@ Modules = {
     ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5",
 }
 
+local cachedTree, cachedBush
+
 local playersStats = {}
 local resourcesById = {}
 local resourcesByKey = {}
@@ -927,8 +929,9 @@ Client.Action2Release = function()
 end
 
 Client.Action3Release = function()
-    Player.Position = Number3(400, 5, 300)
-    Player.Rotation = Number3(0, math.pi * 0.5, 0)
+    print(Player.Position)
+    --Player.Position = Number3(410, 5, 300)
+    --Player.Rotation = Number3(0, math.pi * 0.5, 0)
 end
 
 local nextMineHit = 0
@@ -1359,8 +1362,6 @@ end
 
 floating_island_generator = {}
 
-local cachedTree
-
 local COLORS = {
     GRASS = Color(19, 133, 16),
     DIRT = Color(107, 84, 40),
@@ -1377,7 +1378,10 @@ end
 local function onReady(callback)
     Object:Load("knosvoxel.oak_tree", function(obj)
         cachedTree = obj
-        callback()
+        Object:Load("kooow.green_bush", function(obj)
+            cachedBush = obj
+            callback()
+        end)
     end)
 end
 
