@@ -798,11 +798,12 @@ Client.OnWorldObjectLoad = function(obj)
     obj.Position = obj.Position + Number3(40, -20 * Map.Height, 40)
 
     if obj.Name == "pratamacam.grass_01" then
-        for i = 1, 10 do
+        for i = 1, 5 do
             local copy = Shape(obj, { includeChildren = true })
             copy:SetParent(World)
-            copy.Position = obj.Position + Number3(math.random(-40, 40), 0, math.random(-40, 40))
+            copy.Position = obj.Position + Number3(math.random(-10, 10), 0, math.random(-10, 10))
             copy.Rotation.Y = math.random() * math.pi
+            copy.Scale = math.random() * 0.4 + 0.8
         end
     end
 end
