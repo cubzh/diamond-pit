@@ -179,69 +179,69 @@ generate_map = function()
     map = Object()
     map:SetParent(World)
 
-    local leftWing = MutableShape()
-    leftWing:SetParent(map)
-    leftWing:AddBlock(Color(100, 200, 100), 0, 0, 0)
-    leftWing.Pivot = { 0, 1, 0 }
-    leftWing.Scale = { 500, 100, 200 }
-    leftWing.LocalPosition = { 0, 0, 0 }
-    leftWing.CollisionGroups = Map.CollisionGroups
-    leftWing.CollidesWithGroups = Map.CollidesWithGroups
+    -- local leftWing = MutableShape()
+    -- leftWing:SetParent(map)
+    -- leftWing:AddBlock(Color(100, 200, 100), 0, 0, 0)
+    -- leftWing.Pivot = { 0, 1, 0 }
+    -- leftWing.Scale = { 500, 100, 200 }
+    -- leftWing.LocalPosition = { 0, 0, 0 }
+    -- leftWing.CollisionGroups = Map.CollisionGroups
+    -- leftWing.CollidesWithGroups = Map.CollidesWithGroups
 
-    local rightWing = MutableShape()
-    rightWing:SetParent(map)
-    rightWing:AddBlock(Color(100, 200, 100), 0, 0, 0)
-    rightWing.Pivot = { 0, 1, 0 }
-    rightWing.Scale = { 500, 100, 200 }
-    rightWing.LocalPosition = { 0, 0, 400 }
-    rightWing.CollisionGroups = Map.CollisionGroups
-    rightWing.CollidesWithGroups = Map.CollidesWithGroups
+    -- local rightWing = MutableShape()
+    -- rightWing:SetParent(map)
+    -- rightWing:AddBlock(Color(100, 200, 100), 0, 0, 0)
+    -- rightWing.Pivot = { 0, 1, 0 }
+    -- rightWing.Scale = { 500, 100, 200 }
+    -- rightWing.LocalPosition = { 0, 0, 400 }
+    -- rightWing.CollisionGroups = Map.CollisionGroups
+    -- rightWing.CollidesWithGroups = Map.CollidesWithGroups
 
-    local upWing = MutableShape()
-    upWing:SetParent(map)
-    upWing:AddBlock(Color(100, 200, 100), 0, 0, 0)
-    upWing.Pivot = { 0, 1, 0 }
-    upWing.Scale = { 200, 100, 600 }
-    upWing.LocalPosition = { 400, 0, 0 }
-    upWing.CollisionGroups = Map.CollisionGroups
-    upWing.CollidesWithGroups = Map.CollidesWithGroups
+    -- local upWing = MutableShape()
+    -- upWing:SetParent(map)
+    -- upWing:AddBlock(Color(100, 200, 100), 0, 0, 0)
+    -- upWing.Pivot = { 0, 1, 0 }
+    -- upWing.Scale = { 200, 100, 600 }
+    -- upWing.LocalPosition = { 400, 0, 0 }
+    -- upWing.CollisionGroups = Map.CollisionGroups
+    -- upWing.CollidesWithGroups = Map.CollidesWithGroups
 
-    local downWing = MutableShape()
-    downWing:SetParent(map)
-    downWing:AddBlock(Color(100, 200, 100), 0, 0, 0)
-    downWing.Pivot = { 0, 1, 0 }
-    downWing.Scale = { 200, 100, 600 }
-    downWing.LocalPosition = { 0, 0, 0 }
-    downWing.CollisionGroups = Map.CollisionGroups
-    downWing.CollidesWithGroups = Map.CollidesWithGroups
+    -- local downWing = MutableShape()
+    -- downWing:SetParent(map)
+    -- downWing:AddBlock(Color(100, 200, 100), 0, 0, 0)
+    -- downWing.Pivot = { 0, 1, 0 }
+    -- downWing.Scale = { 200, 100, 600 }
+    -- downWing.LocalPosition = { 0, 0, 0 }
+    -- downWing.CollisionGroups = Map.CollisionGroups
+    -- downWing.CollidesWithGroups = Map.CollidesWithGroups
 
-    local leftStone = MutableShape()
-    leftStone:SetParent(map)
-    leftStone:AddBlock(Color.DarkGrey, 0, 0, 0)
-    leftStone.Pivot = { 0, 1, 0 }
-    leftStone.Scale = { 500, 2000, 200 }
-    leftStone.LocalPosition = { 0, -100, 0 }
+    -- local leftStone = MutableShape()
+    -- leftStone:SetParent(map)
+    -- leftStone:AddBlock(Color.DarkGrey, 0, 0, 0)
+    -- leftStone.Pivot = { 0, 1, 0 }
+    -- leftStone.Scale = { 500, 2000, 200 }
+    -- leftStone.LocalPosition = { 0, -100, 0 }
 
-    local rightStone = MutableShape()
-    rightStone:SetParent(map)
-    rightStone:AddBlock(Color.DarkGrey, 0, 0, 0)
-    rightStone.Pivot = { 0, 1, 0 }
-    rightStone.Scale = { 500, 2000, 200 }
-    rightStone.LocalPosition = { 0, -100, 400 }
+    -- local rightStone = MutableShape()
+    -- rightStone:SetParent(map)
+    -- rightStone:AddBlock(Color.DarkGrey, 0, 0, 0)
+    -- rightStone.Pivot = { 0, 1, 0 }
+    -- rightStone.Scale = { 500, 2000, 200 }
+    -- rightStone.LocalPosition = { 0, -100, 400 }
 
-    local upStone = MutableShape()
-    upStone:SetParent(map)
-    upStone:AddBlock(Color.DarkGrey, 0, 0, 0)
-    upStone.Pivot = { 0, 1, 0 }
-    upStone.Scale = { 200, 2000, 600 }
-    upStone.LocalPosition = { 400, -100, 0 }
+    -- local upStone = MutableShape()
+    -- upStone:SetParent(map)
+    -- upStone:AddBlock(Color.DarkGrey, 0, 0, 0)
+    -- upStone.Pivot = { 0, 1, 0 }
+    -- upStone.Scale = { 200, 2000, 600 }
+    -- upStone.LocalPosition = { 400, -100, 0 }
 
-    local downStone = MutableShape()
-    downStone:SetParent(map)
-    downStone:AddBlock(Color.DarkGrey, 0, 0, 0)
-    downStone.Pivot = { 0, 1, 0 }
-    downStone.Scale = { 200, 2000, 600 }
-    downStone.LocalPosition = { 0, -100, 0 }
+    -- local downStone = MutableShape()
+    -- downStone:SetParent(map)
+    -- downStone:AddBlock(Color.DarkGrey, 0, 0, 0)
+    -- downStone.Pivot = { 0, 1, 0 }
+    -- downStone.Scale = { 200, 2000, 600 }
+    -- downStone.LocalPosition = { 0, -100, 0 }
 end
 
 blocksModule = {
@@ -929,9 +929,8 @@ Client.Action2Release = function()
 end
 
 Client.Action3Release = function()
-    print(Player.Position)
-    --Player.Position = Number3(410, 5, 300)
-    --Player.Rotation = Number3(0, math.pi * 0.5, 0)
+    Player.Position = Number3(410, 5, 300)
+    Player.Rotation = Number3(0, math.pi * 0.5, 0)
 end
 
 local nextMineHit = 0
