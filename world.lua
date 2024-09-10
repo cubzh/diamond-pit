@@ -843,6 +843,7 @@ Client.OnStart = function()
     Map.Position = { 40, -Map.Height * 20, 40 }
 
     initMenu(function()
+        require("ambience"):set(require("ambience").default)
         Fog.On = false
         initPlayer()
         Player:SetParent(World)
