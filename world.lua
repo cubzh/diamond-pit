@@ -176,7 +176,7 @@ local NUGGETS_COLOR = {
 local BLOCKS_MAX_HP = { 4, 10, 25, 10, 40, 80, 125 }
 
 generate_map = function()
-    Map.Pivot = { 0, Map.Height, 0 }
+    Map.Position = { 0, -Map.Height, 0 }
 end
 
 blocksModule = {
