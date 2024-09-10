@@ -269,7 +269,6 @@ blocksModule.checkNeighborsAndAddChips = function(self, x, y, z)
         end
     end
 end
-
 blocksModule.addChips = function(self, block, color)
     if self.chips[block.Coords.Z] and
         self.chips[block.Coords.Z][block.Coords.Y] and
@@ -283,49 +282,60 @@ blocksModule.addChips = function(self, block, color)
             break
         end
     end
-    local chips = MutableShape()
+
+    if not self.cachedChips then
+        self.cachedChips = {}
+    end
+
+    if not self.cachedChips[blockType] then
+        local chips = MutableShape()
+
+        local function randomFacePosition()
+            return math.random(-4, 4), math.random(-4, 4)
+        end
+
+        -- Front face (3 chips)
+        for i = 1, 10 do
+            local x, y = randomFacePosition()
+            chips:AddBlock(NUGGETS_COLOR[blockType], x, y, -5)
+        end
+
+        -- Back face (3 chips)
+        for i = 1, 10 do
+            local x, y = randomFacePosition()
+            chips:AddBlock(NUGGETS_COLOR[blockType], x, y, 5)
+        end
+
+        -- Left face (3 chips)
+        for i = 1, 10 do
+            local y, z = randomFacePosition()
+            chips:AddBlock(NUGGETS_COLOR[blockType], -5, y, z)
+        end
+
+        -- Right face (3 chips)
+        for i = 1, 10 do
+            local y, z = randomFacePosition()
+            chips:AddBlock(NUGGETS_COLOR[blockType], 5, y, z)
+        end
+
+        -- Top face (3 chips)
+        for i = 1, 10 do
+            local x, z = randomFacePosition()
+            chips:AddBlock(NUGGETS_COLOR[blockType], x, 5, z)
+        end
+
+        -- Bottom face (3 chips)
+        for i = 1, 10 do
+            local x, z = randomFacePosition()
+            chips:AddBlock(NUGGETS_COLOR[blockType], x, -5, z)
+        end
+
+        self.cachedChips[blockType] = chips
+    end
+
+    local chips = Shape(self.cachedChips[blockType])
     chips:SetParent(World)
     chips.Position = block.Position + Number3(10, 10, 10)
-
-    local function randomFacePosition()
-        return math.random(-4, 4), math.random(-4, 4)
-    end
-
-    -- Front face (3 chips)
-    for i = 1, 3 do
-        local x, y = randomFacePosition()
-        chips:AddBlock(NUGGETS_COLOR[blockType], x, y, -5)
-    end
-
-    -- Back face (3 chips)
-    for i = 1, 3 do
-        local x, y = randomFacePosition()
-        chips:AddBlock(NUGGETS_COLOR[blockType], x, y, 5)
-    end
-
-    -- Left face (3 chips)
-    for i = 1, 3 do
-        local y, z = randomFacePosition()
-        chips:AddBlock(NUGGETS_COLOR[blockType], -5, y, z)
-    end
-
-    -- Right face (3 chips)
-    for i = 1, 3 do
-        local y, z = randomFacePosition()
-        chips:AddBlock(NUGGETS_COLOR[blockType], 5, y, z)
-    end
-
-    -- Top face (3 chips)
-    for i = 1, 3 do
-        local x, z = randomFacePosition()
-        chips:AddBlock(NUGGETS_COLOR[blockType], x, 5, z)
-    end
-
-    -- Bottom face (3 chips)
-    for i = 1, 3 do
-        local x, z = randomFacePosition()
-        chips:AddBlock(NUGGETS_COLOR[blockType], x, -5, z)
-    end
     chips.Physics = PhysicsMode.Disabled
     chips.Pivot = Number3(0.5, 0.5, 0.5)
     chips.Scale = 1.75
