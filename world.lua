@@ -836,7 +836,7 @@ Client.OnStart = function()
         uiPos = function(node)
             local padding = require("uitheme").current.padding
             nbSlotsLeftText.pos = {
-                Screen.Width * 0.5 - node.Width * 0.5 - padding * 3 - nbSlotsLeftText.Width * 1.5,
+                Screen.Width * 0.5 - node.Width * 0.5 - padding * 3 - nbSlotsLeftText.Width * 2,
                 padding + node.Height * 0.5 - nbSlotsLeftText.Height * 0.5,
             }
             return { Screen.Width * 0.5 - node.Width * 0.5, padding }
