@@ -175,10 +175,6 @@ local NUGGETS_COLOR = {
 
 local BLOCKS_MAX_HP = { 4, 10, 25, 10, 40, 80, 125 }
 
-generate_map = function()
-    Map.Position = { 0, -Map.Height * 20, 0 }
-end
-
 blocksModule = {
     chips = {}
 }
@@ -798,6 +794,10 @@ updateInventory = function(_, inventory)
     -- ui_blocks:anchorNode(inventoryNode, "right", "top", 5)
 end
 
+Client.OnWorldObjectLoad = function(obj)
+    obj.Position.Y = obj.Position.Y - 20 * Map.Height
+end
+
 Client.OnStart = function()
     floating_island_generator:generateIslands({
         nbIslands = 30, -- number of islands
@@ -833,10 +833,10 @@ Client.OnStart = function()
     })
     initUI()
     Player.pickaxe = Shape(Items.caillef.pickaxe)
+    Map.Position = { 0, -Map.Height * 20, 0 }
 
     initMenu(function()
         Fog.On = false
-        generate_map()
         initPlayer()
         Player:SetParent(World)
         Player.Position = Number3(250 + math.random(-25, 25), 5, 150 + math.random(-25, 25))
