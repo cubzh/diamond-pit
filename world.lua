@@ -1399,7 +1399,7 @@ floating_island_generator.generateIslands = function(_, config)
         for i = 1, nbIslands do
             local island = create(math.random(minSize, maxSize))
             island:SetParent(World)
-            island.Scale = 1
+            island.Scale = 10
             island.Physics = PhysicsMode.Disabled
             local x = math.random(-dist, dist)
             local z = math.random(-dist, dist)
