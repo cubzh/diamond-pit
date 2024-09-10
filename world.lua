@@ -1312,10 +1312,6 @@ end
 local function onReady(callback)
     Object:Load("knosvoxel.oak_tree", function(obj)
         cachedTree = obj
-        Object:Load("kooow.green_bush", function(obj)
-            cachedBush = obj
-            callback()
-        end)
     end)
 end
 
@@ -1392,7 +1388,7 @@ floating_island_generator.generateIslands = function(_, config)
         for i = 1, nbIslands do
             local island = create(math.random(minSize, maxSize))
             island:SetParent(World)
-            island.Scale = Map.Scale
+            island.Scale = 5
             island.Physics = PhysicsMode.Disabled
             local x = math.random(-dist, dist)
             local z = math.random(-dist, dist)
