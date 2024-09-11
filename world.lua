@@ -843,6 +843,10 @@ Client.OnStart = function()
     Player.pickaxe = Shape(Items.caillef.pickaxe)
     Map.Position = { 40, -Map.Height * 20, 40 }
 
+    Camera:SetModeFree()
+    Camera.Position = { 250, 100, 250 }
+    Camera.Rotation.X = -math.pi
+
     initMenu(function()
         require("ambience"):set(require("ambience").default)
         Fog.On = false
