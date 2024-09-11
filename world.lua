@@ -844,7 +844,7 @@ Client.OnStart = function()
     Map.Position = { 40, -Map.Height * 20, 40 }
 
     Camera:SetModeFree()
-    Camera.Position = { 20 * 15, 200, 20 * 15 }
+    Camera.Position = { 20 * 15, 300, 20 * 15 }
     Camera.Rotation.X = math.pi * 0.5
 
     initMenu(function()
