@@ -844,8 +844,8 @@ Client.OnStart = function()
     Map.Position = { 40, -Map.Height * 20, 40 }
 
     Camera:SetModeFree()
-    Camera.Position = { 250, 100, 250 }
-    Camera.Rotation.X = -math.pi
+    Camera.Position = { 250, 200, 250 }
+    Camera.Rotation.X = -math.pi * 0.5
 
     initMenu(function()
         require("ambience"):set(require("ambience").default)
