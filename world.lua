@@ -846,10 +846,10 @@ Client.OnStart = function()
     Camera:SetModeFree()
     Camera.Position = { 20 * 15, 300, 20 * 15 }
     Camera.Rotation.X = math.pi * 0.5
+    Fog.On = false
 
     initMenu(function()
         require("ambience"):set(require("ambience").default)
-        Fog.On = false
         initPlayer()
         Player:SetParent(World)
         Player.Position = Number3(250 + math.random(-25, 25), 5, 150 + math.random(-25, 25))
