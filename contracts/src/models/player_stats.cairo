@@ -34,8 +34,8 @@ pub impl PlayerStatsImpl of PlayerStatsTrait {
             2 => 100,
             3 => 300,
             4 => 750,
-            5 => 2500,
-            _ => 2500,
+            5 => 3000,
+            _ => 3000,
         }
     }
 
@@ -59,8 +59,8 @@ pub impl PlayerStatsImpl of PlayerStatsTrait {
             2 => 80,
             3 => 350,
             4 => 1250,
-            5 => 4000,
-            _ => 4000,
+            5 => 2500,
+            _ => 2500,
         }
     }
 
