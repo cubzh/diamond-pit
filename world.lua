@@ -625,6 +625,7 @@ local function createLeaderboardQuad(position, rotation, title)
     quad.Width = 30
     quad.Height = 50
     quad:SetParent(World)
+    quad.IsUnlit = true
     quad.Anchor = { 0.5, 0 }
     quad.Position = position
     quad.Rotation.Y = rotation
@@ -634,6 +635,7 @@ local function createLeaderboardQuad(position, rotation, title)
     titleText:SetParent(quad)
     titleText.FontSize = 3
     titleText.Type = TextType.World
+    titleText.IsUnlit = true
     titleText.Color = Color.Black
     titleText.Anchor = { 0.5, 1 }
     titleText.LocalPosition = { 0, 47, -0.1 }
@@ -643,6 +645,7 @@ local function createLeaderboardQuad(position, rotation, title)
     contentText:SetParent(quad)
     contentText.FontSize = 2.5
     contentText.Type = TextType.World
+    contentText.IsUnlit = true
     contentText.Color = Color.Black
     contentText.Anchor = { 0, 1 }
     contentText.LocalPosition = { -13, 35, -0.1 }
@@ -652,6 +655,7 @@ local function createLeaderboardQuad(position, rotation, title)
     contentTextScore:SetParent(quad)
     contentTextScore.FontSize = 2.5
     contentTextScore.Type = TextType.World
+    contentTextScore.IsUnlit = true
     contentTextScore.Color = Color.Black
     contentTextScore.Anchor = { 1, 1 }
     contentTextScore.LocalPosition = { 13, 35, -0.1 }
