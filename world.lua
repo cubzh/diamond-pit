@@ -743,6 +743,7 @@ updateInventory = function(_, inventory)
     end
 
     coinText.Text = string.format("%d", inventory.coins.value)
+    creditsText.Text = string.format("%d", inventory.rebirth_credits.value)
 
     inventoryTotalQty = totalQty
     inventoryIsFull = totalQty == (maxSlots or 5)
@@ -1008,6 +1009,22 @@ initUI = function()
     end
     coinText:parentDidResize()
 
+    creditsIcon = ui:createShape(Shape(Items.caillef.coin), { spherized = true })
+    print(#creditsIcon.Palette)
+    LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
+        creditsIcon.pivot.Rotation.Y = creditsIcon.pivot.Rotation.Y + dt
+    end)
+    creditsIcon.Size = 80
+    creditsText = ui:createText("0", Color.White, "big")
+    creditsText.object.FontSize = 30
+    creditsText.parentDidResize = function()
+        creditsIcon.pos = { 10, coinIcon - 5 - creditsIcon.Height }
+        creditsText.pos =
+        { creditsIcon.pos.X + creditsIcon.Width + 5, creditsIcon.pos.Y + creditsIcon.Height * 0.5 -
+        creditsText.Height * 0.5 }
+    end
+    creditsText:parentDidResize()
+
     local help = ui:createText("Right Click: Teleport to Sell Area", Color.White, "small")
     help.parentDidResize = function()
         help.pos = { Screen.Width - help.Width - 4, 4 }
@@ -1153,21 +1170,21 @@ dojo.createToriiClient = function(self, config)
         end
         local json = dojo.toriiClient:GetBurners()
         local burners = json.burners
-        if not burners then
-            self:createBurner(config, function()
-                config.onConnect(dojo.toriiClient)
-            end)
-        else
-            local lastBurner = burners[1]
-            self.toriiClient:CreateAccount(lastBurner.publicKey, lastBurner.privateKey, function(success, burnerAccount)
-                if not success then
-                    error("Can't create burner")
-                    return
-                end
-                dojo.burnerAccount = burnerAccount
-                config.onConnect(dojo.toriiClient)
-            end)
-        end
+        -- if not burners then
+        self:createBurner(config, function()
+            config.onConnect(dojo.toriiClient)
+        end)
+        -- else
+        --     local lastBurner = burners[1]
+        --     self.toriiClient:CreateAccount(lastBurner.publicKey, lastBurner.privateKey, function(success, burnerAccount)
+        --         if not success then
+        --             error("Can't create burner")
+        --             return
+        --         end
+        --         dojo.burnerAccount = burnerAccount
+        --         config.onConnect(dojo.toriiClient)
+        --     end)
+        -- end
     end
     dojo.toriiClient:Connect()
 end

@@ -1,1 +1,1 @@
-pub const REBIRTH_PRICE: u64 = 3000;
+pub const REBIRTH_PRICE: u64 = 5;
