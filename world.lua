@@ -1018,7 +1018,7 @@ initUI = function()
     creditsText = ui:createText("0", Color.White, "big")
     creditsText.object.FontSize = 30
     creditsText.parentDidResize = function()
-        creditsIcon.pos = { 10, coinIcon - 5 - creditsIcon.Height }
+        creditsIcon.pos = { 10, coinIcon.pos.Y - 5 - creditsIcon.Height }
         creditsText.pos =
         { creditsIcon.pos.X + creditsIcon.Width + 5, creditsIcon.pos.Y + creditsIcon.Height * 0.5 -
         creditsText.Height * 0.5 }
