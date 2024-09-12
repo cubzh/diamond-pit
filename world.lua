@@ -1008,7 +1008,7 @@ initPlayer = function()
     end
     Player:SetParent(World)
     Camera.FOV = 80
-    require("object_skills").addStepClimbing(Player, { mapScale = 20 })
+    -- require("object_skills").addStepClimbing(Player, { mapScale = 20 })
     Camera:SetModeFirstPerson()
     if Player.EyeLidRight then
         Player.EyeLidRight:RemoveFromParent()
