@@ -900,7 +900,7 @@ function isOnGround(object)
     isOnGroundBox.Min = minN3 + Number3(1, 0, 1)
     isOnGroundBox.Max = maxN3 - Number3(1, 0, 1)
 
-    local impact = isOnGroundBox:Cast(Number3.Down, 1, object.CollidesWithGroups)
+    local impact = isOnGroundBox:Cast(Number3.Down, 20, object.CollidesWithGroups)
     return (impact ~= nil and impact.FaceTouched == Face.Top)
 end
 
