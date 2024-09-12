@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0x4f71913a0e7dfe072368531b1ad324abbdeac558585bd72a838d900fd35873c"
-original_class_hash = "0x4f71913a0e7dfe072368531b1ad324abbdeac558585bd72a838d900fd35873c"
+class_hash = "0x4f2c42a85652e649f70de3221600c24a4e68df8a59b98a9e7cf11b2833e3b3d"
+original_class_hash = "0x4f2c42a85652e649f70de3221600c24a4e68df8a59b98a9e7cf11b2833e3b3d"
 abi = "manifests/dev/base/abis/models/diamond_pit-PlayerInventory-676ae3a3.json"
 tag = "diamond_pit-PlayerInventory"
 manifest_name = "diamond_pit-PlayerInventory-676ae3a3"
@@ -17,5 +17,10 @@ key = false
 
 [[members]]
 name = "coins"
+type = "u64"
+key = false
+
+[[members]]
+name = "rebirth_credits"
 type = "u64"
 key = false

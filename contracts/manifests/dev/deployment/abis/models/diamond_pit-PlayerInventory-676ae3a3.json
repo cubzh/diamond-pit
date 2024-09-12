@@ -381,6 +381,10 @@
       {
         "name": "coins",
         "type": "core::integer::u64"
+      },
+      {
+        "name": "rebirth_credits",
+        "type": "core::integer::u64"
       }
     ]
   },

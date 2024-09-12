@@ -18,6 +18,7 @@ pub trait IActions {
     fn upgrade_pickaxe(ref world: IWorldDispatcher);
     fn set_username(ref world: IWorldDispatcher, name: felt252);
     fn rebirth(ref world:IWorldDispatcher, nb: u8);
+    fn open_egg(ref world:IWorldDispatcher, egg_type: u8);
 }
 
 // dojo decorator
@@ -29,7 +30,8 @@ pub mod actions {
         blocks_column::{BlocksColumn, BlocksColumnTrait, MAX_U128},
         player_inventory::{PlayerInventory, PlayerInventoryTrait},
         daily_leaderboard_entry::{DailyLeaderboardEntry},
-        player_stats::{PlayerStats, PlayerStatsTrait}, player_position::{PlayerPosition}
+        player_stats::{PlayerStats, PlayerStatsTrait}, player_position::{PlayerPosition},
+        pet_inventory::{PetInventory, PetInventoryTrait}
     };
     use diamond_pit::constants::{REBIRTH_PRICE};
     use diamond_pit::helpers::{block::{BlockHelper, BlockType}, math::{fast_power_2}};
@@ -37,6 +39,7 @@ pub mod actions {
     pub mod Errors {
         pub const NOT_ENOUGH_COINS: felt252 = 'not enough coins';
         pub const BLOCK_NOT_FOUND: felt252 = 'block not found';
+        pub const NOT_ENOUGH_CREDITS: felt252 = 'not enough credits';
     }
 
     #[abi(embed_v0)]
@@ -161,6 +164,69 @@ pub mod actions {
             stats.rebirth += nb.into();
             inventory.rebirth_credits += nb.into();
             set!(world, (inventory, stats));
+        }
+
+        fn open_egg(ref world:IWorldDispatcher, egg_type: u8) {
+            let player = get_caller_address();
+            let (position, mut inventory, mut pet_inventory) = get!(world, player, (PlayerPosition, PlayerInventory, PetInventory));
+            let timestamp: u64 = starknet::get_block_info().unbox().block_timestamp;
+            let rnd_value: u128 = _uniform_random((timestamp + position.x.into() * 100049 + position.z.into() * 5099).into(), 100);
+
+            let mut pet: u8 = 0;
+            if egg_type == 0 {
+                assert(inventory.rebirth_credits >= 1, Errors::NOT_ENOUGH_CREDITS);
+                inventory.rebirth_credits -= 1;
+                if rnd_value <= 29 {
+                    pet = 1; // voxels.bunny_pet
+                } else if rnd_value <= 59 {
+                    pet = 2; // voxels.bird_pet
+                } else if rnd_value <= 79 {
+                    pet = 3; // voxels.ram_pet
+                } else if rnd_value <= 98 {
+                    pet = 4; // voxels.chicken
+                } else if rnd_value == 99 {
+                    pet = 5; // voxels.rhino_pet
+                } else {
+                    pet = 6; // voxels.reptile_pet
+                }
+            } else if egg_type == 1 {
+                assert(inventory.rebirth_credits >= 3, Errors::NOT_ENOUGH_CREDITS);
+                inventory.rebirth_credits -= 3;
+                if rnd_value <= 24 {
+                    pet = 1; // voxels.bunny_pet
+                } else if rnd_value <= 49 {
+                    pet = 2; // voxels.bird_pet
+                } else if rnd_value <= 69 {
+                    pet = 3; // voxels.ram_pet
+                } else if rnd_value <= 89 {
+                    pet = 4; // voxels.chicken
+                } else if rnd_value <= 94 {
+                    pet = 5; // voxels.rhino_pet
+                } else {
+                    pet = 6; // voxels.reptile_pet
+                }
+            } else if egg_type == 2 {
+                assert(inventory.rebirth_credits >= 10, Errors::NOT_ENOUGH_CREDITS);
+                inventory.rebirth_credits -= 10;
+                if rnd_value <= 14 {
+                    pet = 1; // voxels.bunny_pet
+                } else if rnd_value <= 29 {
+                    pet = 2; // voxels.bird_pet
+                } else if rnd_value <= 44 {
+                    pet = 3; // voxels.ram_pet
+                } else if rnd_value <= 59 {
+                    pet = 4; // voxels.chicken
+                } else if rnd_value <= 79 {
+                    pet = 5; // voxels.rhino_pet
+                } else {
+                    pet = 6; // voxels.reptile_pet
+                }
+            } else {
+                return;
+            }
+
+            pet_inventory.add_pet(pet);
+            set!(world, (inventory, pet_inventory));
         }
 
         // Tools

@@ -1,0 +1,41 @@
+kind = "DojoModel"
+class_hash = "0x72a2505ea6a4bc3c6c6773f0fc1144a1d0a5367d6d9cd135d2152446c3988ca"
+original_class_hash = "0x72a2505ea6a4bc3c6c6773f0fc1144a1d0a5367d6d9cd135d2152446c3988ca"
+abi = "manifests/dev/base/abis/models/diamond_pit-PetInventory-6e47b70b.json"
+tag = "diamond_pit-PetInventory"
+manifest_name = "diamond_pit-PetInventory-6e47b70b"
+
+[[members]]
+name = "owner"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "bunnies"
+type = "u32"
+key = false
+
+[[members]]
+name = "birds"
+type = "u32"
+key = false
+
+[[members]]
+name = "rams"
+type = "u32"
+key = false
+
+[[members]]
+name = "chickens"
+type = "u32"
+key = false
+
+[[members]]
+name = "rhinos"
+type = "u32"
+key = false
+
+[[members]]
+name = "reptiles"
+type = "u32"
+key = false

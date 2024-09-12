@@ -5,7 +5,7 @@ original_class_hash = "0x458d0ce5b14a4844092bdb62050f462d53362304a13febbac6d9736
 abi = "manifests/dev/deployment/abis/dojo-world.json"
 address = "0x5c1d201209938c1ac8340c7caeec489060b04dff85399605e58ebc2cdc149f4"
 transaction_hash = "0x3b160b37d0ee0f3d51606f047e53add57b6633fc6de50f3b3cafd60153708ee"
-block_number = 4
+block_number = 3
 seed = "diamond_pit"
 manifest_name = "dojo-world"
 
@@ -24,8 +24,8 @@ manifest_name = "dojo-base"
 [[contracts]]
 kind = "DojoContract"
 address = "0x2c24de1c529a154eac885b0b34e8bf1b04f4ce0845b91d1a4fc9aea8c9d71ed"
-class_hash = "0x7dbd64253df532a5c7766fc7819ab0b14a453f681e0c3325c1039dadc544fa3"
-original_class_hash = "0x7dbd64253df532a5c7766fc7819ab0b14a453f681e0c3325c1039dadc544fa3"
+class_hash = "0x2448fe776877f2447681bdd88eab0e6826b0fd98fe4d67b508d5b4bad61c1da"
+original_class_hash = "0x2448fe776877f2447681bdd88eab0e6826b0fd98fe4d67b508d5b4bad61c1da"
 base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
 abi = "manifests/dev/deployment/abis/contracts/diamond_pit-actions-3fc18067.json"
 reads = []
@@ -39,6 +39,8 @@ systems = [
     "upgrade_pickaxe",
     "upgrade_backpack",
     "set_username",
+    "rebirth",
+    "open_egg",
     "generate_world",
 ]
 manifest_name = "diamond_pit-actions-3fc18067"
@@ -106,8 +108,51 @@ key = false
 
 [[models]]
 kind = "DojoModel"
-class_hash = "0x4f71913a0e7dfe072368531b1ad324abbdeac558585bd72a838d900fd35873c"
-original_class_hash = "0x4f71913a0e7dfe072368531b1ad324abbdeac558585bd72a838d900fd35873c"
+class_hash = "0x72a2505ea6a4bc3c6c6773f0fc1144a1d0a5367d6d9cd135d2152446c3988ca"
+original_class_hash = "0x72a2505ea6a4bc3c6c6773f0fc1144a1d0a5367d6d9cd135d2152446c3988ca"
+abi = "manifests/dev/deployment/abis/models/diamond_pit-PetInventory-6e47b70b.json"
+tag = "diamond_pit-PetInventory"
+manifest_name = "diamond_pit-PetInventory-6e47b70b"
+
+[[models.members]]
+name = "owner"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "bunnies"
+type = "u32"
+key = false
+
+[[models.members]]
+name = "birds"
+type = "u32"
+key = false
+
+[[models.members]]
+name = "rams"
+type = "u32"
+key = false
+
+[[models.members]]
+name = "chickens"
+type = "u32"
+key = false
+
+[[models.members]]
+name = "rhinos"
+type = "u32"
+key = false
+
+[[models.members]]
+name = "reptiles"
+type = "u32"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x4f2c42a85652e649f70de3221600c24a4e68df8a59b98a9e7cf11b2833e3b3d"
+original_class_hash = "0x4f2c42a85652e649f70de3221600c24a4e68df8a59b98a9e7cf11b2833e3b3d"
 abi = "manifests/dev/deployment/abis/models/diamond_pit-PlayerInventory-676ae3a3.json"
 tag = "diamond_pit-PlayerInventory"
 manifest_name = "diamond_pit-PlayerInventory-676ae3a3"
@@ -124,6 +169,11 @@ key = false
 
 [[models.members]]
 name = "coins"
+type = "u64"
+key = false
+
+[[models.members]]
+name = "rebirth_credits"
 type = "u64"
 key = false
 

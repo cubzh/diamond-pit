@@ -231,6 +231,30 @@
         ],
         "outputs": [],
         "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "rebirth",
+        "inputs": [
+          {
+            "name": "nb",
+            "type": "core::integer::u8"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "open_egg",
+        "inputs": [
+          {
+            "name": "egg_type",
+            "type": "core::integer::u8"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
       }
     ]
   },
