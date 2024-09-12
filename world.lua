@@ -803,7 +803,7 @@ Client.OnWorldObjectLoad = function(obj)
             copy.Rotation.Y = math.random() * math.pi
             copy.Scale = math.random() * 0.4 + 0.8
             require("hierarchyactions"):applyToDescendants(copy, { includeRoot = true }, function(obj)
-                obj.Physics = false
+                obj.Physics = PhysicsMode.Disabled
             end)
         end
     end
