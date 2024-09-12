@@ -301,6 +301,7 @@ blocksModule.start = function(self)
     self.CollidesWithGroups = Map.CollidesWithGroups
     self.blockShape.Position = { 200, 0, 200 }
     self.blockShape.Scale = 20
+    self.blockShape.Friction = { top = 0.2, other = 0 }
     self.blockShape.Pivot = { 0, 1, 0 }
     self.blockShape.Shadow = true
     -- self.blockShape.PrivateDrawMode = 8
