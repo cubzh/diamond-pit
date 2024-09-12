@@ -1010,7 +1010,7 @@ initUI = function()
     coinText:parentDidResize()
 
     creditsIcon = ui:createShape(Shape(Items.caillef.coin), { spherized = true })
-    print(#creditsIcon.Palette)
+    print(#creditsIcon.object.Palette)
     LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
         creditsIcon.pivot.Rotation.Y = creditsIcon.pivot.Rotation.Y + dt
     end)
