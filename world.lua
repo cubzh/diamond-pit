@@ -969,6 +969,11 @@ initUI = function()
         { coinIcon.pos.X + coinIcon.Width + 5, coinIcon.pos.Y + coinIcon.Height * 0.5 - coinText.Height * 0.5 }
     end
     coinText:parentDidResize()
+
+    local help = ui:createText("Hint: Right Click to teleport to sell area")
+    help.parentDidResize = function()
+        help.pos = { Screen.Width - help.Width - 4, 4 }
+    end
 end
 
 initPlayer = function()
