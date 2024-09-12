@@ -582,6 +582,34 @@ initUpgradeAreas = function()
         PICKAXE_UPGRADE_PRICES)
     floatingBackpack, backpackNextText = createUpgradeArea({ 450, 0, 400 }, "upgrade_backpack",
         Items.caillef.backpackmine, BACKPACK_UPGRADE_PRICES)
+
+    -- rebirth area
+    local area = MutableShape()
+    area:AddBlock(Color(127, 127, 127, 0.5), 0, 0, 0)
+    area:SetParent(World)
+    area.Scale = { 30, 2, 30 }
+    area.Pivot = { 0.5, 0, 0.5 }
+    area.Physics = PhysicsMode.Trigger
+    area.Position = { 350, 0, 450 }
+    area.OnCollisionBegin = function(_, other)
+        if other == Player then
+            dojo.actions.rebirth(1)
+        end
+    end
+
+    local text = Text()
+    text.Text = "Rebirth (3000 💰)"
+    text:SetParent(area)
+    text.Position = area.Position + Number3(0, 12, 0)
+    text.FontSize = 5
+    text.Type = TextType.World
+    text.IsUnlit = true
+    text.Color = Color.Black
+    text.Anchor = { 0.5, 0 }
+    text.LocalPosition = { 0, 7, 0 }
+    LocalEvent:Listen(LocalEvent.Name.Tick, function()
+        text.Forward = Player.Forward
+    end)
 end
 
 local leaderboardTextBlocks, leaderboardTextHits, leaderboardTextCoins
@@ -1279,6 +1307,26 @@ dojo.actions = {
         dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "set_username",
             string.format("[\"%s\"]", string_to_hex(username)))
     end,
+    rebirth = function(nb)
+        if not dojo.toriiClient then
+            return
+        end
+        if VERBOSE then
+            print("Calling rebirth")
+        end
+        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "rebirth",
+            string.format("[\"%s\"]", number_to_hexstr(nb)))
+    end,
+    open_egg = function(egg_type)
+        if not dojo.toriiClient then
+            return
+        end
+        if VERBOSE then
+            print("Calling open_egg")
+        end
+        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "open_egg",
+            string.format("[\"%s\"]", number_to_hexstr(egg_type)))
+    end
 }
 
 -- Module to create floating island
