@@ -597,18 +597,18 @@ initUpgradeAreas = function()
         end
     end
 
-    local text = Text()
-    text.Text = "Rebirth (3000 💰)"
-    text:SetParent(World)
-    text.Position = area.Position + Number3(0, 12, 0)
-    text.FontSize = 5
-    text.Type = TextType.World
-    text.IsUnlit = true
-    text.Color = Color.Black
-    text.Anchor = { 0.5, 0 }
-    text.LocalPosition = { 0, 7, 0 }
+    local rebirthText = Text()
+    rebirthText.Text = "Rebirth (3000 💰)"
+    rebirthText:SetParent(World)
+    rebirthText.Position = rebirthArea.Position + Number3(0, 12, 0)
+    rebirthText.FontSize = 5
+    rebirthText.Type = TextType.World
+    rebirthText.IsUnlit = true
+    rebirthText.Color = Color.Black
+    rebirthText.Anchor = { 0.5, 0 }
+    rebirthText.LocalPosition = { 0, 7, 0 }
     LocalEvent:Listen(LocalEvent.Name.Tick, function()
-        text.Forward = Player.Forward
+        rebirthText.Forward = Player.Forward
     end)
 end
 
