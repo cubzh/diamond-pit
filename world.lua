@@ -970,7 +970,7 @@ initUI = function()
     end
     coinText:parentDidResize()
 
-    local help = ui:createText("Hint: Right Click to teleport to sell area")
+    local help = ui:createText("Right Click: Teleport to Sell Area", Color.White, "small")
     help.parentDidResize = function()
         help.pos = { Screen.Width - help.Width - 4, 4 }
     end
