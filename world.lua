@@ -875,6 +875,7 @@ function isOnGround(object)
         return false
     end
 
+    print(object.CollisionBox)
     bMax = object.CollisionBox.Max
     bMin = object.CollisionBox.Min
 
