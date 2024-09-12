@@ -1011,7 +1011,8 @@ initUI = function()
 
     creditsIcon = ui:createShape(Shape(Items.caillef.coin), { spherized = true })
     creditsIcon.shape.Palette[1].Color = Color.Red
-    creditsIcon.shape.Palette[2].Color = Color(Color.Red.R * 0.8, Color.Red.G * 0.8, Color.Red.B * 0.8)
+    creditsIcon.shape.Palette[2].Color = Color(math.floor(Color.Red.R * 0.8), math.floor(Color.Red.G * 0.8),
+        math.floor(Color.Red.B * 0.8))
     LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
         creditsIcon.pivot.Rotation.Y = creditsIcon.pivot.Rotation.Y + dt
     end)
