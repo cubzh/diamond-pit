@@ -875,7 +875,6 @@ function isOnGround(object)
         return false
     end
 
-    print(object.CollisionBox)
     bMax = object.CollisionBox.Max
     bMin = object.CollisionBox.Min
 
@@ -901,12 +900,12 @@ function isOnGround(object)
     isOnGroundBox.Min = minN3 + Number3(1, 0, 1)
     isOnGroundBox.Max = maxN3 - Number3(1, 0, 1)
 
-    local impact = isOnGroundBox:Cast(Number3.Down, 20, object.CollidesWithGroups)
+    local impact = isOnGroundBox:Cast(Number3.Down, 5, object.CollidesWithGroups)
     return (impact ~= nil and impact.FaceTouched == Face.Top)
 end
 
 Client.Action1 = function()
-    if IsOnGround(Player) then
+    if isOnGround(Player) then
         Player.Velocity.Y = 100
     end
 end
