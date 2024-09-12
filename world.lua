@@ -584,14 +584,14 @@ initUpgradeAreas = function()
         Items.caillef.backpackmine, BACKPACK_UPGRADE_PRICES)
 
     -- rebirth area
-    local area = MutableShape()
-    area:AddBlock(Color(127, 127, 127, 0.5), 0, 0, 0)
-    area:SetParent(World)
-    area.Scale = { 30, 2, 30 }
-    area.Pivot = { 0.5, 0, 0.5 }
-    area.Physics = PhysicsMode.Trigger
-    area.Position = { 350, 0, 450 }
-    area.OnCollisionBegin = function(_, other)
+    local rebirthArea = MutableShape()
+    rebirthArea:AddBlock(Color(127, 127, 127, 0.5), 0, 0, 0)
+    rebirthArea:SetParent(World)
+    rebirthArea.Scale = { 30, 2, 30 }
+    rebirthArea.Pivot = { 0.5, 0, 0.5 }
+    rebirthArea.Physics = PhysicsMode.Trigger
+    rebirthArea.Position = { 350, 0, 450 }
+    rebirthArea.OnCollisionBegin = function(_, other)
         if other == Player then
             dojo.actions.rebirth(1)
         end
@@ -599,7 +599,7 @@ initUpgradeAreas = function()
 
     local text = Text()
     text.Text = "Rebirth (3000 💰)"
-    text:SetParent(area)
+    text:SetParent(World)
     text.Position = area.Position + Number3(0, 12, 0)
     text.FontSize = 5
     text.Type = TextType.World
