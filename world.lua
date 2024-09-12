@@ -863,9 +863,9 @@ Client.OnChat = function(payload)
 end
 
 Client.Action1 = function()
-    -- if Player.IsOnGround then
-    Player.Velocity.Y = 100
-    -- end
+    if Player.IsOnGround then
+        Player.Velocity.Y = 100
+    end
 end
 
 Client.Action2 = function()
