@@ -534,87 +534,54 @@ initMenu = function(callbackOnStart)
 end
 
 initUpgradeAreas = function()
-    local upgradePickaxe = MutableShape()
-    upgradePickaxe:AddBlock(Color(127, 127, 127, 0.5), 0, 0, 0)
-    upgradePickaxe:SetParent(World)
-    upgradePickaxe.Scale = { 30, 2, 30 }
-    upgradePickaxe.Pivot = { 0.5, 0, 0.5 }
-    upgradePickaxe.Physics = PhysicsMode.Trigger
-    upgradePickaxe.Position = { 450, 0, 200 }
-    upgradePickaxe.OnCollisionBegin = function(_, other)
-        if other ~= Player then
-            return
+    local function createUpgradeArea(position, upgradeAction, itemShape, priceTable)
+        local area = MutableShape()
+        area:AddBlock(Color(127, 127, 127, 0.5), 0, 0, 0)
+        area:SetParent(World)
+        area.Scale = { 30, 2, 30 }
+        area.Pivot = { 0.5, 0, 0.5 }
+        area.Physics = PhysicsMode.Trigger
+        area.Position = position
+        area.OnCollisionBegin = function(_, other)
+            if other == Player then
+                dojo.actions[upgradeAction]()
+            end
         end
-        dojo.actions.upgrade_pickaxe()
+
+        local floatingItem = Shape(itemShape)
+        floatingItem:SetParent(World)
+        floatingItem.Scale = 1.5
+        floatingItem.Position = area.Position + Number3(0, 12, 0)
+        floatingItem.Physics = PhysicsMode.Disabled
+        floatingItem.Palette[upgradeAction == "upgrade_pickaxe" and 8 or 1].Color = LEVEL_COLOR[1]
+
+        local t = 0
+        LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
+            t = t + dt
+            floatingItem.Position.Y = 12 + math.sin(t * 3) * 2
+            floatingItem.Rotation.Y = floatingItem.Rotation.Y + dt * 0.5
+        end)
+
+        local text = Text()
+        text.Text = string.format("%d 💰", priceTable[1])
+        text:SetParent(floatingItem)
+        text.FontSize = 5
+        text.Type = TextType.World
+        text.IsUnlit = true
+        text.Color = Color.Black
+        text.Anchor = { 0.5, 0 }
+        text.LocalPosition = { 0, 7, 0 }
+        LocalEvent:Listen(LocalEvent.Name.Tick, function()
+            text.Forward = Player.Forward
+        end)
+
+        return floatingItem, text
     end
 
-    floatingPickaxe = Shape(Items.caillef.pickaxe)
-    floatingPickaxe:SetParent(World)
-    floatingPickaxe.Scale = 1.5
-    floatingPickaxe.Position = upgradePickaxe.Position + Number3(0, 12, 0)
-    floatingPickaxe.Physics = PhysicsMode.Disabled
-    floatingPickaxe.Palette[8].Color = LEVEL_COLOR[1]
-    local t = 0
-    LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
-        t = t + dt
-        floatingPickaxe.Position.Y = 12 + math.sin(t * 3) * 2
-        floatingPickaxe.Rotation.Y = floatingPickaxe.Rotation.Y + dt * 0.5
-    end)
-
-    local text = Text()
-    text.Text = string.format("%d 💰", PICKAXE_UPGRADE_PRICES[1])
-    text:SetParent(floatingPickaxe)
-    text.FontSize = 5
-    text.Type = TextType.World
-    text.IsUnlit = true
-    text.Color = Color.Black
-    text.Anchor = { 0.5, 0 }
-    text.LocalPosition = { 0, 7, 0 }
-    LocalEvent:Listen(LocalEvent.Name.Tick, function()
-        text.Forward = Player.Forward
-    end)
-    pickaxeNextText = text
-
-    local upgradeBackpack = MutableShape()
-    upgradeBackpack:AddBlock(Color(127, 127, 127, 0.5), 0, 0, 0)
-    upgradeBackpack:SetParent(World)
-    upgradeBackpack.Scale = { 30, 2, 30 }
-    upgradeBackpack.Pivot = { 0.5, 0, 0.5 }
-    upgradeBackpack.Physics = PhysicsMode.Trigger
-    upgradeBackpack.Position = { 450, 0, 400 }
-    upgradeBackpack.OnCollisionBegin = function(_, other)
-        if other ~= Player then
-            return
-        end
-        dojo.actions.upgrade_backpack()
-    end
-
-    floatingBackpack = MutableShape(Items.caillef.backpackmine)
-    floatingBackpack:SetParent(World)
-    floatingBackpack.Scale = 1.5
-    floatingBackpack.Position = upgradeBackpack.Position + Number3(0, 12, 0)
-    floatingBackpack.Physics = PhysicsMode.Disabled
-    floatingBackpack.Palette[1].Color = LEVEL_COLOR[1]
-    local t = 0
-    LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
-        t = t + dt
-        floatingBackpack.Position.Y = 12 + math.sin(t * 3) * 2
-        floatingBackpack.Rotation.Y = floatingBackpack.Rotation.Y + dt * 0.5
-    end)
-
-    local text = Text()
-    text.Text = string.format("%d 💰", BACKPACK_UPGRADE_PRICES[1])
-    text:SetParent(floatingBackpack)
-    text.FontSize = 5
-    text.Type = TextType.World
-    text.IsUnlit = true
-    text.Color = Color.Black
-    text.Anchor = { 0.5, 0 }
-    text.LocalPosition = { 0, 7, 0 }
-    LocalEvent:Listen(LocalEvent.Name.Tick, function()
-        text.Forward = Player.Forward
-    end)
-    backpackNextText = text
+    floatingPickaxe, pickaxeNextText = createUpgradeArea({ 450, 0, 200 }, "upgrade_pickaxe", Items.caillef.pickaxe,
+        PICKAXE_UPGRADE_PRICES)
+    floatingBackpack, backpackNextText = createUpgradeArea({ 450, 0, 400 }, "upgrade_backpack",
+        Items.caillef.backpackmine, BACKPACK_UPGRADE_PRICES)
 end
 
 local leaderboardTextBlocks, leaderboardTextHits, leaderboardTextCoins
