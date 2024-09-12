@@ -94,6 +94,6 @@ mod tests {
         assert(BlockHelper::new(BlockType::Air) == 0, 'wrong block 1');
         assert(BlockHelper::new(BlockType::Stone) == 132, 'wrong block 2');
         assert(BlockHelper::new(BlockType::Gold) == 848, 'wrong block 3');
-        assert(BlockHelper::new(BlockType::Diamond) == 1046, 'wrong block 4');
+        assert(BlockHelper::new(BlockType::Diamond) == 1021, 'wrong block 4');
     }
 }

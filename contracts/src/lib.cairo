@@ -18,3 +18,5 @@ pub mod models {
 pub mod tests {
     pub mod test_world;
 }
+
+pub mod constants;

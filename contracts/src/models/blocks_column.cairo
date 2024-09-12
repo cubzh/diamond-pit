@@ -22,7 +22,6 @@ pub struct BlocksColumn {
 #[generate_trait]
 pub impl BlocksColumnImpl of BlocksColumnTrait {
     fn hit_block(ref self: BlocksColumn, z: u8, mut strength: u16) -> (u16, bool) {
-        println!("hit block {} {}", z, strength);
         let block_raw: u16 = self.get_block(z);
         let (_, hp) = BlockHelper::get_block_info(block_raw);
         if (hp <= 0) { // If air or already broken, return 0
@@ -31,13 +30,10 @@ pub impl BlocksColumnImpl of BlocksColumnTrait {
         if strength > hp.into() {
             strength = hp.into();
         }
-        println!("hit block success");
         let new_hp = hp - strength.try_into().unwrap();
         let final_hit = new_hp <= 0;
         let new_block_info: u16 = block_raw - strength.into();
-        println!("self before {}", self.data);
         self.set_block(new_block_info, z);
-        println!("self after {}", self.data);
         (new_block_info, final_hit)
     }
 

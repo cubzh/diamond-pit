@@ -65,6 +65,6 @@ pub impl PlayerStatsImpl of PlayerStatsTrait {
     }
 
     fn get_rebirth_multiplier(self: PlayerStats) -> u16 {
-        self.rebirth + 1
+        (self.rebirth * 10 + 100)
     }
 }

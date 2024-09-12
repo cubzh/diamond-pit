@@ -17,6 +17,7 @@ pub trait IActions {
     fn upgrade_backpack(ref world: IWorldDispatcher);
     fn upgrade_pickaxe(ref world: IWorldDispatcher);
     fn set_username(ref world: IWorldDispatcher, name: felt252);
+    fn rebirth(ref world:IWorldDispatcher, nb: u8);
 }
 
 // dojo decorator
@@ -30,6 +31,7 @@ pub mod actions {
         daily_leaderboard_entry::{DailyLeaderboardEntry},
         player_stats::{PlayerStats, PlayerStatsTrait}, player_position::{PlayerPosition}
     };
+    use diamond_pit::constants::{REBIRTH_PRICE};
     use diamond_pit::helpers::{block::{BlockHelper, BlockType}, math::{fast_power_2}};
 
     pub mod Errors {
@@ -86,10 +88,9 @@ pub mod actions {
             if final_hit {
                 player_leaderboard_entry.nb_blocks_broken += 1;
                 let (block_type, _) = BlockHelper::get_block_info(new_block);
-                let nb_blocks = playerStats.get_rebirth_multiplier();
                 let slots_left = inventory.slots_left(playerStats.get_backpack_max_slots());
-                if slots_left >= nb_blocks {
-                    inventory.add(BlockHelper::block_u8_to_type(block_type), nb_blocks);
+                if slots_left >= 1 {
+                    inventory.add(BlockHelper::block_u8_to_type(block_type), 1);
                     inventory_updated = true;
                 } else { // Send event backpack max capacity reach
                 }
@@ -116,9 +117,9 @@ pub mod actions {
             let day: u64 = starknet::get_block_info().unbox().block_timestamp / 86400;
             let mut player_leaderboard_entry = get!(world, (player, day), (DailyLeaderboardEntry));
 
-            let mut inventory = get!(world, (player), (PlayerInventory));
-            let amountSold = inventory.sell_all();
-            player_leaderboard_entry.nb_coins_collected += amountSold;
+            let (mut inventory, stats) = get!(world, (player), (PlayerInventory, PlayerStats));
+            let amount_sold = (inventory.sell_all() * stats.get_rebirth_multiplier().into()) / 100;
+            player_leaderboard_entry.nb_coins_collected += amount_sold;
             set!(world, (inventory, player_leaderboard_entry));
         }
 
@@ -147,6 +148,19 @@ pub mod actions {
             let mut stats = get!(world, (player), (PlayerStats));
             stats.name = name;
             set!(world, (stats));
+        }
+
+        fn rebirth(ref world: IWorldDispatcher, nb: u8) {
+            let player = get_caller_address();
+            let (mut inventory, mut stats) = get!(world, (player), (PlayerInventory, PlayerStats));
+            let rebirth_price = REBIRTH_PRICE * nb.into();
+            assert(inventory.coins >= rebirth_price, Errors::NOT_ENOUGH_COINS);
+            inventory.coins -= rebirth_price;
+            stats.backpack_level = 0;
+            stats.pickaxe_level = 0;
+            stats.rebirth += nb.into();
+            inventory.rebirth_credits += nb.into();
+            set!(world, (inventory, stats));
         }
 
         // Tools
