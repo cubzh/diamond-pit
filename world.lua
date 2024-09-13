@@ -407,19 +407,16 @@ updatePetInventory = function(key, petsInventory)
     if petsInventory.player.value == dojo.burnerAccount.Address then
         return
     end
-    local petType
-    local nbPets = 0
     for k, v in pairs(petsInventory) do
         if v.type_name == "u32" and v.value > (prevPetsInventory[k] and prevPetsInventory[k].value or 0) then
             print("NEW PET", k)
-            petType = k
-            nbPets = v.value
-            break
-        end
-    end
-    for name, dojoKey in pairs(PET_NAMES) do
-        if petType == dojoKey then
-            updatePetNumber(name, nbPets)
+            local petType = k
+            local nbPets = v.value
+            for name, dojoKey in pairs(PET_NAMES) do
+                if petType == dojoKey then
+                    updatePetNumber(name, nbPets)
+                end
+            end
         end
     end
     prevPetsInventory = petsInventory
