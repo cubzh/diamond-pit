@@ -11,7 +11,15 @@ Modules = {
     ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5",
 }
 
-local cachedTree
+local pets = {}
+local PET_NAMES = {
+    "bird",
+    "bunny",
+    "chicken",
+    "ram",
+    "rhino",
+    "reptile"
+}
 
 local eggs = {}
 local selectedEgg
@@ -382,6 +390,21 @@ createNewPlayer = function(key, position)
     end)
     otherPlayers[key] = player
     return player
+end
+
+local prevPetsInventory
+updatePetInventory = function(key, petsInventory)
+    if petsInventory.player.value == dojo.burnerAccount.Address then
+        return
+    end
+    print(JSON:Encode(petsInventory))
+    for k, v in pairs(petsInventory) do
+        if prevPetsInventory[k] and v.value < prevPetsInventory[k].value or v.value > 0 then
+            print("NEW PET", k)
+            break
+        end
+    end
+    prevPetsInventory = petsInventory
 end
 
 updatePlayerPosition = function(key, position)
@@ -935,6 +958,14 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
         eggCreditsIcon.LocalPosition = { 0, 2.15, 1 }
     end
+
+    for _, name in ipairs(PET_NAMES) do
+        if name == obj.Name then
+            pets[name] = obj
+            obj.IsHidden = true
+            obj.Physics = false
+        end
+    end
 end
 
 Client.OnStart = function()
@@ -1268,6 +1299,7 @@ local onEntityUpdateCallbacks = {
     ["diamond_pit-DailyLeaderboardEntry"] = updateLeaderboard,
     ["diamond_pit-PlayerStats"] = updatePlayerStats,
     ["diamond_pit-PlayerPosition"] = updatePlayerPosition,
+    ["diamond_pit-PetInventory"] = updatePetInventory,
 }
 
 function startGame(toriiClient)
@@ -1330,7 +1362,6 @@ dojo.createToriiClient = function(self, config)
                     self:createBurner(config, function()
                         config.onConnect(dojo.toriiClient)
                     end)
-
                     -- error("Can't create burner")
                     return
                 end
@@ -1519,6 +1550,7 @@ end
 --]]
 
 floating_island_generator = {}
+local cachedTree
 
 local COLORS = {
     GRASS = Color(19, 133, 16),
