@@ -21,7 +21,7 @@ function lookAtEgg(id)
         local text = Text()
         text.Text = "Click to Open"
         text:SetParent(World)
-        text.FontSize = 2
+        text.FontSize = 1.5
         text.Type = TextType.World
         text.IsUnlit = true
         text.Color = Color.Black
@@ -43,7 +43,7 @@ function lookAtEgg(id)
     end
     selectedEgg = eggs[id]
     selectedEgg.Position.Y = 4
-    openText.Position = selectedEgg.Position + Number3(4, 0, -3)
+    openText.Position = selectedEgg.Position + Number3(selectedEgg.Width * selectedEgg.Scale.X * 0.5, 5, 0)
 end
 
 local playersStats = {}
