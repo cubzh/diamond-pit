@@ -609,6 +609,18 @@ initUpgradeAreas = function()
     LocalEvent:Listen(LocalEvent.Name.Tick, function()
         rebirthText.Forward = Player.Forward
     end)
+
+
+    local rebirthTextHelp = Text()
+    rebirthTextHelp.Text =
+    "Rebirth:\nBackpack goes back to level 1\nPickaxe goes back to level 1\nYou gain 1 rebirth credits\n+10% coins when selling"
+    rebirthTextHelp:SetParent(World)
+    rebirthTextHelp.FontSize = 5
+    rebirthTextHelp.Position = Number3(380, 12, 430)
+    rebirthTextHelp.Type = TextType.World
+    rebirthTextHelp.IsUnlit = true
+    rebirthTextHelp.Color = Color.Black
+    rebirthTextHelp.Anchor = { 0.5, 0 }
 end
 
 local leaderboardTextBlocks, leaderboardTextHits, leaderboardTextCoins
