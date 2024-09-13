@@ -835,6 +835,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.Palette[2].Color = Color(math.floor(Color.Red.R * 0.8), math.floor(Color.Red.G * 0.8),
             math.floor(Color.Red.B * 0.8))
         eggCreditsIcon:SetParent(eggText)
+        eggCreditsIcon.Scale = 0.5
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
         eggCreditsIcon.LocalPosition = { 4, 2, 0 }
     elseif obj.Name == "egg2" then
@@ -854,6 +855,15 @@ Client.OnWorldObjectLoad = function(obj)
         LocalEvent:Listen(LocalEvent.Name.Tick, function()
             eggText.Forward = Player.Forward
         end)
+
+        local eggCreditsIcon = Shape(Items.caillef.coin)
+        eggCreditsIcon.Palette[1].Color = Color.Red
+        eggCreditsIcon.Palette[2].Color = Color(math.floor(Color.Red.R * 0.8), math.floor(Color.Red.G * 0.8),
+            math.floor(Color.Red.B * 0.8))
+        eggCreditsIcon:SetParent(eggText)
+        eggCreditsIcon.Scale = 0.5
+        eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
+        eggCreditsIcon.LocalPosition = { 4, 2, 0 }
     elseif obj.Name == "egg3" then
         obj.Scale = 1.3
 
@@ -871,6 +881,15 @@ Client.OnWorldObjectLoad = function(obj)
         LocalEvent:Listen(LocalEvent.Name.Tick, function()
             eggText.Forward = Player.Forward
         end)
+
+        local eggCreditsIcon = Shape(Items.caillef.coin)
+        eggCreditsIcon.Palette[1].Color = Color.Red
+        eggCreditsIcon.Palette[2].Color = Color(math.floor(Color.Red.R * 0.8), math.floor(Color.Red.G * 0.8),
+            math.floor(Color.Red.B * 0.8))
+        eggCreditsIcon:SetParent(eggText)
+        eggCreditsIcon.Scale = 0.5
+        eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
+        eggCreditsIcon.LocalPosition = { 4, 2, 0 }
     end
 end
 
