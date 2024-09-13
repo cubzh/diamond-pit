@@ -15,20 +15,35 @@ local cachedTree
 
 local eggs = {}
 local selectedEgg
+local openText
 function lookAtEgg(id)
+    if not openText then
+        local text = Text()
+        text.Text = "Click to Open"
+        text:SetParent(World)
+        text.FontSize = 2
+        text.Type = TextType.World
+        text.IsUnlit = true
+        text.Color = Color.Black
+        text.Anchor = { 0.5, 0.5 }
+        openText = text
+    end
     if selectedEgg == id then return end
     if not id then
         if selectedEgg then
             selectedEgg.Position.Y = 0
             selectedEgg = nil
+            openText.IsHidden = true
         end
         return
     end
+    openText.IsHidden = false
     if selectedEgg then
         selectedEgg.Position.Y = 0
     end
     selectedEgg = eggs[id]
     selectedEgg.Position.Y = 4
+    openText.Position = selectedEgg.Position + Number3(4, 0, -3)
 end
 
 local playersStats = {}
