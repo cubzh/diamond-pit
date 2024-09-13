@@ -815,11 +815,42 @@ Client.OnWorldObjectLoad = function(obj)
         end
     end
     if obj.Name == "egg1" then
-
+        local eggText = Text()
+        eggText.Text = "1"
+        eggText:SetParent(World)
+        eggText.FontSize = 3
+        eggText.Position = obj.Position + Number3(0, 15, 0)
+        eggText.Rotation.Y = math.pi * 0.25
+        eggText.Type = TextType.World
+        eggText.IsUnlit = true
+        eggText.Color = Color.Black
+        eggText.Anchor = { 0.5, 0 }
     elseif obj.Name == "egg2" then
         obj.Scale = 0.9
+
+        local eggText = Text()
+        eggText.Text = "3"
+        eggText:SetParent(World)
+        eggText.FontSize = 3
+        eggText.Position = obj.Position + Number3(0, 15, 0)
+        eggText.Rotation.Y = math.pi * 0.25
+        eggText.Type = TextType.World
+        eggText.IsUnlit = true
+        eggText.Color = Color.Black
+        eggText.Anchor = { 0.5, 0 }
     elseif obj.Name == "egg3" then
         obj.Scale = 1.3
+
+        local eggText = Text()
+        eggText.Text = "10"
+        eggText:SetParent(World)
+        eggText.FontSize = 3
+        eggText.Position = obj.Position + Number3(0, 15, 0)
+        eggText.Rotation.Y = math.pi * 0.25
+        eggText.Type = TextType.World
+        eggText.IsUnlit = true
+        eggText.Color = Color.Black
+        eggText.Anchor = { 0.5, 0 }
     end
 end
 
