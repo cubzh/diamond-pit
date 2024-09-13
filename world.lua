@@ -600,12 +600,12 @@ initUpgradeAreas = function()
     local rebirthText = Text()
     rebirthText.Text = "Rebirth (3000 💰)"
     rebirthText:SetParent(World)
-    rebirthText.Position = Number3(350, 12, 450)
     rebirthText.FontSize = 5
     rebirthText.Type = TextType.World
     rebirthText.IsUnlit = true
     rebirthText.Color = Color.Black
     rebirthText.Anchor = { 0.5, 0 }
+    rebirthText.Position = Number3(350, 12, 450)
     rebirthText.LocalPosition = { 0, 7, 0 }
     LocalEvent:Listen(LocalEvent.Name.Tick, function()
         rebirthText.Forward = Player.Forward
