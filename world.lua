@@ -887,6 +887,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
         eggCreditsIcon.LocalPosition = { 0, 2.15, 1 }
     elseif obj.Name == "egg3" then
+        obj.Physics = PhysicsMode.Static
         obj.CollisionBox.Min.Y = obj.CollisionBox.Min.Y - 20
         eggs[3] = obj
         obj.Scale = 1.2
