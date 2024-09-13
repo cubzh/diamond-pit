@@ -400,9 +400,7 @@ updatePetInventory = function(key, petsInventory)
     print("new", JSON:Encode(petsInventory))
     print("prev", not prevPetsInventory and "nil" or JSON:Encode(prevPetsInventory))
     for k, v in pairs(petsInventory) do
-        if v.type_name == "u32" and
-            (prevPetsInventory[k] and v.value > prevPetsInventory[k].value
-                or v.value > 0) then
+        if v.type_name == "u32" and v.value > (prevPetsInventory[k] and prevPetsInventory[k].value or 0) then
             print("NEW PET", k)
             break
         end
