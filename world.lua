@@ -1041,7 +1041,7 @@ end
 
 Client.Action2 = function()
     if selectedEgg then
-        dojo.actions.open_egg(tonumber(string.sub(selectedEgg.Name, 4, 4)))
+        dojo.actions.open_egg(tonumber(string.sub(selectedEgg.Name, 4, 4)) - 1)
         return
     end
     mining = true
