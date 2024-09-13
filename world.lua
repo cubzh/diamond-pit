@@ -616,7 +616,7 @@ initUpgradeAreas = function()
     "Rebirth:\nBackpack goes back to level 1\nPickaxe goes back to level 1\nYou gain 1 rebirth credits\n+10% coins when selling"
     rebirthTextHelp:SetParent(World)
     rebirthTextHelp.FontSize = 5
-    rebirthTextHelp.Position = Number3(380, 12, 430)
+    rebirthTextHelp.Position = Number3(380, 0, 430)
     rebirthTextHelp.Type = TextType.World
     rebirthTextHelp.IsUnlit = true
     rebirthTextHelp.Color = Color.Black
