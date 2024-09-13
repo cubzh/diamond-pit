@@ -834,6 +834,7 @@ Client.OnWorldObjectLoad = function(obj)
     end
     if obj.Name == "egg1" then
         eggs[1] = obj
+        obj.CollisionBox.Min.Y = obj.CollisionBox.Min.Y - 20
         local eggText = Text()
         eggText.Text = "1"
         eggText:SetParent(World)
@@ -858,6 +859,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
         eggCreditsIcon.LocalPosition = { 0, 2.15, 1 }
     elseif obj.Name == "egg2" then
+        obj.CollisionBox.Min.Y = obj.CollisionBox.Min.Y - 20
         eggs[2] = obj
         obj.Scale = 0.9
 
@@ -885,6 +887,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
         eggCreditsIcon.LocalPosition = { 0, 2.15, 1 }
     elseif obj.Name == "egg3" then
+        obj.CollisionBox.Min.Y = obj.CollisionBox.Min.Y - 20
         eggs[3] = obj
         obj.Scale = 1.3
 
@@ -1108,9 +1111,7 @@ Client.Tick = function(dt)
     if impact.Object and impact.Object.Name and string.sub(impact.Object.Name, 1, 3) == "egg" and impact.Distance < 50 then
         lookAtEgg(math.floor(tonumber(string.sub(impact.Object.Name, 4, 4))))
     else
-        Timer(0.5, function()
-            lookAtEgg()
-        end)
+        lookAtEgg()
     end
 end
 
