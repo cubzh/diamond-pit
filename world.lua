@@ -13,12 +13,12 @@ Modules = {
 
 local pets = {}
 local PET_NAMES = {
-    "bird",
-    "bunny",
-    "chicken",
-    "ram",
-    "rhino",
-    "reptile"
+    bird = "birds",
+    bunny = "bunnies",
+    chicken = "chickens",
+    ram = "rams",
+    rhino = "rhinos",
+    reptile = "reptiles",
 }
 
 local eggs = {}
@@ -392,17 +392,34 @@ createNewPlayer = function(key, position)
     return player
 end
 
+local petStatus = {}
+function updatePetNumber(petName, nbPets)
+    if not petStatus[petName] then
+        petStatus[petName] = nbPets
+        -- discovery
+        pets[petName].IsHidden = false
+        pets[petName].Physics = Physics.Static
+    end
+end
+
 local prevPetsInventory
 updatePetInventory = function(key, petsInventory)
     if petsInventory.player.value == dojo.burnerAccount.Address then
         return
     end
-    print("new", JSON:Encode(petsInventory))
-    print("prev", not prevPetsInventory and "nil" or JSON:Encode(prevPetsInventory))
+    local petType
+    local nbPets = 0
     for k, v in pairs(petsInventory) do
         if v.type_name == "u32" and v.value > (prevPetsInventory[k] and prevPetsInventory[k].value or 0) then
             print("NEW PET", k)
+            petType = k
+            nbPets = v.value
             break
+        end
+    end
+    for name, dojoKey in pairs(PET_NAMES) do
+        if petType == dojoKey then
+            updatePetNumber(name, nbPets)
         end
     end
     prevPetsInventory = petsInventory
@@ -960,7 +977,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.LocalPosition = { 0, 2.15, 1 }
     end
 
-    for _, name in ipairs(PET_NAMES) do
+    for name, _ in pairs(PET_NAMES) do
         if name == obj.Name then
             pets[name] = obj
             obj.IsHidden = true
