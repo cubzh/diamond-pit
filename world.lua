@@ -814,6 +814,13 @@ Client.OnWorldObjectLoad = function(obj)
             end)
         end
     end
+    if obj.Name == "egg1" then
+
+    elseif obj.Name == "egg2" then
+        obj.Scale = 2
+    elseif obj.Name == "egg3" then
+        obj.Scale = 4
+    end
 end
 
 Client.OnStart = function()
