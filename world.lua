@@ -887,10 +887,11 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
         eggCreditsIcon.LocalPosition = { 0, 2.15, 1 }
     elseif obj.Name == "egg3" then
-        obj.Physics = PhysicsMode.Static
+        local triggerObj = Object()
+        triggerObj = "tegg3"
+        triggerObj.Physics = PhysicsMode.Trigger
         local box = obj.CollisionBox:Copy()
-        box.Min.Y = box.Min.Y - 20
-        obj.CollisionBox = box
+        triggerObj.CollisionBox = box
 
         eggs[3] = obj
         obj.Scale = 1.2
@@ -1112,8 +1113,8 @@ Client.Tick = function(dt)
     end
 
     local impact = Player:CastRay(nil, Player)
-    if impact.Object and impact.Object.Name and string.sub(impact.Object.Name, 1, 3) == "egg" and impact.Distance < 50 then
-        lookAtEgg(math.floor(tonumber(string.sub(impact.Object.Name, 4, 4))))
+    if impact.Object and impact.Object.Name and string.sub(impact.Object.Name, 1, 4) == "tegg" and impact.Distance < 50 then
+        lookAtEgg(math.floor(tonumber(string.sub(impact.Object.Name, 5, 5))))
     else
         lookAtEgg()
     end
