@@ -825,7 +825,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggText.IsUnlit = true
         eggText.Color = Color.White
         eggText.BackgroundColor = Color(0, 0, 0, 0)
-        eggText.Anchor = { 1, 0 }
+        eggText.Anchor = { 0.5, 0 }
         LocalEvent:Listen(LocalEvent.Name.Tick, function()
             eggText.Forward = Player.Forward
         end)
@@ -837,7 +837,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon:SetParent(eggText)
         eggCreditsIcon.Scale = 0.5
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
-        eggCreditsIcon.LocalPosition = { 4, 2, 0 }
+        eggCreditsIcon.LocalPosition = { 0, 0, 1 }
     elseif obj.Name == "egg2" then
         obj.Scale = 0.9
 
@@ -851,7 +851,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggText.IsUnlit = true
         eggText.Color = Color.White
         eggText.BackgroundColor = Color(0, 0, 0, 0)
-        eggText.Anchor = { 1, 0 }
+        eggText.Anchor = { 0.5, 0 }
         LocalEvent:Listen(LocalEvent.Name.Tick, function()
             eggText.Forward = Player.Forward
         end)
@@ -863,7 +863,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon:SetParent(eggText)
         eggCreditsIcon.Scale = 0.5
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
-        eggCreditsIcon.LocalPosition = { 4, 2, 0 }
+        eggCreditsIcon.LocalPosition = { 0, 0, 1 }
     elseif obj.Name == "egg3" then
         obj.Scale = 1.3
 
@@ -877,7 +877,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggText.IsUnlit = true
         eggText.Color = Color.White
         eggText.BackgroundColor = Color(0, 0, 0, 0)
-        eggText.Anchor = { 1, 0 }
+        eggText.Anchor = { 0.5, 0 }
         LocalEvent:Listen(LocalEvent.Name.Tick, function()
             eggText.Forward = Player.Forward
         end)
@@ -889,7 +889,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon:SetParent(eggText)
         eggCreditsIcon.Scale = 0.5
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
-        eggCreditsIcon.LocalPosition = { 4, 2, 0 }
+        eggCreditsIcon.LocalPosition = { 0, 0, 1 }
     end
 end
 
