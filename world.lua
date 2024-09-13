@@ -11,7 +11,22 @@ Modules = {
     ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5",
 }
 
-local cachedTree, cachedBush
+local cachedTree
+
+local eggs = {}
+local selectedEgg
+function lookAtEgg(id)
+    if selectedEgg == id then return end
+    if not id then
+        if selectedEgg then
+            selectedEgg.Position.Y = 0
+            selectedEgg = nil
+        end
+        return
+    end
+    selectedEgg = eggs[id]
+    selectedEgg.Position.Y = 4
+end
 
 local playersStats = {}
 local resourcesById = {}
@@ -815,6 +830,7 @@ Client.OnWorldObjectLoad = function(obj)
         end
     end
     if obj.Name == "egg1" then
+        eggs[1] = obj
         local eggText = Text()
         eggText.Text = "1"
         eggText:SetParent(World)
@@ -839,6 +855,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
         eggCreditsIcon.LocalPosition = { 0, 2.15, 1 }
     elseif obj.Name == "egg2" then
+        eggs[2] = obj
         obj.Scale = 0.9
 
         local eggText = Text()
@@ -865,6 +882,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
         eggCreditsIcon.LocalPosition = { 0, 2.15, 1 }
     elseif obj.Name == "egg3" then
+        eggs[3] = obj
         obj.Scale = 1.3
 
         local eggText = Text()
@@ -1081,6 +1099,13 @@ Client.Tick = function(dt)
                 handleBlocksImpact(impact)
             end
         end
+    end
+
+    local impact = Player:CastRay(nil, Player)
+    if impact.Object and string.sub(impact.Object.Name, 1, 3) == "egg" and impact.Distance < 50 then
+        lookAtEgg(math.floor(tonumber(string.sub(impact.Object.Name(4, 4)))))
+    else
+        lookAtEgg()
     end
 end
 
