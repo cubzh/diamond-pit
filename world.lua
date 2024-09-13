@@ -43,7 +43,7 @@ function lookAtEgg(id)
     end
     selectedEgg = eggs[id]
     selectedEgg.Position.Y = 4
-    openText.Position = selectedEgg.Position + Number3(selectedEgg.Width * selectedEgg.Scale.X * 0.5, 5, 0)
+    openText.Position = selectedEgg.Position + Number3(0, 5, -selectedEgg.Depth * selectedEgg.Scale.Z * 0.5)
 end
 
 local playersStats = {}
