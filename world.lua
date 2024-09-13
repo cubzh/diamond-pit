@@ -835,9 +835,9 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.Palette[2].Color = Color(math.floor(Color.Red.R * 0.8), math.floor(Color.Red.G * 0.8),
             math.floor(Color.Red.B * 0.8))
         eggCreditsIcon:SetParent(eggText)
-        eggCreditsIcon.Scale = 0.5
+        eggCreditsIcon.Scale = 0.9
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
-        eggCreditsIcon.LocalPosition = { 0, 0, 1 }
+        eggCreditsIcon.LocalPosition = { 0, 3, 1 }
     elseif obj.Name == "egg2" then
         obj.Scale = 0.9
 
@@ -861,9 +861,9 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.Palette[2].Color = Color(math.floor(Color.Red.R * 0.8), math.floor(Color.Red.G * 0.8),
             math.floor(Color.Red.B * 0.8))
         eggCreditsIcon:SetParent(eggText)
-        eggCreditsIcon.Scale = 0.5
+        eggCreditsIcon.Scale = 0.9
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
-        eggCreditsIcon.LocalPosition = { 0, 0, 1 }
+        eggCreditsIcon.LocalPosition = { 0, 3, 1 }
     elseif obj.Name == "egg3" then
         obj.Scale = 1.3
 
@@ -887,9 +887,9 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.Palette[2].Color = Color(math.floor(Color.Red.R * 0.8), math.floor(Color.Red.G * 0.8),
             math.floor(Color.Red.B * 0.8))
         eggCreditsIcon:SetParent(eggText)
-        eggCreditsIcon.Scale = 0.5
+        eggCreditsIcon.Scale = 0.9
         eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
-        eggCreditsIcon.LocalPosition = { 0, 0, 1 }
+        eggCreditsIcon.LocalPosition = { 0, 3, 1 }
     end
 end
 
