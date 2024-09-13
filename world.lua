@@ -888,12 +888,15 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.LocalPosition = { 0, 2.15, 1 }
     elseif obj.Name == "egg3" then
         local triggerObj = Object()
-        triggerObj = "tegg3"
+        triggerObj:SetParent(World)
+        triggerObj.Position = obj.Position
+        triggerObj.Name = "tegg3"
         triggerObj.Physics = PhysicsMode.Trigger
         local box = obj.CollisionBox:Copy()
         triggerObj.CollisionBox = box
 
         eggs[3] = obj
+        obj.Physics = false
         obj.Scale = 1.2
         Dev.DisplayColliders = true
         local eggText = Text()
