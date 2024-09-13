@@ -1319,21 +1319,25 @@ dojo.createToriiClient = function(self, config)
         end
         local json = dojo.toriiClient:GetBurners()
         local burners = json.burners
-        -- if not burners then
-        self:createBurner(config, function()
-            config.onConnect(dojo.toriiClient)
-        end)
-        -- else
-        --     local lastBurner = burners[1]
-        --     self.toriiClient:CreateAccount(lastBurner.publicKey, lastBurner.privateKey, function(success, burnerAccount)
-        --         if not success then
-        --             error("Can't create burner")
-        --             return
-        --         end
-        --         dojo.burnerAccount = burnerAccount
-        --         config.onConnect(dojo.toriiClient)
-        --     end)
-        -- end
+        if not burners then
+            self:createBurner(config, function()
+                config.onConnect(dojo.toriiClient)
+            end)
+        else
+            local lastBurner = burners[1]
+            self.toriiClient:CreateAccount(lastBurner.publicKey, lastBurner.privateKey, function(success, burnerAccount)
+                if not success then
+                    self:createBurner(config, function()
+                        config.onConnect(dojo.toriiClient)
+                    end)
+
+                    -- error("Can't create burner")
+                    return
+                end
+                dojo.burnerAccount = burnerAccount
+                config.onConnect(dojo.toriiClient)
+            end)
+        end
     end
     dojo.toriiClient:Connect()
 end
