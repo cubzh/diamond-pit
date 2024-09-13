@@ -892,7 +892,7 @@ Client.OnWorldObjectLoad = function(obj)
         obj.Scale = 1.2
         local triggerObj = Object()
         triggerObj:SetParent(World)
-        triggerObj.Position = obj.Position - Number3(obj.Width, 0, obj.Depth) / 2
+        triggerObj.Position = obj.Position - Number3(obj.Width, 0, obj.Depth) * obj.Scale / 2
         triggerObj.Name = "tegg3"
         triggerObj.Physics = PhysicsMode.Trigger
         local box = obj.CollisionBox:Copy()
