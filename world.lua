@@ -823,7 +823,8 @@ Client.OnWorldObjectLoad = function(obj)
         eggText.Rotation.Y = math.pi * 0.25
         eggText.Type = TextType.World
         eggText.IsUnlit = true
-        eggText.Color = Color.Black
+        eggText.Color = Color.White
+        eggText.BackgroundColor = Color(0, 0, 0, 0)
         eggText.Anchor = { 1, 0 }
         LocalEvent:Listen(LocalEvent.Name.Tick, function()
             eggText.Forward = Player.Forward
@@ -834,7 +835,8 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.Palette[2].Color = Color(math.floor(Color.Red.R * 0.8), math.floor(Color.Red.G * 0.8),
             math.floor(Color.Red.B * 0.8))
         eggCreditsIcon:SetParent(eggText)
-        eggCreditsIcon.LocalPosition = { 5, 0, 0 }
+        eggCreditsIcon.LocalRotation.Y = math.pi * 0.5
+        eggCreditsIcon.LocalPosition = { 4, 2, 0 }
     elseif obj.Name == "egg2" then
         obj.Scale = 0.9
 
@@ -846,7 +848,8 @@ Client.OnWorldObjectLoad = function(obj)
         eggText.Rotation.Y = math.pi * 0.25
         eggText.Type = TextType.World
         eggText.IsUnlit = true
-        eggText.Color = Color.Black
+        eggText.Color = Color.White
+        eggText.BackgroundColor = Color(0, 0, 0, 0)
         eggText.Anchor = { 1, 0 }
         LocalEvent:Listen(LocalEvent.Name.Tick, function()
             eggText.Forward = Player.Forward
@@ -862,7 +865,8 @@ Client.OnWorldObjectLoad = function(obj)
         eggText.Rotation.Y = math.pi * 0.25
         eggText.Type = TextType.World
         eggText.IsUnlit = true
-        eggText.Color = Color.Black
+        eggText.Color = Color.White
+        eggText.BackgroundColor = Color(0, 0, 0, 0)
         eggText.Anchor = { 1, 0 }
         LocalEvent:Listen(LocalEvent.Name.Tick, function()
             eggText.Forward = Player.Forward
