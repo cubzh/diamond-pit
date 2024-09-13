@@ -1008,6 +1008,64 @@ Client.Action3Release = function()
     Player.Rotation = Number3(0, math.pi * 0.5, 0)
 end
 
+function handleBlocksImpact(impact)
+    impact = Player:CastRay(impact.Object)
+    if impact.Distance < 40 then
+        if inventoryIsFull then
+            local text = Text()
+            text.Text = "Inventory full, right click to leave the pit"
+            text:SetParent(World)
+            text.FontSize = 20
+            text.Type = TextType.Screen
+            text.IsUnlit = true
+            text.Color = Color.Black
+            text.Anchor = { 0.5, 0.4 }
+            local impactPos = Camera.Position + Camera.Forward * impact.Distance
+            text.LocalPosition = impactPos
+            Timer(4, function()
+                text:RemoveFromParent()
+            end)
+            return
+        end
+        local block = impact.Block
+        Player:SwingRight()
+        local impactPos = Camera.Position + Camera.Forward * impact.Distance
+        emitter.Position = impactPos
+        emitter:spawn(15)
+        sfx(string.format("wood_impact_%d", math.random(1, 5)), { Spatialized = false, Volume = 0.6 })
+
+        local playerPos = Player.Position + Number3(1, 1, 1) * 1000000
+        tickSinceSync = 0
+        dojo.actions.hit_block(
+            math.floor(block.Coords.X),
+            math.floor(block.Coords.Y),
+            math.floor(block.Coords.Z),
+            math.floor(playerPos.X),
+            math.floor(playerPos.Y),
+            math.floor(playerPos.Z)
+        )
+
+        local text = Text()
+        text.Text = string.format("-%d", pickaxeStrength)
+        text:SetParent(World)
+        text.FontSize = 40
+        text.Type = TextType.Screen
+        text.IsUnlit = true
+        text.Color = Color.Black
+        text.Anchor = { 0.5, 0.4 }
+        text.LocalPosition = impactPos
+        local dir = Player.Right * (math.random(-10, 10) / 50) + Number3(0, 0.3, 0)
+        local listener = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
+            text.LocalPosition = text.LocalPosition + dir
+            dir.Y = dir.Y - 0.01
+        end)
+        Timer(2, function()
+            text:RemoveFromParent()
+            listener:Remove()
+        end)
+    end
+end
+
 local nextMineHit = 0
 local t = 0
 Client.Tick = function(dt)
@@ -1020,61 +1078,7 @@ Client.Tick = function(dt)
             nextMineHit = t + 0.8
             local impact = Player:CastRay(nil, Player)
             if impact.Object and impact.Object.Name == "Blocks" then
-                impact = Player:CastRay(impact.Object)
-                if impact.Distance < 40 then
-                    if inventoryIsFull then
-                        local text = Text()
-                        text.Text = "Inventory full, right click to leave the pit"
-                        text:SetParent(World)
-                        text.FontSize = 20
-                        text.Type = TextType.Screen
-                        text.IsUnlit = true
-                        text.Color = Color.Black
-                        text.Anchor = { 0.5, 0.4 }
-                        local impactPos = Camera.Position + Camera.Forward * impact.Distance
-                        text.LocalPosition = impactPos
-                        Timer(4, function()
-                            text:RemoveFromParent()
-                        end)
-                        return
-                    end
-                    local block = impact.Block
-                    Player:SwingRight()
-                    local impactPos = Camera.Position + Camera.Forward * impact.Distance
-                    emitter.Position = impactPos
-                    emitter:spawn(15)
-                    sfx(string.format("wood_impact_%d", math.random(1, 5)), { Spatialized = false, Volume = 0.6 })
-
-                    local playerPos = Player.Position + Number3(1, 1, 1) * 1000000
-                    tickSinceSync = 0
-                    dojo.actions.hit_block(
-                        math.floor(block.Coords.X),
-                        math.floor(block.Coords.Y),
-                        math.floor(block.Coords.Z),
-                        math.floor(playerPos.X),
-                        math.floor(playerPos.Y),
-                        math.floor(playerPos.Z)
-                    )
-
-                    local text = Text()
-                    text.Text = string.format("-%d", pickaxeStrength)
-                    text:SetParent(World)
-                    text.FontSize = 40
-                    text.Type = TextType.Screen
-                    text.IsUnlit = true
-                    text.Color = Color.Black
-                    text.Anchor = { 0.5, 0.4 }
-                    text.LocalPosition = impactPos
-                    local dir = Player.Right * (math.random(-10, 10) / 50) + Number3(0, 0.3, 0)
-                    local listener = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
-                        text.LocalPosition = text.LocalPosition + dir
-                        dir.Y = dir.Y - 0.01
-                    end)
-                    Timer(2, function()
-                        text:RemoveFromParent()
-                        listener:Remove()
-                    end)
-                end
+                handleBlocksImpact(impact)
             end
         end
     end
