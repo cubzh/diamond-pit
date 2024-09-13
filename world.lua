@@ -888,6 +888,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.LocalPosition = { 0, 2.15, 1 }
     elseif obj.Name == "egg3" then
         eggs[3] = obj
+        obj.Physics = PhysicsMode.Static
         obj.Scale = 1.2
         obj.CollisionBox.Min = obj.CollisionBox.Min + Number3.Down * 20
         Dev.DisplayColliders = true
