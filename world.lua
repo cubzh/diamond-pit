@@ -888,7 +888,7 @@ Client.OnWorldObjectLoad = function(obj)
         eggCreditsIcon.LocalPosition = { 0, 2.15, 1 }
     elseif obj.Name == "egg3" then
         obj.Physics = PhysicsMode.Static
-        local box = Box(obj.CollisionBox.Min, obj.CollisionBox.Max)
+        local box = Box(obj.CollisionBox.Min:Copy(), obj.CollisionBox.Max:Copy())
         box.Min.Y = box.Min.Y - 20
         obj.CollisionBox = box
         eggs[3] = obj
