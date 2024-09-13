@@ -601,7 +601,7 @@ initUpgradeAreas = function()
     rebirthText.Text = "Rebirth (3000 💰)"
     rebirthText:SetParent(World)
     rebirthText.FontSize = 5
-    rebirthText.Position = Number3(350, 12, 450)
+    rebirthText.Position = Number3(350, 25, 450)
     rebirthText.Type = TextType.World
     rebirthText.IsUnlit = true
     rebirthText.Color = Color.Black
