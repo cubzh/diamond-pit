@@ -24,6 +24,9 @@ function lookAtEgg(id)
         end
         return
     end
+    if selectedEgg then
+        selectedEgg.Position.Y = 0
+    end
     selectedEgg = eggs[id]
     selectedEgg.Position.Y = 4
 end
@@ -1105,7 +1108,9 @@ Client.Tick = function(dt)
     if impact.Object and impact.Object.Name and string.sub(impact.Object.Name, 1, 3) == "egg" and impact.Distance < 50 then
         lookAtEgg(math.floor(tonumber(string.sub(impact.Object.Name, 4, 4))))
     else
-        lookAtEgg()
+        Timer(0.5, function()
+            lookAtEgg()
+        end)
     end
 end
 
