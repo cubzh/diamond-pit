@@ -889,7 +889,7 @@ Client.OnWorldObjectLoad = function(obj)
     elseif obj.Name == "egg3" then
         obj.CollisionBox.Min.Y = obj.CollisionBox.Min.Y - 20
         eggs[3] = obj
-        obj.Scale = 1.3
+        obj.Scale = 1.2
 
         local eggText = Text()
         eggText.Text = "10"
