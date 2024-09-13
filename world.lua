@@ -44,7 +44,7 @@ function lookAtEgg(id)
     selectedEgg = eggs[id]
     selectedEgg.Position.Y = 4
     openText.Position = selectedEgg.Position +
-    Number3(0, selectedEgg.Height * selectedEgg.Scale.Y * 0.5, -selectedEgg.Depth * selectedEgg.Scale.Z * 0.8)
+        Number3(0, selectedEgg.Height * selectedEgg.Scale.Y * 0.5, -selectedEgg.Depth * selectedEgg.Scale.Z * 0.8)
 end
 
 local playersStats = {}
@@ -1040,6 +1040,10 @@ Client.Action1 = function()
 end
 
 Client.Action2 = function()
+    if selectedEgg then
+        dojo.actions.open_egg(tonumber(string.sub(selectedEgg.Name, 4, 4)))
+        return
+    end
     mining = true
 end
 
