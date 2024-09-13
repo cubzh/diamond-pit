@@ -890,7 +890,7 @@ Client.OnWorldObjectLoad = function(obj)
         obj.CollisionBox.Min.Y = obj.CollisionBox.Min.Y - 20
         eggs[3] = obj
         obj.Scale = 1.2
-
+        Dev.DisplayColliders = true
         local eggText = Text()
         eggText.Text = "10"
         eggText:SetParent(World)
