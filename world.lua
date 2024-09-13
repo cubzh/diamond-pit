@@ -397,7 +397,8 @@ updatePetInventory = function(key, petsInventory)
     if petsInventory.player.value == dojo.burnerAccount.Address then
         return
     end
-    print(JSON:Encode(petsInventory))
+    print("new", JSON:Encode(petsInventory))
+    print("prev", not prevPetsInventory and "nil" or JSON:Encode(prevPetsInventory))
     for k, v in pairs(petsInventory) do
         if v.type_name == "u32" and
             (prevPetsInventory[k] and v.value < prevPetsInventory[k].value
