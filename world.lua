@@ -817,9 +817,9 @@ Client.OnWorldObjectLoad = function(obj)
     if obj.Name == "egg1" then
 
     elseif obj.Name == "egg2" then
-        obj.Scale = 1.2
+        obj.Scale = 0.9
     elseif obj.Name == "egg3" then
-        obj.Scale = 1.5
+        obj.Scale = 1.3
     end
 end
 
