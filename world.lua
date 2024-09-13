@@ -1102,8 +1102,8 @@ Client.Tick = function(dt)
     end
 
     local impact = Player:CastRay(nil, Player)
-    if impact.Object and string.sub(impact.Object.Name, 1, 3) == "egg" and impact.Distance < 50 then
-        lookAtEgg(math.floor(tonumber(string.sub(impact.Object.Name(4, 4)))))
+    if impact.Object and impact.Object.Name and string.sub(impact.Object.Name, 1, 3) == "egg" and impact.Distance < 50 then
+        lookAtEgg(math.floor(tonumber(string.sub(impact.Object.Name, 4, 4))))
     else
         lookAtEgg()
     end
