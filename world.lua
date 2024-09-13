@@ -612,7 +612,7 @@ initUpgradeAreas = function()
 
     local rebirthTextHelp = Text()
     rebirthTextHelp.Text =
-    "Rebirth:\nBackpack goes back to level 1\nPickaxe goes back to level 1\nYou gain 1 rebirth credits to open eggs\n+10% coins when selling"
+    "Rebirth:\nDowngrade backpack and pickaxe to level 1\n+1 rebirth credits to open eggs\n+10% coins when selling"
     rebirthTextHelp:SetParent(World)
     rebirthTextHelp.FontSize = 2
     rebirthTextHelp.Position = Number3(370, 3, 460)
