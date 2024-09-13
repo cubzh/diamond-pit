@@ -398,7 +398,7 @@ function updatePetNumber(petName, nbPets)
         petStatus[petName] = nbPets
         -- discovery
         pets[petName].IsHidden = false
-        pets[petName].Physics = Physics.Static
+        pets[petName].Physics = PhysicsMode.Static
     end
 end
 
