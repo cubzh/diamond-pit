@@ -401,6 +401,7 @@ function updatePetNumber(petName, nbPets)
         -- discovery
         pets[petName].IsHidden = false
         pets[petName].Physics = PhysicsMode.Static
+        pets[petName].shadow:RemoveFromParent()
     end
 end
 
@@ -1039,8 +1040,10 @@ Client.OnWorldObjectLoad = function(obj)
             obj.Physics = false
 
             local shadow = Shape(obj, { includeChildren = true })
+            obj.shadow = shadow
             shadow:SetParent(World)
             shadow.Physics = false
+            shadow.Position = obj.Position
             for i = 1, #shadow.Palette do
                 shadow.Palette[i].Color = Color(0, 0, 0, 0.5)
             end
