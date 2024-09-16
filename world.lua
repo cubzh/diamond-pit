@@ -1044,8 +1044,9 @@ Client.OnWorldObjectLoad = function(obj)
             shadow:SetParent(World)
             shadow.Physics = false
             shadow.Position = obj.Position
+            shadow.Pivot = obj.Pivot
             for i = 1, #shadow.Palette do
-                shadow.Palette[i].Color = Color(0, 0, 0, 0.5)
+                shadow.Palette[i].Color = Color.Black
             end
         end
     end
