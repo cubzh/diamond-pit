@@ -452,6 +452,7 @@ updatePlayerStats = function(key, stats)
     end
     if prevPlayerStats and prevPlayerStats.rebirth.value < stats.rebirth.value and Player.pickaxe then
         -- rebirth
+        local rebirthLevel = stats.rebirth.value
         sfx("fire_1", { Spatialized = false, Volume = 0.6 })
         sfx("doorbell_2", { Spatialized = false, Volume = 0.6 })
         maxSlots = BACKPACK_MAX_SLOTS[0]
@@ -469,6 +470,13 @@ updatePlayerStats = function(key, stats)
         floatingPickaxe.IsHidden = false
         pickaxeNextText.IsHidden = false
         prevPlayerStats = stats
+
+        local text = require("uikit"):createText(
+        string.format("Rebirth Level: %d! +1 Rebirth Credit Unlocked!", rebirthLevel), Color.White, "big")
+        text.pos = { Screen.Width * 0.5 - text.Width * 0.5, Screen.Height * 0.5 - text.Height * 0.5 }
+        Timer(5, function()
+            text:remove()
+        end)
         return
     end
     prevPlayerStats = stats
