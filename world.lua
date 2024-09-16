@@ -407,7 +407,7 @@ end
 
 local prevPetsInventory
 updatePetInventory = function(key, petsInventory)
-    if petsInventory.player.value == dojo.burnerAccount.Address then
+    if petsInventory.player.value ~= dojo.burnerAccount.Address then
         return
     end
     for k, v in pairs(petsInventory) do
