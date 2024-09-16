@@ -20,6 +20,7 @@ local PET_NAMES = {
     rhino = "rhinos",
     reptile = "reptiles",
 }
+local gameStarted = false
 
 local eggs = {}
 local selectedEgg
@@ -409,12 +410,12 @@ updatePetInventory = function(key, petsInventory)
     end
     for k, v in pairs(petsInventory) do
         if v.type_name == "u32" and v.value > (prevPetsInventory[k] and prevPetsInventory[k].value or 0) then
-            if prevPetsInventory then
+            if gameStarted then
                 print("NEW PET", k)
                 if v.value == 1 then
                     showInfo(string.format("New Pet Discovered! (%s)", k))
                 else
-                    showInfo(string.format("Just a %s, nothing new (%d %s%s discovered)", k, v.value, k,
+                    showInfo(string.format("+1 %s (total: %d %s)", k, v.value, k,
                         (v.value > 1 and "s" or "")))
                 end
             end
@@ -1073,8 +1074,10 @@ Client.OnStart = function()
     Camera.Position = { 20 * 15, 300, 20 * 15 }
     Camera.Rotation.X = math.pi * 0.5
     Fog.On = false
+    gameStarted = false
 
     initMenu(function()
+        gameStarted = true
         require("ambience"):set(require("ambience").default)
         initPlayer()
         Player:SetParent(World)
