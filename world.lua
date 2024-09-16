@@ -466,8 +466,8 @@ updatePlayerStats = function(key, stats)
         local nextLevel = 1
         floatingPickaxe.Palette[8].Color = LEVEL_COLOR[nextLevel]
         pickaxeNextText.Text = string.format("%d 💰", PICKAXE_UPGRADE_PRICES[nextLevel])
-        floatingPickaxe.IsHidden = true
-        pickaxeNextText.IsHidden = true
+        floatingPickaxe.IsHidden = false
+        pickaxeNextText.IsHidden = false
         prevPlayerStats = stats
         return
     end
