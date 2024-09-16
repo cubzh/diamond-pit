@@ -409,7 +409,15 @@ updatePetInventory = function(key, petsInventory)
     end
     for k, v in pairs(petsInventory) do
         if v.type_name == "u32" and v.value > (prevPetsInventory[k] and prevPetsInventory[k].value or 0) then
-            print("NEW PET", k)
+            if prevPetsInventory then
+                print("NEW PET", k)
+                if v.value == 1 then
+                    showInfo(string.format("New Pet Discovered! (%s)", k))
+                else
+                    showInfo(string.format("Just a %s, nothing new (%d %s%s discovered)", k, v.value, k,
+                        (v.value > 1 and "s" or "")))
+                end
+            end
             local petType = k
             local nbPets = v.value
             for name, dojoKey in pairs(PET_NAMES) do
