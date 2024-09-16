@@ -468,6 +468,7 @@ updatePlayerStats = function(key, stats)
         pickaxeNextText.Text = string.format("%d 💰", PICKAXE_UPGRADE_PRICES[nextLevel])
         floatingPickaxe.IsHidden = true
         pickaxeNextText.IsHidden = true
+        prevPlayerStats = stats
         return
     end
     prevPlayerStats = stats
