@@ -1037,6 +1037,13 @@ Client.OnWorldObjectLoad = function(obj)
             pets[name] = obj
             obj.IsHidden = true
             obj.Physics = false
+
+            local shadow = Shape(obj, { includeChildren = true })
+            shadow:SetParent(World)
+            shadow.Physics = false
+            for i = 1, #shadow.Palette do
+                shadow.Palette[i].Color = Color(0, 0, 0, 0.5)
+            end
         end
     end
 end
