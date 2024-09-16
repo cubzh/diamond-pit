@@ -413,10 +413,17 @@ updatePetInventory = function(key, petsInventory)
         if v.type_name == "u32" and v.value > (prevPetsInventory[k] and prevPetsInventory[k].value or 0) then
             if notifEnabled then
                 print("NEW PET", k)
-                if v.value == 1 then
-                    showInfo(string.format("New Pet Discovered! (%s)", k))
+                local petName
+                for sing, plur in ipairs(PET_NAMES) do
+                    if plur == k then
+                        petName = sing
+                        break
+                    end
+                end
+                if prevPetsInventory.value == 0 then
+                    showInfo(string.format("New Pet Discovered: %s)", petName))
                 else
-                    showInfo(string.format("+1 %s (total: %d %s)", k, v.value, k,
+                    showInfo(string.format("New %s Added! (total: %d %s)", petName, v.value, k,
                         (v.value > 1 and "s" or "")))
                 end
             end
