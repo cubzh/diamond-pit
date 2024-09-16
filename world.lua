@@ -444,11 +444,33 @@ updatePlayerPosition = function(key, position)
     player.targetPosition = worldPos
 end
 
+local prevPlayerStats
 updatePlayerStats = function(key, stats)
     playersStats[stats.player.value] = stats
     if stats.player.value ~= dojo.burnerAccount.Address then
         return
     end
+    if prevPlayerStats and prevPlayerStats.rebirth.value < stats.rebirth.value and Player.pickaxe then
+        -- rebirth
+        sfx("fire_1", { Spatialized = false, Volume = 0.6 })
+        sfx("doorbell_2", { Spatialized = false, Volume = 0.6 })
+        maxSlots = BACKPACK_MAX_SLOTS[1]
+        local nextLevel = 2
+        floatingBackpack.Palette[1].Color = LEVEL_COLOR[nextLevel]
+        backpackNextText.Text = string.format("%d 💰", BACKPACK_UPGRADE_PRICES[nextLevel])
+        floatingBackpack.IsHidden = false
+        backpackNextText.IsHidden = false
+
+        pickaxeStrength = PICKAXE_STRENGTHS[1]
+        Player.pickaxe.Palette[8].Color = LEVEL_COLOR[1]
+        local nextLevel = 2
+        floatingPickaxe.Palette[8].Color = LEVEL_COLOR[nextLevel]
+        pickaxeNextText.Text = string.format("%d 💰", PICKAXE_UPGRADE_PRICES[nextLevel])
+        floatingPickaxe.IsHidden = true
+        pickaxeNextText.IsHidden = true
+        return
+    end
+    prevPlayerStats = stats
 
     if textInputUsername then
         textInputUsername.Text = hex_to_string(stats.name.value)
