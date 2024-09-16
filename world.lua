@@ -454,16 +454,16 @@ updatePlayerStats = function(key, stats)
         -- rebirth
         sfx("fire_1", { Spatialized = false, Volume = 0.6 })
         sfx("doorbell_2", { Spatialized = false, Volume = 0.6 })
-        maxSlots = BACKPACK_MAX_SLOTS[1]
-        local nextLevel = 2
+        maxSlots = BACKPACK_MAX_SLOTS[0]
+        local nextLevel = 1
         floatingBackpack.Palette[1].Color = LEVEL_COLOR[nextLevel]
         backpackNextText.Text = string.format("%d 💰", BACKPACK_UPGRADE_PRICES[nextLevel])
         floatingBackpack.IsHidden = false
         backpackNextText.IsHidden = false
 
-        pickaxeStrength = PICKAXE_STRENGTHS[1]
-        Player.pickaxe.Palette[8].Color = LEVEL_COLOR[1]
-        local nextLevel = 2
+        pickaxeStrength = PICKAXE_STRENGTHS[0]
+        Player.pickaxe.Palette[8].Color = LEVEL_COLOR[0]
+        local nextLevel = 1
         floatingPickaxe.Palette[8].Color = LEVEL_COLOR[nextLevel]
         pickaxeNextText.Text = string.format("%d 💰", PICKAXE_UPGRADE_PRICES[nextLevel])
         floatingPickaxe.IsHidden = true
