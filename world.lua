@@ -471,10 +471,17 @@ updatePlayerStats = function(key, stats)
         pickaxeNextText.IsHidden = false
         prevPlayerStats = stats
 
+        local bg = require("uikit"):createFrame(Color.Black)
         local text = require("uikit"):createText(
-        string.format("Rebirth Level: %d! +1 Rebirth Credit Unlocked!", rebirthLevel), Color.White, "big")
-        text.pos = { Screen.Width * 0.5 - text.Width * 0.5, Screen.Height * 0.5 - text.Height * 0.5 }
+            string.format("New Rebirth Level: %d", rebirthLevel), Color.White, "big")
+        text:setParent(bg)
+        text.pos = { 5, 5 }
+        bg.Width = text.Width + 10
+        bg.Height = text.Height + 10
+        bg.pos = { Screen.Width * 0.5 - bg.Width * 0.5, Screen.Height * 0.5 - bg.Height * 0.5 }
+        require("crosshair"):hide()
         Timer(5, function()
+            require("crosshair"):show()
             text:remove()
         end)
         return
