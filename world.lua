@@ -414,7 +414,7 @@ updatePetInventory = function(key, petsInventory)
             if notifEnabled then
                 print("NEW PET", k)
                 local petName
-                for sing, plur in ipairs(PET_NAMES) do
+                for sing, plur in pairs(PET_NAMES) do
                     if plur == k then
                         petName = sing
                         break
