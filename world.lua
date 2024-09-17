@@ -816,6 +816,7 @@ initUpgradeAreas = function()
     rebirthTextHelp.Rotation = rebirthTextHelpRotation
     rebirthTextHelp.Type = TextType.World
     rebirthTextHelp.IsUnlit = true
+    rebirthTextHelp.IsDoubleSided = true
     rebirthTextHelp.Color = Color.Black
     rebirthTextHelp.BackgroundColor = Color(200, 173, 127)
     rebirthTextHelp.Anchor = { 0.5, 0 }
