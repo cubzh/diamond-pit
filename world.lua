@@ -675,7 +675,11 @@ initUpgradeAreas = function()
         area.Position = position
         area.OnCollisionBegin = function(_, other)
             if other == Player then
-                dojo.actions[upgradeAction]()
+                dojo.actions[upgradeAction](function(error)
+                    if error == "not enough coins" then
+                        showInfo("Not Enough Coins")
+                    end
+                end)
             end
         end
 
@@ -724,7 +728,11 @@ initUpgradeAreas = function()
     rebirthArea.Position = { 350, 0, 450 }
     rebirthArea.OnCollisionBegin = function(_, other)
         if other == Player then
-            dojo.actions.rebirth(1)
+            dojo.actions.rebirth(1, function(error)
+                if error == "not enough coins" then
+                    showInfo("Not Enough Coins")
+                end
+            end)
         end
     end
 
@@ -1163,7 +1171,11 @@ end
 
 Client.Action2 = function()
     if selectedEgg then
-        dojo.actions.open_egg(tonumber(string.sub(selectedEgg.Name, 4, 4)) - 1)
+        dojo.actions.open_egg(tonumber(string.sub(selectedEgg.Name, 4, 4)) - 1, function(error)
+            if error == "not enough credits" then
+                showInfo("Not Enough Rebirth Credits")
+            end
+        end)
         return
     end
     mining = true
