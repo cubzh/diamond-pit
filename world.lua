@@ -1420,7 +1420,7 @@ dojo.createBurner = function(self, config, cb)
     self.toriiClient:CreateBurner(
         config.playerAddress,
         config.playerSigningKey,
-        function(success, burnerAccount, privateKey)
+        function(success, burnerAccount)
             if not success then
                 error("Can't create burner")
                 return
@@ -1457,7 +1457,20 @@ dojo.createToriiClient = function(self, config)
                     return
                 end
                 dojo.burnerAccount = burnerAccount
-                config.onConnect(dojo.toriiClient)
+
+                -- test if burner valid (not valid if new katana)
+                local playerPos = Player.Position + Number3(1, 1, 1) * 1000000
+                dojo.actions.sync_position(math.floor(playerPos.X), math.floor(playerPos.Y), math.floor(playerPos.Z),
+                    function(error)
+                        print("EEEEEEE", error)
+                        if error == "ContractNotFound" then
+                            self:createBurner(config, function()
+                                config.onConnect(dojo.toriiClient)
+                            end)
+                        else
+                            config.onConnect(dojo.toriiClient)
+                        end
+                    end)
             end)
         end
     end
@@ -1531,7 +1544,7 @@ end
 
 -- generated contracts
 dojo.actions = {
-    hit_block = function(x, y, z, px, py, pz)
+    hit_block = function(x, y, z, px, py, pz, cb)
         if not dojo.toriiClient then
             return
         end
@@ -1548,12 +1561,12 @@ dojo.actions = {
         if VERBOSE then
             print("Calling hit_block", calldatastr)
         end
-        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "hit_block", calldatastr, function(error)
+        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "hit_block", calldatastr, cb or function(error)
             if not error then return end
             print("ERROR", error)
         end)
     end,
-    sync_position = function(px, py, pz)
+    sync_position = function(px, py, pz, cb)
         if not dojo.toriiClient then
             return
         end
@@ -1563,48 +1576,49 @@ dojo.actions = {
         if VERBOSE then
             print("Calling sync_position", calldatastr)
         end
-        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "sync_position", calldatastr, function(error)
-            if not error then return end
-            print("ERROR", error)
-        end)
+        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "sync_position", calldatastr,
+            cb or function(error)
+                if not error then return end
+                print("ERROR", error)
+            end)
     end,
-    sell_all = function()
+    sell_all = function(cb)
         if not dojo.toriiClient then
             return
         end
         if VERBOSE then
             print("Calling sell_all")
         end
-        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "sell_all", "[]", function(error)
+        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "sell_all", "[]", cb or function(error)
             if not error then return end
             print("ERROR", error)
         end)
     end,
-    upgrade_backpack = function()
+    upgrade_backpack = function(cb)
         if not dojo.toriiClient then
             return
         end
         if VERBOSE then
             print("Calling upgrade_backpack")
         end
-        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "upgrade_backpack", "[]", function(error)
+        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "upgrade_backpack", "[]", cb or function(error)
             if not error then return end
             print("ERROR", error)
         end)
     end,
-    upgrade_pickaxe = function()
+    upgrade_pickaxe = function(cb)
         if not dojo.toriiClient then
             return
         end
         if VERBOSE then
             print("Calling upgrade_pickaxe")
         end
-        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "upgrade_pickaxe", "[]", function(error)
+        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "upgrade_pickaxe", "[]", cb or function(error)
             if not error then return end
             print("ERROR", error)
         end)
     end,
-    set_username = function(username)
+    set_username = function(username, cb)
         if not dojo.toriiClient then
             return
         end
@@ -1612,12 +1626,12 @@ dojo.actions = {
             print("Calling set_username")
         end
         dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "set_username",
-            string.format("[\"%s\"]", string_to_hex(username)), function(error)
+            string.format("[\"%s\"]", string_to_hex(username)), cb or function(error)
                 if not error then return end
                 print("ERROR", error)
             end)
     end,
-    rebirth = function(nb)
+    rebirth = function(nb, cb)
         if not dojo.toriiClient then
             return
         end
@@ -1625,12 +1639,12 @@ dojo.actions = {
             print("Calling rebirth")
         end
         dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "rebirth",
-            string.format("[\"%s\"]", number_to_hexstr(nb)), function(error)
+            string.format("[\"%s\"]", number_to_hexstr(nb)), cb or function(error)
                 if not error then return end
                 print("ERROR", error)
             end)
     end,
-    open_egg = function(egg_type)
+    open_egg = function(egg_type, cb)
         if not dojo.toriiClient then
             return
         end
@@ -1638,22 +1652,23 @@ dojo.actions = {
             print("Calling open_egg")
         end
         dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "open_egg",
-            string.format("[\"%s\"]", number_to_hexstr(egg_type)), function(error)
+            string.format("[\"%s\"]", number_to_hexstr(egg_type)), cb or function(error)
                 if not error then return end
                 print("ERROR", error)
             end)
     end,
-    free_daily_credits = function()
+    free_daily_credits = function(cb)
         if not dojo.toriiClient then
             return
         end
         if VERBOSE then
             print("Calling free_daily_credits")
         end
-        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "free_daily_credits", "[]", function(error)
-            if not error then return end
-            print("ERROR", error)
-        end)
+        dojo.toriiClient:Execute(dojo.burnerAccount, dojo.config.actions, "free_daily_credits", "[]",
+            cb or function(error)
+                if not error then return end
+                print("ERROR", error)
+            end)
     end
 }
 
