@@ -443,10 +443,16 @@ function updatePetNumber(petName, nbPets)
         })
         emitterNewPet.Position = pets[petName].Position + Number3(0, 10, 0)
         emitterNewPet.CollidesWithGroups = {}
-        print("NEW PET")
+        emitterNewPet:spawn(30)
+        sfx("fire_1", { Spatialized = false, Volume = 0.6 })
+        Timer(2, function()
+            emitterNewPet:spawn(30)
+        end)
         Timer(4, function()
             emitterNewPet:spawn(30)
-            sfx("fire_1", { Spatialized = false, Volume = 0.6 })
+        end)
+        Timer(6, function()
+            emitterNewPet:spawn(30)
         end)
     end
 end
