@@ -471,7 +471,7 @@ showInfo = function(str)
     bg.Height = text.Height + 10
     bg.pos = { Screen.Width * 0.5 - bg.Width * 0.5, Screen.Height * 0.5 - bg.Height * 0.5 }
     require("crosshair"):hide()
-    Timer(5, function()
+    Timer(3, function()
         require("crosshair"):show()
         bg:remove()
     end)
@@ -504,7 +504,7 @@ updatePlayerStats = function(key, stats)
         pickaxeNextText.IsHidden = false
         prevPlayerStats = stats
 
-        showInfo(string.format("New Rebirth Level: %d", rebirthLevel))
+        showInfo(string.format("New Rebirth (level %d)", rebirthLevel))
         return
     end
     prevPlayerStats = stats
