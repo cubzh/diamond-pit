@@ -125,7 +125,7 @@ for _, v in ipairs(resources) do
     resourcesById[v.id] = v
 end
 
-local VERBOSE = false
+local VERBOSE = true
 local inventoryIsFull = false
 local inventoryTotalQty = 0
 local sfx = require("sfx")
@@ -431,7 +431,7 @@ end
 
 local prevPetsInventory
 updatePetInventory = function(key, petsInventory)
-    print("Update pet 1")
+    print("Update pet 1", key, JSON:Encode(petsInventory))
     if petsInventory.player.value ~= dojo.burnerAccount.Address then
         return
     end
