@@ -1,12 +1,10 @@
 {
-	"script": "world.lua",
-	"env": {
-		"USER_AUTH": "disabled",
-		"CUBZH_MENU": "disabled",
-		"EDITION": "dojo-1.0.0-alpha.6"
-	},
-	"contributors": [
-		{ "caillef": 1.0 }
-	],
-	"map": "map.b64"
+  "script": "world.lua",
+  "env": {
+    "USER_AUTH": "disabled",
+    "CUBZH_MENU": "disabled",
+    "EDITION": "dojo-1.0.0-alpha.12"
+  },
+  "contributors": [{ "caillef": 1.0 }],
+  "map": "map.b64"
 }
