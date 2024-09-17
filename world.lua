@@ -825,24 +825,25 @@ initUpgradeAreas = function()
     freeDailyCreditsArea.Pivot = { 0.5, 0, 0.5 }
     freeDailyCreditsArea.Physics = PhysicsMode.Trigger
     freeDailyCreditsArea.Position = { 100, 0, 300 }
-    freeDailyCreditsArea.OnCollisionBegin = function(_, other)
-        if other == Player then
-            dojo.actions.free_daily_credits(function(error)
-                if error then
-                    showInfo("You need to wait 24 hours!")
-                end
-            end)
-        end
-    end
 
     local freeDailyCreditsIcon = Shape(Items.caillef.coin)
     freeDailyCreditsIcon.Palette[1].Color = Color.Red
     freeDailyCreditsIcon.Palette[2].Color = Color(math.floor(Color.Red.R * 0.8), math.floor(Color.Red.G * 0.8),
         math.floor(Color.Red.B * 0.8))
     freeDailyCreditsIcon:SetParent(World)
-    freeDailyCreditsIcon.Scale = 1
-    freeDailyCreditsIcon.LocalRotation.Y = math.pi * 0.5
-    freeDailyCreditsIcon.Position = { 100, 10, 300 }
+    freeDailyCreditsIcon.Scale = 1.4
+    freeDailyCreditsIcon.Position = { 100, 5, 300 }
+
+    freeDailyCreditsArea.OnCollisionBegin = function(_, other)
+        if other == Player then
+            dojo.actions.free_daily_credits(function(error)
+                freeDailyCreditsIcon.IsHidden = true
+                if error then
+                    showInfo("You need to wait 24 hours!")
+                end
+            end)
+        end
+    end
 
     local freeDailyCreditsText = Text()
     freeDailyCreditsText.Text = "Free Daily Rebirth Credit"
