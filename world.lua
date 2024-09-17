@@ -441,6 +441,8 @@ function updatePetNumber(petName, nbPets)
                 return Color.White
             end,
         })
+        emitterNewPet.Position = pets[petName].Position + Number3(0, 10, 0)
+        emitterNewPet.CollidesWithGroups = {}
         emitterNewPet:spawn(15)
         sfx("fire_1", { Spatialized = false, Volume = 0.6 })
     end
