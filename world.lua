@@ -140,7 +140,7 @@ worldInfo = {
     rpc_url = "https://api.cartridge.gg/x/diamond-pit/katana",
     torii_url = "https://api.cartridge.gg/x/diamond-pit/torii",
     world = "0x6d5313d73973bb9bbd5c76f5a4d8f5f5f3f244c95596a01391de6a63f77f4b2",
-    actions = "0x03fc18067d76bf7ef58db92e67a8bad60aeb159bf504dfcc99186ad7fdb225e7",
+    actions = "0x02c24de1c529a154eac885b0b34e8bf1b04f4ce0845b91d1a4fc9aea8c9d71ed",
     playerAddress = "0x657e5f424dc6dee0c5a305361ea21e93781fea133d83efa410b771b7f92b",
     playerSigningKey = "0xcd93de85d43988b9492bfaaff930c129fc3edbc513bb0c2b81577291848007",
 }
