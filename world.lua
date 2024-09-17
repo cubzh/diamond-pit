@@ -824,7 +824,7 @@ initUpgradeAreas = function()
     freeDailyCreditsArea.Scale = { 30, 2, 30 }
     freeDailyCreditsArea.Pivot = { 0.5, 0, 0.5 }
     freeDailyCreditsArea.Physics = PhysicsMode.Trigger
-    freeDailyCreditsArea.Position = { 250, 0, 100 }
+    freeDailyCreditsArea.Position = { 100, 0, 300 }
     freeDailyCreditsArea.OnCollisionBegin = function(_, other)
         if other == Player then
             dojo.actions.free_daily_credits()
@@ -835,7 +835,7 @@ initUpgradeAreas = function()
     freeDailyCreditsText.Text = "Free Daily Rebirth Credit"
     freeDailyCreditsText:SetParent(World)
     freeDailyCreditsText.FontSize = 5
-    freeDailyCreditsText.Position = Number3(250, 25, 100)
+    freeDailyCreditsText.Position = Number3(100, 25, 300)
     freeDailyCreditsText.Type = TextType.World
     freeDailyCreditsText.IsUnlit = true
     freeDailyCreditsText.Color = Color.Black
