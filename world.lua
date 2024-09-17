@@ -833,7 +833,7 @@ initUpgradeAreas = function()
     local rightLog = Shape(Items.voxels.log_2)
     rightLog:SetParent(World)
     rightLog.Position = rebirthTextHelpPosition
-    rightLog.Rotation.Y = rebirthTextHelpRotation
+    rightLog.Rotation = rebirthTextHelpRotation
     rightLog.Scale = { 0.4, 0.5, 0.5 }
     rightLog.Pivot = { 0, rightLog.Height * 0.5, rightLog.Depth * 0.5 }
     rightLog:RotateLocal(rightLog.Backward, math.pi * -0.5)
