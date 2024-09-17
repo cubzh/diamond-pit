@@ -389,6 +389,10 @@
       {
         "name": "rebirth",
         "type": "core::integer::u16"
+      },
+      {
+        "name": "next_daily_coin",
+        "type": "core::integer::u64"
       }
     ]
   },

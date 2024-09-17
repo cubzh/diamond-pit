@@ -9,7 +9,7 @@ pub struct PlayerStats {
     pub backpack_level: u8,
     pub pickaxe_level: u8,
     pub rebirth: u16,
-    //hatIndex: u8,
+    pub next_daily_coin: u64,
 }
 
 #[generate_trait]

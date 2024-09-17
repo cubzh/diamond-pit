@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0xe615c3b06e36ab577e3419fbf8c7cdab6f50d8097dfeab9aa1a9735b437836"
-original_class_hash = "0xe615c3b06e36ab577e3419fbf8c7cdab6f50d8097dfeab9aa1a9735b437836"
+class_hash = "0x4c8818b4c78587a8d462eb8dd19f633b485d589905b8aaa7bc2ac8b4e829872"
+original_class_hash = "0x4c8818b4c78587a8d462eb8dd19f633b485d589905b8aaa7bc2ac8b4e829872"
 abi = "manifests/dev/base/abis/models/diamond_pit-PlayerStats-20bc78b8.json"
 tag = "diamond_pit-PlayerStats"
 manifest_name = "diamond_pit-PlayerStats-20bc78b8"
@@ -28,4 +28,9 @@ key = false
 [[members]]
 name = "rebirth"
 type = "u16"
+key = false
+
+[[members]]
+name = "next_daily_coin"
+type = "u64"
 key = false

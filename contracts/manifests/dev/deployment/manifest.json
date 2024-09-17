@@ -1251,8 +1251,8 @@
     {
       "kind": "DojoContract",
       "address": "0x2c24de1c529a154eac885b0b34e8bf1b04f4ce0845b91d1a4fc9aea8c9d71ed",
-      "class_hash": "0x5f3fc8d2541fe46cb107523100903ccadc12a93e2117338028dc1af11827e7",
-      "original_class_hash": "0x5f3fc8d2541fe46cb107523100903ccadc12a93e2117338028dc1af11827e7",
+      "class_hash": "0x217db2f317155195bfde934f28c20fdee3ca0085403e203d6ad12b1adeeee8b",
+      "original_class_hash": "0x217db2f317155195bfde934f28c20fdee3ca0085403e203d6ad12b1adeeee8b",
       "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
       "abi": [
         {
@@ -1511,6 +1511,13 @@
               ],
               "outputs": [],
               "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "free_daily_credits",
+              "inputs": [],
+              "outputs": [],
+              "state_mutability": "external"
             }
           ]
         },
@@ -1607,6 +1614,7 @@
         "set_username",
         "rebirth",
         "open_egg",
+        "free_daily_credits",
         "generate_world"
       ],
       "manifest_name": "diamond_pit-actions-3fc18067"
@@ -3905,10 +3913,15 @@
           "name": "rebirth",
           "type": "u16",
           "key": false
+        },
+        {
+          "name": "next_daily_coin",
+          "type": "u64",
+          "key": false
         }
       ],
-      "class_hash": "0xe615c3b06e36ab577e3419fbf8c7cdab6f50d8097dfeab9aa1a9735b437836",
-      "original_class_hash": "0xe615c3b06e36ab577e3419fbf8c7cdab6f50d8097dfeab9aa1a9735b437836",
+      "class_hash": "0x4c8818b4c78587a8d462eb8dd19f633b485d589905b8aaa7bc2ac8b4e829872",
+      "original_class_hash": "0x4c8818b4c78587a8d462eb8dd19f633b485d589905b8aaa7bc2ac8b4e829872",
       "abi": [
         {
           "type": "impl",
@@ -4300,6 +4313,10 @@
             {
               "name": "rebirth",
               "type": "core::integer::u16"
+            },
+            {
+              "name": "next_daily_coin",
+              "type": "core::integer::u64"
             }
           ]
         },

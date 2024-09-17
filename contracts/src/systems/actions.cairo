@@ -19,6 +19,7 @@ pub trait IActions {
     fn set_username(ref world: IWorldDispatcher, name: felt252);
     fn rebirth(ref world:IWorldDispatcher, nb: u8);
     fn open_egg(ref world:IWorldDispatcher, egg_type: u8);
+    fn free_daily_credits(ref world:IWorldDispatcher);
 }
 
 // dojo decorator
@@ -33,13 +34,14 @@ pub mod actions {
         player_stats::{PlayerStats, PlayerStatsTrait}, player_position::{PlayerPosition},
         pet_inventory::{PetInventory, PetInventoryTrait}
     };
-    use diamond_pit::constants::{REBIRTH_PRICE};
+    use diamond_pit::constants::{REBIRTH_PRICE, ONE_DAY_IN_SECONDS};
     use diamond_pit::helpers::{block::{BlockHelper, BlockType}, math::{fast_power_2}};
 
     pub mod Errors {
         pub const NOT_ENOUGH_COINS: felt252 = 'not enough coins';
         pub const BLOCK_NOT_FOUND: felt252 = 'block not found';
         pub const NOT_ENOUGH_CREDITS: felt252 = 'not enough credits';
+        pub const NOT_AVAILABLE: felt252 = 'not available';
     }
 
     #[abi(embed_v0)]
@@ -227,6 +229,16 @@ pub mod actions {
 
             pet_inventory.add_pet(pet);
             set!(world, (inventory, pet_inventory));
+        }
+
+        fn free_daily_credits(ref world:IWorldDispatcher) {
+            let player = get_caller_address();
+            let timestamp: u64 = starknet::get_block_info().unbox().block_timestamp;
+            let (mut stats, mut inventory) = get!(world, player, (PlayerStats, PlayerInventory));
+            assert(stats.next_daily_coin <= timestamp, Errors::NOT_AVAILABLE);
+            stats.next_daily_coin = timestamp + ONE_DAY_IN_SECONDS;
+            inventory.rebirth_credits += 1;
+            set!(world, (stats, inventory));
         }
 
         // Tools

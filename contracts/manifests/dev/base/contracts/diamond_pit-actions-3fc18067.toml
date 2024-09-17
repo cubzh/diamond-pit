@@ -1,6 +1,6 @@
 kind = "DojoContract"
-class_hash = "0x5f3fc8d2541fe46cb107523100903ccadc12a93e2117338028dc1af11827e7"
-original_class_hash = "0x5f3fc8d2541fe46cb107523100903ccadc12a93e2117338028dc1af11827e7"
+class_hash = "0x217db2f317155195bfde934f28c20fdee3ca0085403e203d6ad12b1adeeee8b"
+original_class_hash = "0x217db2f317155195bfde934f28c20fdee3ca0085403e203d6ad12b1adeeee8b"
 base_class_hash = "0x0"
 abi = "manifests/dev/base/abis/contracts/diamond_pit-actions-3fc18067.json"
 reads = []
@@ -16,6 +16,7 @@ systems = [
     "set_username",
     "rebirth",
     "open_egg",
+    "free_daily_credits",
     "generate_world",
 ]
 manifest_name = "diamond_pit-actions-3fc18067"
