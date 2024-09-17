@@ -382,7 +382,8 @@ createNewPlayer = function(key, position)
     text.IsUnlit = true
     text.Color = Color.Black
     text.Anchor = { 0.5, 0 }
-    text.LocalPosition = Number3(0, 25, 0)
+    text.LocalPosition = Number3(0, 30, 0)
+    player.text = text
 
     LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
         if not player.targetPosition then
@@ -482,7 +483,9 @@ updatePlayerPosition = function(key, position)
 
     local playerStat = playersStats[position.player.value]
     if playerStat then
-
+        player.text.Text = string.format("%s (%d)",
+            playerStat.name.value > 0 and hex_to_string(playerStat.name.value) or "guest",
+            playerStat.rebirthLevel.value)
     end
 
     player.targetPosition = worldPos
