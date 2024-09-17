@@ -828,7 +828,7 @@ local function createLeaderboardQuad(position, rotation, title)
     contentText.Type = TextType.World
     contentText.IsUnlit = true
     contentText.Color = Color.Black
-    titleText.BackgroundColor.A = 0
+    contentText.BackgroundColor.A = 0
     contentText.Anchor = { 0, 1 }
     contentText.LocalPosition = { -13, 35, -0.1 }
 
@@ -839,7 +839,7 @@ local function createLeaderboardQuad(position, rotation, title)
     contentTextScore.Type = TextType.World
     contentTextScore.IsUnlit = true
     contentTextScore.Color = Color.Black
-    titleText.BackgroundColor.A = 0
+    contentTextScore.BackgroundColor.A = 0
     contentTextScore.Anchor = { 1, 1 }
     contentTextScore.LocalPosition = { 13, 35, -0.1 }
 
