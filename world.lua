@@ -800,7 +800,6 @@ initUpgradeAreas = function()
     rebirthText.Type = TextType.World
     rebirthText.IsUnlit = true
     rebirthText.Color = Color.Black
-    rebirthText.BackgroundColor = Color(200, 173, 127)
     rebirthText.Anchor = { 0.5, 0 }
     LocalEvent:Listen(LocalEvent.Name.Tick, function()
         rebirthText.Forward = Player.Forward
@@ -818,13 +817,14 @@ initUpgradeAreas = function()
     rebirthTextHelp.Type = TextType.World
     rebirthTextHelp.IsUnlit = true
     rebirthTextHelp.Color = Color.Black
+    rebirthTextHelp.BackgroundColor = Color(200, 173, 127)
     rebirthTextHelp.Anchor = { 0.5, 0 }
 
     local leftLog = Shape(Items.voxels.log_2)
     leftLog:SetParent(World)
-    leftLog.Position = rebirthTextHelpPosition
+    leftLog.Position = rebirthTextHelpPosition - Number3(0, 3, 0)
     leftLog.Rotation = rebirthTextHelpRotation
-    leftLog.Scale = { 0.4, 0.5, 0.5 }
+    leftLog.Scale = { 0.6, 0.5, 0.5 }
     leftLog.Pivot = { 0, leftLog.Height * 0.5, leftLog.Depth * 0.5 }
     leftLog:RotateLocal(leftLog.Backward, math.pi * -0.5)
     leftLog.Position = leftLog.Position + leftLog.Up * 17
@@ -832,9 +832,9 @@ initUpgradeAreas = function()
 
     local rightLog = Shape(Items.voxels.log_2)
     rightLog:SetParent(World)
-    rightLog.Position = rebirthTextHelpPosition
+    rightLog.Position = rebirthTextHelpPosition - Number3(0, 3, 0)
     rightLog.Rotation = rebirthTextHelpRotation
-    rightLog.Scale = { 0.4, 0.5, 0.5 }
+    rightLog.Scale = { 0.6, 0.5, 0.5 }
     rightLog.Pivot = { 0, rightLog.Height * 0.5, rightLog.Depth * 0.5 }
     rightLog:RotateLocal(rightLog.Backward, math.pi * -0.5)
     rightLog.Position = rightLog.Position + rightLog.Up * -17
