@@ -1495,7 +1495,7 @@ function startGame(toriiClient)
         tickSinceSync = tickSinceSync + 1
         if tickSinceSync >= 5 then
             local playerPos = Player.Position + Number3(1, 1, 1) * 1000000
-            dojo.actions.sync_position(math.floor(playerPos.X), math.floor(playerPos.Y), math.floor(playerPos.Z))
+            -- dojo.actions.sync_position(math.floor(playerPos.X), math.floor(playerPos.Y), math.floor(playerPos.Z))
             tickSinceSync = 0
         end
     end)
