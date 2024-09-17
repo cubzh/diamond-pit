@@ -373,10 +373,23 @@ createNewPlayer = function(key, position)
     model.Rotation.Y = math.random() * 2 * math.pi
     model.Position = position
     player.model = model
+
+    local text = Text()
+    text.Text = "cool name (0)"
+    text:SetParent(model)
+    text.FontSize = 3
+    text.Type = TextType.World
+    text.IsUnlit = true
+    text.Color = Color.Black
+    text.Anchor = { 0.5, 0 }
+    text.LocalPosition = Number3(0, 20, 0)
+
     LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
         if not player.targetPosition then
             return
         end
+        text.Forward = Player.Forward
+
         if player.checkRefresh then
             player.checkRefresh:Cancel()
             player.checkRefresh = nil
@@ -466,6 +479,12 @@ updatePlayerPosition = function(key, position)
     if not player then
         return
     end
+
+    local playerStat = playersStats[position.player.value]
+    if playerStat then
+
+    end
+
     player.targetPosition = worldPos
 end
 
@@ -570,18 +589,7 @@ initSellingArea = function()
             return
         end
         if inventoryTotalQty == 0 then
-            local text = Text()
-            text.Text = "Nothing to sell, mine blocks in the pit"
-            text:SetParent(World)
-            text.FontSize = 20
-            text.Type = TextType.Screen
-            text.IsUnlit = true
-            text.Color = Color.Black
-            text.Anchor = { 0.5, 0.4 }
-            text.Position = Number3(450, 10, 300)
-            Timer(5, function()
-                text:RemoveFromParent()
-            end)
+            showInfo("Nothing to sell, mine blocks in the pit")
             return
         end
         dojo.actions.sell_all()
