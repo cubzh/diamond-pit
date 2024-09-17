@@ -429,13 +429,13 @@ function updatePetNumber(petName, nbPets)
         pets[petName].shadow:RemoveFromParent()
         emitterNewPet = require("particles"):newEmitter({
             velocity = function()
-                local v = Number3(math.random(-20, 20), math.random(30, 50), math.random(-20, 20))
+                local v = Number3(math.random(-20, 20), math.random(60, 90), math.random(-20, 20))
                 return v
             end,
             physics = true,
             life = 5.0,
             scale = function()
-                return 0.3 + math.random() * 0.5
+                return 0.7 + math.random() * 2
             end,
             color = function()
                 return Color.White
@@ -445,7 +445,7 @@ function updatePetNumber(petName, nbPets)
         emitterNewPet.CollidesWithGroups = {}
         print("NEW PET")
         Timer(4, function()
-            emitterNewPet:spawn(15)
+            emitterNewPet:spawn(30)
             sfx("fire_1", { Spatialized = false, Volume = 0.6 })
         end)
     end
