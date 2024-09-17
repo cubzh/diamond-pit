@@ -1379,8 +1379,10 @@ initUI = function()
 
     timerPitRegeneration = ui:createText(string.format(PIT_REGENERATION_TEXT, 0, 0), Color.White, "small")
     timerPitRegeneration.parentDidResize = function()
-        timerPitRegeneration.pos = { Screen.Width * 0.5 - timerPitRegeneration * 0.5, Screen.Height - Screen.SafeArea
-        .Top - 5 - timerPitRegeneration.Height }
+        timerPitRegeneration.pos = {
+            Screen.Width * 0.5 - timerPitRegeneration.Width * 0.5,
+            Screen.Height - Screen.SafeArea.Top - 5 - timerPitRegeneration.Height
+        }
     end
     timerPitRegeneration:parentDidResize()
 end
