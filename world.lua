@@ -483,9 +483,6 @@ updatePlayerPosition = function(key, position)
 
     local playerStat = playersStats[position.player.value]
     if playerStat then
-        print("YES STATS", string.format("%s (%d)",
-            playerStat.name.value ~= "0x0" and hex_to_string(playerStat.name.value) or "guest",
-            playerStat.rebirth.value))
         player.text.Text = string.format("%s (%d)",
             playerStat.name.value ~= "0x0" and hex_to_string(playerStat.name.value) or "guest",
             playerStat.rebirth.value)
