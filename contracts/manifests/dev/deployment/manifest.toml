@@ -4,6 +4,8 @@ class_hash = "0x6f4515274ee23404789c3351a77107d0ec07508530119822046600ca6948d6e"
 original_class_hash = "0x6f4515274ee23404789c3351a77107d0ec07508530119822046600ca6948d6e"
 abi = "manifests/dev/deployment/abis/dojo-world.json"
 address = "0x6d5313d73973bb9bbd5c76f5a4d8f5f5f3f244c95596a01391de6a63f77f4b2"
+transaction_hash = "0x1a35538cfb064fa8295e3fa8285f987332dcc0d5dd1348ea36638cbe846d7f9"
+block_number = 3
 seed = "diamond_pit"
 manifest_name = "dojo-world"
 
@@ -21,9 +23,10 @@ manifest_name = "dojo-base"
 
 [[contracts]]
 kind = "DojoContract"
+address = "0x1e3d5078d20dbcd0457d93a9a201e1ba9b58e09a68a4d48b2b3a9894942e1ac"
 class_hash = "0x273a513f89c9b513780a5c69c9a7ee8a0b83386d0cdd8455de4ea7fab9dda64"
 original_class_hash = "0x273a513f89c9b513780a5c69c9a7ee8a0b83386d0cdd8455de4ea7fab9dda64"
-base_class_hash = "0x0"
+base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
 abi = "manifests/dev/deployment/abis/contracts/diamond_pit-actions-3fc18067.json"
 reads = []
 writes = ["ns:diamond_pit"]
