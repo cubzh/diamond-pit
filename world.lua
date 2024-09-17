@@ -806,7 +806,9 @@ local function createLeaderboardQuad(position, rotation, title)
     leftLog:SetParent(World)
     leftLog.Position = position
     leftLog.Rotation.Y = rotation
-    leftLog:RotateLocal(leftLog.Backward, math.pi * 0.25)
+    leftLog.Scale = { 10, 0.3, 0.3 }
+    leftLog.Pivot = { 0, leftLog.Height * 0.5, leftLog.Depth * 0.5 }
+    leftLog:RotateLocal(leftLog.Backward, math.pi * -0.5)
 
     local titleText = Text()
     titleText.Text = title
