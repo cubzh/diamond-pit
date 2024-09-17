@@ -129,7 +129,7 @@ local VERBOSE = false
 local inventoryIsFull = false
 local inventoryTotalQty = 0
 local sfx = require("sfx")
-local PIT_REGENERATION_TEXT = "Pit regenerate in %d:%2d"
+local PIT_REGENERATION_TEXT = "Pit regenerate in %02d:%02d"
 local timerPitRegeneration
 
 tickSinceSync = 0
@@ -1306,7 +1306,7 @@ end
 function getTimerMinAndSecsBeforeRegeneration()
     local time = Time.Unix()
     local fiveMinuteOffset = (300 - time % 300) -- between 0 and 300
-    return math.floor(fiveMinuteOffset / 60), math.floor(time % 60)
+    return math.floor(fiveMinuteOffset / 60), 60 - math.floor(time % 60)
 end
 
 local nextMineHit = 0
