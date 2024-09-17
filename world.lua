@@ -829,7 +829,7 @@ initUpgradeAreas = function()
         if other == Player then
             dojo.actions.free_daily_credits(function(error)
                 if error then
-                    showInfo("Come back tomorrow!")
+                    showInfo("You need to wait 24 hours!")
                 end
             end)
         end
