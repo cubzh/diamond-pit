@@ -20,8 +20,15 @@ local PET_NAMES = {
     rhino = "rhinos",
     reptile = "reptiles",
 }
-local gameStarted = false
 local notifEnabled = false
+
+local blocksHpStatus = {}
+for z = 0, 50 do
+    blocksHpStatus[z] = {}
+    for y = 0, 10 do
+        blocksHpStatus[z][y] = {}
+    end
+end
 
 local eggs = {}
 local selectedEgg
@@ -1109,11 +1116,9 @@ Client.OnStart = function()
     Camera.Position = { 20 * 15, 300, 20 * 15 }
     Camera.Rotation.X = math.pi * 0.5
     Fog.On = false
-    gameStarted = false
     notifEnabled = false
 
     initMenu(function()
-        gameStarted = true
         Timer(3, function()
             notifEnabled = true
         end)
@@ -1233,6 +1238,11 @@ function handleBlocksImpact(impact)
             math.floor(playerPos.Y),
             math.floor(playerPos.Z)
         )
+        if blocksHpStatus[math.floor(-block.Coords.Y)][math.floor(block.Coords.Z)][math.floor(block.Coords.X)] and
+            blocksHpStatus[math.floor(-block.Coords.Y)][math.floor(block.Coords.Z)][math.floor(block.Coords.X)] <= pickaxeStrength then
+            blocksModule:checkNeighborsAndAddChips(block.Coords.X, -block.Coords.Y, block.Coords.Z)
+            block:Remove()
+        end
 
         local text = Text()
         text.Text = string.format("-%d", pickaxeStrength)
@@ -1386,6 +1396,7 @@ function updateBlocksColumn(key, rawColumn)
         local blockType = blockInfo >> 7
         local blockHp = blockInfo & 127
         local z = -(column.z_layer * 10 + k)
+        blocksHpStatus[-z][column.y][column.x] = blockHp
         local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
         blocksModule:setBlockHP(b, blockHp, BLOCKS_MAX_HP[blockType])
         local blockColor = BLOCK_COLORS[blockType]
