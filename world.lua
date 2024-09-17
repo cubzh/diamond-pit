@@ -485,10 +485,10 @@ updatePlayerPosition = function(key, position)
     if playerStat then
         print("YES STATS", string.format("%s (%d)",
             playerStat.name.value ~= "0x0" and hex_to_string(playerStat.name.value) or "guest",
-            playerStat.rebirthLevel.value))
+            playerStat.rebirth.value))
         player.text.Text = string.format("%s (%d)",
-            playerStat.name.value > 0 and hex_to_string(playerStat.name.value) or "guest",
-            playerStat.rebirthLevel.value)
+            playerStat.name.value ~= "0x0" and hex_to_string(playerStat.name.value) or "guest",
+            playerStat.rebirth.value)
     end
 
     player.targetPosition = worldPos
