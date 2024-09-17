@@ -1462,12 +1462,13 @@ dojo.createToriiClient = function(self, config)
                 local playerPos = Player.Position + Number3(1, 1, 1) * 1000000
                 dojo.actions.sync_position(math.floor(playerPos.X), math.floor(playerPos.Y), math.floor(playerPos.Z),
                     function(error)
-                        print("EEEEEEE", error)
                         if error == "ContractNotFound" then
+                            print("new katana deployed! creating a new burner")
                             self:createBurner(config, function()
                                 config.onConnect(dojo.toriiClient)
                             end)
                         else
+                            print("existing katana")
                             config.onConnect(dojo.toriiClient)
                         end
                     end)
