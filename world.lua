@@ -932,9 +932,9 @@ end
 function initLeaderboard()
     leaderboardTextBlocks, leaderboardTextBlocksScore = createLeaderboardQuad({ 160, 0, 130 }, math.pi * 1.3,
         "Daily Leaderboard\n- Blocks Mined -")
-    leaderboardTextHits, leaderboardTextHitsScore = createLeaderboardQuad({ 140, 0, 180 }, math.pi * 1.4,
+    leaderboardTextHits, leaderboardTextHitsScore = createLeaderboardQuad({ 135, 0, 170 }, math.pi * 1.4,
         "Daily Leaderboard\n- Pickaxe Hits -")
-    leaderboardTextCoins, leaderboardTextCoinsScore = createLeaderboardQuad({ 130, 0, 240 }, math.pi * 1.5,
+    leaderboardTextCoins, leaderboardTextCoinsScore = createLeaderboardQuad({ 130, 0, 220 }, math.pi * 1.5,
         "Daily Leaderboard\n- Coins Earned -")
 end
 
