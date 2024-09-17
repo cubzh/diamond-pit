@@ -462,7 +462,12 @@ updatePlayerPosition = function(key, position)
     player.targetPosition = worldPos
 end
 
+local currentInfo
 showInfo = function(str)
+    if currentInfo then
+        currentInfo.listener:Remove()
+        currentInfo:remove()
+    end
     local bg = require("uikit"):createFrame(Color.Black)
     local text = require("uikit"):createText(str, Color.White, "big")
     text:setParent(bg)
@@ -471,7 +476,8 @@ showInfo = function(str)
     bg.Height = text.Height + 10
     bg.pos = { Screen.Width * 0.5 - bg.Width * 0.5, Screen.Height * 0.5 - bg.Height * 0.5 }
     require("crosshair"):hide()
-    Timer(3, function()
+    currentInfo = bg
+    currentInfo.listener = Timer(3, function()
         require("crosshair"):show()
         bg:remove()
     end)
