@@ -828,7 +828,7 @@ initUpgradeAreas = function()
     leftLog.Scale = { 0.6, 0.5, 0.5 }
     leftLog.Pivot = { 0, leftLog.Height * 0.5, leftLog.Depth * 0.5 }
     leftLog:RotateLocal(leftLog.Backward, math.pi * -0.5)
-    leftLog.Position = leftLog.Position + leftLog.Up * 25.5
+    leftLog.Position = leftLog.Position + leftLog.Up * 25
     leftLog:RotateWorld(Number3(0, 1, 0), math.floor(math.random() * 4) * math.pi * 0.5)
 
     local rightLog = Shape(Items.voxels.log_2)
@@ -838,7 +838,7 @@ initUpgradeAreas = function()
     rightLog.Scale = { 0.6, 0.5, 0.5 }
     rightLog.Pivot = { 0, rightLog.Height * 0.5, rightLog.Depth * 0.5 }
     rightLog:RotateLocal(rightLog.Backward, math.pi * -0.5)
-    rightLog.Position = rightLog.Position + rightLog.Up * -25.5
+    rightLog.Position = rightLog.Position + rightLog.Up * -25
     rightLog:RotateWorld(Number3(0, 1, 0), math.floor(math.random() * 4) * math.pi * 0.5)
 
 
