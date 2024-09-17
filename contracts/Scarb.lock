@@ -3,7 +3,7 @@ version = 1
 
 [[package]]
 name = "diamond_pit"
-version = "1.0.0-alpha.6"
+version = "1.0.0-alpha.12"
 dependencies = [
  "dojo",
 ]
@@ -11,7 +11,7 @@ dependencies = [
 [[package]]
 name = "dojo"
 version = "1.0.0-alpha.4"
-source = "git+https://github.com/dojoengine/dojo?tag=v1.0.0-alpha.6#ede7930735c708572af8a87f81bb76354a401b3a"
+source = "git+https://github.com/dojoengine/dojo?tag=v1.0.0-alpha.12#b391948911356cbf8a91daa93314809c87411098"
 dependencies = [
  "dojo_plugin",
 ]

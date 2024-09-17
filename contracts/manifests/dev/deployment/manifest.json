@@ -1,8 +1,8 @@
 {
   "world": {
     "kind": "WorldContract",
-    "class_hash": "0x458d0ce5b14a4844092bdb62050f462d53362304a13febbac6d973691d61be2",
-    "original_class_hash": "0x458d0ce5b14a4844092bdb62050f462d53362304a13febbac6d973691d61be2",
+    "class_hash": "0x6f4515274ee23404789c3351a77107d0ec07508530119822046600ca6948d6e",
+    "original_class_hash": "0x6f4515274ee23404789c3351a77107d0ec07508530119822046600ca6948d6e",
     "abi": [
       {
         "type": "impl",
@@ -945,6 +945,11 @@
             "kind": "data"
           },
           {
+            "name": "entity_id",
+            "type": "core::felt252",
+            "kind": "data"
+          },
+          {
             "name": "keys",
             "type": "core::array::Span::<core::felt252>",
             "kind": "data"
@@ -1229,9 +1234,9 @@
         ]
       }
     ],
-    "address": "0x5c1d201209938c1ac8340c7caeec489060b04dff85399605e58ebc2cdc149f4",
-    "transaction_hash": "0x3b160b37d0ee0f3d51606f047e53add57b6633fc6de50f3b3cafd60153708ee",
-    "block_number": 3,
+    "address": "0x6d5313d73973bb9bbd5c76f5a4d8f5f5f3f244c95596a01391de6a63f77f4b2",
+    "transaction_hash": null,
+    "block_number": null,
     "seed": "diamond_pit",
     "metadata": {
       "profile_name": "dev",
@@ -1250,10 +1255,10 @@
   "contracts": [
     {
       "kind": "DojoContract",
-      "address": "0x2c24de1c529a154eac885b0b34e8bf1b04f4ce0845b91d1a4fc9aea8c9d71ed",
-      "class_hash": "0x217db2f317155195bfde934f28c20fdee3ca0085403e203d6ad12b1adeeee8b",
-      "original_class_hash": "0x217db2f317155195bfde934f28c20fdee3ca0085403e203d6ad12b1adeeee8b",
-      "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
+      "address": null,
+      "class_hash": "0x273a513f89c9b513780a5c69c9a7ee8a0b83386d0cdd8455de4ea7fab9dda64",
+      "original_class_hash": "0x273a513f89c9b513780a5c69c9a7ee8a0b83386d0cdd8455de4ea7fab9dda64",
+      "base_class_hash": "0x0",
       "abi": [
         {
           "type": "impl",
@@ -2063,6 +2068,7 @@
         }
       ],
       "tag": "diamond_pit-BlocksColumn",
+      "qualified_path": "diamond_pit::models::blocks_column::blocks_column",
       "manifest_name": "diamond_pit-BlocksColumn-766b200b"
     },
     {
@@ -2516,6 +2522,7 @@
         }
       ],
       "tag": "diamond_pit-DailyLeaderboardEntry",
+      "qualified_path": "diamond_pit::models::daily_leaderboard_entry::daily_leaderboard_entry",
       "manifest_name": "diamond_pit-DailyLeaderboardEntry-1d6ce5ad"
     },
     {
@@ -2987,6 +2994,7 @@
         }
       ],
       "tag": "diamond_pit-PetInventory",
+      "qualified_path": "diamond_pit::models::pet_inventory::pet_inventory",
       "manifest_name": "diamond_pit-PetInventory-6e47b70b"
     },
     {
@@ -3431,6 +3439,7 @@
         }
       ],
       "tag": "diamond_pit-PlayerInventory",
+      "qualified_path": "diamond_pit::models::player_inventory::player_inventory",
       "manifest_name": "diamond_pit-PlayerInventory-676ae3a3"
     },
     {
@@ -3884,6 +3893,7 @@
         }
       ],
       "tag": "diamond_pit-PlayerPosition",
+      "qualified_path": "diamond_pit::models::player_position::player_position",
       "manifest_name": "diamond_pit-PlayerPosition-69b522e7"
     },
     {
@@ -4346,6 +4356,7 @@
         }
       ],
       "tag": "diamond_pit-PlayerStats",
+      "qualified_path": "diamond_pit::models::player_stats::player_stats",
       "manifest_name": "diamond_pit-PlayerStats-20bc78b8"
     }
   ]
