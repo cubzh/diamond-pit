@@ -810,7 +810,7 @@ local function createLeaderboardQuad(position, rotation, title)
     leftLog.Pivot = { 0, leftLog.Height * 0.5, leftLog.Depth * 0.5 }
     leftLog:RotateLocal(leftLog.Backward, math.pi * -0.5)
     leftLog.Position = leftLog.Position + leftLog.Up * 17
-    leftLog:RotationWorld(Number3(0, 1, 0), math.floor(math.random() * 4) * math.pi * 0.5)
+    leftLog:RotateWorld(Number3(0, 1, 0), math.floor(math.random() * 4) * math.pi * 0.5)
 
     local rightLog = Shape(Items.voxels.log_2)
     rightLog:SetParent(World)
@@ -820,7 +820,7 @@ local function createLeaderboardQuad(position, rotation, title)
     rightLog.Pivot = { 0, rightLog.Height * 0.5, rightLog.Depth * 0.5 }
     rightLog:RotateLocal(rightLog.Backward, math.pi * -0.5)
     rightLog.Position = rightLog.Position + rightLog.Up * -17
-    rightLog:RotationWorld(Number3(0, 1, 0), math.floor(math.random() * 4) * math.pi * 0.5)
+    rightLog:RotateWorld(Number3(0, 1, 0), math.floor(math.random() * 4) * math.pi * 0.5)
 
     local titleText = Text()
     titleText.Text = title
