@@ -792,7 +792,7 @@ local leaderboardTextBlocksScore, leaderboardTextHitsScore, leaderboardTextCoins
 
 local function createLeaderboardQuad(position, rotation, title)
     local quad = Quad()
-    quad.Color = Color.White
+    quad.Color = Color(200, 173, 127)
     quad.Width = 30
     quad.Height = 50
     quad:SetParent(World)
@@ -808,6 +808,7 @@ local function createLeaderboardQuad(position, rotation, title)
     titleText.Type = TextType.World
     titleText.IsUnlit = true
     titleText.Color = Color.Black
+    titleText.BackgroundColor = Color(0, 0, 0, 0)
     titleText.Anchor = { 0.5, 1 }
     titleText.LocalPosition = { 0, 47, -0.1 }
 
