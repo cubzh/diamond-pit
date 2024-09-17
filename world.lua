@@ -382,7 +382,7 @@ createNewPlayer = function(key, position)
     text.IsUnlit = true
     text.Color = Color.Black
     text.Anchor = { 0.5, 0 }
-    text.LocalPosition = Number3(0, 20, 0)
+    text.LocalPosition = Number3(0, 25, 0)
 
     LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
         if not player.targetPosition then
