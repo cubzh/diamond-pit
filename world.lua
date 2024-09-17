@@ -465,7 +465,7 @@ end
 local currentInfo
 showInfo = function(str)
     if currentInfo then
-        currentInfo.listener:Remove()
+        currentInfo.listener:Cancel()
         currentInfo:remove()
     end
     local bg = require("uikit"):createFrame(Color.Black)
@@ -480,6 +480,7 @@ showInfo = function(str)
     currentInfo.listener = Timer(3, function()
         require("crosshair"):show()
         bg:remove()
+        currentInfo = nil
     end)
 end
 
