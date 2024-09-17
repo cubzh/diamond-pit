@@ -431,9 +431,11 @@ end
 
 local prevPetsInventory
 updatePetInventory = function(key, petsInventory)
+    print("Update pet 1")
     if petsInventory.player.value ~= dojo.burnerAccount.Address then
         return
     end
+    print("Update pet 2", JSON:Encode(petsInventory))
     for k, v in pairs(petsInventory) do
         if v.type_name == "u32" and v.value > (prevPetsInventory[k] and prevPetsInventory[k].value or 0) then
             if notifEnabled then
