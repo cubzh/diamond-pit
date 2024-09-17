@@ -806,7 +806,7 @@ local function createLeaderboardQuad(position, rotation, title)
     leftLog:SetParent(World)
     leftLog.Position = position
     leftLog.Rotation.Y = rotation
-    leftLog.Scale = { 2.2, 0.5, 0.5 }
+    leftLog.Scale = { 2.1, 0.5, 0.5 }
     leftLog.Pivot = { 0, leftLog.Height * 0.5, leftLog.Depth * 0.5 }
     leftLog:RotateLocal(leftLog.Backward, math.pi * -0.5)
     leftLog.Position = leftLog.Position + leftLog.Up * 17
@@ -815,7 +815,7 @@ local function createLeaderboardQuad(position, rotation, title)
     rightLog:SetParent(World)
     rightLog.Position = position
     rightLog.Rotation.Y = rotation
-    rightLog.Scale = { 2.2, 0.5, 0.5 }
+    rightLog.Scale = { 2.1, 0.5, 0.5 }
     rightLog.Pivot = { 0, rightLog.Height * 0.5, rightLog.Depth * 0.5 }
     rightLog:RotateLocal(rightLog.Backward, math.pi * -0.5)
     rightLog.Position = rightLog.Position + rightLog.Up * -17
