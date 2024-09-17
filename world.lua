@@ -215,10 +215,10 @@ local BLOCK_COLORS = {
 }
 
 local NUGGETS_COLOR = {
-    nil,                  -- stone [1]
+    Color.DarkGrey,       -- stone [1]
     Color.DarkGrey,       -- coal
     Color(195, 90, 19),   -- copper
-    nil,                  -- deepstone
+    Color.Grey,           -- deepstone
     Color(206, 206, 206), -- iron
     Color(246, 206, 46),  -- gold
     Color(54, 142, 244),  -- diamond
