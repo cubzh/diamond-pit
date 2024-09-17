@@ -827,7 +827,11 @@ initUpgradeAreas = function()
     freeDailyCreditsArea.Position = { 100, 0, 300 }
     freeDailyCreditsArea.OnCollisionBegin = function(_, other)
         if other == Player then
-            dojo.actions.free_daily_credits()
+            dojo.actions.free_daily_credits(function(error)
+                if error then
+                    showInfo("Come back tomorrow!")
+                end
+            end)
         end
     end
 
