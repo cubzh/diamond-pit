@@ -930,11 +930,11 @@ local function createLeaderboardQuad(position, rotation, title)
 end
 
 function initLeaderboard()
-    leaderboardTextBlocks, leaderboardTextBlocksScore = createLeaderboardQuad({ 160, 0, 100 }, math.pi * 1.3,
+    leaderboardTextBlocks, leaderboardTextBlocksScore = createLeaderboardQuad({ 160, 0, 120 }, math.pi * 1.3,
         "Daily Leaderboard\n- Blocks Mined -")
     leaderboardTextHits, leaderboardTextHitsScore = createLeaderboardQuad({ 145, 0, 150 }, math.pi * 1.4,
         "Daily Leaderboard\n- Pickaxe Hits -")
-    leaderboardTextCoins, leaderboardTextCoinsScore = createLeaderboardQuad({ 130, 0, 200 }, math.pi * 1.5,
+    leaderboardTextCoins, leaderboardTextCoinsScore = createLeaderboardQuad({ 130, 0, 180 }, math.pi * 1.5,
         "Daily Leaderboard\n- Coins Earned -")
 end
 
