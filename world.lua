@@ -129,6 +129,8 @@ local VERBOSE = false
 local inventoryIsFull = false
 local inventoryTotalQty = 0
 local sfx = require("sfx")
+local PIT_REGENERATION_TEXT = "Pit regenerate in %d:%2d"
+local timerPitRegeneration
 
 tickSinceSync = 0
 otherPlayers = {}
@@ -1301,12 +1303,21 @@ function handleBlocksImpact(impact)
     end
 end
 
+function getTimerMinAndSecsBeforeRegeneration()
+    local time = Time.Unix()
+    fiveMinuteOffset = time % 300 -- between 0 and 300
+    return math.floor(fiveMinuteOffset / 60), math.floor(time % 60)
+end
+
 local nextMineHit = 0
 local t = 0
 Client.Tick = function(dt)
     if Player.Position.Y < -2050 then
         Player.Position = Number3(250, 5, 150)
     end
+    local min, secs = getTimerMinAndSecsBeforeRegeneration()
+    timerPitRegeneration.text = string.format(PIT_REGENERATION_TEXT, min, secs)
+
     t = t + dt
     if mining then
         if t >= nextMineHit then
@@ -1365,6 +1376,13 @@ initUI = function()
     help.parentDidResize = function()
         help.pos = { Screen.Width - help.Width - 4, 4 }
     end
+
+    timerPitRegeneration = ui:createText(string.format(PIT_REGENERATION_TEXT, 0, 0), Color.White, "small")
+    timerPitRegeneration.parentDidResize = function()
+        timerPitRegeneration.pos = { Screen.Width * 0.5 - timerPitRegeneration * 0.5, Screen.Height - Screen.SafeArea
+        .Top - 5 - timerPitRegeneration.Height }
+    end
+    timerPitRegeneration:parentDidResize()
 end
 
 initPlayer = function()
