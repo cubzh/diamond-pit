@@ -1242,6 +1242,7 @@ function handleBlocksImpact(impact)
             blocksHpStatus[math.floor(-block.Coords.Y)][math.floor(block.Coords.Z)][math.floor(block.Coords.X)] <= pickaxeStrength then
             blocksModule:checkNeighborsAndAddChips(block.Coords.X, -block.Coords.Y, block.Coords.Z)
             block:Remove()
+            blocksModule:setBlockHP(block, 0, 0)
         end
 
         local text = Text()
