@@ -4,6 +4,7 @@ Config = {
         "caillef.backpackmine",
         "caillef.shop2",
         "caillef.coin",
+        "voxels.log_2",
     },
 }
 
@@ -801,6 +802,11 @@ local function createLeaderboardQuad(position, rotation, title)
     quad.Position = position
     quad.Rotation.Y = rotation
 
+    local leftLog = Shape(Items.voxels.log_2)
+    leftLog:SetParent(World)
+    leftLog.Position = position
+    leftLog.Rotation.Z = math.pi * 0.25
+
     local titleText = Text()
     titleText.Text = title
     titleText:SetParent(quad)
@@ -808,7 +814,7 @@ local function createLeaderboardQuad(position, rotation, title)
     titleText.Type = TextType.World
     titleText.IsUnlit = true
     titleText.Color = Color.Black
-    titleText.BackgroundColor = Color(0, 0, 0, 0)
+    titleText.BackgroundColor.A = 0
     titleText.Anchor = { 0.5, 1 }
     titleText.LocalPosition = { 0, 47, -0.1 }
 
@@ -819,6 +825,7 @@ local function createLeaderboardQuad(position, rotation, title)
     contentText.Type = TextType.World
     contentText.IsUnlit = true
     contentText.Color = Color.Black
+    titleText.BackgroundColor.A = 0
     contentText.Anchor = { 0, 1 }
     contentText.LocalPosition = { -13, 35, -0.1 }
 
@@ -829,6 +836,7 @@ local function createLeaderboardQuad(position, rotation, title)
     contentTextScore.Type = TextType.World
     contentTextScore.IsUnlit = true
     contentTextScore.Color = Color.Black
+    titleText.BackgroundColor.A = 0
     contentTextScore.Anchor = { 1, 1 }
     contentTextScore.LocalPosition = { 13, 35, -0.1 }
 
