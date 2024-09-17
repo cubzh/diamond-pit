@@ -12,6 +12,8 @@ Modules = {
     ui_blocks = "github.com/caillef/cubzh-library/ui_blocks:09941d5",
 }
 
+local VERBOSE = true
+
 local pets = {}
 local PET_NAMES = {
     bird = "birds",
@@ -125,7 +127,6 @@ for _, v in ipairs(resources) do
     resourcesById[v.id] = v
 end
 
-local VERBOSE = true
 local inventoryIsFull = false
 local inventoryTotalQty = 0
 local sfx = require("sfx")
