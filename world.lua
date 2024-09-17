@@ -800,22 +800,46 @@ initUpgradeAreas = function()
     rebirthText.Type = TextType.World
     rebirthText.IsUnlit = true
     rebirthText.Color = Color.Black
+    rebirthText.BackgroundColor = Color(200, 173, 127)
     rebirthText.Anchor = { 0.5, 0 }
     LocalEvent:Listen(LocalEvent.Name.Tick, function()
         rebirthText.Forward = Player.Forward
     end)
 
+    local rebirthTextHelpPosition = Number3(370, 3, 460)
+    local rebirthTextHelpRotation = Rotation(0, math.pi * 0.25, 0)
     local rebirthTextHelp = Text()
     rebirthTextHelp.Text =
     "Rebirth:\nDowngrade backpack and pickaxe to level 1\n+1 rebirth credits to open eggs\n+10% coins when selling"
     rebirthTextHelp:SetParent(World)
     rebirthTextHelp.FontSize = 2
-    rebirthTextHelp.Position = Number3(370, 3, 460)
-    rebirthTextHelp.Rotation.Y = math.pi * 0.25
+    rebirthTextHelp.Position = rebirthTextHelpPosition
+    rebirthTextHelp.Rotation = rebirthTextHelpRotation
     rebirthTextHelp.Type = TextType.World
     rebirthTextHelp.IsUnlit = true
     rebirthTextHelp.Color = Color.Black
     rebirthTextHelp.Anchor = { 0.5, 0 }
+
+    local leftLog = Shape(Items.voxels.log_2)
+    leftLog:SetParent(World)
+    leftLog.Position = rebirthTextHelpPosition
+    leftLog.Rotation = rebirthTextHelpRotation
+    leftLog.Scale = { 0.4, 0.5, 0.5 }
+    leftLog.Pivot = { 0, leftLog.Height * 0.5, leftLog.Depth * 0.5 }
+    leftLog:RotateLocal(leftLog.Backward, math.pi * -0.5)
+    leftLog.Position = leftLog.Position + leftLog.Up * 17
+    leftLog:RotateWorld(Number3(0, 1, 0), math.floor(math.random() * 4) * math.pi * 0.5)
+
+    local rightLog = Shape(Items.voxels.log_2)
+    rightLog:SetParent(World)
+    rightLog.Position = rebirthTextHelpPosition
+    rightLog.Rotation.Y = rebirthTextHelpRotation
+    rightLog.Scale = { 0.4, 0.5, 0.5 }
+    rightLog.Pivot = { 0, rightLog.Height * 0.5, rightLog.Depth * 0.5 }
+    rightLog:RotateLocal(rightLog.Backward, math.pi * -0.5)
+    rightLog.Position = rightLog.Position + rightLog.Up * -17
+    rightLog:RotateWorld(Number3(0, 1, 0), math.floor(math.random() * 4) * math.pi * 0.5)
+
 
     -- free daily credits area
     local freeDailyCreditsArea = MutableShape()
