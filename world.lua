@@ -1180,8 +1180,8 @@ Client.OnWorldObjectLoad = function(obj)
             shadow.IsHidden = false
             require("hierarchyactions"):applyToDescendants(shadow, { includeRoot = true }, function(o)
                 for i = 1, #o.Palette do
-                    -- o.Palette[i].Color = Color.Black
-                    -- o.Palette[i].Color.A = 0.1
+                    o.Palette[i].Color = Color.Black
+                    o.Palette[i].Color.A = 0.01
                 end
             end)
         end
