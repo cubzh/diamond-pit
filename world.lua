@@ -204,7 +204,7 @@ local BLOCK_COLORS = {
     Color(185, 178, 175), -- stone [1]
     Color(86, 84, 87),    -- coal
     Color(216, 113, 80),  -- copper
-    Color(66, 75, 126),   -- deepstone
+    Color(97, 89, 87),    -- deepstone
     Color(196, 203, 211), -- iron
     Color(253, 167, 28),  -- gold
     Color(97, 203, 219),  -- diamond
@@ -214,7 +214,7 @@ local NUGGETS_COLOR = {
     Color(145, 144, 143), -- stone [1]
     Color(71, 73, 72),    -- coal
     Color(184, 98, 95),   -- copper
-    Color(62, 73, 91),    -- deepstone
+    Color(73, 72, 62),    -- deepstone
     Color(180, 186, 194), -- iron
     Color(247, 135, 21),  -- gold
     Color(1, 186, 189),   -- diamond
