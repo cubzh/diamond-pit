@@ -151,11 +151,11 @@ local PICKAXE_STRENGTHS = {
 }
 
 local LEVEL_COLOR = {
-    [0] = Color.Grey,
-    [1] = Color.Orange,
-    [2] = Color.White,
-    [3] = Color.Yellow,
-    [4] = Color(112, 209, 244),
+    [0] = Color(185, 178, 175),
+    [1] = Color(216, 113, 80),
+    [2] = Color(196, 203, 211),
+    [3] = Color(253, 167, 28),
+    [4] = Color(97, 203, 219),
     [5] = Color(128, 0, 128),
     [6] = Color.Red,
 }
@@ -201,23 +201,23 @@ idToName = {
 }
 
 local BLOCK_COLORS = {
-    Color.Grey,           -- stone [1]
-    Color.Black,          -- coal
-    Color.Orange,         -- copper
-    Color.DarkGrey,       -- deepstone
-    Color.White,          -- iron
-    Color.Yellow,         -- gold
-    Color(112, 209, 244), -- diamond
+    Color(185, 178, 175), -- stone [1]
+    Color(86, 84, 87),    -- coal
+    Color(216, 113, 80),  -- copper
+    Color(66, 75, 126),   -- deepstone
+    Color(196, 203, 211), -- iron
+    Color(253, 167, 28),  -- gold
+    Color(97, 203, 219),  -- diamond
 }
 
 local NUGGETS_COLOR = {
-    Color.DarkGrey,       -- stone [1]
-    Color.DarkGrey,       -- coal
-    Color(195, 90, 19),   -- copper
-    Color.Grey,           -- deepstone
-    Color(206, 206, 206), -- iron
-    Color(246, 206, 46),  -- gold
-    Color(54, 142, 244),  -- diamond
+    Color(145, 144, 143), -- stone [1]
+    Color(71, 73, 72),    -- coal
+    Color(184, 98, 95),   -- copper
+    Color(62, 73, 91),    -- deepstone
+    Color(180, 186, 194), -- iron
+    Color(247, 135, 21),  -- gold
+    Color(1, 186, 189),   -- diamond
 }
 
 local BLOCKS_MAX_HP = { 4, 10, 25, 10, 40, 80, 125 }
