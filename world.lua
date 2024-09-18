@@ -303,6 +303,7 @@ blocksModule.addChips = function(self, block, color)
 end
 
 blocksModule.setBlockHP = function(self, block, hp, maxHP, blockType)
+    if not block then return end
     if not self.chips[block.Coords.Z] or not self.chips[block.Coords.Z][block.Coords.Y] or not self.chips[block.Coords.Z][block.Coords.Y][block.Coords.X] then
         if hp < maxHP then
             self:addChips(block, BLOCK_COLORS[blockType])
