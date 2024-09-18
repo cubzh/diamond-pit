@@ -292,6 +292,7 @@ blocksModule.addChips = function(self, block, color)
 
     local chips = Shape(self.cachedChips[blockType])
     chips:SetParent(World)
+    chips.Shadow = true
     chips.Position = block.Position + Number3(10, 10, 10)
     chips.Physics = PhysicsMode.Disabled
     chips.Pivot = Number3(0.5, 0.5, 0.5)
