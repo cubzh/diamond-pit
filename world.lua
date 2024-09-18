@@ -25,14 +25,6 @@ local PET_NAMES = {
 }
 local notifEnabled = false
 
-local blocksHpStatus = {}
-for z = 0, 50 do
-    blocksHpStatus[z] = {}
-    for y = 0, 10 do
-        blocksHpStatus[z][y] = {}
-    end
-end
-
 local eggs = {}
 local selectedEgg
 local openText
@@ -234,29 +226,6 @@ blocksModule = {
     chips = {}
 }
 
-blocksModule.checkNeighborsAndAddChips = function(self, x, y, z)
-    local directions = {
-        { 1, 0, 0 }, { -1, 0, 0 },
-        { 0, 1, 0 }, { 0, -1, 0 },
-        { 0, 0, 1 }, { 0, 0, -1 }
-    }
-
-    for _, dir in ipairs(directions) do
-        local nx, ny, nz = x + dir[1], y + dir[2], z + dir[3]
-        local neighborBlock = self.blockShape:GetBlock(nx, ny, nz)
-
-        if neighborBlock then
-            local neighborColor = neighborBlock.Color
-            if neighborColor ~= BLOCK_COLORS[1] and neighborColor ~= BLOCK_COLORS[4] then
-                for _, color in pairs(BLOCK_COLORS) do
-                    if neighborColor == color then
-                        self:addChips(neighborBlock, color)
-                    end
-                end
-            end
-        end
-    end
-end
 blocksModule.addChips = function(self, block, color)
     if self.chips[block.Coords.Z] and
         self.chips[block.Coords.Z][block.Coords.Y] and
@@ -333,8 +302,14 @@ blocksModule.addChips = function(self, block, color)
     self.chips[block.Coords.Z][block.Coords.Y][block.Coords.X] = chips
 end
 
-blocksModule.setBlockHP = function(self, block, hp, maxHP)
-    if not self.chips[block.Coords.Z] or not self.chips[block.Coords.Z][block.Coords.Y] or not self.chips[block.Coords.Z][block.Coords.Y][block.Coords.X] then return end
+blocksModule.setBlockHP = function(self, block, hp, maxHP, blockType)
+    if not self.chips[block.Coords.Z] or not self.chips[block.Coords.Z][block.Coords.Y] or not self.chips[block.Coords.Z][block.Coords.Y][block.Coords.X] then
+        if hp < maxHP then
+            self:addChips(block, BLOCK_COLORS[blockType])
+        else
+            return
+        end
+    end
 
     local chips = self.chips[block.Coords.Z][block.Coords.Y][block.Coords.X]
     if hp <= 0 then
@@ -1361,12 +1336,6 @@ function handleBlocksImpact(impact)
             math.floor(playerPos.Y),
             math.floor(playerPos.Z)
         )
-        if blocksHpStatus[math.floor(-block.Coords.Y)][math.floor(block.Coords.Z)][math.floor(block.Coords.X)] and
-            blocksHpStatus[math.floor(-block.Coords.Y)][math.floor(block.Coords.Z)][math.floor(block.Coords.X)] <= pickaxeStrength then
-            blocksModule:checkNeighborsAndAddChips(block.Coords.X, -block.Coords.Y, block.Coords.Z)
-            block:Remove()
-            blocksModule:setBlockHP(block, 0, 0)
-        end
 
         local text = Text()
         text.Text = string.format("-%d", pickaxeStrength)
@@ -1538,12 +1507,10 @@ function updateBlocksColumn(key, rawColumn)
         local blockType = blockInfo >> 7
         local blockHp = blockInfo & 127
         local z = -(column.z_layer * 10 + k)
-        blocksHpStatus[-z][column.y][column.x] = blockHp
         local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
-        blocksModule:setBlockHP(b, blockHp, BLOCKS_MAX_HP[blockType])
+        blocksModule:setBlockHP(b, blockHp, BLOCKS_MAX_HP[blockType], blockType)
         local blockColor = BLOCK_COLORS[blockType]
         if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
-            blocksModule:checkNeighborsAndAddChips(column.x, z, column.y)
             b:Remove()
         elseif b and b.Color ~= blockColor then
             b:Replace(blockColor)
