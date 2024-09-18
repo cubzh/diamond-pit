@@ -1181,7 +1181,7 @@ Client.OnWorldObjectLoad = function(obj)
             require("hierarchyactions"):applyToDescendants(shadow, { includeRoot = true }, function(o)
                 for i = 1, #o.Palette do
                     o.Palette[i].Color = Color.Black
-                    o.Palette[i].Color.A = 0.01
+                    o.Palette[i].Color.A = 0.03
                 end
             end)
         end
