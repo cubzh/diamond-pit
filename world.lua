@@ -1292,10 +1292,10 @@ function startEggAnimation()
             Screen.Height * 0.5 - egg.Height * 0.5
         }
     end
-    -- local t = 0
     local tickListener = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
-        -- t = t * 1.001 + dt * 0.005
-        egg.pivot.Rotation = egg.pivot.Rotation + Rotation(dt * 0.5, dt * 0.5 * 2, dt * 0.5 * 3)
+        egg.pivot:RotateLocal(egg.pivot.Right, dt * 0.5)
+        egg.pivot:RotateLocal(egg.pivot.Right, dt)
+        egg.pivot:RotateLocal(egg.pivot.Right, dt * 2)
     end)
     egg:parentDidResize()
     Timer(5, function()
