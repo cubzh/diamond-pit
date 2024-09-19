@@ -1329,6 +1329,7 @@ end
 Client.Action2 = function()
     if selectedEgg then
         dojo.actions.open_egg(tonumber(string.sub(selectedEgg.Name, 4, 4)) - 1, function(error)
+            print("EOIZJE", error)
             if error == "TransactionExecutionError" then
                 showInfo("Not Enough Rebirth Credits")
                 return
