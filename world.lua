@@ -1328,11 +1328,12 @@ end
 
 Client.Action2 = function()
     if selectedEgg then
-        startEggAnimation(1 + tonumber(string.sub(selectedEgg.Name, 4, 4)) - 1)
         dojo.actions.open_egg(tonumber(string.sub(selectedEgg.Name, 4, 4)) - 1, function(error)
             if error == "TransactionExecutionError" then
                 showInfo("Not Enough Rebirth Credits")
+                return
             end
+            startEggAnimation(1 + tonumber(string.sub(selectedEgg.Name, 4, 4)) - 1)
         end)
         return
     end
