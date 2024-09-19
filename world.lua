@@ -1293,7 +1293,8 @@ function startEggAnimation(size)
         }
     end
     local t = 0
-    local nextSwoosh = 1
+    local nextSwooshDelay = 1
+    local nextSwoosh = 0
     sfx("whooshes_medium_1", { Spatialized = false, Volume = 0.4 })
     local tickListener = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
         t = t + dt * 0.015
@@ -1302,7 +1303,8 @@ function startEggAnimation(size)
         egg.pivot:RotateLocal(egg.pivot.Forward, t * 2)
         if nextSwoosh < t then
             sfx("whooshes_medium_1", { Spatialized = false, Volume = 0.4 })
-            nextSwoosh = nextSwoosh * 0.9
+            nextSwoosh = t + nextSwooshDelay
+            nextSwooshDelay = nextSwooshDelay * 0.9
         end
     end)
     egg:parentDidResize()
