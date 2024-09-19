@@ -1176,19 +1176,19 @@ Client.OnWorldObjectLoad = function(obj)
         if name == obj.Name then
             pets[name] = obj
             obj.IsHidden = true
-            obj.Physics = false
+            obj.Physics = PhysicsMode.Disabled
 
             local shadow = Shape(obj, { includeChildren = true })
             obj.shadow = shadow
             shadow:SetParent(World)
-            shadow.Physics = false
+            shadow.Physics = PhysicsMode.Disabled
             shadow.Position = obj.Position
             shadow.Pivot = obj.Pivot
             shadow.Scale = obj.Scale
             shadow.Rotation = obj.Rotation
             shadow.IsHidden = false
             require("hierarchyactions"):applyToDescendants(shadow, { includeRoot = true }, function(o)
-                o.Physics = false
+                o.Physics = PhysicsMode.Disabled
                 for i = 1, #o.Palette do
                     o.Palette[i].Color = Color.Black
                     o.Palette[i].Color.A = 0.03
