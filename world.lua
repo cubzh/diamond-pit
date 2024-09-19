@@ -1292,6 +1292,11 @@ function startEggAnimation()
             Screen.Height * 0.5 - egg.Height * 0.5
         }
     end
+    local t = 0
+    local tickListener = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
+        t = t + dt
+        egg.Rotation = egg.Rotation + Rotation(t, t * 3, 0)
+    end)
     egg:parentDidResize()
     Timer(5, function()
         egg:remove()
