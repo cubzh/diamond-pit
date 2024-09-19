@@ -1292,6 +1292,7 @@ function startEggAnimation()
             Screen.Height * 0.5 - egg.Height * 0.5
         }
     end
+    egg:parentDidResize()
     Timer(5, function()
         egg:remove()
     end)
