@@ -1282,22 +1282,28 @@ Client.Action1 = function()
     end
 end
 
-function startEggAnimation()
+function startEggAnimation(size)
     local ui = require("uikit")
     local egg = ui:createShape(Shape(Items.avatoon.egg), { spherized = true })
     egg.parentDidResize = function()
-        egg.Size = Screen.Height * 0.5
+        egg.Size = Screen.Height * 0.25 * size
         egg.pos = {
             Screen.Width * 0.5 - egg.Width * 0.5,
             Screen.Height * 0.5 - egg.Height * 0.5
         }
     end
     local t = 0
+    local nextSwoosh = 1
+    sfx("whooshes_medium_1", { Spatialized = false, Volume = 0.4 })
     local tickListener = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
         t = t + dt * 0.015
         egg.pivot:RotateLocal(egg.pivot.Right, t * 0.5)
         egg.pivot:RotateLocal(egg.pivot.Up, t)
         egg.pivot:RotateLocal(egg.pivot.Forward, t * 2)
+        if nextSwoosh < t then
+            sfx("whooshes_medium_1", { Spatialized = false, Volume = 0.4 })
+            nextSwoosh = nextSwoosh * 0.9
+        end
     end)
     egg:parentDidResize()
     Timer(5, function()
