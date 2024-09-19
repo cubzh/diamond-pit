@@ -1173,6 +1173,7 @@ Client.OnWorldObjectLoad = function(obj)
             shadow.Rotation = obj.Rotation
             shadow.IsHidden = false
             require("hierarchyactions"):applyToDescendants(shadow, { includeRoot = true }, function(o)
+                o.Physics = false
                 for i = 1, #o.Palette do
                     o.Palette[i].Color = Color.Black
                     o.Palette[i].Color.A = 0.03
