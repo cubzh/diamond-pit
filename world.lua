@@ -398,9 +398,19 @@ createNewPlayer = function(key, position)
 end
 
 local petStatus = {}
+local petNameToDisplay
+local nbPetsToDisplay
 function updatePetNumber(petName, nbPets)
     if not petStatus[petName] then
         petStatus[petName] = nbPets
+
+        -- if prevPetsInventory.value == 0 then
+        --     showInfo(string.format("New Pet Discovered: %s)", petName))
+        -- else
+        --     showInfo(string.format("New %s Added! (total: %d %s)", petName, v.value, k,
+        --         (v.value > 1 and "s" or "")))
+        -- end
+
         -- discovery
         pets[petName].IsHidden = false
         pets[petName].Physics = PhysicsMode.Static
@@ -429,6 +439,13 @@ function updatePetNumber(petName, nbPets)
     end
 end
 
+displayNewPetAcquired = function()
+    if not petNameToDisplay then return end
+    updatePetNumber(petNameToDisplay, nbPetsToDisplay)
+    petNameToDisplay = nil
+    nbPetsToDisplay = nil
+end
+
 local prevPetsInventory
 updatePetInventory = function(key, petsInventory)
     if petsInventory.owner.value ~= dojo.burnerAccount.Address then
@@ -436,27 +453,21 @@ updatePetInventory = function(key, petsInventory)
     end
     for k, v in pairs(petsInventory) do
         if v.type_name == "u32" and v.value > (prevPetsInventory[k] and prevPetsInventory[k].value or 0) then
-            if notifEnabled then
-                print("NEW PET", k)
-                local petName
-                for sing, plur in pairs(PET_NAMES) do
-                    if plur == k then
-                        petName = sing
-                        break
-                    end
-                end
-                if prevPetsInventory.value == 0 then
-                    showInfo(string.format("New Pet Discovered: %s)", petName))
-                else
-                    showInfo(string.format("New %s Added! (total: %d %s)", petName, v.value, k,
-                        (v.value > 1 and "s" or "")))
-                end
-            end
+            -- if notifEnabled then
+            --     local petName
+            --     for sing, plur in pairs(PET_NAMES) do
+            --         if plur == k then
+            --             petName = sing
+            --             break
+            --         end
+            --     end
+            -- end
             local petType = k
             local nbPets = v.value
             for name, dojoKey in pairs(PET_NAMES) do
                 if petType == dojoKey then
-                    updatePetNumber(name, nbPets)
+                    petNameToDisplay = name
+                    nbPetsToDisplay = nbPets
                 end
             end
         end
@@ -1311,6 +1322,7 @@ function startEggAnimation(size)
     Timer(5, function()
         tickListener:Remove()
         egg:remove()
+        displayNewPetAcquired()
     end)
 end
 
