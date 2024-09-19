@@ -1293,7 +1293,7 @@ function startEggAnimation(size)
         }
     end
     local t = 0
-    local nextSwooshDelay = 1
+    local nextSwooshDelay = 0.2
     local nextSwoosh = 0
     sfx("whooshes_medium_1", { Spatialized = false, Volume = 0.4 })
     local tickListener = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
