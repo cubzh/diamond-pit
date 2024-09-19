@@ -466,6 +466,9 @@ updatePetInventory = function(key, petsInventory)
             local nbPets = v.value
             for name, dojoKey in pairs(PET_NAMES) do
                 if petType == dojoKey then
+                    if not prevPetsInventory then
+                        updatePetNumber(name, nbPets)
+                    end
                     petNameToDisplay = name
                     nbPetsToDisplay = nbPets
                 end
