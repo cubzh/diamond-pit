@@ -5,6 +5,7 @@ Config = {
         "caillef.shop2",
         "caillef.coin",
         "voxels.log_2",
+        "avatoon.egg",
     },
 }
 
@@ -1281,13 +1282,29 @@ Client.Action1 = function()
     end
 end
 
+function startEggAnimation()
+    local ui = require("uikit")
+    local egg = ui:createShape(Shape(Items.avatoon.egg), { spherized = true })
+    egg.parentDidResize = function()
+        egg.Size = Screen.Height * 0.5
+        egg.pos = {
+            Screen.Width * 0.5 - egg.Width * 0.5,
+            Screen.Height * 0.5 - egg.Height * 0.5
+        }
+    end
+    Timer(5, function()
+        egg:remove()
+    end)
+end
+
 Client.Action2 = function()
     if selectedEgg then
-        dojo.actions.open_egg(tonumber(string.sub(selectedEgg.Name, 4, 4)) - 1, function(error)
-            if error == "TransactionExecutionError" then
-                showInfo("Not Enough Rebirth Credits")
-            end
-        end)
+        startEggAnimation()
+        -- dojo.actions.open_egg(tonumber(string.sub(selectedEgg.Name, 4, 4)) - 1, function(error)
+        --     if error == "TransactionExecutionError" then
+        --         showInfo("Not Enough Rebirth Credits")
+        --     end
+        -- end)
         return
     end
     mining = true
