@@ -1294,7 +1294,7 @@ function startEggAnimation()
     end
     local t = 0
     local tickListener = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
-        t = t * 1.1 + dt * 0.0001
+        t = t * 1.001 + dt * 0.0001
         egg.pivot.Rotation = egg.pivot.Rotation + Rotation(t, 0, t * 3)
     end)
     egg:parentDidResize()
