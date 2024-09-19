@@ -1304,7 +1304,7 @@ function startEggAnimation(size)
         if nextSwoosh < t then
             sfx("whooshes_medium_1", { Spatialized = false, Volume = 0.4 })
             nextSwoosh = t + nextSwooshDelay
-            nextSwooshDelay = nextSwooshDelay * 0.95
+            nextSwooshDelay = nextSwooshDelay * 0.85
         end
     end)
     egg:parentDidResize()
