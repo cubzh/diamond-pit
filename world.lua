@@ -1604,30 +1604,29 @@ function updateBlocksColumn(key, rawColumn)
                     quad.Image = imagePng
                     quad.Width = 20
                     quad.Height = 20
+                    quad.Anchor = { 0.5, 0.5 }
                     quad.LocalPosition = { posX, posY, posZ }
                     quad.IsDoubleSided = true
                     quad:SetParent(object)
                     quad.Rotation = { rotationX, rotationY, rotationZ }
                     return quad
                 end
-
-                -- Face avant (déjà créée)
-                createFace(0, 0, 0, -10, -10, 10)
+                createFace(0, 0, 0, 0, 0, 10)
 
                 -- Face arrière
-                createFace(0, math.pi, 0, 10, -10, -10)
+                createFace(0, math.pi, 0, 0, 0, -10)
 
                 -- Face gauche
-                createFace(0, math.pi * 0.5, 0, -10, -10, -10)
+                createFace(0, math.pi * 0.5, 0, -10, 0, 0)
 
                 -- Face droite
-                createFace(0, math.pi * -0.5, 0, 10, -10, 10)
+                createFace(0, math.pi * -0.5, 0, 10, 0, 0)
 
                 -- Face supérieure
-                createFace(math.pi * -0.5, 0, 0, -10, 10, -10)
+                createFace(math.pi * -0.5, 0, 0, 0, 10, 0)
 
                 -- Face inférieure
-                createFace(math.pi * 0.5, 0, 0, -10, -10, 10)
+                createFace(math.pi * 0.5, 0, 0, 0, -10, 0)
             end)
         end
     end
