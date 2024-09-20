@@ -1588,7 +1588,7 @@ function updateBlocksColumn(key, rawColumn)
         end
 
         -- if starknet block
-        if blockType == 2 and blockHp > 0 and not texturedBlocks[z] and not texturedBlocks[z][column.y] and not texturedBlocks[z][column.y][column.x] then
+        if blockType == 2 and blockHp > 0 and not (texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x]) then
             local object = Object()
             object:SetParent(World)
             object.Position = blocksModule.blockShape.Position +
