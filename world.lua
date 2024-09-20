@@ -1588,7 +1588,7 @@ function updateBlocksColumn(key, rawColumn)
         end
 
         -- if starknet block
-        if blockType == 2 and not texturedBlocks[z] and not texturedBlocks[z][column.y] and not texturedBlocks[z][column.y][column.x] then
+        if blockType == 2 and blockHp > 0 and not texturedBlocks[z] and not texturedBlocks[z][column.y] and not texturedBlocks[z][column.y][column.x] then
             local object = Object()
             object:SetParent(World)
             object.Position = blocksModule.blockShape.Position + b.Coords * blocksModule.blockShape.Scale
@@ -1604,6 +1604,14 @@ function updateBlocksColumn(key, rawColumn)
                 quad.Height = 20
                 quad.IsDoubleSided = true
                 quad:SetParent(object)
+
+                local quad = Quad()
+                quad.Image = imagePng
+                quad.Width = 20
+                quad.Height = 20
+                quad.IsDoubleSided = true
+                quad:SetParent(object)
+                quad.Rotation.Y = math.pi * 0.5
             end)
         end
     end
