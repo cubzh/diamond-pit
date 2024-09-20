@@ -1591,7 +1591,6 @@ function updateBlocksColumn(key, rawColumn)
         if blockType == 2 and blockHp > 0 and not (texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x]) then
             local object = Object()
             object.Scale = 1.001
-            object.Pivot = { 0.5, 0.5, 0.5 }
             object:SetParent(World)
             object.Position = blocksModule.blockShape.Position +
                 (b.Coords + Number3(0.5, -0.5, 0.5)) * blocksModule.blockShape.Scale
