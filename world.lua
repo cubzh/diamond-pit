@@ -1619,8 +1619,8 @@ function updateBlocksColumn(key, rawColumn)
                 createFace(0, math.pi, 0, 0, 0, -10)
                 createFace(0, math.pi * 0.5, 0, -10, 0, 0)
                 createFace(0, math.pi * -0.5, 0, 10, 0, 0)
-                createFace(math.pi * -0.5, 0, 0, 0, 10, 0)
-                createFace(math.pi * 0.5, 0, 0, 0, -10, 0)
+                createFace(math.pi * 0.5, 0, 0, 0, 10, 0)
+                createFace(math.pi * -0.5, 0, 0, 0, -10, 0)
             end)
         end
     end
