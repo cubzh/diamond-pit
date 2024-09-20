@@ -218,7 +218,7 @@ local BLOCK_COLORS = {
     Color(196, 203, 211), -- iron
     Color(253, 167, 28),  -- gold
     Color(97, 203, 219),  -- diamond
-    Color.Red,            -- starknet
+    Color.White,          -- starknet
 }
 
 local NUGGETS_COLOR = {
@@ -229,7 +229,7 @@ local NUGGETS_COLOR = {
     Color(180, 186, 194), -- iron
     Color(247, 135, 21),  -- gold
     Color(1, 186, 189),   -- diamond
-    nil
+    Color.White
 }
 
 local BLOCKS_MAX_HP = { 4, 10, 25, 10, 40, 80, 125, 127 }
@@ -1592,7 +1592,7 @@ function updateBlocksColumn(key, rawColumn)
         end
 
         -- if starknet block
-        if blockType == 2 and blockHp > 0 and not (texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x]) then
+        if blockType == 8 and blockHp > 0 and not (texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x]) then
             local object = Object()
             object.Scale = 1.001
             object:SetParent(World)
