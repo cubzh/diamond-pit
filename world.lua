@@ -15,6 +15,7 @@ Modules = {
 
 local VERBOSE = false
 
+local texturedBlocks = {}
 local pets = {}
 local PET_NAMES = {
     bird = "birds",
@@ -319,9 +320,6 @@ end
 blocksModule.setBlockHP = function(self, block, hp, maxHP, blockType)
     if not block then return end
     if not self.chips[block.Coords.Z] or not self.chips[block.Coords.Z][block.Coords.Y] or not self.chips[block.Coords.Z][block.Coords.Y][block.Coords.X] then
-        if not hp or not maxHP then
-            print(">>>>>", hp, maxHP, blockType)
-        end
         if hp < maxHP then
             self:addChips(block, BLOCK_COLORS[blockType])
         else
@@ -1579,9 +1577,6 @@ function updateBlocksColumn(key, rawColumn)
         local blockHp = blockInfo & 127
         local z = -(column.z_layer * 10 + k)
         local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
-        if blockType > 7 then
-            print(">>>>>>", blockType, blockHp)
-        end
         blocksModule:setBlockHP(b, blockHp, BLOCKS_MAX_HP[blockType], blockType)
         local blockColor = BLOCK_COLORS[blockType]
         if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
@@ -1590,6 +1585,23 @@ function updateBlocksColumn(key, rawColumn)
             b:Replace(blockColor)
         elseif not b and blockHp > 0 then
             blocksModule.blockShape:AddBlock(blockColor, column.x, z, column.y)
+        end
+
+        -- if starknet block
+        if blockType == 2 and not texturedBlocks[z] and not texturedBlocks[z][column.y] and not texturedBlocks[z][column.y][column.x] then
+            local object = Object()
+            texturedBlocks[z] = texturedBlocks[z] or {}
+            texturedBlocks[z][column.y] = texturedBlocks[z][column.y] or {}
+            texturedBlocks[z][column.y][column.x] = object
+            HTTP:Get("http://api.voxdream.art/starknet.png", function(res)
+                local imagePng = res.Body
+                local quad = Quad()
+                quad.Image = imagePng
+                quad.Width = 20
+                quad.Height = 20
+                quad.IsDoubleSided = true
+                quad:SetParent(object)
+            end)
         end
     end
 end
