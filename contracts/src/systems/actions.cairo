@@ -281,7 +281,7 @@ pub mod actions {
                     }.into();
 
                     if z_layer == 4 && starknet_x == x && starknet_y == y {
-                        block = 8; // Starknet block instead of diamond
+                        block = BlockHelper::new(BlockType::Starknet); // Starknet block instead of diamond
                     }
 
                     data = (data & (MAX_U128 ^ (4095 * shift))) + block * shift;
