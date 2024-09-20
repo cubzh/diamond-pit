@@ -231,7 +231,7 @@ local NUGGETS_COLOR = {
     nil
 }
 
-local BLOCKS_MAX_HP = { 4, 10, 25, 10, 40, 80, 125 }
+local BLOCKS_MAX_HP = { 4, 10, 25, 10, 40, 80, 125, 127 }
 
 blocksModule = {
     chips = {}
