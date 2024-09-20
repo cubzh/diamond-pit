@@ -1591,8 +1591,8 @@ function updateBlocksColumn(key, rawColumn)
         if blockType == 2 and blockHp > 0 and not texturedBlocks[z] and not texturedBlocks[z][column.y] and not texturedBlocks[z][column.y][column.x] then
             local object = Object()
             object:SetParent(World)
-            object.Position = blocksModule.blockShape.Position + b.Coords * blocksModule.blockShape.Scale
-            print(b.Position)
+            object.Position = blocksModule.blockShape.Position +
+                (b.Coords - Number3(0, 1, 0)) * blocksModule.blockShape.Scale
             texturedBlocks[z] = texturedBlocks[z] or {}
             texturedBlocks[z][column.y] = texturedBlocks[z][column.y] or {}
             texturedBlocks[z][column.y][column.x] = object
@@ -1611,7 +1611,7 @@ function updateBlocksColumn(key, rawColumn)
                 quad.Height = 20
                 quad.IsDoubleSided = true
                 quad:SetParent(object)
-                quad.Rotation.Y = math.pi * 0.5
+                quad.Rotation.Y = math.pi * -0.5
             end)
         end
     end
