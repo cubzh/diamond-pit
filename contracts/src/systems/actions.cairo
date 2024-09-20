@@ -247,6 +247,11 @@ pub mod actions {
 
             let timestamp: u64 = starknet::get_block_info().unbox().block_timestamp;
 
+            // Starknet block
+            let rnd_value_starknet_block: u128 = _uniform_random(timestamp.into(), 100);
+            let starknet_y: u8 = (rnd_value_starknet_block / 10).try_into().unwrap(); // value between 0 and 9
+            let starknet_x: u8 = (rnd_value_starknet_block % 10).try_into().unwrap(); // value between 0 and 9
+
             let mut y: u8 = 0;
             loop {
                 if y >= 10 {
@@ -266,7 +271,7 @@ pub mod actions {
                     }; // 10 Deepstone
                     let rnd_value: u128 = (seed_rnd.into() + x.into() * 100049) % 10;
                     let shift = fast_power_2(rnd_value * 12);
-                    let block: u128 = match z_layer {
+                    let mut block: u128 = match z_layer {
                         0 => BlockHelper::new(BlockType::Coal),
                         1 => BlockHelper::new(BlockType::Copper),
                         2 => BlockHelper::new(BlockType::Iron),
@@ -274,6 +279,11 @@ pub mod actions {
                         4 => BlockHelper::new(BlockType::Diamond),
                         _ => BlockHelper::new(BlockType::Coal),
                     }.into();
+
+                    if z_layer == 4 && starknet_x == x && starknet_y == y {
+                        block = 8; // Starknet block instead of diamond
+                    }
+
                     data = (data & (MAX_U128 ^ (4095 * shift))) + block * shift;
                     set!(world, (BlocksColumn { x, y, z_layer, data }));
                     x += 1;

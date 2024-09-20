@@ -13,6 +13,7 @@ pub enum BlockType {
     Iron,
     Gold,
     Diamond,
+    Starknet,
 }
 
 #[generate_trait]
@@ -40,10 +41,11 @@ pub impl BlockHelper of BlockHelperTrait {
             BlockType::Iron => 40,
             BlockType::Gold => 80,
             BlockType::Diamond => 125,
+            BlockType::Starknet => 127,
         }
     }
 
-    fn block_price_per_type(block_type: BlockType) -> u8 {
+    fn block_price_per_type(block_type: BlockType) -> u16 {
         match block_type {
             BlockType::Air => 0,
             BlockType::Stone => 1,
@@ -53,6 +55,7 @@ pub impl BlockHelper of BlockHelperTrait {
             BlockType::Iron => 20,
             BlockType::Gold => 60,
             BlockType::Diamond => 100,
+            BlockType::Starknet => 1000,
         }
     }
 
@@ -66,6 +69,7 @@ pub impl BlockHelper of BlockHelperTrait {
             BlockType::Iron => 5,
             BlockType::Gold => 6,
             BlockType::Diamond => 7,
+            BlockType::Starknet => 8,
         }
     }
 
@@ -79,6 +83,7 @@ pub impl BlockHelper of BlockHelperTrait {
             5 => BlockType::Iron,
             6 => BlockType::Gold,
             7 => BlockType::Diamond,
+            8 => BlockType::Starknet,
             _ => BlockType::Air,
         }
     }
