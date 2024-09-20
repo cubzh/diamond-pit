@@ -1576,6 +1576,9 @@ function updateBlocksColumn(key, rawColumn)
         local blockHp = blockInfo & 127
         local z = -(column.z_layer * 10 + k)
         local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
+        if blockType == 8 then
+            print(">>", blockType, blockHp)
+        end
         blocksModule:setBlockHP(b, blockHp, BLOCKS_MAX_HP[blockType], blockType)
         local blockColor = BLOCK_COLORS[blockType]
         if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
