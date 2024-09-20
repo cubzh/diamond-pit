@@ -1581,6 +1581,10 @@ function updateBlocksColumn(key, rawColumn)
         local blockColor = BLOCK_COLORS[blockType]
         if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
             b:Remove()
+            if texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x] then
+                texturedBlocks[z][column.y][column.x]:RemoveFromParent()
+                texturedBlocks[z][column.y][column.x] = nil
+            end
         elseif b and b.Color ~= blockColor then
             b:Replace(blockColor)
         elseif not b and blockHp > 0 then
@@ -1612,20 +1616,10 @@ function updateBlocksColumn(key, rawColumn)
                     return quad
                 end
                 createFace(0, 0, 0, 0, 0, 10)
-
-                -- Face arrière
                 createFace(0, math.pi, 0, 0, 0, -10)
-
-                -- Face gauche
                 createFace(0, math.pi * 0.5, 0, -10, 0, 0)
-
-                -- Face droite
                 createFace(0, math.pi * -0.5, 0, 10, 0, 0)
-
-                -- Face supérieure
                 createFace(math.pi * -0.5, 0, 0, 0, 10, 0)
-
-                -- Face inférieure
                 createFace(math.pi * 0.5, 0, 0, 0, -10, 0)
             end)
         end
