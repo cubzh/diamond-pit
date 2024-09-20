@@ -1590,6 +1590,7 @@ function updateBlocksColumn(key, rawColumn)
         -- if starknet block
         if blockType == 2 and blockHp > 0 and not (texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x]) then
             local object = Object()
+            object.Scale = 1.001
             object:SetParent(World)
             object.Position = blocksModule.blockShape.Position +
                 (b.Coords - Number3(0, 1, 0)) * blocksModule.blockShape.Scale
