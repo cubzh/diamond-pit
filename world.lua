@@ -341,7 +341,7 @@ blocksModule.start = function(self)
     for z = 0, 49 do
         for j = 0, 9 do
             for i = 0, 9 do
-                self.blockShape:AddBlock(Color.Grey, i, -z, j)
+                self.blockShape:AddBlock(BLOCK_COLORS[1], i, -z, j)
             end
         end
     end
