@@ -113,6 +113,13 @@ local resources = {
         type = "block",
         block = { color = Color(97, 203, 219) },
     },
+    {
+        id = 8,
+        key = "starknet",
+        name = "Starknet",
+        type = "block",
+        block = { color = Color.Blue },
+    },
 }
 
 for _, v in ipairs(resources) do
@@ -199,6 +206,7 @@ idToName = {
     "Iron",
     "Gold",
     "Diamond",
+    "Starknet",
 }
 
 local BLOCK_COLORS = {
@@ -209,6 +217,7 @@ local BLOCK_COLORS = {
     Color(196, 203, 211), -- iron
     Color(253, 167, 28),  -- gold
     Color(97, 203, 219),  -- diamond
+    Color.Red,            -- starknet
 }
 
 local NUGGETS_COLOR = {
@@ -219,6 +228,7 @@ local NUGGETS_COLOR = {
     Color(180, 186, 194), -- iron
     Color(247, 135, 21),  -- gold
     Color(1, 186, 189),   -- diamond
+    nil
 }
 
 local BLOCKS_MAX_HP = { 4, 10, 25, 10, 40, 80, 125 }
@@ -240,6 +250,8 @@ blocksModule.addChips = function(self, block, color)
             break
         end
     end
+
+    if not NUGGETS_COLOR[blockType] then return end
 
     if not self.cachedChips then
         self.cachedChips = {}
