@@ -1599,22 +1599,35 @@ function updateBlocksColumn(key, rawColumn)
             texturedBlocks[z][column.y][column.x] = object
             HTTP:Get("https://api.voxdream.art/starknet.png", function(res)
                 local imagePng = res.Body
-                local quad = Quad()
-                quad.Image = imagePng
-                quad.Width = 20
-                quad.Height = 20
-                quad.LocalPosition = { -10, -10, -10 }
-                quad.IsDoubleSided = true
-                quad:SetParent(object)
+                local function createFace(rotationX, rotationY, rotationZ, posX, posY, posZ)
+                    local quad = Quad()
+                    quad.Image = imagePng
+                    quad.Width = 20
+                    quad.Height = 20
+                    quad.LocalPosition = { posX, posY, posZ }
+                    quad.IsDoubleSided = true
+                    quad:SetParent(object)
+                    quad.Rotation = { rotationX, rotationY, rotationZ }
+                    return quad
+                end
 
-                local quad = Quad()
-                quad.Image = imagePng
-                quad.Width = 20
-                quad.Height = 20
-                quad.LocalPosition = { -10, -10, -10 }
-                quad.IsDoubleSided = true
-                quad:SetParent(object)
-                quad.Rotation.Y = math.pi * -0.5
+                -- Face avant (déjà créée)
+                createFace(0, 0, 0, -10, -10, 10)
+
+                -- Face arrière
+                createFace(0, math.pi, 0, 10, -10, -10)
+
+                -- Face gauche
+                createFace(0, math.pi * 0.5, 0, -10, -10, -10)
+
+                -- Face droite
+                createFace(0, math.pi * -0.5, 0, 10, -10, 10)
+
+                -- Face supérieure
+                createFace(math.pi * -0.5, 0, 0, -10, 10, -10)
+
+                -- Face inférieure
+                createFace(math.pi * 0.5, 0, 0, -10, -10, 10)
             end)
         end
     end
