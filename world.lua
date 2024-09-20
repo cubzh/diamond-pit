@@ -1590,6 +1590,8 @@ function updateBlocksColumn(key, rawColumn)
         -- if starknet block
         if blockType == 2 and not texturedBlocks[z] and not texturedBlocks[z][column.y] and not texturedBlocks[z][column.y][column.x] then
             local object = Object()
+            object.Position = b.Position
+            print(b.Position)
             texturedBlocks[z] = texturedBlocks[z] or {}
             texturedBlocks[z][column.y] = texturedBlocks[z][column.y] or {}
             texturedBlocks[z][column.y][column.x] = object
