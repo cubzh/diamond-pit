@@ -1591,9 +1591,10 @@ function updateBlocksColumn(key, rawColumn)
         if blockType == 2 and blockHp > 0 and not (texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x]) then
             local object = Object()
             object.Scale = 1.001
+            object.Pivot = { 0.5, 0.5, 0.5 }
             object:SetParent(World)
             object.Position = blocksModule.blockShape.Position +
-                (b.Coords - Number3(0, 1, 0)) * blocksModule.blockShape.Scale
+                (b.Coords + Number3(0.5, -0.5, 0.5)) * blocksModule.blockShape.Scale
             texturedBlocks[z] = texturedBlocks[z] or {}
             texturedBlocks[z][column.y] = texturedBlocks[z][column.y] or {}
             texturedBlocks[z][column.y][column.x] = object
@@ -1603,6 +1604,7 @@ function updateBlocksColumn(key, rawColumn)
                 quad.Image = imagePng
                 quad.Width = 20
                 quad.Height = 20
+                quad.LocalPosition = { -10, -10, -10 }
                 quad.IsDoubleSided = true
                 quad:SetParent(object)
 
@@ -1610,6 +1612,7 @@ function updateBlocksColumn(key, rawColumn)
                 quad.Image = imagePng
                 quad.Width = 20
                 quad.Height = 20
+                quad.LocalPosition = { -10, -10, -10 }
                 quad.IsDoubleSided = true
                 quad:SetParent(object)
                 quad.Rotation.Y = math.pi * -0.5
