@@ -413,7 +413,9 @@ function updatePetNumber(petName, nbPets)
 
         -- discovery
         pets[petName].IsHidden = false
-        pets[petName].Physics = PhysicsMode.Static
+        require("hierarchyactions"):applyToDescendants(pets[petName], { includeRoot = true }, function(o)
+            o.Physics = PhysicsMode.Static
+        end)
         pets[petName].shadow:RemoveFromParent()
         emitterNewPet = require("particles"):newEmitter({
             velocity = function()
@@ -1176,7 +1178,9 @@ Client.OnWorldObjectLoad = function(obj)
         if name == obj.Name then
             pets[name] = obj
             obj.IsHidden = true
-            obj.Physics = PhysicsMode.Disabled
+            require("hierarchyactions"):applyToDescendants(obj, { includeRoot = true }, function(o)
+                o.Physics = PhysicsMode.Disabled
+            end)
 
             local shadow = Shape(obj, { includeChildren = true })
             obj.shadow = shadow
