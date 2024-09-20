@@ -1591,7 +1591,7 @@ function updateBlocksColumn(key, rawColumn)
         if blockType == 2 and not texturedBlocks[z] and not texturedBlocks[z][column.y] and not texturedBlocks[z][column.y][column.x] then
             local object = Object()
             object:SetParent(World)
-            object.Position = blocksModule.blockShape.Position + b.Coords * b.Scale
+            object.Position = blocksModule.blockShape.Position + b.Coords * blocksModule.blockShape.Scale
             print(b.Position)
             texturedBlocks[z] = texturedBlocks[z] or {}
             texturedBlocks[z][column.y] = texturedBlocks[z][column.y] or {}
