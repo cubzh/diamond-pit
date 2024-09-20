@@ -1593,7 +1593,7 @@ function updateBlocksColumn(key, rawColumn)
             texturedBlocks[z] = texturedBlocks[z] or {}
             texturedBlocks[z][column.y] = texturedBlocks[z][column.y] or {}
             texturedBlocks[z][column.y][column.x] = object
-            HTTP:Get("http://api.voxdream.art/starknet.png", function(res)
+            HTTP:Get("https://api.voxdream.art/starknet.png", function(res)
                 local imagePng = res.Body
                 local quad = Quad()
                 quad.Image = imagePng
