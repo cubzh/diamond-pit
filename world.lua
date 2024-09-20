@@ -1592,7 +1592,7 @@ function updateBlocksColumn(key, rawColumn)
         end
 
         -- if starknet block
-        if blockType == 8 and blockHp > 0 and not (texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x]) then
+        if blockType == 2 and blockHp > 0 and not (texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x]) then
             local object = Object()
             object.Scale = 1.001
             object:SetParent(World)
