@@ -1026,10 +1026,10 @@ updateInventory = function(_, inventory)
     local totalQty = 0
     print("inv value", inventory.data.value)
     local inventoryHexaWithoutPrefix = string.sub(inventory.data.value, 3, #inventory.data.value)
-    print("inv without previx", inventoryHexaWithoutPrefix)
     if #inventoryHexaWithoutPrefix % 2 ~= 0 then
         inventoryHexaWithoutPrefix = "0" .. inventoryHexaWithoutPrefix
     end
+    print("inv without previx", inventoryHexaWithoutPrefix)
     for i = 1, 8 do
         print(i, #inventoryHexaWithoutPrefix / 2)
         if i > #inventoryHexaWithoutPrefix / 2 then
