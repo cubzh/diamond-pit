@@ -1024,7 +1024,7 @@ updateInventory = function(_, inventory)
     end
     local slots = {}
     local totalQty = 0
-    local inventoryHexaWithoutPrefix = string.sub(inventory.data.value, 3, #inventory.data.value)
+    local inventoryHexaWithoutPrefix = string.sub(tostring(inventory.data.value), 3, #inventory.data.value)
     for i = 1, #inventoryHexaWithoutPrefix / 2 do
         local nbInSlot = string_to_hex(string.sub(inventoryHexaWithoutPrefix, math.max(1, math.#inventoryHexaWithoutPrefix - 1 - 2 * i),
             #inventoryHexaWithoutPrefix - 1 - 2 * (i - 1)))
