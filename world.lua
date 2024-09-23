@@ -964,12 +964,12 @@ function initLeaderboard()
     leaderboardTextCoins, leaderboardTextCoinsScore = createLeaderboardQuad({ 130, 0, 220 }, math.pi * 1.5,
         "Daily Leaderboard\n- Coins Earned -")
 
-    leaderboardTextRebirths, leaderboardTextRebirthsScore = createLeaderboardQuad({ 180, 0, 110 }, math.pi * 0.7,
+    leaderboardTextRebirths, leaderboardTextRebirthsScore = createLeaderboardQuad({ 190, 0, 110 }, math.pi * 1.1,
         "Season Leaderboard\n- Rebirths -")
 end
 
 local leaderboardEntries = {}
-local function updateIndividualLeaderboard(entries, textObject, textScoreObject, valueField)
+function updateIndividualLeaderboard(entries, textObject, textScoreObject, valueField)
     local list = {}
     for _, elem in pairs(entries) do
         table.insert(list, elem)
