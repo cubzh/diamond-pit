@@ -1038,7 +1038,7 @@ updateInventory = function(_, inventory)
         local startIndex = #inventoryHexaWithoutPrefix - 2 * i
         local endIndex = startIndex + 1
         print("indexes", startIndex, endIndex)
-        local nbInSlot = tonumber(string.sub(inventoryHexaWithoutPrefix, startIndex, endIndex), 16)
+        local nbInSlot = tonumber("0x" .. string.sub(inventoryHexaWithoutPrefix, startIndex, endIndex))
         print("nb slots", nbInSlot)
         if nbInSlot > 0 then
             table.insert(slots, { blockType = i, qty = nbInSlot })
