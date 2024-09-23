@@ -1611,7 +1611,7 @@ function updateBlocksColumn(key, rawColumn)
                 createFace(math.pi * 0.5, 0, 0, 0, 10, 0)
                 createFace(math.pi * -0.5, 0, 0, 0, -10, 0)
             end)
-        elseif b then
+        elseif b and not blockType == 8 then
             b:Remove()
         end
     end
