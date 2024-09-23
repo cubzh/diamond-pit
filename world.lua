@@ -1024,21 +1024,17 @@ updateInventory = function(_, inventory)
     end
     local slots = {}
     local totalQty = 0
-    print("inv value", inventory.data.value)
     local inventoryHexaWithoutPrefix = string.sub(inventory.data.value, 3, #inventory.data.value)
     if #inventoryHexaWithoutPrefix % 2 ~= 0 then
         inventoryHexaWithoutPrefix = "0" .. inventoryHexaWithoutPrefix
     end
-    print("inv without previx", inventoryHexaWithoutPrefix)
     for i = 1, 8 do
         local startIndex = #inventoryHexaWithoutPrefix - 2 * i - 1
         if startIndex < 1 then
             break
         end
         local endIndex = startIndex + 1
-        print("indexes", startIndex, endIndex)
         local nbInSlot = tonumber("0x" .. string.sub(inventoryHexaWithoutPrefix, startIndex, endIndex))
-        print("nb slots", nbInSlot)
         if nbInSlot > 0 then
             table.insert(slots, { blockType = i, qty = nbInSlot })
             totalQty = totalQty + nbInSlot
