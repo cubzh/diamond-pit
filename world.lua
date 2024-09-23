@@ -1027,7 +1027,7 @@ updateInventory = function(_, inventory)
     print("inv value", inventory.data.value)
     local inventoryHexaWithoutPrefix = string.sub(inventory.data.value, 3, #inventory.data.value)
     print("inv without previx", inventoryHexaWithoutPrefix)
-    if #inventoryHexaWithoutPrefix % 2 == 1 then
+    if #inventoryHexaWithoutPrefix % 2 ~= 0 then
         inventoryHexaWithoutPrefix = "0" .. inventoryHexaWithoutPrefix
     end
     for i = 1, 8 do
