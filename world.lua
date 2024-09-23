@@ -25,7 +25,6 @@ local PET_NAMES = {
     rhino = "rhinos",
     reptile = "reptiles",
 }
-local notifEnabled = false
 
 local eggs = {}
 local selectedEgg
@@ -467,15 +466,6 @@ updatePetInventory = function(key, petsInventory)
     end
     for k, v in pairs(petsInventory) do
         if v.type_name == "u32" and v.value > (prevPetsInventory[k] and prevPetsInventory[k].value or 0) then
-            -- if notifEnabled then
-            --     local petName
-            --     for sing, plur in pairs(PET_NAMES) do
-            --         if plur == k then
-            --             petName = sing
-            --             break
-            --         end
-            --     end
-            -- end
             local petType = k
             local nbPets = v.value
             for name, dojoKey in pairs(PET_NAMES) do
@@ -1252,12 +1242,8 @@ Client.OnStart = function()
     Camera.Position = { 20 * 15, 300, 20 * 15 }
     Camera.Rotation.X = math.pi * 0.5
     Fog.On = false
-    notifEnabled = false
 
     initMenu(function()
-        Timer(3, function()
-            notifEnabled = true
-        end)
         require("ambience"):set(require("ambience").default)
         initPlayer()
         Player:SetParent(World)
@@ -1583,17 +1569,16 @@ function updateBlocksColumn(key, rawColumn)
         local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
         blocksModule:setBlockHP(b, blockHp, BLOCKS_MAX_HP[blockType], blockType)
         local blockColor = BLOCK_COLORS[blockType]
-        if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
-            b:Remove()
-            if texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x] then
-                texturedBlocks[z][column.y][column.x]:RemoveFromParent()
-                texturedBlocks[z][column.y][column.x] = nil
-            end
-        elseif b and b.Color ~= blockColor then
-            b:Replace(blockColor)
-        elseif not b and blockHp > 0 then
-            blocksModule.blockShape:AddBlock(blockColor, column.x, z, column.y)
-        end
+        -- if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
+        --     if texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x] then
+        --         texturedBlocks[z][column.y][column.x]:RemoveFromParent()
+        --         texturedBlocks[z][column.y][column.x] = nil
+        --     end
+        -- elseif b and b.Color ~= blockColor then
+        --     b:Replace(blockColor)
+        -- elseif not b and blockHp > 0 then
+        --     blocksModule.blockShape:AddBlock(blockColor, column.x, z, column.y)
+        -- end
 
         -- if starknet block
         if blockType == 8 and blockHp > 0 and not (texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x]) then
@@ -1626,6 +1611,8 @@ function updateBlocksColumn(key, rawColumn)
                 createFace(math.pi * 0.5, 0, 0, 0, 10, 0)
                 createFace(math.pi * -0.5, 0, 0, 0, -10, 0)
             end)
+        else
+            b:Remove()
         end
     end
 end
