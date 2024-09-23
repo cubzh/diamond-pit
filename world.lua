@@ -1022,11 +1022,12 @@ updateInventory = function(_, inventory)
     if inventory.player.value ~= dojo.burnerAccount.Address then
         return
     end
-    print("Inventory", inventory.data.value, "type", type(inventory.data.value))
     local slots = {}
     local totalQty = 0
-    for i = 1, 8 do
-        local nbInSlot = ((inventory.data.value >> (8 * i)) & 255)
+    local inventoryHexaWithoutPrefix = string.sub(inventory.data.value, 3, #inventory.data.value)
+    for i = 1, #inventoryHexaWithoutPrefix / 2 do
+        local nbInSlot = string.sub(inventory.data.value, math.max(1, math.#inventory.data.value - 1 - 2 * i),
+            #inventory.data.value - 1 - 2 * (i - 1))((inventory.data.value >> (8 * i)) & 255)
         if nbInSlot > 0 then
             table.insert(slots, { blockType = i, qty = nbInSlot })
             totalQty = totalQty + nbInSlot
