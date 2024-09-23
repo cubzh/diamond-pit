@@ -1553,24 +1553,18 @@ function updateBlocksColumn(key, rawColumn)
         local blockHp = blockInfo & 127
         local z = -(column.z_layer * 10 + k)
         local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
-        if blockType < 8 and b then
+        blocksModule:setBlockHP(b, blockHp, BLOCKS_MAX_HP[blockType], blockType)
+        local blockColor = BLOCK_COLORS[blockType]
+        if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
             b:Remove()
-            b = nil
-            blockHp = 0
-        else
-            blocksModule:setBlockHP(b, blockHp, BLOCKS_MAX_HP[blockType], blockType)
-            local blockColor = BLOCK_COLORS[blockType]
-            if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
-                b:Remove()
-                if texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x] then
-                    texturedBlocks[z][column.y][column.x]:RemoveFromParent()
-                    texturedBlocks[z][column.y][column.x] = nil
-                end
-            elseif b and b.Color ~= blockColor then
-                b:Replace(blockColor)
-            elseif not b and blockHp > 0 then
-                blocksModule.blockShape:AddBlock(blockColor, column.x, z, column.y)
+            if texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x] then
+                texturedBlocks[z][column.y][column.x]:RemoveFromParent()
+                texturedBlocks[z][column.y][column.x] = nil
             end
+        elseif b and b.Color ~= blockColor then
+            b:Replace(blockColor)
+        elseif not b and blockHp > 0 then
+            blocksModule.blockShape:AddBlock(blockColor, column.x, z, column.y)
         end
 
         -- if starknet block
