@@ -964,7 +964,7 @@ function initLeaderboard()
     leaderboardTextCoins, leaderboardTextCoinsScore = createLeaderboardQuad({ 130, 0, 220 }, math.pi * 1.5,
         "Daily Leaderboard\n- Coins Earned -")
 
-    leaderboardTextRebirths, leaderboardTextRebirthsScore = createLeaderboardQuad({ 190, 0, 110 }, math.pi * 1.1,
+    leaderboardTextRebirths, leaderboardTextRebirthsScore = createLeaderboardQuad({ 210, 0, 110 }, math.pi * 1.1,
         "Season Leaderboard\n- Rebirths -")
 end
 
