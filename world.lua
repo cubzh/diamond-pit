@@ -1611,7 +1611,7 @@ function updateBlocksColumn(key, rawColumn)
                 createFace(math.pi * 0.5, 0, 0, 0, 10, 0)
                 createFace(math.pi * -0.5, 0, 0, 0, -10, 0)
             end)
-        else
+        elseif b then
             b:Remove()
         end
     end
