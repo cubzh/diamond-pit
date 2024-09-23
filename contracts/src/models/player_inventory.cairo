@@ -2,14 +2,14 @@ use starknet::ContractAddress;
 use diamond_pit::helpers::block::{BlockType, BlockHelperTrait};
 use diamond_pit::helpers::math::{fast_power_2};
 
-const SLOT_MASK: u64 = 255;
+const SLOT_MASK: u128 = 255;
 
 #[derive(Copy, Drop, Serde)]
 #[dojo::model]
 pub struct PlayerInventory {
     #[key]
     player: ContractAddress,
-    pub data: u64,
+    pub data: u128,
     pub coins: u64,
     pub rebirth_credits: u64,
 }

@@ -1,0 +1,27 @@
+kind = "DojoModel"
+class_hash = "0x1d6712de80e886915830e47ac81b8d92e95a2d90b19b56d9590f3235caa3b9a"
+original_class_hash = "0x1d6712de80e886915830e47ac81b8d92e95a2d90b19b56d9590f3235caa3b9a"
+abi = "manifests/dev/base/abis/models/diamond_pit-PlayerInventory-676ae3a3.json"
+tag = "diamond_pit-PlayerInventory"
+qualified_path = "diamond_pit::models::player_inventory::player_inventory"
+manifest_name = "diamond_pit-PlayerInventory-676ae3a3"
+
+[[members]]
+name = "player"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "data"
+type = "u128"
+key = false
+
+[[members]]
+name = "coins"
+type = "u64"
+key = false
+
+[[members]]
+name = "rebirth_credits"
+type = "u64"
+key = false

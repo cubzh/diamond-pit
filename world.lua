@@ -1231,7 +1231,7 @@ Client.OnStart = function()
 
     inventory_module:setResources(resourcesByKey, resourcesById)
     inventory_module:create("hotbar", {
-        width = 7,
+        width = 8,
         height = 1,
         alwaysVisible = true,
         selector = false,

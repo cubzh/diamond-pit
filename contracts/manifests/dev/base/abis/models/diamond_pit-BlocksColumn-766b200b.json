@@ -363,34 +363,34 @@
   },
   {
     "type": "impl",
-    "name": "player_inventoryImpl",
-    "interface_name": "diamond_pit::models::player_inventory::Iplayer_inventory"
+    "name": "blocks_columnImpl",
+    "interface_name": "diamond_pit::models::blocks_column::Iblocks_column"
   },
   {
     "type": "struct",
-    "name": "diamond_pit::models::player_inventory::PlayerInventory",
+    "name": "diamond_pit::models::blocks_column::BlocksColumn",
     "members": [
       {
-        "name": "player",
-        "type": "core::starknet::contract_address::ContractAddress"
+        "name": "x",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "y",
+        "type": "core::integer::u8"
+      },
+      {
+        "name": "z_layer",
+        "type": "core::integer::u8"
       },
       {
         "name": "data",
         "type": "core::integer::u128"
-      },
-      {
-        "name": "coins",
-        "type": "core::integer::u64"
-      },
-      {
-        "name": "rebirth_credits",
-        "type": "core::integer::u64"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "diamond_pit::models::player_inventory::Iplayer_inventory",
+    "name": "diamond_pit::models::blocks_column::Iblocks_column",
     "items": [
       {
         "type": "function",
@@ -398,7 +398,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "diamond_pit::models::player_inventory::PlayerInventory"
+            "type": "diamond_pit::models::blocks_column::BlocksColumn"
           }
         ],
         "outputs": [],
@@ -408,7 +408,7 @@
   },
   {
     "type": "event",
-    "name": "diamond_pit::models::player_inventory::player_inventory::Event",
+    "name": "diamond_pit::models::blocks_column::blocks_column::Event",
     "kind": "enum",
     "variants": []
   }

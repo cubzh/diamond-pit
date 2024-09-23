@@ -1,0 +1,22 @@
+kind = "DojoContract"
+class_hash = "0x5373b9bc7a00e256a8b98d448b45cdd9f2815dfd0311683e30e2f8afa5db3e7"
+original_class_hash = "0x5373b9bc7a00e256a8b98d448b45cdd9f2815dfd0311683e30e2f8afa5db3e7"
+base_class_hash = "0x0"
+abi = "manifests/dev/base/abis/contracts/diamond_pit-actions-3fc18067.json"
+reads = []
+writes = []
+init_calldata = []
+tag = "diamond_pit-actions"
+systems = [
+    "hit_block",
+    "sync_position",
+    "sell_all",
+    "upgrade_pickaxe",
+    "upgrade_backpack",
+    "set_username",
+    "rebirth",
+    "open_egg",
+    "free_daily_credits",
+    "generate_world",
+]
+manifest_name = "diamond_pit-actions-3fc18067"

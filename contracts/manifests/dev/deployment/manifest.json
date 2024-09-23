@@ -1256,8 +1256,8 @@
     {
       "kind": "DojoContract",
       "address": "0x1e3d5078d20dbcd0457d93a9a201e1ba9b58e09a68a4d48b2b3a9894942e1ac",
-      "class_hash": "0x6ff2a57ed30384da727051d6b189fe6b4b7023484cbfea30554e7ce90361960",
-      "original_class_hash": "0x6ff2a57ed30384da727051d6b189fe6b4b7023484cbfea30554e7ce90361960",
+      "class_hash": "0x5373b9bc7a00e256a8b98d448b45cdd9f2815dfd0311683e30e2f8afa5db3e7",
+      "original_class_hash": "0x5373b9bc7a00e256a8b98d448b45cdd9f2815dfd0311683e30e2f8afa5db3e7",
       "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
       "abi": [
         {
@@ -3007,7 +3007,7 @@
         },
         {
           "name": "data",
-          "type": "u64",
+          "type": "u128",
           "key": false
         },
         {
@@ -3021,8 +3021,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x4f2c42a85652e649f70de3221600c24a4e68df8a59b98a9e7cf11b2833e3b3d",
-      "original_class_hash": "0x4f2c42a85652e649f70de3221600c24a4e68df8a59b98a9e7cf11b2833e3b3d",
+      "class_hash": "0x1d6712de80e886915830e47ac81b8d92e95a2d90b19b56d9590f3235caa3b9a",
+      "original_class_hash": "0x1d6712de80e886915830e47ac81b8d92e95a2d90b19b56d9590f3235caa3b9a",
       "abi": [
         {
           "type": "impl",
@@ -3401,7 +3401,7 @@
             },
             {
               "name": "data",
-              "type": "core::integer::u64"
+              "type": "core::integer::u128"
             },
             {
               "name": "coins",
