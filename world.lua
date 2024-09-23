@@ -1050,7 +1050,6 @@ updateInventory = function(_, inventory)
 
     LocalEvent:Send("InvClearAll", { key = "hotbar" })
     for _, slot in ipairs(slots) do
-        print("SLOT", slot.blockType, "key", resourcesById[slot.blockType].key, "qty", slot.qty)
         LocalEvent:Send("InvAdd", {
             key = "hotbar",
             rKey = resourcesById[slot.blockType].key,
