@@ -1569,6 +1569,10 @@ function updateBlocksColumn(key, rawColumn)
         local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
         blocksModule:setBlockHP(b, blockHp, BLOCKS_MAX_HP[blockType], blockType)
         local blockColor = BLOCK_COLORS[blockType]
+        if blockType ~= 8 and b then
+            b:Remove()
+            b = nil
+        end
         if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
             b:Remove()
             if texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x] then

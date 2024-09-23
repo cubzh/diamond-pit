@@ -1,3 +1,3 @@
 # Diamond Pit
 
-[Play](https://localhost:8081/github-redirect)
+[Play](http://localhost:8081/github-redirect)
