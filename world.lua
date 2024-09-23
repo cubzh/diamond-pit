@@ -1024,7 +1024,7 @@ updateInventory = function(_, inventory)
     end
     local slots = {}
     local totalQty = 0
-    for i = 1, 7 do
+    for i = 1, 8 do
         local nbInSlot = ((inventory.data.value >> (8 * i)) & 255)
         if nbInSlot > 0 then
             table.insert(slots, { blockType = i, qty = nbInSlot })
@@ -1053,29 +1053,6 @@ updateInventory = function(_, inventory)
             end,
         })
     end
-
-    -- if inventoryNode then
-    -- 	inventoryNode:remove()
-    -- end
-    -- local nodes = {
-    -- 	ui:createText("Inventory"),
-    -- 	ui:createText(string.format("%d/%d", totalQty, maxSlots or 5)),
-    -- }
-    -- for _, slot in ipairs(slots) do
-    -- 	table.insert(nodes, ui:createText(string.format("%s: %d", idToName[slot.blockType], slot.qty)))
-    -- end
-    -- local bgInventory = ui:createFrame(Color.White)
-    -- bgInventory.parentDidResize = function()
-    -- 	bgInventory.Width = 100
-    -- 	bgInventory.Height = Screen.Height / 3
-    -- 	bgInventory.pos = { Screen.Width - bgInventory.Width, Screen.Height - Screen.SafeArea.Top - bgInventory.Height }
-    -- end
-    -- bgInventory:parentDidResize()
-    -- inventoryNode = ui_blocks:createLineContainer({
-    -- 	dir = "vertical",
-    -- 	nodes = nodes,
-    -- })
-    -- ui_blocks:anchorNode(inventoryNode, "right", "top", 5)
 end
 
 Client.OnWorldObjectLoad = function(obj)
