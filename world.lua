@@ -1433,7 +1433,7 @@ end
 
 function getTimerMinAndSecsBeforeRegeneration()
     local time = Time.Unix()
-    local fiveMinuteOffset = (300 - time % 300) -- between 0 and 300
+    local fiveMinuteOffset = (299 - time % 300) -- between 0 and 300
     return math.floor(fiveMinuteOffset / 60), 59 - math.floor(time % 60)
 end
 
