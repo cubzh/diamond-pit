@@ -446,9 +446,8 @@ function updatePetNumber(petName, nbPets)
         })
         emitterNewPet.Position = pets[petName].Position + Number3(0, 10, 0)
         emitterNewPet.CollidesWithGroups = {}
-        emitterNewPet:spawn(30)
-        sfx("fire_1", { Spatialized = false, Volume = 0.6 })
-        Timer(4, function()
+        Timer(2, function()
+            sfx("fire_1", { Spatialized = false, Volume = 0.6 })
             emitterNewPet:spawn(30)
         end)
     end
@@ -548,6 +547,8 @@ end
 local prevPlayerStats
 updatePlayerStats = function(key, stats)
     playersStats[stats.player.value] = stats
+    updateIndividualLeaderboard(playersStats, leaderboardTextRebirths, leaderboardTextRebirthsScore, "rebirth")
+
     if stats.player.value ~= dojo.burnerAccount.Address then
         return
     end
@@ -962,6 +963,9 @@ function initLeaderboard()
         "Daily Leaderboard\n- Pickaxe Hits -")
     leaderboardTextCoins, leaderboardTextCoinsScore = createLeaderboardQuad({ 130, 0, 220 }, math.pi * 1.5,
         "Daily Leaderboard\n- Coins Earned -")
+
+    leaderboardTextRebirths, leaderboardTextRebirthsScore = createLeaderboardQuad({ 180, 0, 110 }, math.pi * 0.7,
+        "Season Leaderboard\n- Rebirths -")
 end
 
 local leaderboardEntries = {}
@@ -1324,7 +1328,7 @@ function startEggAnimation(size)
         }
     end
     local t = 0
-    local nextSwooshDelay = 0.03
+    local nextSwooshDelay = 0.005
     local nextSwoosh = 0
     sfx("whooshes_medium_1", { Spatialized = false, Volume = 0.4 })
     local tickListener = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
