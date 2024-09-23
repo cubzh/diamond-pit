@@ -33,7 +33,8 @@ pub impl PlayerInventoryImpl of PlayerInventoryTrait {
             self.get_amount(BlockType::Iron).into() +
             self.get_amount(BlockType::DeepStone).into() +
             self.get_amount(BlockType::Gold).into() +
-            self.get_amount(BlockType::Diamond).into())
+            self.get_amount(BlockType::Diamond).into() +
+            self.get_amount(BlockType::Starknet).into())
     }
 
     fn sell_all(ref self: PlayerInventory) -> u64 {
@@ -44,7 +45,8 @@ pub impl PlayerInventoryImpl of PlayerInventoryTrait {
             self.get_amount(BlockType::Iron).into() * BlockHelperTrait::block_price_per_type(BlockType::Iron).into() +
             self.get_amount(BlockType::DeepStone).into() * BlockHelperTrait::block_price_per_type(BlockType::DeepStone).into() +
             self.get_amount(BlockType::Gold).into() * BlockHelperTrait::block_price_per_type(BlockType::Gold).into() +
-            self.get_amount(BlockType::Diamond).into() * BlockHelperTrait::block_price_per_type(BlockType::Diamond).into();
+            self.get_amount(BlockType::Diamond).into() * BlockHelperTrait::block_price_per_type(BlockType::Diamond).into() +
+            self.get_amount(BlockType::Starknet).into() * BlockHelperTrait::block_price_per_type(BlockType::Starknet).into();
 
         // Clear inventory
         self.data = 0;
@@ -95,6 +97,6 @@ mod tests {
         inventory.add(BlockType::Gold, 4);
         inventory.add(BlockType::Diamond, 123);
         inventory.sell_all();
-        assert!(inventory.coins == 12550 + 10, "wrong sell all");
+        assert!(inventory.coins == 12560, "wrong sell all");
     }
 }
