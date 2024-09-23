@@ -1572,6 +1572,7 @@ function updateBlocksColumn(key, rawColumn)
         if blockType ~= 8 and b then
             b:Remove()
             b = nil
+            blockHp = 0
         end
         if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
             b:Remove()
