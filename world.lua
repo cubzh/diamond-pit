@@ -1032,8 +1032,8 @@ updateInventory = function(_, inventory)
         if i > #inventoryHexaWithoutPrefix / 2 then
             break
         end
-        local startIndex = math.max(1, #inventoryHexaWithoutPrefix + 1 - 2 * i)
-        local endIndex = math.max(1, #inventoryHexaWithoutPrefix + 1 - 2 * i) + 1
+        local startIndex = math.max(1, #inventoryHexaWithoutPrefix - 1 - 2 * i)
+        local endIndex = math.max(1, #inventoryHexaWithoutPrefix - 1 - 2 * i) + 1
         local nbInSlot = tonumber(string.sub(inventoryHexaWithoutPrefix, startIndex, endIndex), 16)
         print(startIndex, endIndex, "NB slots", nbInSlot)
         if nbInSlot > 0 then
