@@ -1570,6 +1570,7 @@ function updateBlocksColumn(key, rawColumn)
         blocksModule:setBlockHP(b, blockHp, BLOCKS_MAX_HP[blockType], blockType)
         local blockColor = BLOCK_COLORS[blockType]
         if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
+            b:Remove()
             if texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x] then
                 texturedBlocks[z][column.y][column.x]:RemoveFromParent()
                 texturedBlocks[z][column.y][column.x] = nil
