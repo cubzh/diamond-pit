@@ -1026,8 +1026,9 @@ updateInventory = function(_, inventory)
     local totalQty = 0
     local inventoryHexaWithoutPrefix = string.sub(inventory.data.value, 3, #inventory.data.value)
     for i = 1, #inventoryHexaWithoutPrefix / 2 do
-        local nbInSlot = string.sub(inventory.data.value, math.max(1, math.#inventory.data.value - 1 - 2 * i),
-            #inventory.data.value - 1 - 2 * (i - 1))((inventory.data.value >> (8 * i)) & 255)
+        local nbInSlot = string_to_hex(string.sub(inventoryHexaWithoutPrefix, math.max(1, math.#inventoryHexaWithoutPrefix - 1 - 2 * i),
+            #inventoryHexaWithoutPrefix - 1 - 2 * (i - 1)))
+        print("NB slots", nbInSlot)
         if nbInSlot > 0 then
             table.insert(slots, { blockType = i, qty = nbInSlot })
             totalQty = totalQty + nbInSlot
