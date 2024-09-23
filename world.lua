@@ -1040,9 +1040,9 @@ updateInventory = function(_, inventory)
     inventoryIsFull = totalQty == (maxSlots or 5)
     nbSlotsLeftText.Text = string.format("%d/%d", totalQty, maxSlots or 5)
 
-    local ui = require("uikit")
     LocalEvent:Send("InvClearAll", { key = "hotbar" })
     for _, slot in ipairs(slots) do
+        print("SLOT", slot.blockType, "key", resourcesById[slot.blockType].key, "qty", slot.qty)
         LocalEvent:Send("InvAdd", {
             key = "hotbar",
             rKey = resourcesById[slot.blockType].key,
