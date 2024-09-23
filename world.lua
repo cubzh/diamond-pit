@@ -1031,11 +1031,10 @@ updateInventory = function(_, inventory)
     end
     print("inv without previx", inventoryHexaWithoutPrefix)
     for i = 1, 8 do
-        print(i, #inventoryHexaWithoutPrefix / 2)
-        if i > #inventoryHexaWithoutPrefix / 2 then
+        local startIndex = #inventoryHexaWithoutPrefix - 2 * i - 1
+        if startIndex < 1 then
             break
         end
-        local startIndex = #inventoryHexaWithoutPrefix - 2 * i - 1
         local endIndex = startIndex + 1
         print("indexes", startIndex, endIndex)
         local nbInSlot = tonumber("0x" .. string.sub(inventoryHexaWithoutPrefix, startIndex, endIndex))
