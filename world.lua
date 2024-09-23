@@ -1024,16 +1024,16 @@ updateInventory = function(_, inventory)
     end
     local slots = {}
     local totalQty = 0
-    local inventoryHexaWithoutPrefix = string.sub(tostring(inventory.data.value), 3, #inventory.data.value)
-    for i = 1, #inventoryHexaWithoutPrefix / 2 do
-        local nbInSlot = string_to_hex(string.sub(inventoryHexaWithoutPrefix, math.max(1, math.#inventoryHexaWithoutPrefix - 1 - 2 * i),
-            #inventoryHexaWithoutPrefix - 1 - 2 * (i - 1)))
-        print("NB slots", nbInSlot)
-        if nbInSlot > 0 then
-            table.insert(slots, { blockType = i, qty = nbInSlot })
-            totalQty = totalQty + nbInSlot
-        end
-    end
+    -- local inventoryHexaWithoutPrefix = string.sub(tostring(inventory.data.value), 3, #inventory.data.value)
+    -- for i = 1, #inventoryHexaWithoutPrefix / 2 do
+    --     local nbInSlot = string_to_hex(string.sub(inventoryHexaWithoutPrefix, math.max(1, math.#inventoryHexaWithoutPrefix - 1 - 2 * i),
+    --         #inventoryHexaWithoutPrefix - 1 - 2 * (i - 1)))
+    --     print("NB slots", nbInSlot)
+    --     if nbInSlot > 0 then
+    --         table.insert(slots, { blockType = i, qty = nbInSlot })
+    --         totalQty = totalQty + nbInSlot
+    --     end
+    -- end
 
     coinText.Text = string.format("%d", inventory.coins.value)
     creditsText.Text = string.format("%d", inventory.rebirth_credits.value)
