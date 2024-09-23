@@ -1024,6 +1024,7 @@ updateInventory = function(_, inventory)
     end
     local slots = {}
     local totalQty = 0
+    print("inv value", inventory.data.value)
     local inventoryHexaWithoutPrefix = string.sub(inventory.data.value, 3, #inventory.data.value)
     print("inv without previx", inventoryHexaWithoutPrefix)
     for i = 1, 8 do
@@ -1032,7 +1033,7 @@ updateInventory = function(_, inventory)
             break
         end
         local startIndex = math.max(1, #inventoryHexaWithoutPrefix - 2 * i)
-        local endIndex = #inventoryHexaWithoutPrefix - 2 * (i - 1)
+        local endIndex = math.max(1, #inventoryHexaWithoutPrefix - 2 * i) + 1
         local nbInSlot = tonumber(string.sub(inventoryHexaWithoutPrefix, startIndex, endIndex), 16)
         print(startIndex, endIndex, "NB slots", nbInSlot)
         if nbInSlot > 0 then
