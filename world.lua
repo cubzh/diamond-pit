@@ -1022,7 +1022,7 @@ updateInventory = function(_, inventory)
     if inventory.player.value ~= dojo.burnerAccount.Address then
         return
     end
-    print("Inventory", inventory.data.value)
+    print("Inventory", inventory.data.value, "type", type(inventory.data.value))
     local slots = {}
     local totalQty = 0
     for i = 1, 8 do
