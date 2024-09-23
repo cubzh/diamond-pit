@@ -1569,16 +1569,16 @@ function updateBlocksColumn(key, rawColumn)
         local b = blocksModule.blockShape:GetBlock(column.x, z, column.y)
         blocksModule:setBlockHP(b, blockHp, BLOCKS_MAX_HP[blockType], blockType)
         local blockColor = BLOCK_COLORS[blockType]
-        -- if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
-        --     if texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x] then
-        --         texturedBlocks[z][column.y][column.x]:RemoveFromParent()
-        --         texturedBlocks[z][column.y][column.x] = nil
-        --     end
-        -- elseif b and b.Color ~= blockColor then
-        --     b:Replace(blockColor)
-        -- elseif not b and blockHp > 0 then
-        --     blocksModule.blockShape:AddBlock(blockColor, column.x, z, column.y)
-        -- end
+        if b and (blockHp == 0 or blockType == 0 or blockColor == nil) then
+            if texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x] then
+                texturedBlocks[z][column.y][column.x]:RemoveFromParent()
+                texturedBlocks[z][column.y][column.x] = nil
+            end
+        elseif b and b.Color ~= blockColor then
+            b:Replace(blockColor)
+        elseif not b and blockHp > 0 then
+            blocksModule.blockShape:AddBlock(blockColor, column.x, z, column.y)
+        end
 
         -- if starknet block
         if blockType == 8 and blockHp > 0 and not (texturedBlocks[z] and texturedBlocks[z][column.y] and texturedBlocks[z][column.y][column.x]) then
@@ -1611,8 +1611,6 @@ function updateBlocksColumn(key, rawColumn)
                 createFace(math.pi * 0.5, 0, 0, 0, 10, 0)
                 createFace(math.pi * -0.5, 0, 0, 0, -10, 0)
             end)
-        elseif b and not blockType == 8 then
-            b:Remove()
         end
     end
 end
