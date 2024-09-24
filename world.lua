@@ -413,6 +413,14 @@ local petStatus = {}
 local petNameToDisplay
 local nbPetsToDisplay
 function updatePetNumber(petName, nbPets)
+    local nbPetsUnlocked = 0
+    for _, nbPet in pairs(petStatus) do
+        if nbPet and nbPet > 0 then
+            nbPetsUnlocked = nbPetsUnlocked + 1
+        end
+    end
+    animalText.Text = string.format("%d/6 pets", nbPetsUnlocked)
+
     if not petStatus[petName] then
         petStatus[petName] = nbPets
 
@@ -638,6 +646,20 @@ initSellingArea = function()
     text.Color = Color.Black
     text.Anchor = { 0.5, 0 }
     text.Position = shop.Position + Number3(0, 25, 0)
+    LocalEvent:Listen(LocalEvent.Name.Tick, function()
+        text.Forward = Player.Forward
+    end)
+
+    local text = Text()
+    animalText = text
+    text.Text = "0/6 pets"
+    text:SetParent(World)
+    text.FontSize = 7
+    text.Type = TextType.World
+    text.IsUnlit = true
+    text.Color = Color.Black
+    text.Anchor = { 0.5, 0 }
+    text.Position = Number3(150, 25, 350)
     LocalEvent:Listen(LocalEvent.Name.Tick, function()
         text.Forward = Player.Forward
     end)
