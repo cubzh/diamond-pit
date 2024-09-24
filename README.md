@@ -5,10 +5,16 @@
     <img src="play_button.png" alt="Play Now" width="30%" height="30%">
   </a>
   <p></p>
+  <img src="diamondpit.gif" alt="Play Now" width="100%" height="100%">
 </div>
 
-![](diamondpit.mp4)
 Diamond Pit is an example game built on [Cubzh](https://github.com/cubzh/cubzh) using the [Dojo SDK](https://github.com/dojoengine/dojo), demonstrating fully on-chain game integration.
+
+Cubzh is an open-source and fully scriptable game engine, at the intersection of Minecraft and Roblox.
+
+Dojo is a provable game engine and toolchain for creating fully autonomous, on-chain games and worlds on Starknet.
+
+The Dojo API is available in Lua when launching the dojo edition of Cubzh, as specified here in the cubzh.json: https://github.com/cubzh/diamond-pit/blob/main/cubzh.json#L6
 
 ⭐️ Best way to help us: add a star to [Cubzh](https://github.com/cubzh/cubzh) repository ⭐️
 
@@ -24,16 +30,15 @@ In Diamond Pit, players navigate a vast pit, mining blocks to sell and upgrade t
 
 ## Run your own version
 
-
-
-## Make changes on the game
-
-To create your own version:
-
 1. Fork this repository
-2. Update the image URL in the README
-3. Make desired changes in `world.lua`
-4. Push your changes and access your version at:
+2. Your version of the game is now accessible at https://app.cu.bzh/?script=github.com/<username>/<repo>:<commithash>
+3. Update the "Play" button URL in the README (replace with URL of your fork)
+4. Visit your Github repository page and click "Play"
+
+## Make changes on the game client
+
+1. Make desired changes in `world.lua`
+2. Push your changes and access your version at:
    ```
    https://app.cu.bzh/?script=github.com/<username>/<repo>:<commithash>
    ```
