@@ -1,7 +1,7 @@
 # Diamond Pit
 
 <div align="center">
-  <a href="https://app.cu.bzh/?script=github.com/caillef/diamond-pit">
+  <a href="https://app.cu.bzh/?script=github.com/cubzh/diamond-pit">
     <img src="play_button.png" alt="Play Now" width="30%" height="30%">
   </a>
   <p></p>
