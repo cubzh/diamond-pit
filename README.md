@@ -1,6 +1,6 @@
 # Diamond Pit
 
-<div align="center" class="margin-bottom:20px">
+<div align="center" style="margin-bottom:40px">
   <a href="https://app.cu.bzh/?script=github.com/caillef/diamond-pit">
     <img src="play_button.png" alt="Play Now" width="30%" height="30%">
   </a>
