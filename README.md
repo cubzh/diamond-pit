@@ -1,3 +1,3 @@
 # Diamond Pit
 
-[Play](http://localhost:8081/github-redirect)
+[Play](https://app.cu.bzh/github-redirect)
