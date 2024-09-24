@@ -5,7 +5,7 @@
     <img src="play_button.png" alt="Play Now" width="30%" height="30%">
   </a>
   <p></p>
-  <video controls>
+  <video width="1080" height="720" controls>
     <source src="diamondpit.mp4" type="video/mp4">
   </video>
 </div>
