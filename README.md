@@ -1,8 +1,10 @@
 # Diamond Pit
 
-<a href="https://app.cu.bzh/?script=github.com/caillef/diamond-pit">
-  <img src="play_button.png" alt="Play Now" width="50%" height="50%">
-</a>
+<div align="center">
+  <a href="https://app.cu.bzh/?script=github.com/caillef/diamond-pit">
+    <img src="play_button.png" alt="Play Now" width="50%" height="50%">
+  </a>
+</div>
 
 Diamond Pit is an example game built on [Cubzh](https://github.com/cubzh/cubzh) using the [Dojo SDK](https://github.com/dojoengine/dojo), demonstrating fully on-chain game integration.
 
