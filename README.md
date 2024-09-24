@@ -6,9 +6,6 @@
   </a>
 </div>
 
-<p></p>
-<p></p>
-
 Diamond Pit is an example game built on [Cubzh](https://github.com/cubzh/cubzh) using the [Dojo SDK](https://github.com/dojoengine/dojo), demonstrating fully on-chain game integration.
 
 ⭐️ Best way to help us: add a star to [Cubzh](https://github.com/cubzh/cubzh) repository ⭐️
