@@ -413,14 +413,6 @@ local petStatus = {}
 local petNameToDisplay
 local nbPetsToDisplay
 function updatePetNumber(petName, nbPets)
-    local nbPetsUnlocked = 0
-    for _, nbPet in pairs(petStatus) do
-        if nbPet and nbPet > 0 then
-            nbPetsUnlocked = nbPetsUnlocked + 1
-        end
-    end
-    animalText.Text = string.format("%d/6 pets", nbPetsUnlocked)
-
     if not petStatus[petName] then
         petStatus[petName] = nbPets
 
@@ -458,6 +450,15 @@ function updatePetNumber(petName, nbPets)
             emitterNewPet:spawn(30)
         end)
     end
+
+    local nbPetsUnlocked = 0
+    for key, nbPet in pairs(petStatus) do
+        print(key, nbPet)
+        if nbPet and nbPet > 0 then
+            nbPetsUnlocked = nbPetsUnlocked + 1
+        end
+    end
+    animalText.Text = string.format("%d/6 pets", nbPetsUnlocked)
 end
 
 displayNewPetAcquired = function()
