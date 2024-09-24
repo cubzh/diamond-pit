@@ -5,11 +5,9 @@
     <img src="play_button.png" alt="Play Now" width="30%" height="30%">
   </a>
   <p></p>
-  <video width="1080" height="720" controls>
-    <source src="diamondpit.mp4" type="video/mp4">
-  </video>
 </div>
 
+![]('diamondpit.mp4')
 Diamond Pit is an example game built on [Cubzh](https://github.com/cubzh/cubzh) using the [Dojo SDK](https://github.com/dojoengine/dojo), demonstrating fully on-chain game integration.
 
 ⭐️ Best way to help us: add a star to [Cubzh](https://github.com/cubzh/cubzh) repository ⭐️
