@@ -5,6 +5,7 @@
     <img src="play_button.png" alt="Play Now" width="30%" height="30%">
   </a>
   <p></p>
+  <img src="diamondpit.gif" alt="Play Now" width="60%" height="60%">
 </div>
 
 Diamond Pit is an example game built on [Cubzh](https://github.com/cubzh/cubzh) using the [Dojo SDK](https://github.com/dojoengine/dojo), demonstrating fully on-chain game integration.
@@ -21,7 +22,11 @@ In Diamond Pit, players navigate a vast pit, mining blocks to sell and upgrade t
 - Collectible pets obtained from eggs
 - Goal: Collect all 6 unique pets
 
-## Customizing the Game
+## Run your own version
+
+
+
+## Make changes on the game
 
 To create your own version:
 
