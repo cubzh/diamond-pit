@@ -59,5 +59,6 @@ To create your own version:
 ## Future Development
 
 - Cubzh x Dojo tutorial coming by the end of October with a VSCode extension to iterate faster
+- Starknet mainnet and testnet integrations with Dojo Controller
 - Implement off-chain messages for smoother player movements
-- Add a feature to select a pet that follows the player and provides boosts
+- Feature: select a pet that follows the player and provides bonuses
